@@ -29,6 +29,7 @@ class LoginFragment : Fragment() {
         initEventLogin()
         initAnimation()
         return binding.root
+
     }
 
     private fun initAnimation() {

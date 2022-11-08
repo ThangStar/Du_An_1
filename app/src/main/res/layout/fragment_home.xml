@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.fragment_sub.HomeFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_top_title"
+        android:layout_width="match_parent"
+        android:padding="25dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/imv_menu"
+            android:background="@drawable/ripple_text"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:focusable="true" />
+        <TextView
+            android:layout_centerVertical="true"
+
+            android:layout_toEndOf="@id/imv_menu"
+            android:id="@+id/tv_title_tab"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:text="Trang chủ"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_centerVertical="true"
+
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"/>
+    </RelativeLayout>
+    <SearchView
+        android:id="@+id/search_rs"
+        android:background="@drawable/ripple_text"
+        android:layout_below="@id/rl_top_title"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_width="wrap_content"
+        android:queryBackground="@color/background_edittext_primary"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="5dp"
+        android:queryHint="Tìm thứ gì đó.."
+        android:imeOptions="actionSearch"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:id="@+id/rl_directory"
+        android:layout_width="match_parent"
+        android:layout_below="@id/search_rs"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Danh mục"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/text_color_secondary"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:clickable="true"
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:textColor="@color/text_color_three"
+            android:text="ẨN"
+            android:background="@drawable/ripple_text"
+            android:textSize="15sp"
+            android:layout_height="wrap_content"
+            android:focusable="true" />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/rl_directory"
+        android:id="@+id/ry_directory"
+        android:layout_width="wrap_content"
+        android:nestedScrollingEnabled="true"
+        android:layout_marginStart="15dp"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

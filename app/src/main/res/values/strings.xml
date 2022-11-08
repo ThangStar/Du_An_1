@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CubeMarket</string>
+    <string name="name_shop">CUBE_SHOP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Đăng Nhập</string>
+</resources>

@@ -9,36 +9,39 @@
     <RelativeLayout
         android:id="@+id/rl_top_title"
         android:layout_width="match_parent"
-        android:padding="25dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="25dp">
+
         <ImageView
-            android:layout_centerVertical="true"
             android:id="@+id/imv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/ripple_text"
             android:clickable="true"
-            android:layout_alignParentStart="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu"
-            android:focusable="true" />
+            android:focusable="true"
+            android:src="@drawable/menu" />
+
         <TextView
-            android:layout_centerVertical="true"
-
-            android:layout_toEndOf="@id/imv_menu"
             android:id="@+id/tv_title_tab"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:text="Trang chủ"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="wrap_content"/>
-        <ImageView
-            android:layout_centerVertical="true"
 
             android:layout_width="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_height="wrap_content"
-            android:src="@drawable/avatar"/>
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_toEndOf="@id/imv_menu"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Trang chủ"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/avatar" />
     </RelativeLayout>
     <SearchView
         android:id="@+id/search_rs"

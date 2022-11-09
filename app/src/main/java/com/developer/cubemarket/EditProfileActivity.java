@@ -3,17 +3,16 @@ package com.developer.cubemarket;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.developer.cubemarket.MODEL.DAO.DaoUser;
 import com.developer.cubemarket.MODEL.OOP.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.shashank.sony.fancytoastlib.FancyToast;
+
+import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -21,6 +20,7 @@ public class EditProfileActivity extends AppCompatActivity {
     TextView tv_Email,tv_Ten;
     Button btn_capnhat;
     DaoUser userDao;
+    List<User> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         String email = Email.getText().toString();
         String ten = Ten.getText().toString();
-
-
 
         btn_capnhat= findViewById(R.id.btn_capnhat);
 // bắt sự kiện ấn nút cập nhật
@@ -61,18 +59,27 @@ public class EditProfileActivity extends AppCompatActivity {
     public boolean validate(){
         String email = Email.getText().toString();
         String ten = Ten.getText().toString();
+        int a ,b ;
 
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        if (email.matches(emailPattern)){
+        if (!email.matches(emailPattern)){
             tv_Email.setText("Email không hợp lệ");
-            return false;
+            a = 1;
+        }else {
+            tv_Email.setText("");
+            a = 0;
         }
-
         if (ten.length() <= 10) {
             tv_Ten.setText("Tên phải trên 10 ký tự");
-            return false;
+            b = 1;
+        }else {
+            tv_Ten.setText("");
+            b = 0;
         }
-        return true;
+        if (a == 0 && b == 0) {
+            return true;
+        }
+        return false;
     }
 
 

@@ -75,7 +75,10 @@
             android:id="@+id/tv_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_color_three"
+            />
+
         <TextView
             android:id="@+id/tv2"
             android:layout_width="match_parent"
@@ -99,13 +102,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Họ và tên" />
+                android:hint="Họ và tên"
+                android:fontFamily="@font/roboto_medium"
+                android:id="@+id/edt_b"/>/>
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_color_three"
+            />
     </LinearLayout>
 
     <LinearLayout

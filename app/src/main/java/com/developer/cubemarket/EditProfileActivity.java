@@ -51,6 +51,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     user.setTen(ten);
                     user.setGmail(email);
                     userDao.updete_user(user);
+                    FancyToast.makeText(EditProfileActivity.this,"Đã cập nhật", FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                 }
             }
         });

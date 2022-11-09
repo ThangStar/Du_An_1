@@ -3,7 +3,6 @@ package MODEL.DAO;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.textclassifier.TextLinks;
 
 import androidx.annotation.Nullable;
 
@@ -20,15 +19,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.Danhmuc;
-import MODEL.OOP.User;
 
 public class DaoDanhMuc {
     Context context;

@@ -2,24 +2,6 @@ package MODEL.KET_NOI_SEVER;
 
 public class Link {
 
-    /*
-                 //converting image to base64 string
-              profile_image.buildDrawingCache();
-                Bitmap bmap = profile_image.getDrawingCache();
-                String encodedImageData =getEncoded64ImageStringFromBitmap(bmap);
-
-
-public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
-    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-    bitmap.compress(CompressFormat.JPEG, 70, stream);
-    byte[] byteFormat = stream.toByteArray();
-    // get the base 64 string
-    String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
-
-    return imgString;
-}
-
-    * */
 
     // địa chỉ mạng
    // static final String IP="192.168.191.162";

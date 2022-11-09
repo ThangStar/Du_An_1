@@ -1,4 +1,4 @@
-package MODEL.DAO;
+package com.developer.cubemarket.MODEL.DAO;
 
 import android.content.Context;
 import android.util.Log;
@@ -20,9 +20,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import MODEL.KET_NOI_SEVER.HttpsTrustManager;
-import MODEL.KET_NOI_SEVER.Link;
-import MODEL.OOP.User;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.HttpsTrustManager;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.Link;
+import com.developer.cubemarket.MODEL.OOP.User;
 
 public class DaoUser {
     Context context;

@@ -1,4 +1,4 @@
-package MODEL.DAO;
+package com.developer.cubemarket.MODEL.DAO;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,9 +23,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import MODEL.KET_NOI_SEVER.HttpsTrustManager;
-import MODEL.KET_NOI_SEVER.Link;
-import MODEL.OOP.Sanpham;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.HttpsTrustManager;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.Link;
+import com.developer.cubemarket.MODEL.OOP.Sanpham;
 
 public class DaoSanPham {
     Context context;

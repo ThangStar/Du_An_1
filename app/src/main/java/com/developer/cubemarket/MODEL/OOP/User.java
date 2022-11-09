@@ -1,4 +1,4 @@
-package MODEL.OOP;
+package com.developer.cubemarket.MODEL.OOP;
 
 public class User {
     private int id;

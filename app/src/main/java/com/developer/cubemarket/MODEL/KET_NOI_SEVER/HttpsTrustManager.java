@@ -1,4 +1,4 @@
-package MODEL.KET_NOI_SEVER;
+package com.developer.cubemarket.MODEL.KET_NOI_SEVER;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;

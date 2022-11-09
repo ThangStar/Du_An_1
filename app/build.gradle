@@ -53,6 +53,9 @@ dependencies {
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
+    //fancyToast
+    implementation 'io.github.shashank02051997:FancyToast:2.0.2'
+
     // đọc dữ liệu internet
     implementation 'com.android.volley:volley:1.2.1'
 }

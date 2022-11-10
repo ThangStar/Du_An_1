@@ -30,21 +30,15 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 // Ánh Xạ
-        Email = findViewById(R.id.edt_a);
         Ten = findViewById(R.id.edt_b);
-        Password = findViewById(R.id.edt_c);
         Sdt = findViewById(R.id.edt_d);
         ChucVu = findViewById(R.id.edt_e);
 
-        tv_Email = findViewById(R.id.tv_email);
         tv_Ten = findViewById(R.id.tv_name);
-        tv_Pass = findViewById(R.id.tv_pass);
         tv_Sdt = findViewById(R.id.tv_sdt);
         tv_ChucVu = findViewById(R.id.tv_chucvu);
 
-        String email = Email.getText().toString();
         String ten = Ten.getText().toString();
-        String pass = Password.getText().toString();
         String sdt = Sdt.getText().toString();
         String chucVu = ChucVu.getText().toString();
 
@@ -63,8 +57,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     User user = new User();
                     user.setId(1);
                     user.setTen(ten);
-                    user.setGmail(email);
-                    user.setPassword(pass);
                     user.setPhone(sdt);
                     user.setChucvu(1);
                     userDao.updete_user(user);
@@ -76,22 +68,14 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     public boolean validate(){
-        String email = Email.getText().toString();
         String ten = Ten.getText().toString();
-        String pass = Password.getText().toString();
         String sdt = Sdt.getText().toString();
         String chucVu = ChucVu.getText().toString();
         int a ,b, c, d ;
-        Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");
-        Matcher match = ptrn.matcher(sdt);
+        String regex ="^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        Pattern ptrn = Pattern.compile(regex);
+        boolean kt = sdt.matches(regex);
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        if (!email.matches(emailPattern)){
-            tv_Email.setText("Email không hợp lệ");
-            a = 1;
-        }else {
-            tv_Email.setText("");
-            a = 0;
-        }
         if (ten.length() <= 10) {
             tv_Ten.setText("Tên phải trên 10 ký tự");
             b = 1;
@@ -99,21 +83,14 @@ public class EditProfileActivity extends AppCompatActivity {
             tv_Ten.setText("");
             b = 0;
         }
-        if (pass.length() <=6) {
-            tv_Pass.setText("Password phải chứa ít nhất 6 ký tự");
-            c = 1;
-        }else {
-            tv_Ten.setText("");
-            c = 0;
-        }
-        if (sdt.matches(String.valueOf(match.find() && match.group().equals(sdt)))) {
-            tv_Pass.setText("Số Điện Thoại Không Hợp Lệ");
+        if (kt == false) {
+            tv_Sdt.setText("Số Điện Thoại Không Hợp Lệ");
             d = 1;
         }else {
-            tv_Pass.setText("");
+            tv_Sdt.setText("");
             d = 0;
         }
-        if (a == 0 && b == 0 && c == 0 && d == 0) {
+        if ( b == 0 && d == 0) {
             return true;
         }
         return false;

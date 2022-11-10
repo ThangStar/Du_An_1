@@ -1,10 +1,12 @@
 package com.developer.cubemarket.connection.MODEL.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -13,10 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.developer.cubemarket.R;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 
 public class DaoUser {
@@ -42,10 +46,10 @@ public class DaoUser {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-//                    Snackbar.make(root, "Tạo tài khoản thành công!", 3000).show();
+
+                    Toasty.success(context, "Tạo tài khoản thành công!", Toasty.LENGTH_SHORT).show();
                 }else{
-//                    Snackbar.make(root, "lỗi!", 3000).show();
-                    Log.d(TAG, "lỗi>>"+response.toString());
+                    Toasty.error(context, "Lỗi: "+response.toString(), Toasty.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -103,14 +107,15 @@ public class DaoUser {
         requestQueue.add(stringRequest);
 
     }
-    public void dangnhap(String user,String pass){
+    public void dangnhap(LinearLayout root, String user, String pass){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_dangnhap, new Response.Listener<String>() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onResponse(String response) {
                if(response.toString().trim().equals("ErrorLogin")){
-                   Log.d(TAG, "Tài khoản hoặc mật khẩu không chính sác");
+                   Toasty.warning(context, "Tài khoản hoặc mật khẩu không chính xác", Toasty.LENGTH_SHORT).show();
                }else{
                    try {
                        JSONArray jsonArray= new JSONArray(response);
@@ -126,11 +131,14 @@ public class DaoUser {
                                    tenchucvu="Người bán";
                                }
                                Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
+                               Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
                                //--------------------------------------------------------code them doạn này------------------------------------
-
+                               //start home when login success!
+                               Navigation.findNavController(root)
+                                       .navigate(R.id.action_loginFragment_to_productFragment);
                            } catch (JSONException e) {
                                e.printStackTrace();
-                               Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                               Toasty.error(context, "đã xảy ra lỗi "+e, Toasty.LENGTH_SHORT).show();
                            }
                        }
                    } catch (JSONException e) {
@@ -142,7 +150,7 @@ public class DaoUser {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+                Toasty.error(context, "đã xảy ra lỗi "+error, Toasty.LENGTH_SHORT).show();
             }
         }){
             @Nullable

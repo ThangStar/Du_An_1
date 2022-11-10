@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
@@ -31,8 +32,15 @@ class CartFragment : Fragment() {
         //Do something here
         initRecyclerDireactory()
         initRecyclerProduct()
+        initGoCheckOut()
 
         return binding.root
+    }
+
+    private fun initGoCheckOut() {
+        binding.lnGoCheckOut.setOnClickListener {
+            findNavController().navigate(R.id.action_productFragment_to_checkOutFragment)
+        }
     }
 
     private fun initRecyclerProduct() {

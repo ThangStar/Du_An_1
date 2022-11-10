@@ -211,6 +211,7 @@
     </androidx.core.widget.NestedScrollView>
     <com.google.android.material.button.MaterialButton
         android:text="Thêm vào giỏ"
+        android:id="@+id/btn_go_check_out"
         android:layout_marginVertical="5dp"
         android:paddingVertical="16dp"
         android:layout_marginHorizontal="15dp"

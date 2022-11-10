@@ -22,18 +22,18 @@ import java.util.Map;
 
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
-import MODEL.OOP.Kichthuoc;
+import MODEL.OOP.GioHang;
 
-public class DaoKichThuoc {
+public class DaoGioHang {
     Context context;
     String TAG="TAG";
-    public DaoKichThuoc(Context context) {
+    public DaoGioHang(Context context) {
         this.context = context;
     }
-    public  void insert_kichthuoc(Kichthuoc kichthuoc){
+    public  void insert_giohang(GioHang gioHang){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_kichthuoc, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_giohang, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
@@ -52,8 +52,10 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(kichthuoc.getMasanpham()));
-                stringStringMap.put("tenkichthuoc",kichthuoc.getTenkichthuoc());
+                stringStringMap.put("id", String.valueOf(gioHang.getId()));
+                stringStringMap.put("masanpham",String.valueOf(gioHang.getMasanpham()));
+                stringStringMap.put("mamausac",String.valueOf(gioHang.getMamausac()));
+                stringStringMap.put("makichthuoc",String.valueOf(gioHang.getMakichthuoc()));
 
                 return stringStringMap;
             }
@@ -61,39 +63,10 @@ public class DaoKichThuoc {
         requestQueue.add(stringRequest);
 
     }
-    public  void delete_kichthuoc(int makichthuoc){
+    public  void getdata_giohang(int id){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_kichthuoc, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "thành công");
-                }else{
-                    Log.d(TAG, "lỗi>>"+response.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
-            }
-        }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("makichthuoc", String.valueOf(makichthuoc));
-                return stringStringMap;
-            }
-        };
-        requestQueue.add(stringRequest);
-
-    }
-    public  void getdata_kichthuoc(int masanpham){
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_kichthuoc, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_giohang, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
@@ -102,11 +75,19 @@ public class DaoKichThuoc {
                     for (int i = 0 ; i<jsonArray.length();i++){
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            int mamausac= jsonObject.getInt("makichthuoc");
-                            int masanpham=jsonObject.getInt("masanpham");
-                            String tenmau= jsonObject.getString("tenkichthuoc");
+                            int magiohang=jsonObject.getInt("magiohang");
+                            int mamausac= jsonObject.getInt("mamausac");
+                            int makichthuoc= jsonObject.getInt("makichthuoc");
+                            int giasanpham= jsonObject.getInt("giaban");
+                            String tensanpham=jsonObject.getString("tensanpham");
+                            String tenmausac=jsonObject.getString("tenmau");
+                            String tenkichthuoc=jsonObject.getString("tenkichthuoc");
+                            String img=jsonObject.getString("img");
 
-                            Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
+                            Log.d(TAG, "magiohang-> "+magiohang+" mamasac -> "+mamausac +" makichthuoc -> "+makichthuoc+ " giasanpham -> "+giasanpham
+
+                            +" tensanpham -> "+ tensanpham +" tenmausac -> "+tenmausac + " tenkichthuoc ->? "+tenkichthuoc+" img -> "+img
+                            );
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -135,11 +116,10 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
+                stringStringMap.put("id", String.valueOf(id));
                 return stringStringMap;
             }
         };
         requestQueue.add(stringRequest);
-
     }
 }

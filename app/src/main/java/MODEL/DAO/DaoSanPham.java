@@ -35,11 +35,11 @@ public class DaoSanPham {
         this.context = context;
     }
 
-    public  void intsert_sanpham( Sanpham sanpham){
+    public  void intsert_sanpham( Sanpham sanpham,String tenmau,String tenkichthuoc){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.intsert_sanpham, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
@@ -70,6 +70,8 @@ public class DaoSanPham {
 
                 stringStringMap.put("giaban", String.valueOf(sanpham.getGiaban()));
                 stringStringMap.put("chitiet",sanpham.getChitiet());
+                stringStringMap.put("tenmau",tenmau);
+                stringStringMap.put("tenkichthuoc",tenkichthuoc);
                 return stringStringMap;
             }
         };

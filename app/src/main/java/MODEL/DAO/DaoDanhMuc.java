@@ -2,6 +2,8 @@ package MODEL.DAO;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,9 +32,7 @@ import MODEL.OOP.Danhmuc;
 public class DaoDanhMuc {
     Context context;
     String TAG="TAG";
-    int madanhmuc=-725;
-    String tendanhmuc=null;
-    String khuvuc=null;
+
 
     public DaoDanhMuc(Context context) {
         this.context = context;
@@ -41,7 +42,7 @@ public class DaoDanhMuc {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.intsert_danhmuc, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_danhmuc, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
@@ -65,6 +66,7 @@ public class DaoDanhMuc {
 
                 stringStringMap.put("tendanhmuc",danhmuc.getTendanhmuc());
                 stringStringMap.put("khuvuc",danhmuc.getKhuvuc());
+                stringStringMap.put("img",danhmuc.getImg());// phải ep thành base 64
                 return stringStringMap;
             }
         };
@@ -72,7 +74,17 @@ public class DaoDanhMuc {
         requestQueue.add(stringRequest);
 
     }
-    public  void delete_danhmuc( Danhmuc danhmuc){
+    // hàm chuyển ảnh thành base 64
+    public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteFormat = stream.toByteArray();
+        // get the base 64 string
+        String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+
+        return imgString;
+    }
+    public  void delete_danhmuc( int madanhmuc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_danhmuc, new Response.Listener<String>() {
@@ -95,7 +107,7 @@ public class DaoDanhMuc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
+                stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
                 return stringStringMap;
             }
         };
@@ -128,6 +140,7 @@ public class DaoDanhMuc {
                 stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
                 stringStringMap.put("tendanhmuc",danhmuc.getTendanhmuc());
                 stringStringMap.put("khuvuc",danhmuc.getKhuvuc());
+                stringStringMap.put("img",danhmuc.getImg());
                 return stringStringMap;
             }
         };
@@ -147,10 +160,11 @@ public class DaoDanhMuc {
                 for (int i = 0 ; i<response.length();i++){
                     try {
                         JSONObject jsonObject= response.getJSONObject(i);
-                        madanhmuc= jsonObject.getInt("madanhmuc");
-                        tendanhmuc= jsonObject.getString("tendanhmuc");
-                       khuvuc= jsonObject.getString("khuvuc");
-                        Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc);
+                     int   madanhmuc= jsonObject.getInt("madanhmuc");
+                      String  tendanhmuc= jsonObject.getString("tendanhmuc");
+                        String  khuvuc= jsonObject.getString("khuvuc");
+                        String img=jsonObject.getString("img") ;
+                        Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc+" img >>>> "+img);
                         //---------------------------------------viets code ở dưới này---------------------------------------
 
 
@@ -190,10 +204,11 @@ public class DaoDanhMuc {
                     for (int i = 0 ; i<jsonArray.length();i++){
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            madanhmuc= jsonObject.getInt("madanhmuc");
-                            tendanhmuc= jsonObject.getString("tendanhmuc");
-                            khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc);
+                            int   madanhmuc= jsonObject.getInt("madanhmuc");
+                            String  tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String  khuvuc= jsonObject.getString("khuvuc");
+                            String img=jsonObject.getString("img") ;
+                            Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc+" img >>>> "+img);
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
 

@@ -1,14 +1,182 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:background="@color/background_primary"
+android:layout_height="match_parent"
+tools:context=".fragment.fragment_home_pager.CartFragment">
+<RelativeLayout
+    android:translationZ="5dp"
+    android:elevation="3dp"
+    android:id="@+id/rl_top_title"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.fragment_sub.CartFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:padding="25dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/imv_menu"
+        android:background="@drawable/ripple_text"
+        android:clickable="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu"
+        android:focusable="true" />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/imv_menu"
+        android:id="@+id/tv_title_tab"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:text="Giỏ hàng"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_centerVertical="true"
 
-</FrameLayout>
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
+        android:src="@drawable/avatar"/>
+</RelativeLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginHorizontal="25dp"
+    android:layout_below="@id/rl_top_title"
+    android:background="@color/dividingLine"/>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_below="@id/rl_top_title"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SearchView
+            android:id="@+id/search_rs"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_width="match_parent"
+            android:queryBackground="@color/background_edittext_primary"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="5dp"
+            android:queryHint="Tìm thứ gì đó.."
+            android:imeOptions="actionSearch"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:id="@+id/rl_directory"
+            android:layout_width="match_parent"
+            android:layout_below="@id/search_rs"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Danh mục"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/text_color_secondary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:clickable="true"
+                android:padding="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_color_three"
+                android:text="ẨN"
+                android:background="@drawable/ripple_text"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"
+                android:focusable="true" />
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/rl_directory"
+            android:id="@+id/ry_directory"
+            android:layout_width="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_title_directory"
+            android:layout_below="@id/ry_directory"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Sản phẩm"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ry_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title_directory"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/background_primary"
+            android:layout_marginTop="15dp"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="?attr/actionBarSize"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
+    <androidx.cardview.widget.CardView
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="8dp"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_item_directory"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="10dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:minWidth="30dp"
+                android:text="2"
+                android:padding="0dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="30dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="15dp"
+                android:text="Kiểm tra"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="|"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/white"
+                android:textSize="26sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="25dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="đ 1.290.000"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

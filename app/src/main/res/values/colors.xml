@@ -19,6 +19,10 @@
     <color name="text_color_three">#E0201A</color>
     <color name="button_background_primary">#572D86</color>
     <color name="item_color_primary">#9D9EA3</color>
+    <color name="item_color_secondary">#EE3169</color>
+    <color name="dividingLine">#27727C8E</color>
+    <color name="background_primary">#F6F9FA</color>
+
 
 
 

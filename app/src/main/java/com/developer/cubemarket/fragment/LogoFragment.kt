@@ -24,7 +24,7 @@ class LogoFragment : Fragment() {
         ctx = binding.root.context
         val coroutine = CoroutineScope(CoroutineName("logo") + Dispatchers.IO)
         coroutine.launch {
-            Thread.sleep(2000)
+            Thread.sleep(1000)
             withContext(Dispatchers.Main){
                 findNavController().navigate(R.id.action_logoFragment_to_loginFragment)
             }

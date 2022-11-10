@@ -10,6 +10,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
+import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
+import com.developer.cubemarket.connection.MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -29,6 +31,7 @@ class LoginFragment : Fragment() {
         initEventLogin()
         initAnimation()
         return binding.root
+
     }
 
     private fun initAnimation() {
@@ -74,7 +77,7 @@ class LoginFragment : Fragment() {
                 binding.tvTitle.text = "Quên Mật Khẩu"
                 binding.btnOk.text = "Gửi mã"
 
-                binding.edtA.hint = "Email / Số điện thoại"
+                binding.edtA.hint = "Email"
                 binding.iplB.visibility = View.INVISIBLE
                 binding.iplC.visibility = View.INVISIBLE
                 binding.iplD.visibility = View.INVISIBLE
@@ -86,7 +89,24 @@ class LoginFragment : Fragment() {
 
     private fun initEventLogin() {
         binding.btnOk.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_productFragment)
+            when(countLayout){
+                1 -> {
+                    val email = binding.edtA.text.toString().trim()
+                    val numberPhone = binding.edtB.text.toString().trim()
+                    val fullname = binding.edtC.text.toString().trim()
+                    val pass = binding.edtD.text.toString().trim()
+                    val user = User(0, fullname, pass, 0, numberPhone, email)
+                    DaoUser(ctx).insert_user(user)
+                }
+                0 -> {
+                    val email = binding.edtA.text.toString().trim()
+                    val pass = binding.edtB.text.toString().trim()
+                    DaoUser(ctx).dangnhap(email, pass)
+
+                }
+            }
+            //Register success!
+           findNavController().navigate(R.id.action_loginFragment_to_productFragment)
         }
     }
 }

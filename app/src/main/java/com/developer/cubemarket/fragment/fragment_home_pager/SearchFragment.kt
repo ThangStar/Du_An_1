@@ -1,4 +1,4 @@
-package com.developer.cubemarket.fragment.fragment_sub
+package com.developer.cubemarket.fragment.fragment_home_pager
 
 import android.content.Context
 import android.os.Bundle
@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.developer.cubemarket.R
-import com.developer.cubemarket.databinding.FragmentProfileBinding
 import com.developer.cubemarket.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {

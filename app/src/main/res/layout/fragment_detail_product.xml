@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/white"
+        android:layout_height="250dp"
+        android:layout_width="match_parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:collapsedTitleTextColor="@color/black"
+            app:toolbarId="@+id/toolbar"
+            app:titleCollapseMode="fade"
+            app:expandedTitleTextColor="@color/background_edittext_primary"
+            app:layout_scrollFlags="scroll">
+
+            <ImageView
+                android:id="@+id/app_bar_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/product1"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:title="4.9/5 ⭐"
+                app:titleMarginStart="20dp"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:logo="@drawable/cancel"
+                android:isScrollContainer="true"
+                app:titleTextColor="@color/button_background_primary"
+                app:layout_collapseMode="pin"
+                app:menu="@menu/menu_share"
+                android:hapticFeedbackEnabled="true"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent">
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:id="@+id/fab_add_favorite"
+        app:backgroundTint="@color/item_color_secondary"
+        app:layout_anchor="@id/appbar"
+        android:transitionName="imageProduct"
+        android:layout_marginEnd="45dp"
+        android:src="@drawable/hearth"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Button"
+        app:layout_anchorGravity="bottom|end"
+        android:tint="@android:color/white"
+        android:layout_height="wrap_content"/>
+    <androidx.core.widget.NestedScrollView
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            app:layout_anchor="@id/appbar"
+            android:paddingVertical="18dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragment.fragment_product.DetailProductFragment">
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:fontFamily="@font/roboto_bold"
+                        android:id="@+id/tv"
+                        android:textSize="22sp"
+                        android:textColor="@color/text_color_secondary"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Giày nike" />
+
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="22sp"
+                        android:textColor="@color/purple_200"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="đ 690.000" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/minus"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="02"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/plus"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/info_product"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_width="wrap_content"
+                    android:text="Văn Thắng"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:src="@drawable/verify"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_color"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:text="Chọn màu sắc"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    app:cornerRadius="8dp"
+                    app:backgroundTint="@color/item_color_secondary"
+                    android:layout_alignParentEnd="true"
+                    android:text="Liên hệ người bán"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="29dp"
+                android:background="@drawable/radius_all_item"
+                android:paddingVertical="12dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="màu trắng"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="29dp"
+                android:background="@drawable/radius_all_item"
+                android:paddingVertical="12dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="màu xám"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.button.MaterialButton
+        android:text="Thêm vào giỏ"
+        android:layout_marginVertical="5dp"
+        android:paddingVertical="16dp"
+        android:layout_marginHorizontal="15dp"
+        app:cornerRadius="8dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/roboto_bold"
+        app:backgroundTint="@color/button_background_primary"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:icon="@drawable/cart"
+        app:iconGravity="textStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

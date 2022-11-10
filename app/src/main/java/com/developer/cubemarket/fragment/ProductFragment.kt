@@ -11,10 +11,10 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.ProductPagerAdapter
 import com.developer.cubemarket.databinding.FragmentProductBinding
-import com.developer.cubemarket.fragment.fragment_sub.CartFragment
-import com.developer.cubemarket.fragment.fragment_sub.HomeFragment
-import com.developer.cubemarket.fragment.fragment_sub.ProfileFragment
-import com.developer.cubemarket.fragment.fragment_sub.SearchFragment
+import com.developer.cubemarket.fragment.fragment_home_pager.CartFragment
+import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
+import com.developer.cubemarket.fragment.fragment_home_pager.ProfileFragment
+import com.developer.cubemarket.fragment.fragment_home_pager.SearchFragment
 
 class ProductFragment : Fragment() {
     lateinit var binding: FragmentProductBinding

@@ -5,23 +5,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ProductFragment">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_product"
+            android:paddingBottom="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.viewpager2.widget.ViewPager2>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:id="@+id/bottom_nav_product"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/menu_bottom_nav"
+            app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@color/bottom_change_tint_selected"
+            app:itemBackground="@color/white"
+            app:itemTextColor="@color/button_background_primary"
+            android:layout_height="?attr/actionBarSize"/>
 
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager_product"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:id="@+id/bottom_nav_product"
-        app:elevation="3dp"
-        android:translationZ="5dp"
-        app:menu="@menu/menu_bottom_nav"
-        app:itemIconTint="@color/bottom_change_tint_selected"
-        app:itemBackground="@color/white"
-        app:itemTextColor="@color/button_background_primary"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"/>
 </RelativeLayout>

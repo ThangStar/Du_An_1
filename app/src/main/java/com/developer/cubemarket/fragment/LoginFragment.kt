@@ -10,8 +10,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
-import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
-import com.developer.cubemarket.connection.MODEL.OOP.User
+import MODEL.DAO.DaoUser
+import MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {

@@ -58,4 +58,9 @@ dependencies {
 
     // đọc dữ liệu internet
     implementation 'com.android.volley:volley:1.2.1'
+
+    // Gửi Email tới USER
+    implementation files('libs/activation.jar')
+    implementation files('libs/additionnal.jar')
+    implementation files('libs/mail.jar')
 }

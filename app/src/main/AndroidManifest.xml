@@ -18,6 +18,12 @@
             android:name=".DoiMatKhauActivity"
             android:exported="false"/>
         <activity
+            android:name=".FogotPassActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".NewPassActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ThemSanPhamActivity"
             android:exported="false" />
         <activity

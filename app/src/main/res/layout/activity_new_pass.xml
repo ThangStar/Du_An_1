@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewPassActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp">
+
+        <ImageView
+            android:id="@+id/imv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ripple_text"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+        <TextView
+            android:id="@+id/tv_title_tab"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginStart="60dp"
+            android:layout_toEndOf="@id/imv_menu"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Cập nhật thông tin"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:text="Get new password"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/signin"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxStrokeWidth="0dp"
+                android:id="@+id/ipl_a"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
+                android:textColorHint="@color/text_hint_secondary"
+                app:boxBackgroundColor="@color/background_edittext_primary"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="New Password"
+                    android:id="@+id/et_newpass"
+                    android:inputType="textPassword"
+                    android:password="false"
+                    android:paddingVertical="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_info_24"
+                    android:drawablePadding="20dp"
+                    android:paddingStart="40dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/passbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button"
+            android:text="GET NEW PASSWORD" />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

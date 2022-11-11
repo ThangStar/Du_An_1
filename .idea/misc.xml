@@ -3,16 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/drawable-v24/ic_baseline_mail_24.xml" value="0.286" />
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.286" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/activity_doi_mat_khau.xml" value="0.33" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/activity_edit_profile.xml" value="0.33" />
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/activity_forgot.xml" value="0.33152173913043476" />
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/activity_new_pass.xml" value="0.33152173913043476" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/activity_them_san_pham.xml" value="0.22" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/directory_item.xml" value="0.27445652173913043" />
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_cart.xml" value="0.33152173913043476" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_detail_product.xml" value="0.33152173913043476" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_home.xml" value="0.27445652173913043" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_login.xml" value="0.27445652173913043" />
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_logo.xml" value="0.33152173913043476" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_product.xml" value="0.27445652173913043" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_profile.xml" value="0.27445652173913043" />
         <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/fragment_search.xml" value="0.27445652173913043" />
+        <entry key="..\:/Huy Ngo/AndroidStudioProjects/Du_An_1/app/src/main/res/layout/product_home_item.xml" value="0.33152173913043476" />
       </map>
     </option>
   </component>

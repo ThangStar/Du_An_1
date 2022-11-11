@@ -16,11 +16,11 @@ import java.util.regex.Pattern;
 
 public class DoiMatKhauActivity extends AppCompatActivity {
 
-    TextInputEditText mk1,mk2;
-    TextView tv_mk1,tv_mk2;
+    TextInputEditText mk1,mk2,mkcu;
+    TextView tv_mk1,tv_mk2,tv_mkcu;
     Button btn;
     DaoUser daoUser;
-    String mk,re_mk;
+    String mk,re_mk,mkold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,11 @@ public class DoiMatKhauActivity extends AppCompatActivity {
 
         mk1 = findViewById(R.id.edt_a);
         mk2 = findViewById(R.id.edt_b);
+        mkcu = findViewById(R.id.edt_c);
 
-        tv_mk1 = findViewById(R.id.tv_pass);
+        tv_mk1 = findViewById(R.id.tv_newpass);
         tv_mk2 = findViewById(R.id.tv_repass);
+        tv_mkcu = findViewById(R.id.tv_oldpass);
 
         btn = findViewById(R.id.btn_capnhat);
 
@@ -63,10 +65,11 @@ public class DoiMatKhauActivity extends AppCompatActivity {
     public boolean validate(){
         mk = mk1.getText().toString();
         re_mk = mk2.getText().toString();
+        mkold = mkcu.getText().toString();
         String regex = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(mk);
-        int a, b;
+        int a, b, c;
 
         boolean validPassword = isValidPassword(mk,regex);
 
@@ -88,7 +91,14 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             tv_mk2.setText("");
             b = 0;
         }
-        if ( b == 0 && a == 0) {
+        if (mkold.length() == 0 ){
+            tv_mkcu.setText("Không đc để trống");
+            c = 1;
+        }else {
+            tv_mkcu.setText("");
+            c = 0;
+        }
+        if ( b == 0 && a == 0 && c == 0) {
             return true;
         }
         return false;

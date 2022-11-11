@@ -47,6 +47,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="Mật Khẩu Cũ" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:boxCornerRadiusBottomStart="25dp"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxStrokeWidth="0dp"
+            android:id="@+id/ipl_c"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="false"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/text_hint_secondary"
+            app:boxBackgroundColor="@color/background_edittext_primary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="..."
+                android:fontFamily="@font/roboto_medium"
+                android:id="@+id/edt_c"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_oldpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_color_three" />
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Mật Khẩu Mới" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +106,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tv_pass"
+            android:id="@+id/tv_newpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -113,13 +148,26 @@
             android:textColor="@color/text_color_three" />
 
 
-        <Button
-            android:id="@+id/btn_capnhat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đổi mật khẩu"
-            android:layout_gravity="center"/>
+
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_capnhat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="8dp"
+            android:textSize="16sp"
+            android:paddingVertical="15dp"
+            android:layout_marginHorizontal="18dp"
+            android:text="Đổi mật khẩu"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"/>
+
+    </RelativeLayout>
+
 
 </LinearLayout>

@@ -131,6 +131,7 @@ tools:context=".fragment.fragment_home_pager.CartFragment">
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/ln_go_check_out"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

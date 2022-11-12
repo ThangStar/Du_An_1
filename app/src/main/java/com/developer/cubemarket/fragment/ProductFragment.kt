@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.ProductPagerAdapter
@@ -15,10 +16,15 @@ import com.developer.cubemarket.fragment.fragment_home_pager.CartFragment
 import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_home_pager.ProfileFragment
 import com.developer.cubemarket.fragment.fragment_home_pager.SearchFragment
+import es.dmoral.toasty.Toasty
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class ProductFragment : Fragment() {
     lateinit var binding: FragmentProductBinding
     lateinit var ctx: Context
+    var isExit = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,5 +76,24 @@ class ProductFragment : Fragment() {
         arr.add(ProfileFragment())
 
         return arr
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        class blockGoBack : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Toasty.warning(ctx, "Quay lại lần nữa để thoát", Toasty.LENGTH_SHORT).show()
+                val job1 = GlobalScope.launch {
+                    isExit = true
+                    Thread.sleep(2000)
+                    isExit = false
+                    cancel()
+                }
+                if (isExit){
+                    System.exit(0)
+                }
+            }
+        }
+        requireActivity().getOnBackPressedDispatcher().addCallback(
+            this, blockGoBack());
     }
 }

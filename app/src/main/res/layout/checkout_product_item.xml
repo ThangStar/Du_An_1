@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp"
+    android:clickable="true"
+    android:background="@drawable/ripple_text"
+    android:paddingHorizontal="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/car_image"
+        app:cardCornerRadius="10dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/imv_product"
+            android:layout_width="wrap_content"
+            android:src="@drawable/product1"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_toRightOf="@id/car_image"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_name"
+            android:text="Mặt nạ hacker"
+            android:textSize="20sp"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="@color/text_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_info"
+            android:text="Size: M, màu đen"
+            android:textSize="8sp"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="@color/text_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="đ 190.000"
+            android:id="@+id/tv_price"
+            android:fontFamily="@font/roboto_bold"
+            android:textSize="20sp"
+            android:textColor="@color/text_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:orientation="vertical"
+        android:background="@drawable/shape_linear_radius"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imv_plus"
+            android:clickable="true"
+            android:background="@drawable/ripple_item"
+            android:src="@drawable/ic_plus"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true" />
+        <TextView
+            android:id="@+id/tv_amount"
+            android:text="2"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/text_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/imv_minus"
+            android:padding="8dp"
+            android:clickable="true"
+            android:background="@drawable/ripple_item"
+            android:src="@drawable/ic_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true" />
+    </LinearLayout>
+</RelativeLayout>

@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"/>
     <androidx.core.widget.NestedScrollView
         android:fitsSystemWindows="true"
+        android:background="@color/white"
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="wrap_content">
@@ -211,6 +212,7 @@
     </androidx.core.widget.NestedScrollView>
     <com.google.android.material.button.MaterialButton
         android:text="Thêm vào giỏ"
+        android:id="@+id/btn_go_check_out"
         android:layout_marginVertical="5dp"
         android:paddingVertical="16dp"
         android:layout_marginHorizontal="15dp"

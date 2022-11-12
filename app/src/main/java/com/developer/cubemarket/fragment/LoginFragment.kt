@@ -14,8 +14,8 @@ import androidx.activity.OnBackPressedDispatcher
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
 import com.developer.cubemarket.config.share_references.DataShareReferences
-import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
-import com.developer.cubemarket.connection.MODEL.OOP.User
+import com.developer.cubemarket.MODEL.DAO.DaoUser
+import com.developer.cubemarket.MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentLoginBinding
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.GlobalScope

@@ -55,4 +55,20 @@ dependencies {
 
     // đọc dữ liệu internet
     implementation 'com.android.volley:volley:1.2.1'
+    //fancyToast
+    implementation 'io.github.shashank02051997:FancyToast:2.0.2'
+
+    // đọc dữ liệu internet
+    implementation 'com.android.volley:volley:1.2.1'
+
+    // Gửi Email tới USER
+    implementation files('libs/activation.jar')
+    implementation files('libs/additionnal.jar')
+    implementation files('libs/mail.jar')
+
+    //Toasty
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
+
+    //TedBottomPicker
+    implementation 'gun0912.ted:tedbottompicker:2.0.1'
 }

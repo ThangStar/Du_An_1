@@ -1,4 +1,4 @@
-package com.developer.cubemarket.connection.MODEL.DAO;
+package com.developer.cubemarket.MODEL.DAO;
 
 import android.content.Context;
 import android.util.Log;
@@ -16,9 +16,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.R;
 import com.developer.cubemarket.config.share_references.DataShareReferences;
-import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
-import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
-import com.developer.cubemarket.connection.MODEL.OOP.User;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.HttpsTrustManager;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.Link;
+import com.developer.cubemarket.MODEL.OOP.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;

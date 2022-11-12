@@ -1,6 +1,5 @@
 package com.developer.cubemarket.connection.MODEL.DAO;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -16,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.R;
+import com.developer.cubemarket.config.share_references.DataShareReferences;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
@@ -29,7 +29,6 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-
 public class DaoUser {
     Context context;
     String TAG="TAG";
@@ -39,14 +38,14 @@ public class DaoUser {
         this.context = context;
     }
 
-    public void insert_user(User user){
+    public  void insert_user( User user){
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.intsert_user, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-
                     Toasty.success(context, "Tạo tài khoản thành công!", Toasty.LENGTH_SHORT).show();
                 }else{
                     Toasty.error(context, "Lỗi: "+response.toString(), Toasty.LENGTH_SHORT).show();
@@ -72,7 +71,7 @@ public class DaoUser {
         };
         requestQueue.add(stringRequest);
     }
-    public  void updete_user( User user){
+    public  void update_user( int id ,String ten, int chucvu,String phone){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
@@ -94,12 +93,76 @@ public class DaoUser {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("id", String.valueOf(user.getId()));
-                stringStringMap.put("ten",user.getTen());
-                stringStringMap.put("pass",user.getPassword());
-                stringStringMap.put("chucvu", String.valueOf(user.getChucvu()));
-                stringStringMap.put("gmail",user.getGmail());
-                stringStringMap.put("phone",user.getPhone());
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("ten",ten);
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+                stringStringMap.put("phone",phone);
+                stringStringMap.put("update","UPDATETHONGTIN");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void update_gmail_user( int id,String gmail){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("gmail",gmail);
+                stringStringMap.put("update","UPDATEGMAIL");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void update_pass_user( int id,String pass,String pass_new){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("pass",pass);
+                stringStringMap.put("pass_new", pass_new);
+                stringStringMap.put("update","UPDATEPASS");
                 return stringStringMap;
             }
         };
@@ -111,7 +174,6 @@ public class DaoUser {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_dangnhap, new Response.Listener<String>() {
-            @SuppressLint("RestrictedApi")
             @Override
             public void onResponse(String response) {
                if(response.toString().trim().equals("ErrorLogin")){
@@ -128,21 +190,25 @@ public class DaoUser {
                                String phone=jsonObject.getString("phone");
                                String gmail=jsonObject.getString("gmail");
                                if(chuvu==1){
-                                   tenchucvu="Người bán";
+                                   tenchucvu="Admin";
                                }
                                Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
-                               Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
                                //--------------------------------------------------------code them doạn này------------------------------------
-                               //start home when login success!
+                               Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
+                               //put data in share references
+                               DataShareReferences.Companion.putEmailAndPass(context, user, pass);
+
+                               //go to home
                                Navigation.findNavController(root)
                                        .navigate(R.id.action_loginFragment_to_productFragment);
                            } catch (JSONException e) {
                                e.printStackTrace();
-                               Toasty.error(context, "đã xảy ra lỗi "+e, Toasty.LENGTH_SHORT).show();
+                               Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
                            }
                        }
                    } catch (JSONException e) {
-                       Log.d(TAG, "-----llll--->>"+e);
+                       Log.d("SSS", "-----llll--->>"+e);
+                       Toasty.error(context, "đã xảy ra lỗi "+e, Toasty.LENGTH_SHORT).show();
                        e.printStackTrace();
                    }
                }
@@ -150,7 +216,8 @@ public class DaoUser {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(context, "đã xảy ra lỗi "+error, Toasty.LENGTH_SHORT).show();
+                Log.d("SSS", "-----llll--->>"+error.toString());
+                Toasty.error(context, "đã xảy ra lỗi ", Toasty.LENGTH_SHORT).show();
             }
         }){
             @Nullable

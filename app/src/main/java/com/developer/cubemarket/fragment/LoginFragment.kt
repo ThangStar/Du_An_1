@@ -13,6 +13,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcher
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
+import com.developer.cubemarket.config.share_references.DataShareReferences
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentLoginBinding
@@ -36,10 +37,17 @@ class LoginFragment : Fragment() {
         ctx = binding.root.context
 
 
+        initDataDefault()
         initEventLogin()
         initAnimation()
         return binding.root
 
+    }
+
+    private fun initDataDefault() {
+        val auth = DataShareReferences.getEmailAndPass(requireContext())
+        binding.edtA.setText(auth.email)
+        binding.edtB.setText(auth.pass)
     }
 
     private fun initAnimation() {
@@ -132,9 +140,27 @@ class LoginFragment : Fragment() {
 
                 }
                 0 -> {
+                    var isCheck = true
                     val email = binding.edtA.text.toString().trim()
                     val pass = binding.edtB.text.toString().trim()
-                    DaoUser(ctx).dangnhap(binding.root, email, pass)
+                    if(email.isBlank()){
+                        isCheck = false
+                        binding.edtA.error = "Địa chỉ email không được để trống"
+                    } else{
+                        binding.edtA.error = null
+                    }
+
+                    if(pass.isBlank()){
+                        isCheck = false
+                        binding.edtB.error = "Mật khẩu không được để trống"
+                    } else{
+                        binding.edtB.error = null
+                    }
+
+                    if (isCheck){
+                        DaoUser(ctx).dangnhap(binding.root, email, pass)
+                    }
+
                 }
             }
             //Register success!

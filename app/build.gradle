@@ -58,4 +58,7 @@ dependencies {
 
     //Toasty
     implementation 'com.github.GrenderG:Toasty:1.5.2'
+
+    //TedBottomPicker
+    implementation 'gun0912.ted:tedbottompicker:2.0.1'
 }

@@ -1,4 +1,4 @@
-package com.developer.cubemarket.config
+package com.developer.cubemarket.config.utils
 
 import android.content.res.Resources
 import android.graphics.Bitmap

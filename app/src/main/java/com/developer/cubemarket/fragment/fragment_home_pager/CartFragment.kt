@@ -15,7 +15,7 @@ import com.developer.cubemarket.`object`.DirectoryHome
 import com.developer.cubemarket.`object`.cart.CartProduct
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.cart.CartProductAdapter
-import com.developer.cubemarket.config.DataConfig
+import com.developer.cubemarket.config.utils.DataConfig
 import com.developer.cubemarket.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {

@@ -1,7 +1,6 @@
 package com.developer.cubemarket.fragment.fragment_home_pager
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -19,7 +18,7 @@ import com.developer.cubemarket.`object`.DirectoryHome
 import com.developer.cubemarket.`object`.ProductHome
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.ProductHomeAdapter
-import com.developer.cubemarket.config.DataConfig
+import com.developer.cubemarket.config.utils.DataConfig
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 
 

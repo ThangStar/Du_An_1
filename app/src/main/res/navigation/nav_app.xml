@@ -15,13 +15,7 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/in_page"
             app:launchSingleTop="true"
-            app:popExitAnim="@anim/out_page"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_logoFragment_to_productFragment"
-            app:destination="@id/productFragment"
-            app:enterAnim="@anim/in_page"
-            app:exitAnim="@anim/out_page" />
 
     </fragment>
     <fragment
@@ -32,8 +26,7 @@
         <action
             android:id="@+id/action_loginFragment_to_productFragment"
             app:destination="@id/productFragment"
-            app:enterAnim="@anim/in_page"
-            app:popExitAnim="@anim/out_page" />
+            app:enterAnim="@anim/in_page" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
@@ -44,10 +37,30 @@
             android:id="@+id/action_productFragment_to_detailProductFragment"
             app:destination="@id/detailProductFragment"
             app:enterAnim="@anim/in_page"
-            app:popExitAnim="@anim/out_page" />
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_checkOutFragment"
-            app:destination="@id/checkOutFragment" />
+            app:destination="@id/checkOutFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
+        <action
+            android:id="@+id/action_productFragment_to_postProductFragment"
+            app:destination="@id/postProductFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
+        <action
+            android:id="@+id/action_productFragment_to_updateProductFragment"
+            app:destination="@id/updateProductFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
@@ -58,4 +71,14 @@
         android:id="@+id/checkOutFragment"
         android:name="com.developer.cubemarket.fragment.fragment_product.CheckOutFragment"
         android:label="CheckOutFragment" />
+    <fragment
+        android:id="@+id/postProductFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_utils_product.PostProductFragment"
+        android:label="fragment_post_product"
+        tools:layout="@layout/fragment_post_product" />
+    <fragment
+        android:id="@+id/updateProductFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment"
+        android:label="fragment_update_product"
+        tools:layout="@layout/fragment_update_product" />
 </navigation>

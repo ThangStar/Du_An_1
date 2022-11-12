@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.checkout.ProductCheckOut
 import com.developer.cubemarket.adapter.checkout.CheckOutCartAdapter
-import com.developer.cubemarket.config.DataConfig
+import com.developer.cubemarket.config.utils.DataConfig
 import com.developer.cubemarket.databinding.FragmentCheckOutBinding
 
 class CheckOutFragment : Fragment() {
@@ -31,7 +31,7 @@ class CheckOutFragment : Fragment() {
     }
 
     private fun initDataProduct(): ArrayList<ProductCheckOut> {
-        var arr = arrayListOf<ProductCheckOut>()
+        val arr = arrayListOf<ProductCheckOut>()
         val bm1 = DataConfig.resourceToBitmap(resources, R.drawable.product1)
         val bm2 = DataConfig.resourceToBitmap(resources, R.drawable.product2)
 

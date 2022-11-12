@@ -3,15 +3,12 @@ package com.developer.cubemarket.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.ProductHome
-import com.developer.cubemarket.config.DataConfig
+import com.developer.cubemarket.config.utils.DataConfig
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
 
 class ProductHomeAdapter(

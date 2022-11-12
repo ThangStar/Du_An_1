@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.checkout.ProductCheckOut
-import com.developer.cubemarket.config.DataConfig
+import com.developer.cubemarket.config.utils.DataConfig
 import com.developer.cubemarket.databinding.CheckoutProductItemBinding
 
 class CheckOutCartAdapter(

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".fragment.fragment_utils_product.PostProductFragment">
+
+<RelativeLayout
+    android:id="@+id/rl_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="25dp">
+
+    <ImageView
+        android:id="@+id/imv_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ripple_text"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:textColor="@color/text_color_secondary"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_title_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Đăng sản phẩm"
+        android:textSize="20sp" />
+
+</RelativeLayout>
+
+<ScrollView
+    android:layout_below="@+id/rl_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:paddingHorizontal="20dp"
+                android:weightSum="2"
+                android:paddingVertical="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/ln_name"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/text_color_secondary"
+                            android:id="@+id/tv1"
+                            android:layout_marginBottom="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tên sản phẩm"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_below="@id/tv1"
+                            android:layout_height="wrap_content"
+                            app:boxStrokeColor="@color/dividingLine"
+                            app:boxStrokeWidth="1dp"
+                            android:layout_marginBottom="6dp"
+
+                            app:boxCornerRadiusTopEnd="8dp"
+                            app:boxCornerRadiusBottomStart="8dp"
+                            app:boxCornerRadiusBottomEnd="8dp"
+                            app:boxCornerRadiusTopStart="8dp"
+                            android:id="@+id/ipl_a"
+                            app:hintEnabled="false"
+                            android:textColorHint="@color/text_hint_secondary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Tên.."
+                                android:fontFamily="@font/roboto_medium"
+                                android:id="@+id/edt_a"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_below="@id/ln_name"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/text_color_secondary"
+
+                            android:id="@+id/tv111"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Danh mục"/>
+
+                        <Spinner
+                            android:paddingHorizontal="0dp"
+                            android:id="@+id/spn_directory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <ImageButton
+                    android:id="@+id/imv_avatar"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:background="@drawable/ripple_text"
+                    android:src="@drawable/avatar_2"
+                    android:layout_width="0dp"
+                    android:scaleType="fitCenter"
+                    android:layout_height="match_parent"
+                    android:focusable="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:paddingHorizontal="20dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginBottom="6dp"
+                        android:textColor="@color/text_color_secondary"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giá"
+                        android:layout_marginTop="10dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="@color/dividingLine"
+                        app:boxStrokeWidth="1dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:hintEnabled="false"
+                        android:textColorHint="@color/text_hint_secondary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="VND"
+                            android:inputType="number"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/roboto_medium"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+
+                        android:layout_marginBottom="6dp"
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kho"
+                        android:layout_marginTop="10dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="@color/dividingLine"
+                        app:boxStrokeWidth="1dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:hintEnabled="false"
+                        android:textColorHint="@color/text_hint_secondary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0"
+                            android:inputType="number"
+
+                            android:fontFamily="@font/roboto_medium"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/text_color_secondary"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhà sản xuất"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dividingLine"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:hintEnabled="false"
+                    android:textColorHint="@color/text_hint_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nike, Supreme, Adidas,.."
+                        android:fontFamily="@font/roboto_medium"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/text_color_secondary"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kích cỡ"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dividingLine"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:hintEnabled="false"
+                    android:textColorHint="@color/text_hint_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="M, X, XL, XXL"
+                        android:fontFamily="@font/roboto_medium"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/text_color_secondary"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Màu sắc"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dividingLine"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:hintEnabled="false"
+                    android:textColorHint="@color/text_hint_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Xanh, Đỏ, Vàng"
+                        android:fontFamily="@font/roboto_medium"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chi tiết"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dividingLine"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:hintEnabled="false"
+                    android:textColorHint="@color/text_hint_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:minHeight="80dp"
+                        android:layout_marginBottom="?attr/actionBarSize"
+                        android:layout_height="wrap_content"
+                        android:hint="Chi tiết.."
+                        android:fontFamily="@font/roboto_medium"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_capnhat"
+    android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="18dp"
+    android:paddingVertical="15dp"
+    android:text="ĐĂNG"
+    android:layout_alignParentBottom="true"
+    android:layout_marginVertical="5dp"
+    android:textSize="16sp"
+    app:backgroundTint="@color/button_background_primary"
+    app:cornerRadius="8dp" />
+
+</RelativeLayout>

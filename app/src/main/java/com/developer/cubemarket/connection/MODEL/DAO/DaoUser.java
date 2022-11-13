@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.R;
 import com.developer.cubemarket.config.share_references.DataShareReferences;
+import com.developer.cubemarket.config.user.DataUser;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
@@ -32,7 +33,7 @@ import es.dmoral.toasty.Toasty;
 public class DaoUser {
     Context context;
     String TAG="TAG";
-    String tenchucvu="Người dùng";
+    String tenchucvu="User";
 
     public DaoUser(Context context) {
         this.context = context;
@@ -195,6 +196,11 @@ public class DaoUser {
                                Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
                                //--------------------------------------------------------code them doạn này------------------------------------
                                Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
+                               DataUser.Companion.setId(id);
+                               DataUser.Companion.setName(ten);
+                               DataUser.Companion.setGmail(gmail);
+                               DataUser.Companion.setOccupation(tenchucvu);
+                               DataUser.Companion.setNumberPhone(phone);
                                //put data in share references
                                DataShareReferences.Companion.putEmailAndPass(context, user, pass);
 

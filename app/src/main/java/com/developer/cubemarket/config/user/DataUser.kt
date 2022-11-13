@@ -1,6 +1,6 @@
-package com.developer.cubemarket.config.person
+package com.developer.cubemarket.config.user
 
-class DataPerson {
+class DataUser {
     companion object{
         var id = 0;
         var name = ""

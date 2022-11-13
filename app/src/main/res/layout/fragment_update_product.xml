@@ -82,12 +82,11 @@
                                 app:boxStrokeColor="@color/dividingLine"
                                 app:boxStrokeWidth="1dp"
                                 android:layout_marginBottom="6dp"
-
                                 app:boxCornerRadiusTopEnd="8dp"
                                 app:boxCornerRadiusBottomStart="8dp"
                                 app:boxCornerRadiusBottomEnd="8dp"
                                 app:boxCornerRadiusTopStart="8dp"
-                                android:id="@+id/ipl_a"
+                                android:id="@+id/til_name"
                                 app:hintEnabled="false"
                                 android:textColorHint="@color/text_hint_secondary">
 
@@ -96,7 +95,7 @@
                                     android:layout_height="wrap_content"
                                     android:hint="Tên.."
                                     android:fontFamily="@font/roboto_medium"
-                                    android:id="@+id/edt_a"/>
+                                    android:id="@+id/edt_name"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
@@ -158,6 +157,7 @@
                             android:layout_marginTop="10dp"/>
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
+                            android:id="@+id/til_price"
                             android:layout_height="wrap_content"
                             app:boxStrokeColor="@color/dividingLine"
                             app:boxStrokeWidth="1dp"
@@ -172,6 +172,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/edt_price"
                                 android:hint="VND"
                                 android:inputType="number"
                                 android:fontFamily="@font/roboto_medium"/>
@@ -197,6 +198,7 @@
                             android:layout_height="wrap_content"
                             app:boxStrokeColor="@color/dividingLine"
                             app:boxStrokeWidth="1dp"
+                            android:id="@+id/til_amount"
                             app:boxCornerRadiusTopEnd="8dp"
                             app:boxCornerRadiusBottomStart="8dp"
                             app:boxCornerRadiusBottomEnd="8dp"
@@ -206,6 +208,7 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
+                                android:id="@+id/edt_amount"
                                 android:layout_height="wrap_content"
                                 android:hint="0"
                                 android:inputType="number"
@@ -231,6 +234,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/til_brand"
                         app:boxStrokeColor="@color/dividingLine"
                         app:boxStrokeWidth="1dp"
                         app:boxCornerRadiusTopEnd="8dp"
@@ -243,6 +247,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/edt_brand"
                             android:hint="Nike, Supreme, Adidas,.."
                             android:fontFamily="@font/roboto_medium"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -263,7 +268,7 @@
                         android:layout_marginTop="10dp"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/ry_size"
-                        app:spanCount="4"
+                        app:spanCount="3"
                         tools:itemCount="8"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         android:layout_width="match_parent"
@@ -273,6 +278,7 @@
                         android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="wrap_content"
+                            android:id="@+id/til_size"
                             android:layout_height="wrap_content"
                             app:boxStrokeColor="@color/dividingLine"
                             app:boxStrokeWidth="1dp"
@@ -284,12 +290,14 @@
                             android:textColorHint="@color/text_hint_secondary">
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/edt_size"
                             android:layout_height="wrap_content"
                             android:hint="M, L, XL, XXL"
                             android:fontFamily="@font/roboto_medium"/>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.button.MaterialButton
                             android:layout_width="wrap_content"
+                            android:id="@+id/btn_add_size"
                             android:text="Thêm cỡ"
                             android:layout_marginHorizontal="18dp"
                             android:layout_gravity="center_vertical"
@@ -325,6 +333,7 @@
                         android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="wrap_content"
+                            android:id="@+id/til_color"
                             android:layout_height="wrap_content"
                             app:boxStrokeColor="@color/dividingLine"
                             app:boxStrokeWidth="1dp"
@@ -336,12 +345,14 @@
                             android:textColorHint="@color/text_hint_secondary">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
+                                android:id="@+id/edt_color"
                                 android:layout_height="wrap_content"
                                 android:hint="Xanh, đỏ, vàng"
                                 android:fontFamily="@font/roboto_medium"/>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.button.MaterialButton
                             android:layout_width="wrap_content"
+                            android:id="@+id/btn_add_color"
                             android:text="Thêm màu"
                             android:layout_marginHorizontal="18dp"
                             android:layout_gravity="center_vertical"
@@ -369,6 +380,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/til_detail"
                         app:boxStrokeColor="@color/dividingLine"
                         app:boxStrokeWidth="1dp"
                         app:boxCornerRadiusTopEnd="8dp"
@@ -380,6 +392,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/edt_detail"
                             android:minHeight="80dp"
                             android:layout_marginBottom="?attr/actionBarSize"
                             android:layout_height="wrap_content"
@@ -398,7 +411,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_capnhat"
+        android:id="@+id/btn_update"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"

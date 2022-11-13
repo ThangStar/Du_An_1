@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
-import com.developer.cubemarket.config.utils.utils
+import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.databinding.SizeItemBinding
-import es.dmoral.toasty.Toasty
 
 class SizeAdapter(
     private var activity: Activity,
@@ -25,7 +24,7 @@ class SizeAdapter(
         init {
             v.findViewById<LinearLayout>(R.id.ln_root).setOnClickListener {
                 Log.d("SSS", "POS: $adapterPosition")
-                utils.dialogDelSize(activity, "Xóa size ${arr[adapterPosition]}?",
+                Utils.dialogDelSize(activity, "Xóa size ${arr[adapterPosition]}?",
                     "Bạn có chắc chắn xóa size này ?", 123, adapterPosition)
             }
         }

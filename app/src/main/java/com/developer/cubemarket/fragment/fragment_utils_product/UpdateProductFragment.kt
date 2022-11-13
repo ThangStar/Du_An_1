@@ -2,17 +2,20 @@ package com.developer.cubemarket.fragment.fragment_utils_product
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.utils.color.ColorAdapter
 import com.developer.cubemarket.adapter.utils.size.SizeAdapter
 import com.developer.cubemarket.databinding.FragmentProductBinding
 import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
+import java.util.regex.Pattern
 
-    class UpdateProductFragment : Fragment() {
+class UpdateProductFragment : Fragment() {
     lateinit var binding: FragmentUpdateProductBinding
     @SuppressLint("StaticFieldLeak")
     companion object{
@@ -36,9 +39,86 @@ import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
 
         initRecyclerSize()
         initRecycelrColor()
+        initAddSize()
+        initAddColor()
+        initDataSpinnerDirectory()
+        initEventUpdate()
         //end code
         return binding.root
     }
+    private fun initDataSpinnerDirectory() {
+        val type = arrayListOf("Phổ biến", "Xu hướng", "Mới", "Bán chạy", "Khác")
+
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.dropdown_directory_item,
+            type
+        )
+        binding.spnDirectory.setAdapter(adapter)
+    }
+    private fun initEventUpdate() {
+        binding.btnUpdate.setOnClickListener {
+            val name = binding.edtName.text.toString().trim()
+            val directory = binding.spnDirectory.selectedItem.toString()
+            val price = binding.edtPrice.text.toString().trim()
+            val amount = binding.edtAmount.text.toString()
+            val brand = binding.edtBrand.text.toString().trim()
+            val size = formatStr(arrSize)
+            val color = formatStr(arrColor)
+            val detail = binding.edtDetail.text.toString()
+
+            // update above data to DB
+
+            Log.d("SSS", "name: $name, directory: $directory, " +
+                    "price: $price, amount: $amount, " +
+                    "brand: $brand, size: $size, color: $color, detail: $detail")
+        }
+    }
+
+    private fun formatStr(arr: ArrayList<String>): String {
+        var strFormat = ""
+        if (arr.size != 0){
+            for (i in arr){
+                strFormat += i+", "
+            }
+            strFormat = strFormat.substring(0, strFormat.length - 2)
+        }
+        return strFormat
+    }
+
+    private fun initAddColor() {
+            binding.btnAddColor.setOnClickListener{
+                val color = binding.edtColor.text.toString().trim()
+                val matches = "^[a-zA-Z0-9]{1,10}\$"
+                if (Pattern.matches(matches, color)){
+                    if(binding.tilColor.error != null){
+                        binding.tilColor.error = null
+                    }
+                    binding.edtColor.setText("")
+                    arrColor.add(color)
+                    colorAdapter.notifyItemInserted(arrColor.size)
+                }else{
+                    binding.tilColor.error = "vd: Xanh, Đỏ.."
+                }
+            }
+        }
+
+        private fun initAddSize() {
+            binding.btnAddSize.setOnClickListener{
+                val size = binding.edtSize.text.toString().trim()
+                val matches = "^[a-zA-Z0-9]{1,3}\$"
+                if (Pattern.matches(matches, size)){
+                    if(binding.tilSize.error != null){
+                        binding.tilSize.error = null
+                    }
+                    binding.edtSize.setText("")
+                    arrSize.add(size)
+                    sizeAdapter.notifyItemInserted(arrSize.size)
+                }else{
+                    binding.tilSize.error = "vd: X, XL, 39.."
+                }
+            }
+        }
 
         private fun initRecycelrColor() {
             colorAdapter = ColorAdapter(requireActivity(), initColor())

@@ -18,7 +18,7 @@ import com.developer.cubemarket.`object`.DirectoryHome
 import com.developer.cubemarket.`object`.ProductHome
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.ProductHomeAdapter
-import com.developer.cubemarket.config.utils.DataConfig
+import com.developer.cubemarket.config.utils.utils
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 
 
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
 
     private fun initDataProduct(): ArrayList<ProductHome> {
         var arr = arrayListOf<ProductHome>()
-        val bm = DataConfig.resourceToBitmap(resources, R.drawable.product1)
+        val bm = utils.resourceToBitmap(resources, R.drawable.product1)
         arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
         arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
         arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))

@@ -1,17 +1,31 @@
 package com.developer.cubemarket.fragment.fragment_utils_product
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.developer.cubemarket.R
+import com.developer.cubemarket.adapter.utils.color.ColorAdapter
 import com.developer.cubemarket.adapter.utils.size.SizeAdapter
 import com.developer.cubemarket.databinding.FragmentProductBinding
 import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
 
     class UpdateProductFragment : Fragment() {
     lateinit var binding: FragmentUpdateProductBinding
+    @SuppressLint("StaticFieldLeak")
+    companion object{
+        @SuppressLint("StaticFieldLeak")
+        lateinit var sizeAdapter: SizeAdapter
+        @SuppressLint("StaticFieldLeak")
+        lateinit var colorAdapter: ColorAdapter
+
+        val arrSize = arrayListOf<String>()
+        val arrColor = arrayListOf<String>()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,30 +41,28 @@ import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
     }
 
         private fun initRecycelrColor() {
-            val adapter = SizeAdapter(initColor())
-            binding.ryColor.adapter = adapter
+            colorAdapter = ColorAdapter(requireActivity(), initColor())
+            binding.ryColor.adapter = colorAdapter
         }
 
         private fun initColor(): ArrayList<String> {
-            val arr = arrayListOf<String>()
-            arr.add("Xanh")
-            arr.add("Đỏ")
-            arr.add("Vàng")
-            return arr
+            arrColor.add("Xanh")
+            arrColor.add("Đỏ")
+            arrColor.add("Vàng")
+            return arrColor
         }
 
         private fun initRecyclerSize() {
-            val adapter = SizeAdapter(initSize())
-            binding.rySize.adapter = adapter
+            sizeAdapter = SizeAdapter(requireActivity(), initSize())
+            binding.rySize.adapter = sizeAdapter
         }
 
         private fun initSize(): ArrayList<String> {
-            val arr = arrayListOf<String>()
-            arr.add("M")
-            arr.add("L")
-            arr.add("X")
-            arr.add("XL")
-            arr.add("XXL")
-            return arr
+            arrSize.add("M")
+            arrSize.add("L")
+            arrSize.add("X")
+            arrSize.add("XL")
+            arrSize.add("XXL")
+            return arrSize
         }
     }

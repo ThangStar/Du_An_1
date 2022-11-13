@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.checkout.ProductCheckOut
-import com.developer.cubemarket.config.utils.DataConfig
+import com.developer.cubemarket.config.utils.utils
 import com.developer.cubemarket.databinding.CheckoutProductItemBinding
 
 class CheckOutCartAdapter(
@@ -26,7 +26,7 @@ var arr: ArrayList<ProductCheckOut>
         holder.binding.imvProduct.setImageBitmap(pr.image)
         holder.binding.tvName.text = pr.name
         holder.binding.tvInfo.text = pr.info
-        holder.binding.tvPrice.text = DataConfig.formaterVND(pr.price)
+        holder.binding.tvPrice.text = utils.formaterVND(pr.price)
         holder.binding.tvAmount.text = "${pr.amount}"
         holder.binding.imvPlus.setOnClickListener {
             //plus tvAmount

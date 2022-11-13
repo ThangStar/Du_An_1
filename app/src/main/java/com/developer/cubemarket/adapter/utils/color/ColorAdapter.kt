@@ -1,4 +1,4 @@
-package com.developer.cubemarket.adapter.utils.size
+package com.developer.cubemarket.adapter.utils.color
 
 import android.app.Activity
 import android.util.Log
@@ -12,10 +12,10 @@ import com.developer.cubemarket.config.utils.utils
 import com.developer.cubemarket.databinding.SizeItemBinding
 import es.dmoral.toasty.Toasty
 
-class SizeAdapter(
+class ColorAdapter(
     private var activity: Activity,
     var arr: ArrayList<String>
-): RecyclerView.Adapter<SizeAdapter.SizeViewHolder>() {
+): RecyclerView.Adapter<ColorAdapter.SizeViewHolder>() {
     class SizeViewHolder(
         activity: Activity,
         v: View,
@@ -25,8 +25,8 @@ class SizeAdapter(
         init {
             v.findViewById<LinearLayout>(R.id.ln_root).setOnClickListener {
                 Log.d("SSS", "POS: $adapterPosition")
-                utils.dialogDelSize(activity, "Xóa size ${arr[adapterPosition]}?",
-                    "Bạn có chắc chắn xóa size này ?", 123, adapterPosition)
+                utils.dialogDelColor(activity, "Xóa màu ${arr[adapterPosition]}?",
+                    "Bạn có chắc chắn xóa màu này ?", 123, adapterPosition)
             }
         }
     }

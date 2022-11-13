@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.ProductHome
-import com.developer.cubemarket.config.utils.DataConfig
+import com.developer.cubemarket.config.utils.utils
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
 
 class ProductHomeAdapter(
@@ -27,7 +27,7 @@ class ProductHomeAdapter(
     override fun onBindViewHolder(holder: ProducHomeViewHolder, position: Int) {
         val pr = arr[position]
         holder.binding.imvProduct.setImageBitmap(pr.imgProduct)
-        holder.binding.tvPrice.text = DataConfig.formaterVND(pr.priceProduct)
+        holder.binding.tvPrice.text = utils.formaterVND(pr.priceProduct)
         holder.binding.tvTitle.text = pr.nameProduct
         holder.binding.lnProduct.setOnClickListener {
             findNavController(fr).navigate(

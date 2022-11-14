@@ -6,9 +6,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.view.View
-import androidx.annotation.MenuRes
-import androidx.appcompat.widget.PopupMenu
 import com.developer.cubemarket.R
 import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment
@@ -68,9 +65,6 @@ class Utils {
                 .build()
             mBottomSheetDialog.show()
         }
-
-
-
         fun dialogDelProduct(activity: Activity, title: String, message: String, id: Int, pos: Int){
             val mBottomSheetDialog: BottomSheetMaterialDialog = BottomSheetMaterialDialog.Builder(activity)
                 .setTitle(title)

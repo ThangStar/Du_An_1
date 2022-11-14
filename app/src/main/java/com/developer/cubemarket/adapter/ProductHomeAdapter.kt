@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.ProductHome
@@ -53,15 +55,10 @@ class ProductHomeAdapter(
                         "Bạn có muốn xóa sản phẩm ${arr[adapterPosition].nameProduct}", 123, adapterPosition)
                     }
                     R.id.it_edit ->{
-                        Toasty.warning(ctx,
-                            "Click edit", Toasty.LENGTH_SHORT).show()
+                            fr.findNavController().navigate(R.id.action_productFragment_to_updateProductFragment)
                     }
                 }
                 true
-            }
-            popup.setOnDismissListener {
-                Toasty.warning(ctx,
-                    "Dismiss", Toasty.LENGTH_SHORT).show()
             }
             // Show the popup menu.
             popup.show()

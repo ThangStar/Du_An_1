@@ -3,14 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/ln_root"
     android:clipToPadding="true"
+    android:clickable="true"
+    android:background="@drawable/ripple_text"
     android:layout_width="wrap_content"
     android:layout_marginVertical="8dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:focusable="true">
 
 
     <LinearLayout
         android:background="@drawable/shape_radius"
+
         android:id="@+id/ln_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -29,10 +34,8 @@
             android:id="@+id/imv_del"
             android:layout_width="24dp"
             android:background="@drawable/ripple_item_no_bg"
-            android:clickable="true"
             android:layout_height="24dp"
-            android:src="@drawable/cancel_item_small"
-            android:focusable="true" />
+            android:src="@drawable/cancel_item_small"/>
     </LinearLayout>
 
 

@@ -15,7 +15,7 @@ import com.developer.cubemarket.`object`.DirectoryHome
 import com.developer.cubemarket.`object`.cart.CartProduct
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.cart.CartProductAdapter
-import com.developer.cubemarket.config.utils.DataConfig
+import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
@@ -50,8 +50,8 @@ class CartFragment : Fragment() {
 
     private fun initDataCartProduct():  ArrayList<CartProduct> {
         var arr = arrayListOf<CartProduct>()
-        val bm = DataConfig.resourceToBitmap(resources, R.drawable.product1)
-        val bm2 = DataConfig.resourceToBitmap(resources, R.drawable.product2)
+        val bm = Utils.resourceToBitmap(resources, R.drawable.product1)
+        val bm2 = Utils.resourceToBitmap(resources, R.drawable.product2)
         arr.add(CartProduct(bm, "Giày nike", "size: 41", 690000))
         arr.add(CartProduct(bm2, "Mặt nạ hacker", "size: 41", 690300))
         arr.add(CartProduct(bm, "Giày nike", "size: 41", 534000))

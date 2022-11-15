@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.cart.CartProduct
-import com.developer.cubemarket.config.utils.DataConfig
+import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.databinding.ProductCartItemBinding
 
 class CartProductAdapter(
@@ -26,7 +26,7 @@ class CartProductAdapter(
         holder.binding.imvProduct.setImageBitmap(pr.img)
         holder.binding.tvInfo.text = pr.info
         holder.binding.tvName.text = pr.name
-        holder.binding.tvPrice.text = DataConfig.formaterVND(pr.price)
+        holder.binding.tvPrice.text = Utils.formaterVND(pr.price)
     }
     override fun getItemCount(): Int {
         return arr.size

@@ -24,11 +24,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initBtnPost() {
-        binding.btnPost.setOnClickListener {
+        binding.lnPost.setOnClickListener {
             findNavController().navigate(R.id.action_productFragment_to_postProductFragment)
-        }
-        binding.btnUpdate.setOnClickListener {
-            findNavController().navigate(R.id.action_productFragment_to_updateProductFragment)
         }
     }
 

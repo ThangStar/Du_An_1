@@ -71,4 +71,7 @@ dependencies {
 
     //TedBottomPicker
     implementation 'gun0912.ted:tedbottompicker:2.0.1'
+
+    // Material Dialog
+    implementation 'dev.shreyaspatil.MaterialDialog:MaterialDialog:2.2.3'
 }

@@ -18,13 +18,18 @@ import com.developer.cubemarket.`object`.DirectoryHome
 import com.developer.cubemarket.`object`.ProductHome
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.ProductHomeAdapter
-import com.developer.cubemarket.config.utils.DataConfig
+import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     lateinit var ctx: Context
+
+    companion object{
+        lateinit var productHomeAdapter: ProductHomeAdapter
+        var arrHomeProduct = arrayListOf<ProductHome>()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,20 +57,19 @@ class HomeFragment : Fragment() {
             }
         }
         binding.ryProduct.layoutManager = customLayout
-        val adapter = ProductHomeAdapter(this, initDataProduct())
-        binding.ryProduct.adapter = adapter
+        productHomeAdapter = ProductHomeAdapter(this, initDataProduct())
+        binding.ryProduct.adapter = productHomeAdapter
 
     }
 
     private fun initDataProduct(): ArrayList<ProductHome> {
-        var arr = arrayListOf<ProductHome>()
-        val bm = DataConfig.resourceToBitmap(resources, R.drawable.product1)
-        arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
-        arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
-        arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
-        arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
-        arr.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
-        return arr
+        val bm = Utils.resourceToBitmap(resources, R.drawable.product1)
+        arrHomeProduct.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
+        arrHomeProduct.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
+        arrHomeProduct.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
+        arrHomeProduct.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
+        arrHomeProduct.add(ProductHome(bm, nameProduct = "PRODUCT1", priceProduct = 123131))
+        return arrHomeProduct
     }
 
     private fun initRecyclerDireactory() {

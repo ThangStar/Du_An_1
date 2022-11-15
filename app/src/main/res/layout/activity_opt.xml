@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bachground_gradient"
+    tools:context=".OPT">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:textSize="52sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed-light"
+        android:layout_marginTop="130dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sign in to continue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:layout_marginTop="200dp"/>
+
+    <RelativeLayout
+        android:id="@+id/box1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        android:layout_marginTop="350dp">
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Email Address"
+            android:inputType="textEmailAddress"
+            android:textSize="24sp"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="20dp"
+            android:layout_marginHorizontal="30dp"
+            android:importantForAutofill="no"/>
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Verify Email Address"
+            android:layout_marginHorizontal="30dp"
+            android:onClick="sendVerifyEmail"
+            android:background="@drawable/button_backgrount" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/box2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="350dp">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="100dp"
+            android:orientation="horizontal">
+            
+            <EditText
+                android:id="@+id/digit1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLength="1"
+                android:layout_weight="1"
+                android:textSize="32sp"
+                android:textAlignment="center"
+                />
+            <EditText
+                android:id="@+id/digit2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLength="1"
+                android:layout_weight="1"
+                android:textSize="32sp"
+                android:textAlignment="center"
+                />
+            <EditText
+                android:id="@+id/digit3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLength="1"
+                android:layout_weight="1"
+                android:textSize="32sp"
+                android:textAlignment="center"
+                />
+            <EditText
+                android:id="@+id/digit4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLength="1"
+                android:layout_weight="1"
+                android:textSize="32sp"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Confirm"
+            android:layout_marginHorizontal="30dp"
+            android:onClick="checkCode"
+            android:background="@drawable/button_backgrount" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

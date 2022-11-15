@@ -35,7 +35,7 @@ public class DaoSanPham {
         this.context = context;
     }
 
-    public  void intsert_sanpham( Sanpham sanpham,String tenmau,String tenkichthuoc){
+    public  void insert_sanpham( Sanpham sanpham,String tenmau,String tenkichthuoc){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();

@@ -1,4 +1,4 @@
-package com.developer.cubemarket.MODEL.OOP;
+package MODEL.OOP;
 
 public class Danhmuc {
     private int madanhmuc;

@@ -1,4 +1,4 @@
-package com.developer.cubemarket.MODEL.DAO;
+package MODEL.DAO;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,9 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.developer.cubemarket.MODEL.KET_NOI_SEVER.HttpsTrustManager;
-import com.developer.cubemarket.MODEL.KET_NOI_SEVER.Link;
-import com.developer.cubemarket.MODEL.OOP.Kichthuoc;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,17 +20,24 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import MODEL.KET_NOI_SEVER.HttpsTrustManager;
+import MODEL.KET_NOI_SEVER.Link;
+import MODEL.OOP.User;
 
-public class DaoKichThuoc {
+public class DaoUser {
     Context context;
     String TAG="TAG";
-    public DaoKichThuoc(Context context) {
+    String tenchucvu="Người dùng";
+
+    public DaoUser(Context context) {
         this.context = context;
     }
-    public  void insert_kichthuoc(Kichthuoc kichthuoc){
+
+    public  void insert_user( User user){
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_kichthuoc, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
@@ -52,19 +56,20 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(kichthuoc.getMasanpham()));
-                stringStringMap.put("tenkichthuoc",kichthuoc.getTenkichthuoc());
-
+                stringStringMap.put("ten",user.getTen());
+                stringStringMap.put("pass",user.getPassword());
+                stringStringMap.put("chucvu", String.valueOf(user.getChucvu()));
+                stringStringMap.put("gmail",user.getGmail());
+                stringStringMap.put("phone",user.getPhone());
                 return stringStringMap;
             }
         };
         requestQueue.add(stringRequest);
-
     }
-    public  void delete_kichthuoc(int makichthuoc){
+    public  void update_user( int id ,String ten, int chucvu,String phone){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_kichthuoc, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
@@ -83,46 +88,28 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("makichthuoc", String.valueOf(makichthuoc));
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("ten",ten);
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+                stringStringMap.put("phone",phone);
+                stringStringMap.put("update","UPDATETHONGTIN");
                 return stringStringMap;
             }
         };
+
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_kichthuoc(int masanpham){
+    public  void update_gmail_user( int id,String gmail){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_kichthuoc, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "onResponse: >>> "+response);
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0 ; i<jsonArray.length();i++){
-                        try {
-                            JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            int mamausac= jsonObject.getInt("makichthuoc");
-                            int masanpham=jsonObject.getInt("masanpham");
-                            String tenmau= jsonObject.getString("tenkichthuoc");
-
-                            Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
-
-                            //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
-                        }
-
-                    }
-                } catch (JSONException e) {
-                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
-                    e.printStackTrace();
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
@@ -135,11 +122,100 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("gmail",gmail);
+                stringStringMap.put("update","UPDATEGMAIL");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void update_pass_user( int id,String pass,String pass_new){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("pass",pass);
+                stringStringMap.put("pass_new", pass_new);
+                stringStringMap.put("update","UPDATEPASS");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public void dangnhap(String user,String pass){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_dangnhap, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+               if(response.toString().trim().equals("ErrorLogin")){
+                   Log.d(TAG, "Tài khoản hoặc mật khẩu không chính sác");
+               }else{
+                   try {
+                       JSONArray jsonArray= new JSONArray(response);
+                       for (int i = 0 ; i<jsonArray.length();i++){
+                           try {
+                               JSONObject jsonObject= jsonArray.getJSONObject(i);
+                               int id= jsonObject.getInt("id");
+                               String ten = jsonObject.getString("ten");
+                               int chuvu=jsonObject.getInt("chucvu");
+                               String phone=jsonObject.getString("phone");
+                               String gmail=jsonObject.getString("gmail");
+                               if(chuvu==1){
+                                   tenchucvu="Admin";
+                               }
+                               Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
+                               //--------------------------------------------------------code them doạn này------------------------------------
+
+                           } catch (JSONException e) {
+                               e.printStackTrace();
+                               Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                           }
+                       }
+                   } catch (JSONException e) {
+                       Log.d(TAG, "-----llll--->>"+e);
+                       e.printStackTrace();
+                   }
+               }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("gmail", user);
+                stringStringMap.put("pass", pass);
                 return stringStringMap;
             }
         };
         requestQueue.add(stringRequest);
-
     }
 }

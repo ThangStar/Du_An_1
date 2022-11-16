@@ -53,6 +53,11 @@ class UpdateProductFragment : Fragment() {
         //end code
         return binding.root
     }
+
+    private fun initDataDefault() {
+
+    }
+
     private fun initDataSpinnerDirectory() {
         val type = arrayListOf("Phổ biến", "Xu hướng", "Mới", "Bán chạy", "Khác")
 

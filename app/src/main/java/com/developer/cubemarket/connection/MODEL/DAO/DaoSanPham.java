@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham;
+import com.developer.cubemarket.object.ProductHome;
+import com.developer.cubemarket.utils.CallBackProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -167,7 +170,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_sanpham(){
+    public  void getdata_sanpham(CallBackProduct callBackProduct){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -187,16 +190,23 @@ public class DaoSanPham {
                             int soluong=jsonObject.getInt("soluong");
                             int giaban= jsonObject.getInt("giaban");
                             String chitiet= jsonObject.getString("chitiet");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
+                            Log.d("PRODUCT", "msp> "+masanpham+" msd >"+madanhmuc +" ten > "+ tensanpham
                                     +" img > "+img+" nsx > "+nhasanxuat+
                                     " soluong > "+ soluong+" hinhdang > "+
                                     " giaban > "+giaban+" chitiet > "+chitiet);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
-
-
-
+                            ProductHome pr = new ProductHome(
+                                    masanpham,
+                                    madanhmuc,
+                                    nhasanxuat,
+                                    soluong,
+                                    chitiet,
+                                    img,
+                                    tensanpham,
+                                    giaban);
+                            callBackProduct.DataProduct(pr);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

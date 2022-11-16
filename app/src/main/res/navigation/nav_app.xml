@@ -61,6 +61,23 @@
             app:exitAnim="@anim/out_page"
             app:popEnterAnim="@anim/pop_in_page"
             app:popExitAnim="@anim/pop_out_page" />
+        <action
+            android:id="@+id/action_productFragment_to_updateUserFragment"
+            app:destination="@id/updateUserFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_insertDirectoryFragment"
+            app:destination="@id/insertDirectoryFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_updateDirectoryFragment"
+            app:destination="@id/updateDirectoryFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_changePassFragment"
+            app:destination="@id/changePassFragment" />
+        <action
+            app:popUpTo="@id/nav_app"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_productFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
@@ -81,4 +98,24 @@
         android:name="com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment"
         android:label="fragment_update_product"
         tools:layout="@layout/fragment_update_product" />
+    <fragment
+        android:id="@+id/updateUserFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_utils_user.UpdateUserFragment"
+        android:label="fragment_update_user"
+        tools:layout="@layout/fragment_update_user" />
+    <fragment
+        android:id="@+id/insertDirectoryFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_utils_product.InsertDirectoryFragment"
+        android:label="fragment_insert_directory"
+        tools:layout="@layout/fragment_insert_directory" />
+    <fragment
+        android:id="@+id/updateDirectoryFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_utils_product.UpdateDirectoryFragment"
+        android:label="fragment_update_directory"
+        tools:layout="@layout/fragment_update_directory" />
+    <fragment
+        android:id="@+id/changePassFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_pass.ChangePassFragment"
+        android:label="fragment_change_pass"
+        tools:layout="@layout/fragment_change_pass" />
 </navigation>

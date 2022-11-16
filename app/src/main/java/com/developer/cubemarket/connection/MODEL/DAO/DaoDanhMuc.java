@@ -19,15 +19,19 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
+import com.developer.cubemarket.utils.CallbackUpdateProduct;
+import com.developer.cubemarket.utils.VolleyCallBack;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
 
 
 public class DaoDanhMuc {
@@ -39,7 +43,7 @@ public class DaoDanhMuc {
         this.context = context;
     }
 
-    public  void insert_danhmuc( Danhmuc danhmuc){
+    public  void insert_danhmuc(Context ctx, Danhmuc danhmuc){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -47,7 +51,8 @@ public class DaoDanhMuc {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "thêm thành công");
+                    Log.d(TAG, "Thành công");
+                    Toasty.success(ctx, "OK", 500).show();
                 }else{
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
@@ -85,7 +90,7 @@ public class DaoDanhMuc {
 
         return imgString;
     }
-    public  void delete_danhmuc( int madanhmuc){
+    public void delete_danhmuc( int madanhmuc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_danhmuc, new Response.Listener<String>() {
@@ -115,7 +120,7 @@ public class DaoDanhMuc {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_danhmuc(Danhmuc danhmuc){
+    public  void update_danhmuc(CallbackUpdateProduct callbackUpdateProduct, Danhmuc danhmuc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_danhmuc, new Response.Listener<String>() {
@@ -123,15 +128,16 @@ public class DaoDanhMuc {
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>>" +response);
                 if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "cập nhập thành công");
+                    callbackUpdateProduct.onSuccess();
                 }else{
-                    Log.d(TAG, "cập nhập không thành công");
+                    callbackUpdateProduct.onFail();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
+                callbackUpdateProduct.onError();
             }
         }){
             @Nullable
@@ -148,7 +154,7 @@ public class DaoDanhMuc {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_danhmuc(){
+    public  void getdata_danhmuc(final VolleyCallBack callBack){
         Log.d(TAG, "laydulieudanhmuc: ");
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -158,6 +164,7 @@ public class DaoDanhMuc {
             public void onResponse(JSONArray response) {
                 Log.d(TAG, "onResponse: 1");
                 Log.d(TAG, "onResponse: >>"+response.toString());
+                ArrayList<Danhmuc> arr = new ArrayList<Danhmuc>();
                 for (int i = 0 ; i<response.length();i++){
                     try {
                         JSONObject jsonObject= response.getJSONObject(i);
@@ -167,18 +174,12 @@ public class DaoDanhMuc {
                         String img=jsonObject.getString("img") ;
                         Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc+" img >>>> "+img);
                         //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
-
-
+                        callBack.onSuccess(new Danhmuc(madanhmuc, tendanhmuc, khuvuc, img));
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
                     }
-
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -211,9 +212,6 @@ public class DaoDanhMuc {
                             String img=jsonObject.getString("img") ;
                             Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc+" img >>>> "+img);
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
 
 
                         } catch (JSONException e) {

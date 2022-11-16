@@ -4,8 +4,13 @@ class DataUser {
     companion object{
         var id = 0;
         var name = ""
-        var occupation = ""
+
+        //0: User
+        //1: Moderators
+        //2: Admin
+        var occupation = 0
         var numberPhone = ""
-        var gmail = ""
+        var email = ""
+        var pass = ""
     }
 }

@@ -20,6 +20,8 @@ import com.developer.cubemarket.config.user.DataUser;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
+import com.developer.cubemarket.utils.CallBackChangePass;
+import com.developer.cubemarket.utils.CallBackUpdate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,22 +74,23 @@ public class DaoUser {
         };
         requestQueue.add(stringRequest);
     }
-    public  void update_user( int id ,String ten, int chucvu,String phone){
+    public void update_user(CallBackUpdate callBackUpdate, int id , String ten, int chucvu, String phone){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "thành công");
+                    callBackUpdate.onSuccess("thành công");
                 }else{
-                    Log.d(TAG, "lỗi>>"+response.toString());
+                    callBackUpdate.onFail("Lỗi"+response.toString());
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+                callBackUpdate.onError("Lỗi: "+error.toString());
             }
         }){
             @Nullable
@@ -138,22 +141,22 @@ public class DaoUser {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_pass_user( int id,String pass,String pass_new){
+    public  void update_pass_user(CallBackChangePass callBackChangePass, int id, String pass, String pass_new){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "thành công");
+                    callBackChangePass.onSuccess("Đổi mật khẩu thành công");
                 }else{
-                    Log.d(TAG, "lỗi>>"+response.toString());
+                    callBackChangePass.onError(response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+                callBackChangePass.onError("Đã xảy ra lỗi");
             }
         }){
             @Nullable
@@ -193,14 +196,16 @@ public class DaoUser {
                                if(chuvu==1){
                                    tenchucvu="Admin";
                                }
-                               Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
+                               Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"" +
+                                       "   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
                                //--------------------------------------------------------code them doạn này------------------------------------
                                Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
                                DataUser.Companion.setId(id);
                                DataUser.Companion.setName(ten);
-                               DataUser.Companion.setGmail(gmail);
-                               DataUser.Companion.setOccupation(tenchucvu);
+                               DataUser.Companion.setEmail(gmail);
+                               DataUser.Companion.setOccupation(chuvu);
                                DataUser.Companion.setNumberPhone(phone);
+                               DataUser.Companion.setPass(pass);
                                //put data in share references
                                DataShareReferences.Companion.putEmailAndPass(context, user, pass);
 

@@ -16,6 +16,7 @@ import com.developer.cubemarket.`object`.cart.CartProduct
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.cart.CartProductAdapter
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
@@ -62,7 +63,7 @@ class CartFragment : Fragment() {
 
     private fun initRecyclerDireactory() {
         binding.ryDirectory.layoutManager = LinearLayoutManager(ctx, RecyclerView.HORIZONTAL, false)
-        val adapter = DirectoryHomeAdapter(initDataDirectory())
+        val adapter = DirectoryHomeAdapter(requireContext(), this, initDataDirectory())
         binding.ryDirectory.adapter = adapter
         binding.ryDirectory.addOnItemTouchListener(object: RecyclerView.OnItemTouchListener {
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
@@ -81,13 +82,8 @@ class CartFragment : Fragment() {
 
         })
     }
-    private fun initDataDirectory(): ArrayList<DirectoryHome> {
-        var arr = arrayListOf<DirectoryHome>()
-        arr.add(DirectoryHome(R.drawable.top, "Hàng đầu"))
-        arr.add(DirectoryHome(R.drawable.trend, "Xu hướng"))
-        arr.add(DirectoryHome(R.drawable.pic_new, "Mới"))
-        arr.add(DirectoryHome(R.drawable.fast, "Bán chạy"))
-        arr.add(DirectoryHome(R.drawable.other, "Khác"))
+    private fun initDataDirectory(): ArrayList<Danhmuc> {
+        var arr = arrayListOf<Danhmuc>()
 
         return arr
     }

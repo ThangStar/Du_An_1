@@ -3,6 +3,7 @@ package com.developer.cubemarket.fragment
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,11 @@ import androidx.activity.OnBackPressedDispatcher
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
 import com.developer.cubemarket.config.share_references.DataShareReferences
+import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentLoginBinding
+import com.developer.cubemarket.utils.VolleyCallBack
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
@@ -36,13 +39,13 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         ctx = binding.root.context
 
-
         initDataDefault()
         initEventLogin()
         initAnimation()
         return binding.root
 
     }
+
 
     private fun initDataDefault() {
         val auth = DataShareReferences.getEmailAndPass(requireContext())
@@ -117,21 +120,38 @@ class LoginFragment : Fragment() {
                     val numberPhone = binding.edtB.text.toString().trim()
                     val fullname = binding.edtC.text.toString().trim()
                     val pass = binding.edtD.text.toString().trim()
-                    if (email.isBlank())
-                    isCheck = false
-                    binding.edtA.error = "Email không được để trống"
+                    if (email.isBlank()){
+                        isCheck = false
+                        binding.edtA.error = "Email không được để trống"
+                    }else{
+                        binding.edtA.error = null
 
-                    if (numberPhone.isBlank())
+                    }
+                    if (numberPhone.isBlank()){
                         isCheck = false
                         binding.edtB.error = "Số điện thoại không được để trống"
+                    }else{
+                        binding.edtB.error = null
 
-                    if (fullname.isBlank())
+                    }
+
+
+                    if (fullname.isBlank()){
                         isCheck = false
                         binding.edtC.error = "Họ tên không được để trống"
+                    }else{
+                        binding.edtC.error = null
 
-                    if (pass.isBlank())
+                    }
+
+
+                    if (pass.isBlank()){
                         isCheck = false
                         binding.edtD.error = "Mật khẩu không được để trống"
+                    }else{
+                        binding.edtD.error = null
+
+                    }
 
                     if(isCheck){
                         val user = User(0, fullname, pass, 0, numberPhone, email)

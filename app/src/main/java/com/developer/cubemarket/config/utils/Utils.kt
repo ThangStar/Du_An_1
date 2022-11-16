@@ -6,15 +6,22 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
+import android.util.Base64
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.developer.cubemarket.R
+import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment
+import com.developer.cubemarket.utils.CallBackDelDirectory
 import dev.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog
-import es.dmoral.toasty.Toasty
+import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 
-class Utils {
 
+class Utils {
     companion object{
         var alert: AlertDialog? = null
         fun formaterVND(price: Int): String{
@@ -59,7 +66,7 @@ class Utils {
                     dialogInterface?.dismiss()
                 }
                 .setNegativeButton("Hủy", R.drawable.cancel_del
-                ) { dialogInterface, which ->
+                ) { dialogInterface, _ ->
                     dialogInterface?.dismiss()
                 }
                 .build()
@@ -84,6 +91,48 @@ class Utils {
                 }
                 .build()
             mBottomSheetDialog.show()
+        }
+        fun getEncoded64ImageStringFromBitmap(bitmap: Bitmap): String? {
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream)
+            val byteFormat = stream.toByteArray()
+            // get the base 64 string
+            return Base64.encodeToString(byteFormat, Base64.NO_WRAP)
+        }
+        fun base64ToBitMap(strBase64: String): Bitmap {
+            val decodedString: ByteArray = Base64.decode(strBase64, Base64.DEFAULT)
+            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        }
+        fun getOptionLoadImgDirectoryFromUrl(): RequestOptions {
+            val options: RequestOptions = RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.trend)
+                .error(R.drawable.trend)
+            return options
+        }
+        fun dialogDelDirectory(callBackOnSuccess: CallBackDelDirectory, activity: Activity, title: String, message: String, id: Int, pos: Int){
+            val mBottomSheetDialog: BottomSheetMaterialDialog = BottomSheetMaterialDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setAnimation(R.raw.delete)
+                .setPositiveButton("Xóa",R.drawable.delete
+                ) { dialogInterface, _ ->
+                    //Do something delete here
+                    DaoDanhMuc(activity).delete_danhmuc(id)
+                    callBackOnSuccess.onUpdateScreen()
+
+                    dialogInterface?.dismiss()
+                }
+                .setNegativeButton("Hủy", R.drawable.cancel_del
+                ) { dialogInterface, which ->
+                    dialogInterface?.dismiss()
+                }
+                .build()
+            mBottomSheetDialog.show()
+        }
+        fun getRegexVietNam(): String {
+            return "^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]{1,18}\$"
         }
     }
 }

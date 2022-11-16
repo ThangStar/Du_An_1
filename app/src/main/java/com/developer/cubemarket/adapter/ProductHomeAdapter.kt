@@ -31,13 +31,11 @@ class ProductHomeAdapter(
         init {
             binding.lnProduct.setOnLongClickListener(this)
         }
-
-
         override fun onLongClick(p0: View?): Boolean {
             if (p0 != null) {
                 when(p0.id){
                     binding.lnProduct.id -> {
-                        if(DataUser.occupation.equals("User")){
+                        if(DataUser.occupation == 3){
                             showMenu(fr.requireContext(), binding.imvProduct, R.menu.menu_utils)
                         }
                     }
@@ -72,14 +70,12 @@ class ProductHomeAdapter(
 
     override fun onBindViewHolder(holder: ProducHomeViewHolder, position: Int) {
         val pr = arr[position]
-        holder.binding.imvProduct.setImageBitmap(pr.imgProduct)
+//        holder.binding.imvProduct.setImageBitmap(Utils.base64ToBitMap(pr.imgProduct))
         holder.binding.tvPrice.text = Utils.formaterVND(pr.priceProduct)
         holder.binding.tvTitle.text = pr.nameProduct
         holder.binding.lnProduct.setOnClickListener {
             findNavController(fr).navigate(
                 R.id.action_productFragment_to_detailProductFragment)
-
-
         }
 
     }

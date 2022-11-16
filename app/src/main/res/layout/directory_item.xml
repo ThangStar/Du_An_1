@@ -12,6 +12,7 @@
     android:layout_width="80dp"
     android:layout_height="110dp">
     <LinearLayout
+        android:id="@+id/ln_directory"
         android:clickable="true"
         android:focusable="true"
         android:layout_width="match_parent"
@@ -20,11 +21,16 @@
         android:paddingVertical="12dp"
         android:paddingHorizontal="15dp"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/imv_directory"
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="6dp"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:src="@drawable/trend"/>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imv_directory"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:src="@drawable/trend"/>
+        </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/tv_name_directory"
             android:text="NAME"

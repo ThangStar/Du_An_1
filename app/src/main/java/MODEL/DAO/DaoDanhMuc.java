@@ -22,9 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_danhmuc;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.Danhmuc;
@@ -32,9 +35,10 @@ import MODEL.OOP.Danhmuc;
 public class DaoDanhMuc {
     Context context;
     String TAG="TAG";
+    IResult_danhmuc mResultCallback = null;
 
-
-    public DaoDanhMuc(Context context) {
+    public DaoDanhMuc(IResult_danhmuc resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
 
@@ -148,15 +152,14 @@ public class DaoDanhMuc {
 
     }
     public  void getdata_danhmuc(){
-        Log.d(TAG, "laydulieudanhmuc: ");
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, Link.getdata_danhmuc,
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d(TAG, "onResponse: 1");
-                Log.d(TAG, "onResponse: >>"+response.toString());
+                List<Danhmuc> list= new ArrayList();
                 for (int i = 0 ; i<response.length();i++){
                     try {
                         JSONObject jsonObject= response.getJSONObject(i);
@@ -167,7 +170,7 @@ public class DaoDanhMuc {
                         Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc+" img >>>> "+img);
                         //---------------------------------------viets code ở dưới này---------------------------------------
 
-
+                        list.add(new Danhmuc(madanhmuc,tendanhmuc,khuvuc,img));
 
 
 
@@ -176,6 +179,10 @@ public class DaoDanhMuc {
                         Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
                     }
 
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("danhmuc", list);
                 }
 
             }

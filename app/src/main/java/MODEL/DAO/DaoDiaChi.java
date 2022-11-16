@@ -17,18 +17,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_diachi;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
+import MODEL.OOP.Diachi;
 
 public class DaoDiaChi {
     Context context;
     String TAG="TAG";
+    IResult_diachi mResultCallback = null;
 
-
-    public DaoDiaChi(Context context) {
+    public DaoDiaChi(IResult_diachi resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
     public  void insert_diachi( int id, String tendiachi){
@@ -148,6 +153,7 @@ public class DaoDiaChi {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Diachi> ee= new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -156,7 +162,7 @@ public class DaoDiaChi {
                             int madiachi= jsonObject.getInt("madiachi");
                             int id= jsonObject.getInt("id");
                             String tendiachi= jsonObject.getString("tendiachi");
-                            Log.d(TAG, "madiachi > "+madiachi+ " id > "+id+" tendiachi > "+tendiachi);
+                           ee.add(new Diachi(madiachi,id,tendiachi));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -172,6 +178,10 @@ public class DaoDiaChi {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("diachi", ee);
                 }
             }
         }, new Response.ErrorListener() {

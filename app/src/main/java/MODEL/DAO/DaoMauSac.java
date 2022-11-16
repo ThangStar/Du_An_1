@@ -17,9 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_mausac;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.Mausac;
@@ -27,8 +30,10 @@ import MODEL.OOP.Mausac;
 public class DaoMauSac {
     Context context;
     String TAG="TAG";
+    IResult_mausac mResultCallback = null;
 
-    public DaoMauSac(Context context) {
+    public DaoMauSac(IResult_mausac resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
     public  void insert_mausac(Mausac mausac){
@@ -98,6 +103,7 @@ public class DaoMauSac {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Mausac> ee = new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -107,7 +113,7 @@ public class DaoMauSac {
                             int masanpham=jsonObject.getInt("masanpham");
                             String tenmau= jsonObject.getString("tenmausac");
 
-                            Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
+                           ee.add(new Mausac(mamausac,masanpham,tenmau));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -124,6 +130,10 @@ public class DaoMauSac {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("mausac", ee);
                 }
             }
         }, new Response.ErrorListener() {

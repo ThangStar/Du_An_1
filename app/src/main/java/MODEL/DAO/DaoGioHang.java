@@ -17,20 +17,30 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_giohang;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
+import MODEL.OOP.Danhmuc;
 import MODEL.OOP.GioHang;
+import MODEL.OOP.Kichthuoc;
+import MODEL.OOP.Mausac;
+import MODEL.OOP.Sanpham;
 
 public class DaoGioHang {
     Context context;
     String TAG="TAG";
-    public DaoGioHang(Context context) {
+    IResult_giohang mResultCallback = null;
+
+    public DaoGioHang(IResult_giohang resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
-    public  void insert_giohang(GioHang gioHang){
+    public  void insert_giohang(int id ,int mamausac,int makichthuoc,int masanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_giohang, new Response.Listener<String>() {
@@ -52,10 +62,10 @@ public class DaoGioHang {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("id", String.valueOf(gioHang.getId()));
-                stringStringMap.put("masanpham",String.valueOf(gioHang.getMasanpham()));
-                stringStringMap.put("mamausac",String.valueOf(gioHang.getMamausac()));
-                stringStringMap.put("makichthuoc",String.valueOf(gioHang.getMakichthuoc()));
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("masanpham",String.valueOf(masanpham));
+                stringStringMap.put("mamausac",String.valueOf(mamausac));
+                stringStringMap.put("makichthuoc",String.valueOf(makichthuoc));
 
                 return stringStringMap;
             }
@@ -70,6 +80,7 @@ public class DaoGioHang {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<GioHang>ee= new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -83,17 +94,12 @@ public class DaoGioHang {
                             String tenmausac=jsonObject.getString("tenmau");
                             String tenkichthuoc=jsonObject.getString("tenkichthuoc");
                             String img=jsonObject.getString("img");
+                            int soluong= jsonObject.getInt("soluong");
 
-                            Log.d(TAG, "magiohang-> "+magiohang+" mamasac -> "+mamausac +" makichthuoc -> "+makichthuoc+ " giasanpham -> "+giasanpham
-
-                            +" tensanpham -> "+ tensanpham +" tenmausac -> "+tenmausac + " tenkichthuoc ->? "+tenkichthuoc+" img -> "+img
-                            );
-
+                          ee.add(new GioHang(magiohang,-99, new Mausac(mamausac,-99,tenmausac),
+                                  new Kichthuoc(makichthuoc,-99,tenkichthuoc), new Sanpham(-99,new Danhmuc(-99,"dhghgdf","jjfkjdf","kjkj"),tensanpham,img,"kkk",-99,giasanpham,"jhjhjh",-99),
+                                  soluong));
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -104,6 +110,10 @@ public class DaoGioHang {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("giohanhg", ee);
                 }
             }
         }, new Response.ErrorListener() {

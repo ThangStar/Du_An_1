@@ -3,20 +3,20 @@ package MODEL.OOP;
 public class GioHang {
     int magiohang;
     int id;
-    int masanpham;
-    int mamausac;
-    int makichthuoc;
+    Mausac mausac;
+    Kichthuoc kichthuoc;
+    Sanpham sanpham;
     int soluong;
 
     public GioHang() {
     }
 
-    public GioHang(int magiohang, int id, int masanpham, int mamausac, int makichthuoc, int soluong) {
+    public GioHang(int magiohang, int id, Mausac mausac, Kichthuoc kichthuoc, Sanpham sanpham, int soluong) {
         this.magiohang = magiohang;
         this.id = id;
-        this.masanpham = masanpham;
-        this.mamausac = mamausac;
-        this.makichthuoc = makichthuoc;
+        this.mausac = mausac;
+        this.kichthuoc = kichthuoc;
+        this.sanpham = sanpham;
         this.soluong = soluong;
     }
 
@@ -36,28 +36,28 @@ public class GioHang {
         this.id = id;
     }
 
-    public int getMasanpham() {
-        return masanpham;
+    public Mausac getMausac() {
+        return mausac;
     }
 
-    public void setMasanpham(int masanpham) {
-        this.masanpham = masanpham;
+    public void setMausac(Mausac mausac) {
+        this.mausac = mausac;
     }
 
-    public int getMamausac() {
-        return mamausac;
+    public Kichthuoc getKichthuoc() {
+        return kichthuoc;
     }
 
-    public void setMamausac(int mamausac) {
-        this.mamausac = mamausac;
+    public void setKichthuoc(Kichthuoc kichthuoc) {
+        this.kichthuoc = kichthuoc;
     }
 
-    public int getMakichthuoc() {
-        return makichthuoc;
+    public Sanpham getSanpham() {
+        return sanpham;
     }
 
-    public void setMakichthuoc(int makichthuoc) {
-        this.makichthuoc = makichthuoc;
+    public void setSanpham(Sanpham sanpham) {
+        this.sanpham = sanpham;
     }
 
     public int getSoluong() {

@@ -17,9 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_khuyenmai;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.KhuyenMai;
@@ -27,9 +30,10 @@ import MODEL.OOP.KhuyenMai;
 public class DaoKhuyenMai {
     Context context;
     String TAG="TAG";
+    IResult_khuyenmai mResultCallback = null;
 
-
-    public DaoKhuyenMai(Context context) {
+    public DaoKhuyenMai(IResult_khuyenmai resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
     public  void insert_khuyenmai(KhuyenMai khuyenMai){
@@ -156,6 +160,7 @@ public class DaoKhuyenMai {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<KhuyenMai> ee= new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -165,9 +170,8 @@ public class DaoKhuyenMai {
                             int phantramgiamgia=jsonObject.getInt("phantramgiamgia");
                             String ngaybatdau=jsonObject.getString("ngaybatdau");
                             String ngayketthuc=jsonObject.getString("ngayketthuc");
-                            String sotienapdung=jsonObject.getString("sotienapdung");
-                            Log.d(TAG, "magiamgia > "+magiamgia+ " phantramgiamgia > "+ phantramgiamgia+ " ngaybatdau > "+ngaybatdau+ " ngayketthuc > "+ngayketthuc + " sotienapdung > "+ sotienapdung);
-
+                            int sotienapdung=jsonObject.getInt("sotienapdung");
+                          ee.add(new KhuyenMai(magiamgia,phantramgiamgia,ngaybatdau,ngayketthuc,sotienapdung));
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
 
@@ -182,6 +186,10 @@ public class DaoKhuyenMai {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("khuyenmai", ee);
                 }
             }
         }, new Response.ErrorListener() {
@@ -207,7 +215,7 @@ public class DaoKhuyenMai {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_khuyenmai, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                List<KhuyenMai> ee= new ArrayList<>();
               if(response.toString().trim().equals("khongtontai")){
                   Log.d(TAG, "ma giảm giá đã hét hạn hoặc không tồn tại");
               }else{
@@ -221,9 +229,8 @@ public class DaoKhuyenMai {
                               int phantramgiamgia=jsonObject.getInt("phantramgiamgia");
                               String ngaybatdau=jsonObject.getString("ngaybatdau");
                               String ngayketthuc=jsonObject.getString("ngayketthuc");
-                              String sotienapdung=jsonObject.getString("sotienapdung");
-                              Log.d(TAG, "magiamgia > "+magiamgia+ " phantramgiamgia > "+ phantramgiamgia+ " ngaybatdau > "+ngaybatdau+ " ngayketthuc > "+ngayketthuc + " sotienapdung > "+ sotienapdung);
-
+                              int sotienapdung=jsonObject.getInt("sotienapdung");
+                              ee.add(new KhuyenMai(magiamgia,phantramgiamgia,ngaybatdau,ngayketthuc,sotienapdung));
                               //---------------------------------------viets code ở dưới này---------------------------------------
 
 
@@ -240,6 +247,10 @@ public class DaoKhuyenMai {
                       e.printStackTrace();
                   }
               }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("khuyenmai", ee);
+                }
 
             }
         }, new Response.ErrorListener() {

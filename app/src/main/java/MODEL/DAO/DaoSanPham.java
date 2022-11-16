@@ -20,9 +20,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_sanpham;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.Danhmuc;
@@ -30,13 +33,15 @@ import MODEL.OOP.Sanpham;
 
 public class DaoSanPham {
     Context context;
-    String TAG="-TAG";
+    String TAG="TAG";
+    IResult_sanpham mResultCallback = null;
 
-    public DaoSanPham(Context context) {
+    public DaoSanPham(IResult_sanpham resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
 
-    public  void insert_sanpham( Sanpham sanpham,String tenmau,String tenkichthuoc){
+    public  void insert_sanpham( int madanhmuc,String tensanpham,String img,String nhasanxuat,int soluong,int giaban,String chitiet,String tenmau,String tenkichthuoc,int id){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -62,18 +67,18 @@ public class DaoSanPham {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
                 Danhmuc danhmuc = new Danhmuc();
-                stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
-                stringStringMap.put("tensanpham",sanpham.getTensanpham());
-                stringStringMap.put("hinhanh",sanpham.getImg() );// chuyển hình thành base 64
+                stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
+                stringStringMap.put("tensanpham",tensanpham);
+                stringStringMap.put("hinhanh",img );// chuyển hình thành base 64
 
-                stringStringMap.put("nhasanxuat", sanpham.getNhasanxuat());
-                stringStringMap.put("soluong", String.valueOf(sanpham.getSoluong()));
+                stringStringMap.put("nhasanxuat", nhasanxuat);
+                stringStringMap.put("soluong", String.valueOf(soluong));
 
-                stringStringMap.put("giaban", String.valueOf(sanpham.getGiaban()));
-                stringStringMap.put("chitiet",sanpham.getChitiet());
+                stringStringMap.put("giaban", String.valueOf(giaban));
+                stringStringMap.put("chitiet",chitiet);
                 stringStringMap.put("tenmau",tenmau);
                 stringStringMap.put("tenkichthuoc",tenkichthuoc);
-                stringStringMap.put("id", String.valueOf(sanpham.getId()));
+                stringStringMap.put("id", String.valueOf(id));
                 return stringStringMap;
             }
         };
@@ -176,7 +181,8 @@ public class DaoSanPham {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
+                Log.d(TAG, "onResponse: " +response);
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -193,14 +199,9 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
-                                    +" img > "+img+" nsx > "+nhasanxuat+
-                                    " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet+
-                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
 
 
 
@@ -214,6 +215,10 @@ public class DaoSanPham {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {
@@ -241,6 +246,7 @@ public class DaoSanPham {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -257,11 +263,8 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
-                                    +" img > "+img+" nsx > "+nhasanxuat+
-                                    " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet+
-                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -278,6 +281,10 @@ public class DaoSanPham {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {
@@ -305,6 +312,7 @@ public class DaoSanPham {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -321,11 +329,8 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
-                                    +" img > "+img+" nsx > "+nhasanxuat+
-                                    " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet+
-                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -342,6 +347,10 @@ public class DaoSanPham {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {
@@ -369,6 +378,7 @@ public class DaoSanPham {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -385,13 +395,11 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
-                                    +" img > "+img+" nsx > "+nhasanxuat+
-                                    " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet+
-                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+
 
 
 
@@ -405,6 +413,10 @@ public class DaoSanPham {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {
@@ -433,6 +445,7 @@ public class DaoSanPham {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -449,13 +462,11 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
-                                    +" img > "+img+" nsx > "+nhasanxuat+
-                                    " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet+
-                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+
 
 
 
@@ -469,6 +480,10 @@ public class DaoSanPham {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {
@@ -529,10 +544,11 @@ public class DaoSanPham {
     public  void sanpham_tuongtu(int id,int chucvu,String tendanhmuc,String tensanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham_tuongtu, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -549,13 +565,11 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
-                                    +" img > "+img+" nsx > "+nhasanxuat+
-                                    " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet+
-                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+
 
 
 
@@ -569,6 +583,10 @@ public class DaoSanPham {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {

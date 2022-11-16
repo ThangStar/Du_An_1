@@ -17,9 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import MODEL.IResult.IResult_kichthuoc;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.Kichthuoc;
@@ -27,7 +30,10 @@ import MODEL.OOP.Kichthuoc;
 public class DaoKichThuoc {
     Context context;
     String TAG="TAG";
-    public DaoKichThuoc(Context context) {
+    IResult_kichthuoc mResultCallback = null;
+
+    public DaoKichThuoc(IResult_kichthuoc resultCallback, Context context) {
+        mResultCallback = resultCallback;
         this.context = context;
     }
     public  void insert_kichthuoc(Kichthuoc kichthuoc){
@@ -97,16 +103,17 @@ public class DaoKichThuoc {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
+                List<Kichthuoc> ee= new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            int mamausac= jsonObject.getInt("makichthuoc");
+                            int makichthuoc= jsonObject.getInt("makichthuoc");
                             int masanpham=jsonObject.getInt("masanpham");
-                            String tenmau= jsonObject.getString("tenkichthuoc");
+                            String tenkichthuoc= jsonObject.getString("tenkichthuoc");
 
-                            Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
+                            ee.add(new Kichthuoc(makichthuoc,masanpham,tenkichthuoc));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -123,6 +130,10 @@ public class DaoKichThuoc {
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("kichthuoc", ee);
                 }
             }
         }, new Response.ErrorListener() {

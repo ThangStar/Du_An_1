@@ -2,26 +2,28 @@ package MODEL.OOP;
 
 public class Sanpham {
     private  int masanpham;
-    private int madanhmuc;
+    private Danhmuc danhmuc;
     private  String tensanpham;
     private  String img;
     private  String nhasanxuat;
     private  int soluong;
     private  int giaban;
     private  String chitiet;
+    private  int id;
 
     public Sanpham() {
     }
 
-    public Sanpham(int masanpham, int madanhmuc, String tensanpham, String img, String nhasanxuat, int soluong, int giaban, String chitiet) {
+    public Sanpham(int masanpham, Danhmuc danhmuc, String tensanpham, String img, String nhasanxuat, int soluong, int giaban, String chitiet, int id) {
         this.masanpham = masanpham;
-        this.madanhmuc = madanhmuc;
+        this.danhmuc = danhmuc;
         this.tensanpham = tensanpham;
         this.img = img;
         this.nhasanxuat = nhasanxuat;
         this.soluong = soluong;
         this.giaban = giaban;
         this.chitiet = chitiet;
+        this.id = id;
     }
 
     public int getMasanpham() {
@@ -32,12 +34,12 @@ public class Sanpham {
         this.masanpham = masanpham;
     }
 
-    public int getMadanhmuc() {
-        return madanhmuc;
+    public Danhmuc getDanhmuc() {
+        return danhmuc;
     }
 
-    public void setMadanhmuc(int madanhmuc) {
-        this.madanhmuc = madanhmuc;
+    public void setDanhmuc(Danhmuc danhmuc) {
+        this.danhmuc = danhmuc;
     }
 
     public String getTensanpham() {
@@ -86,5 +88,13 @@ public class Sanpham {
 
     public void setChitiet(String chitiet) {
         this.chitiet = chitiet;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

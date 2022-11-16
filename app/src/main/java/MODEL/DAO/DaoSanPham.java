@@ -25,6 +25,7 @@ import java.util.Map;
 
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
+import MODEL.OOP.Danhmuc;
 import MODEL.OOP.Sanpham;
 
 public class DaoSanPham {
@@ -60,8 +61,8 @@ public class DaoSanPham {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-
-                stringStringMap.put("madanhmuc", String.valueOf(sanpham.getMadanhmuc()));
+                Danhmuc danhmuc = new Danhmuc();
+                stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
                 stringStringMap.put("tensanpham",sanpham.getTensanpham());
                 stringStringMap.put("hinhanh",sanpham.getImg() );// chuyển hình thành base 64
 
@@ -72,6 +73,7 @@ public class DaoSanPham {
                 stringStringMap.put("chitiet",sanpham.getChitiet());
                 stringStringMap.put("tenmau",tenmau);
                 stringStringMap.put("tenkichthuoc",tenkichthuoc);
+                stringStringMap.put("id", String.valueOf(sanpham.getId()));
                 return stringStringMap;
             }
         };
@@ -151,7 +153,8 @@ public class DaoSanPham {
                 Map<String, String> stringStringMap= new HashMap<>();
 
                 stringStringMap.put("masanpham", String.valueOf(sanpham.getMasanpham()));
-                stringStringMap.put("madanhmuc", String.valueOf(sanpham.getMadanhmuc()));
+                Danhmuc danhmuc = new Danhmuc();
+                stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
                 stringStringMap.put("tensanpham",sanpham.getTensanpham());
                 stringStringMap.put("hinhanh",sanpham.getImg() );// chuyển hình thành base 64
 
@@ -167,7 +170,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_sanpham(){
+    public  void getdata_sanpham(int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -187,10 +190,14 @@ public class DaoSanPham {
                             int soluong=jsonObject.getInt("soluong");
                             int giaban= jsonObject.getInt("giaban");
                             String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
                             Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
                                     +" img > "+img+" nsx > "+nhasanxuat+
                                     " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet);
+                                    " giaban > "+giaban+" chitiet > "+chitiet+
+                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -219,13 +226,15 @@ public class DaoSanPham {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("YEUCAUGEDATAALL", "YEUCAUGEDATAALL");
+                stringStringMap.put("YEUCAUGEDATAALL", "XEMCHUNG");
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
                 return stringStringMap;
             }
         };
         requestQueue.add(stringRequest);
     }
-    public  void getdata_sanpham_saphet(){
+    public  void getdata_sanphamsaphet(int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -245,10 +254,14 @@ public class DaoSanPham {
                             int soluong=jsonObject.getInt("soluong");
                             int giaban= jsonObject.getInt("giaban");
                             String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
                             Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
                                     +" img > "+img+" nsx > "+nhasanxuat+
                                     " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet);
+                                    " giaban > "+giaban+" chitiet > "+chitiet+
+                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -277,13 +290,79 @@ public class DaoSanPham {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("YEUCAUGEDATAALL", "YEUCAUGEDATASAPHET");
+                stringStringMap.put("YEUCAUGEDATAALL", "XEMSANPHAMSAPHET");
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
                 return stringStringMap;
             }
         };
         requestQueue.add(stringRequest);
     }
-    public  void search_sanpham(String noidungsearch){
+    public  void getdata_sanpham_all(int id,int chucvu){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse: >>> "+response);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int masanpham=jsonObject.getInt("masanpham");
+                            int madanhmuc= jsonObject.getInt("madanhmuc");
+                            String tensanpham= jsonObject.getString("tensanpham");
+                            String img = jsonObject.getString("img");
+                            String nhasanxuat=jsonObject.getString("nhasanxuat");
+                            int soluong=jsonObject.getInt("soluong");
+                            int giaban= jsonObject.getInt("giaban");
+                            String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
+                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
+                                    +" img > "+img+" nsx > "+nhasanxuat+
+                                    " soluong > "+ soluong+" hinhdang > "+
+                                    " giaban > "+giaban+" chitiet > "+chitiet+
+                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("YEUCAUGEDATAALL", "XEMSANPHAMALL");
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public  void search_sanpham_chung(String noidungsearch,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
@@ -303,13 +382,16 @@ public class DaoSanPham {
                             int soluong=jsonObject.getInt("soluong");
                             int giaban= jsonObject.getInt("giaban");
                             String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
                             Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
                                     +" img > "+img+" nsx > "+nhasanxuat+
                                     " soluong > "+ soluong+" hinhdang > "+
-                                    " giaban > "+giaban+" chitiet > "+chitiet);
+                                    " giaban > "+giaban+" chitiet > "+chitiet+
+                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
 
 
 
@@ -336,6 +418,73 @@ public class DaoSanPham {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
                 stringStringMap.put("noidungsearch", noidungsearch);
+                stringStringMap.put("YEUCAUGEDATAALL", "XEMCHUNG");
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public  void search_sanpham_rieng(String noidungsearch,int id,int chucvu){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse: >>> "+response);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int masanpham=jsonObject.getInt("masanpham");
+                            int madanhmuc= jsonObject.getInt("madanhmuc");
+                            String tensanpham= jsonObject.getString("tensanpham");
+                            String img = jsonObject.getString("img");
+                            String nhasanxuat=jsonObject.getString("nhasanxuat");
+                            int soluong=jsonObject.getInt("soluong");
+                            int giaban= jsonObject.getInt("giaban");
+                            String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
+                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
+                                    +" img > "+img+" nsx > "+nhasanxuat+
+                                    " soluong > "+ soluong+" hinhdang > "+
+                                    " giaban > "+giaban+" chitiet > "+chitiet+
+                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("noidungsearch", noidungsearch);
+                stringStringMap.put("YEUCAUGEDATAALL", "XEMALL");
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
                 return stringStringMap;
             }
         };

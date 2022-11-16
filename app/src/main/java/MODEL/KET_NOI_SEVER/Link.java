@@ -24,7 +24,7 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     // địa chỉ mạng
    // static final String IP="192.168.191.162";
      //static final String IP="192.168.31.162";
-    static final String IP="phongabdyt.000webhostapp.com";
+    static final String IP="103.18.6.172";
     // link lên server
    public static String insert_user="https://"+IP+"//android/duanmau/insert_user.php";
     public static String update_user="http://"+IP+"//android/duanmau/update_user.php";

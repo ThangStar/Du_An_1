@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import MODEL.KET_NOI_SEVER.HttpsTrustManager;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
 import MODEL.OOP.GioHang;
 

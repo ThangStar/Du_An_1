@@ -1,8 +1,9 @@
-package com.developer.cubemarket.connection.MODEL.DAO;
+package com.developer.cubemarket.MODEL.DAO;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
@@ -17,9 +18,9 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.R;
 import com.developer.cubemarket.config.share_references.DataShareReferences;
 import com.developer.cubemarket.config.user.DataUser;
-import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
-import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
-import com.developer.cubemarket.connection.MODEL.OOP.User;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.HttpsTrustManager;
+import com.developer.cubemarket.MODEL.KET_NOI_SEVER.Link;
+import com.developer.cubemarket.MODEL.OOP.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +29,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import es.dmoral.toasty.Toasty;
 
 public class DaoUser {
     Context context;
@@ -47,9 +47,9 @@ public class DaoUser {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    Toasty.success(context, "Tạo tài khoản thành công!", Toasty.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toasty.error(context, "Lỗi: "+response.toString(), Toasty.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Lỗi: "+response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -178,7 +178,7 @@ public class DaoUser {
             @Override
             public void onResponse(String response) {
                if(response.toString().trim().equals("ErrorLogin")){
-                   Toasty.warning(context, "Tài khoản hoặc mật khẩu không chính xác", Toasty.LENGTH_SHORT).show();
+                   Toast.makeText(context, "Tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                }else{
                    try {
                        JSONArray jsonArray= new JSONArray(response);
@@ -195,7 +195,7 @@ public class DaoUser {
                                }
                                Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
                                //--------------------------------------------------------code them doạn này------------------------------------
-                               Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
+                               Toast.makeText(context, "đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                                DataUser.Companion.setId(id);
                                DataUser.Companion.setName(ten);
                                DataUser.Companion.setGmail(gmail);
@@ -214,7 +214,7 @@ public class DaoUser {
                        }
                    } catch (JSONException e) {
                        Log.d("SSS", "-----llll--->>"+e);
-                       Toasty.error(context, "đã xảy ra lỗi "+e, Toasty.LENGTH_SHORT).show();
+                       Toast.makeText(context, "đã xảy ra lỗi "+e, Toast.LENGTH_SHORT).show();
                        e.printStackTrace();
                    }
                }
@@ -223,7 +223,7 @@ public class DaoUser {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("SSS", "-----llll--->>"+error.toString());
-                Toasty.error(context, "đã xảy ra lỗi ", Toasty.LENGTH_SHORT).show();
+                Toast.makeText(context, "đã xảy ra lỗi ", Toast.LENGTH_SHORT).show();
             }
         }){
             @Nullable

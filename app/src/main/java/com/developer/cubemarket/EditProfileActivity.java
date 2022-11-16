@@ -54,12 +54,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (validate() == false) {
                     FancyToast.makeText(EditProfileActivity.this,"Hãy kiểm tra lại thông tin", FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
                 }else {
-                    User user = new User();
-                    user.setId(1);
-                    user.setTen(ten);
-                    user.setPhone(sdt);
-                    user.setChucvu(1);
-                    userDao.updete_user(user);
+
+                    userDao.update_user(1, ten, Integer.parseInt(chucVu), sdt);
                     FancyToast.makeText(EditProfileActivity.this,"Đã cập nhật", FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                 }
             }

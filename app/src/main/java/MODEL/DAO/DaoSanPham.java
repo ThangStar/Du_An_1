@@ -525,4 +525,71 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
+
+    public  void sanpham_tuongtu(int id,int chucvu,String tendanhmuc,String tensanpham){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham_tuongtu, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse: >>> "+response);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int masanpham=jsonObject.getInt("masanpham");
+                            int madanhmuc= jsonObject.getInt("madanhmuc");
+                            String tensanpham= jsonObject.getString("tensanpham");
+                            String img = jsonObject.getString("img");
+                            String nhasanxuat=jsonObject.getString("nhasanxuat");
+                            int soluong=jsonObject.getInt("soluong");
+                            int giaban= jsonObject.getInt("giaban");
+                            String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
+                            Log.d(TAG, "msp> "+masanpham+" msd >"+masanpham +" ten > "+ tensanpham
+                                    +" img > "+img+" nsx > "+nhasanxuat+
+                                    " soluong > "+ soluong+" hinhdang > "+
+                                    " giaban > "+giaban+" chitiet > "+chitiet+
+                                    "id > "+id + " tendanhmuc > "+tendanhmuc + " khuvuc > "+ khuvuc);
+
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+                stringStringMap.put("tendanhmuctuongtu", tendanhmuc);
+                stringStringMap.put("tensanphamtuongtu", tensanpham);
+                stringStringMap.put("YEUCAUGEDATAALL", "XEMCHUNG");
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 }

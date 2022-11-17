@@ -26,7 +26,14 @@ class ProfileFragment : Fragment() {
         initEventInsertDirectory()
         initGoChangePass()
         initEventLogout()
+        initEventGoSaled()
         return binding.root
+    }
+
+    private fun initEventGoSaled() {
+        binding.lnGoProductSale.setOnClickListener {
+            findNavController().navigate(R.id.action_productFragment_to_productSaleFragment)
+        }
     }
 
     private fun initEventLogout() {

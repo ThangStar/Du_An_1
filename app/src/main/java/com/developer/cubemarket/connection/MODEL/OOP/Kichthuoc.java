@@ -37,4 +37,9 @@ public class Kichthuoc {
     public void setTenkichthuoc(String tenkichthuoc) {
         this.tenkichthuoc = tenkichthuoc;
     }
+
+    @Override
+    public String toString() {
+        return tenkichthuoc;
+    }
 }

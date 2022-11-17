@@ -13,10 +13,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.developer.cubemarket.R
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
+import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment
 import com.developer.cubemarket.utils.CallBackDelDirectory
+import com.developer.cubemarket.utils.CallBackDelProduct
 import dev.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog
+import es.dmoral.toasty.Toasty
 import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 
@@ -83,6 +86,22 @@ class Utils {
                     //Do something delete here
                     HomeFragment.arrHomeProduct.removeAt(pos)
                     HomeFragment.productHomeAdapter.notifyItemRemoved(pos)
+
+                    val callBack = object: CallBackDelProduct{
+                        override fun onSuccess(rs: String) {
+                            Toasty.success(activity, rs, Toasty.LENGTH_SHORT).show()
+                        }
+
+                        override fun onFail(rs: String) {
+                            Toasty.warning(activity, rs, Toasty.LENGTH_SHORT).show()
+                        }
+
+                        override fun onError(rs: String) {
+                            Toasty.error(activity, rs, Toasty.LENGTH_SHORT).show()
+                        }
+
+                    }
+                    DaoSanPham(activity).delete_sanpham(callBack, id)
                     dialogInterface?.dismiss()
                 }
                 .setNegativeButton("Hủy", R.drawable.cancel_del
@@ -133,6 +152,9 @@ class Utils {
         }
         fun getRegexVietNam(): String {
             return "^[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]{1,18}\$"
+        }
+        fun getRegexVietNam2(): String {
+            return "a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s"
         }
     }
 }

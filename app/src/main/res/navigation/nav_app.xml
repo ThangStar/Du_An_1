@@ -78,6 +78,9 @@
             app:popUpToInclusive="true"
             android:id="@+id/action_productFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_productSaleFragment"
+            app:destination="@id/productSaleFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
@@ -90,7 +93,7 @@
         android:label="CheckOutFragment" />
     <fragment
         android:id="@+id/postProductFragment"
-        android:name="com.developer.cubemarket.fragment.fragment_utils_product.PostProductFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_utils_product.InsertProductFragment"
         android:label="fragment_post_product"
         tools:layout="@layout/fragment_post_product" />
     <fragment
@@ -118,4 +121,8 @@
         android:name="com.developer.cubemarket.fragment.fragment_pass.ChangePassFragment"
         android:label="fragment_change_pass"
         tools:layout="@layout/fragment_change_pass" />
+    <fragment
+        android:id="@+id/productSaleFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_product_sale.ProductSaleFragment"
+        android:label="ProductSaleFragment" />
 </navigation>

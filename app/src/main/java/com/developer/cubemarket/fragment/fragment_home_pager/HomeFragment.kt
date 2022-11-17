@@ -15,17 +15,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
+import com.android.volley.VolleyError
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.ProductHome
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.ProductHomeAdapter
+import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
+import com.developer.cubemarket.connection.MODEL.IResult.IResult_sanpham
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
+import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
+import com.developer.cubemarket.connection.MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 import com.developer.cubemarket.utils.CallBackProduct
 import com.developer.cubemarket.utils.VolleyCallBack
+import es.dmoral.toasty.Toasty
 
 
 class HomeFragment : Fragment() {
@@ -37,7 +43,7 @@ class HomeFragment : Fragment() {
         @SuppressLint("StaticFieldLeak")
         lateinit var adapterDirectory: DirectoryHomeAdapter
         lateinit var productHomeAdapter: ProductHomeAdapter
-        var arrHomeProduct = arrayListOf<ProductHome>()
+        var arrHomeProduct = arrayListOf<Sanpham>()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +54,7 @@ class HomeFragment : Fragment() {
         postponeEnterTransition()
         initRecyclerDireactory()
         initRecyclerProduct()
+        initSearch()
         binding.ryProduct.doOnPreDraw {
             startPostponedEnterTransition()
         }
@@ -57,6 +64,13 @@ class HomeFragment : Fragment() {
         exitTransition = TransitionInflater.from(ctx).inflateTransition(
             R.transition.shared_image)
         return binding.root
+    }
+
+    private fun initSearch() {
+        binding.searchRs.setOnSearchClickListener {
+            DaoSanPham(requireContext()).search_sanpham_chung(binding.searchRs.query.toString(),
+                DataUser.id, DataUser.occupation)
+        }
     }
 
     private fun initRecyclerProduct() {
@@ -71,14 +85,26 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initDataProduct(): ArrayList<ProductHome> {
-        val callBack = object : CallBackProduct {
-            override fun DataProduct(pr: ProductHome) {
-                arrHomeProduct.add(pr)
+    private fun initDataProduct(): ArrayList<Sanpham> {
+        arrHomeProduct.clear()
+        val callBack = object : CallBackProduct{
+            override fun onSuccess(sp: Sanpham) {
+                arrHomeProduct.add(sp)
                 productHomeAdapter.notifyItemInserted(arrHomeProduct.size)
             }
+
+            override fun onFail(err: String) {
+                Toasty.warning(requireContext(), err, Toasty.LENGTH_SHORT).show()
+
+            }
+
+            override fun onError(err: String) {
+                Toasty.error(requireContext(), err, Toasty.LENGTH_SHORT).show()
+            }
+
+
         }
-        DaoSanPham(requireContext()).getdata_sanpham(callBack)
+        DaoSanPham(requireContext()).getdata_sanpham(callBack, DataUser.id, DataUser.occupation)
 
         return arrHomeProduct
     }

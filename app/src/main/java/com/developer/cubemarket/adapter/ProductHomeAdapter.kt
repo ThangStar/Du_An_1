@@ -1,6 +1,7 @@
 package com.developer.cubemarket.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,19 +12,21 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.developer.cubemarket.R
 import com.developer.cubemarket.`object`.ProductHome
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
 import es.dmoral.toasty.Toasty
 
 class ProductHomeAdapter(
     var fr: Fragment,
-    var arr: ArrayList<ProductHome>
+    var arr: ArrayList<Sanpham>
 ): RecyclerView.Adapter<ProductHomeAdapter.ProducHomeViewHolder>() {
     class ProducHomeViewHolder(
-        var arr: ArrayList<ProductHome>,
+        var arr: ArrayList<Sanpham>,
         var fr: Fragment,
         v: View): RecyclerView.ViewHolder(v),
         View.OnLongClickListener {
@@ -49,8 +52,8 @@ class ProductHomeAdapter(
             popup.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.it_del ->{
-                        Utils.dialogDelProduct(fr.requireActivity(), "Xóa ${arr[adapterPosition].nameProduct}",
-                        "Bạn có muốn xóa sản phẩm ${arr[adapterPosition].nameProduct}", 123, adapterPosition)
+                        Utils.dialogDelProduct(fr.requireActivity(), "Xóa ${arr[adapterPosition].tensanpham}",
+                        "Bạn có muốn xóa sản phẩm ${arr[adapterPosition].tensanpham}", arr[adapterPosition].masanpham, adapterPosition)
                     }
                     R.id.it_edit ->{
                             fr.findNavController().navigate(R.id.action_productFragment_to_updateProductFragment)
@@ -70,12 +73,25 @@ class ProductHomeAdapter(
 
     override fun onBindViewHolder(holder: ProducHomeViewHolder, position: Int) {
         val pr = arr[position]
-//        holder.binding.imvProduct.setImageBitmap(Utils.base64ToBitMap(pr.imgProduct))
-        holder.binding.tvPrice.text = Utils.formaterVND(pr.priceProduct)
-        holder.binding.tvTitle.text = pr.nameProduct
+        try{
+            val option = Utils.getOptionLoadImgDirectoryFromUrl()
+            Glide.with(fr.requireContext()).load(pr.img).apply(option).into(holder.binding.imvProduct);
+        }catch (_: java.lang.Exception){
+
+        }
+        holder.binding.tvPrice.text = Utils.formaterVND(pr.giaban)
+        holder.binding.tvTitle.text = pr.tensanpham
         holder.binding.lnProduct.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("img", pr.img)
+            bundle.putString("name", pr.tensanpham)
+            bundle.putString("detail", pr.chitiet)
+            bundle.putInt("price", pr.giaban)
+            bundle.putString("brand", pr.nhasanxuat)
+            bundle.putInt("amount", pr.soluong)
+
             findNavController(fr).navigate(
-                R.id.action_productFragment_to_detailProductFragment)
+                R.id.action_productFragment_to_detailProductFragment, bundle)
         }
 
     }

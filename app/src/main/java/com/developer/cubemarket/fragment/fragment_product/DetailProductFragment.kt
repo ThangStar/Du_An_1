@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
 import java.lang.String
 
@@ -28,8 +30,26 @@ class DetailProductFragment : Fragment() {
         //set tint icon floating favorite
         binding.fabAddFavorite.setColorFilter(Color.WHITE)
 
+        initDataDefault()
         initEventToolbar()
         return binding.root
+    }
+
+    private fun initDataDefault() {
+        val urlImg = arguments?.getString("img")
+        val name = arguments?.getString("name")
+        val detail = arguments?.getString("detail")
+        val price = arguments?.getString("price")
+        val brand = arguments?.getString("brand")
+        val amount = arguments?.getString("amount")
+
+
+        try{
+            val option = Utils.getOptionLoadImgDirectoryFromUrl()
+            Glide.with(requireContext()).load(urlImg).apply(option).into(binding.appBarImage);
+        }catch (_: java.lang.Exception){
+
+        }
     }
 
     private fun initEventToolbar() {
@@ -38,12 +58,12 @@ class DetailProductFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-    fun getToolbarLogoIcon(toolbar: androidx.appcompat.widget.Toolbar): View? {
+    private fun getToolbarLogoIcon(toolbar: androidx.appcompat.widget.Toolbar): View? {
         //check if contentDescription previously was set
-        val hadContentDescription = TextUtils.isEmpty(toolbar.getLogoDescription())
+        val hadContentDescription = TextUtils.isEmpty(toolbar.logoDescription)
         val contentDescription =
-            String.valueOf(if (!hadContentDescription) toolbar.getLogoDescription() else "logoContentDescription")
-        toolbar.setLogoDescription(contentDescription)
+            String.valueOf(if (!hadContentDescription) toolbar.logoDescription else "logoContentDescription")
+        toolbar.logoDescription = contentDescription
         val potentialViews = ArrayList<View>()
         //find the view based on it's content description, set programatically or with android:contentDescription
         toolbar.findViewsWithText(
@@ -57,7 +77,7 @@ class DetailProductFragment : Fragment() {
             logoIcon = potentialViews[0]
         }
         //Clear content description if not previously present
-        if (hadContentDescription) toolbar.setLogoDescription(null)
+        if (hadContentDescription) toolbar.logoDescription = null
         return logoIcon
     }
 

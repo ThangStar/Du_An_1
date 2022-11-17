@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-tools:context=".fragment.fragment_utils_product.PostProductFragment">
+tools:context=".fragment.fragment_utils_product.InsertProductFragment">
 
 <RelativeLayout
     android:id="@+id/rl_toolbar"
@@ -86,7 +86,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                             app:boxCornerRadiusBottomStart="8dp"
                             app:boxCornerRadiusBottomEnd="8dp"
                             app:boxCornerRadiusTopStart="8dp"
-                            android:id="@+id/ipl_a"
+                            android:id="@+id/til_name"
                             app:hintEnabled="false"
                             android:textColorHint="@color/text_hint_secondary">
 
@@ -95,7 +95,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                                 android:layout_height="wrap_content"
                                 android:hint="Tên.."
                                 android:fontFamily="@font/roboto_medium"
-                                android:id="@+id/edt_a"/>
+                                android:id="@+id/edt_name"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -108,7 +108,6 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                         android:layout_height="wrap_content">
                         <TextView
                             android:textColor="@color/text_color_secondary"
-
                             android:id="@+id/tv111"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -151,7 +150,6 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                     <TextView
                         android:layout_marginBottom="6dp"
                         android:textColor="@color/text_color_secondary"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Giá"
@@ -161,6 +159,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="@color/dividingLine"
                         app:boxStrokeWidth="1dp"
+                        android:id="@+id/til_price"
                         app:boxCornerRadiusTopEnd="8dp"
                         app:boxCornerRadiusBottomStart="8dp"
                         app:boxCornerRadiusBottomEnd="8dp"
@@ -173,6 +172,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                             android:layout_height="wrap_content"
                             android:hint="VND"
                             android:inputType="number"
+                            android:id="@+id/edt_price"
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/roboto_medium"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -194,6 +194,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                         android:layout_marginTop="10dp"/>
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
+                        android:id="@+id/til_amount"
                         android:layout_height="wrap_content"
                         app:boxStrokeColor="@color/dividingLine"
                         app:boxStrokeWidth="1dp"
@@ -208,6 +209,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="0"
+                            android:id="@+id/edt_amount"
                             android:inputType="number"
 
                             android:fontFamily="@font/roboto_medium"/>
@@ -222,7 +224,6 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/text_color_secondary"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nhà sản xuất"
@@ -233,6 +234,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/dividingLine"
                     app:boxStrokeWidth="1dp"
+                    android:id="@+id/til_brand"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
@@ -242,6 +244,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
+                        android:id="@+id/edt_brand"
                         android:layout_height="wrap_content"
                         android:hint="Nike, Supreme, Adidas,.."
                         android:fontFamily="@font/roboto_medium"/>
@@ -265,6 +268,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/til_size"
                     app:boxStrokeColor="@color/dividingLine"
                     app:boxStrokeWidth="1dp"
                     app:boxCornerRadiusTopEnd="8dp"
@@ -277,6 +281,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/edt_size"
                         android:hint="M, X, XL, XXL"
                         android:fontFamily="@font/roboto_medium"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -291,7 +296,6 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/text_color_secondary"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Màu sắc"
@@ -299,6 +303,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                     android:layout_marginTop="10dp"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
+                    android:id="@id/til_color"
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/dividingLine"
                     app:boxStrokeWidth="1dp"
@@ -313,6 +318,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Xanh, Đỏ, Vàng"
+                        android:id="@+id/edt_color"
                         android:fontFamily="@font/roboto_medium"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -330,14 +336,16 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chi tiết"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="12dp"
                     android:layout_marginTop="10dp"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/dividingLine"
                     app:boxStrokeWidth="1dp"
+                    android:layout_marginBottom="?attr/actionBarSize"
                     app:boxCornerRadiusTopEnd="8dp"
+                    android:id="@+id/til_detail"
                     app:boxCornerRadiusBottomStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
                     app:boxCornerRadiusTopStart="8dp"
@@ -346,8 +354,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:minHeight="80dp"
-                        android:layout_marginBottom="?attr/actionBarSize"
+                        android:id="@+id/edt_detail"
                         android:layout_height="wrap_content"
                         android:hint="Chi tiết.."
                         android:fontFamily="@font/roboto_medium"/>
@@ -364,7 +371,7 @@ tools:context=".fragment.fragment_utils_product.PostProductFragment">
 </ScrollView>
 
 <com.google.android.material.button.MaterialButton
-    android:id="@+id/btn_capnhat"
+    android:id="@+id/btn_insert"
     android:layout_width="match_parent"
     android:layout_gravity="bottom"
     android:layout_height="wrap_content"

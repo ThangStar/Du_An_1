@@ -22,7 +22,9 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 class ProductFragment : Fragment() {
-    lateinit var binding: FragmentProductBinding
+    companion object{
+        lateinit var binding: FragmentProductBinding
+    }
     lateinit var ctx: Context
     var isExit = false
     override fun onCreateView(
@@ -40,6 +42,7 @@ class ProductFragment : Fragment() {
         initOnBottomNavChange()
         return binding.root
     }
+
 
     private fun initOnBottomNavChange() {
         binding.bottomNavProduct.setOnItemSelectedListener {

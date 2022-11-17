@@ -1,5 +1,6 @@
 package com.developer.cubemarket.adapter.search;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.developer.cubemarket.R;
+import com.developer.cubemarket.config.utils.Utils;
+import com.developer.cubemarket.connection.MODEL.OOP.Sanpham;
 import com.developer.cubemarket.object.search.ketquaObject;
 
 import java.util.List;
 
 public class ketquaAdapter extends RecyclerView.Adapter<ketquaAdapter.ketquaViewHolder>{
-    private List<ketquaObject> ketquaObjectList;
+    private List<Sanpham> arr;
+    private Context ctx;
 
-    public ketquaAdapter(List<ketquaObject> ketquaObjectList) {
-        this.ketquaObjectList = ketquaObjectList;
+    public ketquaAdapter(Context ctx, List<Sanpham> arr) {
+        this.arr = arr;
+        this.ctx = ctx;
     }
 
     @NonNull
@@ -30,19 +37,20 @@ public class ketquaAdapter extends RecyclerView.Adapter<ketquaAdapter.ketquaView
 
     @Override
     public void onBindViewHolder(@NonNull ketquaViewHolder holder, int position) {
-        ketquaObject ketquaObject = ketquaObjectList.get(position);
-        if (ketquaObject==null){
+        Sanpham sanpham = arr.get(position);
+        if (sanpham==null){
             return;
         }
-        holder.image.setImageResource(ketquaObject.getImage());
-        holder.name.setText(ketquaObject.getName());
-        holder.price.setText(ketquaObject.getPrice());
+        RequestOptions option = Utils.Companion.getOptionLoadImgDirectoryFromUrl();
+        Glide.with(ctx).load(sanpham.getImg()).apply(option).into(holder.image);
+        holder.name.setText(sanpham.getTensanpham());
+        holder.price.setText(sanpham.getGiaban()+"");
     }
 
     @Override
     public int getItemCount() {
-        if (ketquaObjectList !=null){
-            return ketquaObjectList.size();
+        if (arr !=null){
+            return arr.size();
         }
         return 0;
     }
@@ -54,9 +62,9 @@ public class ketquaAdapter extends RecyclerView.Adapter<ketquaAdapter.ketquaView
 
         public ketquaViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            name = itemView.findViewById(R.id.name);
-            price = itemView.findViewById(R.id.price);
+            image = itemView.findViewById(R.id.imv_product);
+            name = itemView.findViewById(R.id.tv_title);
+            price = itemView.findViewById(R.id.tv_price);
         }
     }
 }

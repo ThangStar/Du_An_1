@@ -12,6 +12,7 @@ import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentProductSaleBinding
 import com.developer.cubemarket.utils.CallBackProduct
+import com.developer.cubemarket.utils.CallBackProductSale
 import es.dmoral.toasty.Toasty
 
 class ProductSaleFragment : Fragment() {
@@ -33,7 +34,7 @@ class ProductSaleFragment : Fragment() {
     }
     private fun initDataCartProduct():  ArrayList<Sanpham> {
         var arr = arrayListOf<Sanpham>()
-        val callBack = object: CallBackProduct{
+        val callBack = object: CallBackProductSale{
             override fun onSuccess(sp: Sanpham) {
                 arr.add(sp)
                 adapterProduct.notifyItemInserted(arr.size)

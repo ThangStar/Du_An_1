@@ -3,41 +3,42 @@ package com.developer.cubemarket.fragment.fragment_home_pager
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.transition.TransitionInflater
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
+import android.widget.SimpleCursorAdapter
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
-import com.android.volley.VolleyError
 import com.developer.cubemarket.R
-import com.developer.cubemarket.`object`.ProductHome
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.ProductHomeAdapter
 import com.developer.cubemarket.config.user.DataUser
-import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
-import com.developer.cubemarket.connection.MODEL.IResult.IResult_sanpham
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
-import com.developer.cubemarket.connection.MODEL.OOP.User
 import com.developer.cubemarket.databinding.FragmentHomeBinding
+import com.developer.cubemarket.fragment.ProductFragment
 import com.developer.cubemarket.utils.CallBackProduct
 import com.developer.cubemarket.utils.VolleyCallBack
+import com.mancj.materialsearchbar.MaterialSearchBar.OnSearchActionListener
+import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
 import es.dmoral.toasty.Toasty
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     lateinit var ctx: Context
+    private var arrAutoComplete = arrayListOf<String>()
 
+    var adapterCompleteSearch: ArrayAdapter<String>? = null
     companion object{
         lateinit var arrDirectory: ArrayList<Danhmuc>
         @SuppressLint("StaticFieldLeak")
@@ -51,13 +52,20 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         ctx = binding.root.context
+
+
+
+        initCompleteSearch()
+
         postponeEnterTransition()
         initRecyclerDireactory()
         initRecyclerProduct()
         initSearch()
+
         binding.ryProduct.doOnPreDraw {
             startPostponedEnterTransition()
         }
+
 
         sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(
             R.transition.shared_image)
@@ -66,11 +74,49 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private fun initCompleteSearch() {
+        adapterCompleteSearch =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrAutoComplete)
+
+        binding.sbrHome.lastSuggestions = arrAutoComplete
+
+    }
+
     private fun initSearch() {
-        binding.searchRs.setOnSearchClickListener {
-            DaoSanPham(requireContext()).search_sanpham_chung(binding.searchRs.query.toString(),
-                DataUser.id, DataUser.occupation)
-        }
+        binding.sbrHome.addTextChangeListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //text changed
+                val arr = arrayListOf<String>()
+                for (i in arrAutoComplete){
+                    if(arr.size < 6){
+                        if(i.contains(p0.toString())){
+                            arr.add(i)
+                        }
+                    }
+                }
+                binding.sbrHome.lastSuggestions = arr
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            //
+            }
+        })
+        binding.sbrHome.setOnSearchActionListener(object: OnSearchActionListener{
+            override fun onSearchStateChanged(enabled: Boolean) {
+            }
+
+            override fun onSearchConfirmed(text: CharSequence?) {
+                ProductFragment.binding.pagerProduct.setCurrentItem(1, true)
+            }
+
+            override fun onButtonClicked(buttonCode: Int) {
+            }
+        })
     }
 
     private fun initRecyclerProduct() {
@@ -87,10 +133,13 @@ class HomeFragment : Fragment() {
 
     private fun initDataProduct(): ArrayList<Sanpham> {
         arrHomeProduct.clear()
+        arrAutoComplete.clear()
+
         val callBack = object : CallBackProduct{
             override fun onSuccess(sp: Sanpham) {
                 arrHomeProduct.add(sp)
                 productHomeAdapter.notifyItemInserted(arrHomeProduct.size)
+                arrAutoComplete.add(sp.tensanpham)
             }
 
             override fun onFail(err: String) {

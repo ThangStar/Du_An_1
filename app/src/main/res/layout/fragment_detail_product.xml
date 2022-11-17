@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:fontFamily="@font/roboto_bold"
-                        android:id="@+id/tv"
+                        android:id="@+id/tv_name"
                         android:textSize="22sp"
                         android:textColor="@color/text_color_secondary"
                         android:layout_width="match_parent"
@@ -91,6 +91,7 @@
                         android:text="Giày nike" />
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/roboto_bold"
                         android:textSize="22sp"
@@ -124,6 +125,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_detail"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:fontFamily="@font/roboto_regular"
@@ -166,35 +168,39 @@
                     android:text="Liên hệ người bán"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:paddingHorizontal="29dp"
-                android:background="@drawable/radius_all_item"
-                android:paddingVertical="12dp"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
+
+            <RadioGroup
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:text="màu trắng"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/roboto_light"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:paddingHorizontal="29dp"
-                android:background="@drawable/radius_all_item"
-                android:paddingVertical="12dp"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:paddingHorizontal="29dp"
+                    android:background="@drawable/radius_all_item"
+                    android:paddingVertical="12dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="màu trắng"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/roboto_light"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:paddingHorizontal="29dp"
+                    android:background="@drawable/radius_all_item"
+                    android:paddingVertical="12dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
                 <TextView
                     android:text="màu xám"
                     android:textSize="13sp"
@@ -207,7 +213,24 @@
                     android:layout_width="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_height="wrap_content"/>
-            </RelativeLayout>
+                </RelativeLayout>
+            </RadioGroup>
+
+            <TextView
+                android:layout_marginVertical="14dp"
+                android:id="@+id/tv_amount"
+                android:text="Kho: "
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="14sp"
+                android:id="@+id/tv_brand"
+                android:text="Kho: "
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     <com.google.android.material.button.MaterialButton

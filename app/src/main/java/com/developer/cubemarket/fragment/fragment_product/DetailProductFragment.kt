@@ -43,6 +43,12 @@ class DetailProductFragment : Fragment() {
         val brand = arguments?.getString("brand")
         val amount = arguments?.getString("amount")
 
+        binding.tvName.text = name
+        binding.tvDetail.text = detail
+        binding.tvPrice.text = price
+        binding.tvAmount.text = "Kho: $amount"
+        binding.tvBrand.text = "Nhãn hiệu: $brand"
+
 
         try{
             val option = Utils.getOptionLoadImgDirectoryFromUrl()

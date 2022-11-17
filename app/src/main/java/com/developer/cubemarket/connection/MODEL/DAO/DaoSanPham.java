@@ -22,6 +22,8 @@ import com.developer.cubemarket.connection.MODEL.OOP.Sanpham;
 import com.developer.cubemarket.utils.CallBackDelProduct;
 import com.developer.cubemarket.utils.CallBackInsertProduct;
 import com.developer.cubemarket.utils.CallBackProduct;
+import com.developer.cubemarket.utils.CallBackProductSale;
+import com.developer.cubemarket.utils.CallBackSearchProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -312,15 +315,14 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void getdata_sanpham_all(CallBackProduct callBackProduct, int id,int chucvu){
+    public  void getdata_sanpham_all(CallBackProductSale callBackProductSale, int id, int chucvu){
         Log.d("III", "id: "+id+" chucVu: "+chucvu);
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "onResponse: >>> "+response);
-
+                Log.d("789", "onResponse: >>> 789"+response);
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -337,19 +339,19 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            callBackProduct.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),
+                            callBackProductSale.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),
                                     tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
                             //---------------------------------------viets code ở dưới này---------------------------------------
                             Log.d("AAA", tensanpham);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            callBackProduct.onFail(e.toString());
+                            callBackProductSale.onFail(e.toString());
                             Log.d("AAA", e.toString());
                         }
 
                     }
                 } catch (JSONException e) {
-                    callBackProduct.onError(e.toString());
+                    callBackProductSale.onError(e.toString());
                     Log.d("AAA", e.toString());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
@@ -359,7 +361,10 @@ public class DaoSanPham {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error.networkResponse);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error.getLocalizedMessage());
+                Log.d(TAG, "xảy ra lỗi >>>>" + Arrays.toString(error.getStackTrace()));
+
             }
         }){
             @Nullable
@@ -374,14 +379,13 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void search_sanpham_chung(String noidungsearch,int id,int chucvu){
+    public  void search_sanpham_chung(CallBackSearchProduct callBack, String noidungsearch, int id, int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
-                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -399,24 +403,25 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
-                            Log.d("SSS", tensanpham);
+                            Log.d("SEARCH: TEN SAN PHAM => ", tensanpham);
+                            callBack.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),
+                                    tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            callBack.onFail(e.toString());
                             Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
                         }
 
                     }
+                    callBack.onFinish();
+
                 } catch (JSONException e) {
+                    callBack.onError(e.toString());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
-                }
-                if(mResultCallback != null){
-
-                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {

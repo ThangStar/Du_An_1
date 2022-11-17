@@ -7,7 +7,7 @@
     tools:context=".fragment.ProductFragment">
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager_product"
-            android:paddingBottom="?attr/actionBarSize"
+            android:layout_above="@id/bottom_nav_product"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.viewpager2.widget.ViewPager2>
@@ -16,10 +16,10 @@
             android:id="@+id/bottom_nav_product"
             android:layout_alignParentBottom="true"
             app:menu="@menu/menu_bottom_nav"
-            app:labelVisibilityMode="unlabeled"
+            app:labelVisibilityMode="selected"
             app:itemIconTint="@color/bottom_change_tint_selected"
             app:itemBackground="@color/white"
             app:itemTextColor="@color/button_background_primary"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="wrap_content"/>
 
 </RelativeLayout>

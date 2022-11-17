@@ -37,4 +37,9 @@ public class Mausac {
     public void setTenmausac(String tenmausac) {
         this.tenmausac = tenmausac;
     }
+
+    @Override
+    public String toString() {
+        return tenmausac;
+    }
 }

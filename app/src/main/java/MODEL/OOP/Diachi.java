@@ -37,4 +37,9 @@ public class Diachi {
     public void setTendiachi(String tendiachi) {
         this.tendiachi = tendiachi;
     }
+
+    @Override
+    public String toString() {
+        return tendiachi;
+    }
 }

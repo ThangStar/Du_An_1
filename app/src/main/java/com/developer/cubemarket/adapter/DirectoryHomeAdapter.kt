@@ -40,7 +40,7 @@ class DirectoryHomeAdapter(
             if (p0 != null){
                 when(p0.id){
                     binding.lnDirectory.id ->{
-                        if(DataUser.occupation == 3){
+                        if(DataUser.occupation == 2){
                             showMenu(fr.requireContext(), binding.imvDirectory, R.menu.menu_utils)
                         }
                     }
@@ -61,7 +61,7 @@ class DirectoryHomeAdapter(
                                 adapter.notifyItemRemoved(adapterPosition)
                             }
                         }
-                        Utils.dialogDelDirectory(callBackOnSuccess, fr.requireActivity(), "Xóa ${arr[adapterPosition].tendanhmuc}",
+                        Utils.dialogDelDirectory(callBackOnSuccess, fr.requireActivity(), "Xóa ${arr[adapterPosition].tendanhmuc}?",
                             "Bạn có muốn xóa danh mục ${arr[adapterPosition].tendanhmuc}",
                             arr[adapterPosition].madanhmuc,
                             adapterPosition)

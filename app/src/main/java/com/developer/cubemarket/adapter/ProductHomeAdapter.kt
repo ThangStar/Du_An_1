@@ -38,7 +38,7 @@ class ProductHomeAdapter(
             if (p0 != null) {
                 when(p0.id){
                     binding.lnProduct.id -> {
-                        if(DataUser.occupation == 3){
+                        if(DataUser.occupation == 2){
                             showMenu(fr.requireContext(), binding.imvProduct, R.menu.menu_utils)
                         }
                     }
@@ -52,7 +52,7 @@ class ProductHomeAdapter(
             popup.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.it_del ->{
-                        Utils.dialogDelProduct(fr.requireActivity(), "Xóa ${arr[adapterPosition].tensanpham}",
+                        Utils.dialogDelProduct(fr.requireActivity(), "Xóa ${arr[adapterPosition].tensanpham}?",
                         "Bạn có muốn xóa sản phẩm ${arr[adapterPosition].tensanpham}", arr[adapterPosition].masanpham, adapterPosition)
                     }
                     R.id.it_edit ->{

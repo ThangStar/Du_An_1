@@ -41,8 +41,7 @@ class DetailProductFragment : Fragment() {
         val detail = arguments?.getString("detail")
         val price = arguments?.getString("price")
         val brand = arguments?.getString("brand")
-        val amount = arguments?.getString("amount")
-
+        val amount = arguments?.getInt("amount")
         binding.tvName.text = name
         binding.tvDetail.text = detail
         binding.tvPrice.text = price

@@ -86,7 +86,7 @@ class UpdateDirectoryFragment : Fragment() {
             if(Pattern.matches(Utils.getRegexVietNam(), local)){
                 binding.tilLocal.error = null
             }else{
-                binding.tilLocal.error = "Tên danh mục cần 1-18 kí tự và không có kí tự đặc biệt"
+                binding.tilLocal.error = "Tên khu vực cần 1-18 kí tự và không có kí tự đặc biệt"
                 isCheck = false
             }
 

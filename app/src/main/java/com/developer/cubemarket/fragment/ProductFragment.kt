@@ -38,9 +38,16 @@ class ProductFragment : Fragment() {
         val adapter = ProductPagerAdapter(this, getFragment())
         binding.pagerProduct.adapter = adapter
 
+        initBadgeBottom()
         initOnPagerChange()
         initOnBottomNavChange()
         return binding.root
+    }
+
+    private fun initBadgeBottom() {
+        val badge = binding.bottomNavProduct.getOrCreateBadge(R.id.ic_cart)
+        badge.isVisible = true
+        badge.number = 9
     }
 
 

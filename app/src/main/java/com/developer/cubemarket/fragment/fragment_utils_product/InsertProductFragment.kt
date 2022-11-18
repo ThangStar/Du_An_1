@@ -70,10 +70,10 @@ class InsertProductFragment : Fragment() {
                 isCheck = false
             }
 
-            if(Pattern.matches("^[1-9]{5,12}$", price)){
+            if(Pattern.matches("^[0-9]{5,10}$", price)){
                 binding.tilPrice.error = null
             }else{
-                binding.tilPrice.error = "Giá 5-12 kí tự, phải là số"
+                binding.tilPrice.error = "Giá 5-10 kí tự, phải là số"
                 isCheck = false
             }
 
@@ -84,33 +84,33 @@ class InsertProductFragment : Fragment() {
                 isCheck = false
             }
 
-            if(Pattern.matches(Utils.getRegexVietNam(), brand)){
+            if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,18}", brand)){
                 binding.tilBrand.error = null
             }else{
                 binding.tilBrand.error = "Nhãn hiệu 1-18 kí tự, không có kí tự đặc biệt"
                 isCheck = false
             }
 
-            if(Pattern.matches("^[a-zA-Z0-9]{1,5}$", size)){
+            if(Pattern.matches("^[a-zA-Z0-9\\\\, ]{1,18}$", size)){
                 binding.tilSize.error = null
             }else{
-                binding.tilSize.error = "Kích cỡ 1-5 kí tự, không có kí tự đặc biệt"
+                binding.tilSize.error = "Kích cỡ 1-18 kí tự, không có kí tự đặc biệt" +
+                        " - ngăn cách nhau bằng dấu phẩy"
                 isCheck = false
             }
 
-            if(Pattern.matches(Utils.getRegexVietNam(), color)){
+            if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,18}", color)){
                 binding.tilColor.error = null
             }else{
-                binding.tilColor.error = "Màu sắc 1-18 kí tự, không có kí tự đặc biệt"
+                binding.tilColor.error = "Màu sắc 1-18 kí tự, không có kí tự đặc biệt - ngăn cách nhau bằng dấu phẩy"
                 isCheck = false
             }
 
-            if(Pattern.matches("^[${Utils.getRegexVietNam2()}]{5,100}$", detail)){
+            if(Pattern.matches("^[\\S ]{5,500}\$", detail)){
                 binding.tilDetail.error = null
             }else{
                 isCheck = false
-                binding.tilDetail.error = "Chi tiết sản phẩm 5-100 kí tự, không có kí tự đặc biệt"
-
+                binding.tilDetail.error = "Chi tiết sản phẩm 5-500 kí tự, không có kí tự đặc biệt"
             }
             if (isCheck){
                 Toasty.success(requireContext(), "OK", Toasty.LENGTH_SHORT).show()

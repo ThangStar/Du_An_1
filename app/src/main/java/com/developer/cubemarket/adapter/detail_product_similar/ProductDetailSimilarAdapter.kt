@@ -1,4 +1,4 @@
-package com.developer.cubemarket.adapter
+package com.developer.cubemarket.adapter.detail_product_similar
 
 import android.content.Context
 import android.os.Bundle
@@ -13,15 +13,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.developer.cubemarket.R
+import com.developer.cubemarket.call_back_view.CallBackProductDetailScrollTop
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
 
-class ProductHomeAdapter(
+class ProductDetailSimilarAdapter(
     var fr: Fragment,
+    private var callBackScrollTop: CallBackProductDetailScrollTop,
     var arr: ArrayList<Sanpham>
-): RecyclerView.Adapter<ProductHomeAdapter.ProducHomeViewHolder>() {
+): RecyclerView.Adapter<ProductDetailSimilarAdapter.ProducHomeViewHolder>() {
     class ProducHomeViewHolder(
         var arr: ArrayList<Sanpham>,
         var fr: Fragment,
@@ -79,17 +81,8 @@ class ProductHomeAdapter(
         holder.binding.tvPrice.text = Utils.formaterVND(pr.giaban)
         holder.binding.tvTitle.text = pr.tensanpham
         holder.binding.lnProduct.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("img", pr.img)
-            bundle.putString("name", pr.tensanpham)
-            bundle.putString("detail", pr.chitiet)
-            bundle.putInt("price", pr.giaban)
-            bundle.putString("brand", pr.nhasanxuat)
-            bundle.putInt("amount", pr.soluong)
-            bundle.putString("directory", pr.danhmuc.tendanhmuc)
 
-            findNavController(fr).navigate(
-                R.id.action_productFragment_to_detailProductFragment, bundle)
+            callBackScrollTop.startScroll(sp = pr)
         }
 
     }

@@ -16,4 +16,5 @@
     <string name="add_dr">Thêm danh mục</string>
     <string name="update_directory">Cập nhật danh mục</string>
     <string name="pr_saled">Sản phẩm đã đăng</string>
+    <string name="add_favorite">add favorite</string>
 </resources>

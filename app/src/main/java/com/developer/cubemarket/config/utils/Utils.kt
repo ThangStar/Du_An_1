@@ -2,7 +2,6 @@ package com.developer.cubemarket.config.utils
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -27,7 +26,7 @@ import java.text.DecimalFormat
 class Utils {
     companion object{
         var alert: AlertDialog? = null
-        fun formaterVND(price: Int): String{
+        fun formaterVND(price: Int?): String{
             val formatter = DecimalFormat("###,###,###")
             return "đ ${formatter.format(price)}"
         }

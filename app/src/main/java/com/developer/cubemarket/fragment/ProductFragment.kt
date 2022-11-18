@@ -2,12 +2,12 @@ package com.developer.cubemarket.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.ProductPagerAdapter
@@ -17,9 +17,8 @@ import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_home_pager.ProfileFragment
 import com.developer.cubemarket.fragment.fragment_home_pager.SearchFragment
 import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.system.exitProcess
 
 class ProductFragment : Fragment() {
     companion object{
@@ -78,8 +77,8 @@ class ProductFragment : Fragment() {
         })
     }
 
-    fun getFragment(): ArrayList<Fragment>{
-        var arr = arrayListOf<Fragment>()
+    private fun getFragment(): ArrayList<Fragment>{
+        val arr = arrayListOf<Fragment>()
         arr.add(HomeFragment())
         arr.add(SearchFragment())
         arr.add(CartFragment())
@@ -87,23 +86,26 @@ class ProductFragment : Fragment() {
 
         return arr
     }
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onAttach(context: Context) {
         super.onAttach(context)
         class blockGoBack : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Toasty.warning(ctx, "Quay lại lần nữa để thoát", Toasty.LENGTH_SHORT).show()
-                val job1 = GlobalScope.launch {
+                GlobalScope.launch {
                     isExit = true
-                    Thread.sleep(2000)
+                    withContext(Dispatchers.IO) {
+                        Thread.sleep(2000)
+                    }
                     isExit = false
                     cancel()
                 }
                 if (isExit){
-                    System.exit(0)
+                    exitProcess(0)
                 }
             }
         }
-        requireActivity().getOnBackPressedDispatcher().addCallback(
+        requireActivity().onBackPressedDispatcher.addCallback(
             this, blockGoBack());
     }
 }

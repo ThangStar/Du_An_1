@@ -23,6 +23,7 @@ import com.developer.cubemarket.utils.CallBackDelProduct;
 import com.developer.cubemarket.utils.CallBackInsertProduct;
 import com.developer.cubemarket.utils.CallBackProduct;
 import com.developer.cubemarket.utils.CallBackProductSale;
+import com.developer.cubemarket.utils.CallBackProductSimilar;
 import com.developer.cubemarket.utils.CallBackSearchProduct;
 
 import org.json.JSONArray;
@@ -214,6 +215,7 @@ public class DaoSanPham {
                             //---------------------------------------viets code ở dưới này---------------------------------------
                             callback.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),
                                     tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            Log.d("HOMEPRODUCT", masanpham+"");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             callback.onFail(e.toString());
@@ -546,7 +548,8 @@ public class DaoSanPham {
 
     }
 
-    public  void sanpham_tuongtu(int id,int chucvu,String tendanhmuc,String tensanpham){
+    public  void sanpham_tuongtu(CallBackProductSimilar callBack, int id, int chucvu, String tendanhmuc, String tensanpham){
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
@@ -571,14 +574,15 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,
+                                    tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,
+                                    soluong,giaban,chitiet,id));
 
+                            Log.d("PRODUCTSIMILAR: ", tensanpham);
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
-
-
+                            callBack.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,
+                                    tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,
+                                    soluong,giaban,chitiet,id));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
@@ -586,6 +590,7 @@ public class DaoSanPham {
 
                     }
                 } catch (JSONException e) {
+                    callBack.onFail("đã xảy ra lỗi :"+e.getMessage());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
                 }
@@ -597,6 +602,7 @@ public class DaoSanPham {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBack.onError("đã xảy ra lỗi :"+error.getMessage());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){

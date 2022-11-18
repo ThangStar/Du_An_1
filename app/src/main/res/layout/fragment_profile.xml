@@ -161,7 +161,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/lock"
+                                android:src="@drawable/ic_change_pass"
                                 app:tint="@color/button_background_primary" />
                         </LinearLayout>
                         <LinearLayout
@@ -401,6 +401,55 @@
                         android:layout_below="@id/card1"
                         android:background="@color/dividingLine"/>
                     <LinearLayout
+                        android:id="@+id/ln_insert_directory"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/ripple_text"
+                        android:paddingHorizontal="22dp"
+                        android:paddingVertical="8dp"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_directory"
+                                app:tint="@color/item_color_secondary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_margin="16dp"
+                                android:text="@string/add_directory"
+                                android:textAlignment="center"
+                                android:textColor="@color/text_color_secondary"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitEnd"
+                            android:src="@drawable/ic_next"
+                            android:contentDescription="@string/right" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dividingLine"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:gravity="center_vertical"
                         android:clickable="true"
@@ -444,55 +493,8 @@
                             android:src="@drawable/ic_next"
                             android:contentDescription="@string/right" />
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/dividingLine"/>
-                    <LinearLayout
-                        android:id="@+id/ln_insert_directory"
-                        android:layout_width="match_parent"
-                        android:gravity="center_vertical"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:background="@drawable/ripple_text"
-                        android:paddingHorizontal="22dp"
-                        android:paddingVertical="8dp"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_bug"
-                                app:tint="@color/black" />
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_margin="16dp"
-                                android:text="@string/add_directory"
-                                android:textAlignment="center"
-                                android:textColor="@color/text_color_secondary"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:scaleType="fitEnd"
-                            android:src="@drawable/ic_next"
-                            android:contentDescription="@string/right" />
-                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <TextView

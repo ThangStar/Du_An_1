@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.developer.cubemarket.R
-import com.developer.cubemarket.`object`.cart.CartProduct
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
-import com.developer.cubemarket.databinding.ProductCartItemBinding
 import com.developer.cubemarket.databinding.ProductSaleItemBinding
 
 class SaleProductAdapter(
@@ -31,7 +29,7 @@ class SaleProductAdapter(
 //        holder.binding.imvProduct.setImageBitmap(pr.img)
         val option = Utils.getOptionLoadImgDirectoryFromUrl()
         Glide.with(ctx).load(pr.img).apply(option).into(holder.binding.imvProduct);
-        holder.binding.tvAmount.text = pr.chitiet
+        holder.binding.tvAmount.text = "kho: ${pr.soluong}"
         holder.binding.tvName.text = pr.tensanpham
         holder.binding.tvPrice.text = Utils.formaterVND(pr.giaban)
     }

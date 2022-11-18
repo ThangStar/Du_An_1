@@ -120,6 +120,8 @@ class SearchFragment : Fragment() {
                 ketquaAdapter.notifyDataSetChanged()
                 binding.search.clearSuggestions()
                 binding.search.clearFocus()
+                //set text keyword search
+                binding.tvResult.text = "Kết quả từ khóa: '$text'"
                 DaoSanPham(requireContext()).search_sanpham_chung(callBackSearch, text.toString(),
                     DataUser.id, DataUser.occupation)
             }

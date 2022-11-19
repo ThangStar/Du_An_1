@@ -131,7 +131,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_sanpham( Sanpham sanpham){
+    public  void update_sanpham( int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,int soluong,int giaban,String chitiet){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -157,17 +157,17 @@ public class DaoSanPham {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
 
-                stringStringMap.put("masanpham", String.valueOf(sanpham.getMasanpham()));
+                stringStringMap.put("masanpham", String.valueOf(masanpham));
                 Danhmuc danhmuc = new Danhmuc();
-                stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
-                stringStringMap.put("tensanpham",sanpham.getTensanpham());
-                stringStringMap.put("hinhanh",sanpham.getImg() );// chuyển hình thành base 64
+                stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
+                stringStringMap.put("tensanpham",tensanpham);
+                stringStringMap.put("hinhanh",img);// chuyển hình thành base 64
 
-                stringStringMap.put("nhasanxuat", sanpham.getNhasanxuat());
-                stringStringMap.put("soluong", String.valueOf(sanpham.getSoluong()));
+                stringStringMap.put("nhasanxuat", nhasanxuat);
+                stringStringMap.put("soluong", String.valueOf(soluong));
 
-                stringStringMap.put("giaban", String.valueOf(sanpham.getGiaban()));
-                stringStringMap.put("chitiet",sanpham.getChitiet());
+                stringStringMap.put("giaban", String.valueOf(giaban));
+                stringStringMap.put("chitiet",chitiet);
                 return stringStringMap;
             }
         };

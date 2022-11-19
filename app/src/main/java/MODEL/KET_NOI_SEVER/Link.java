@@ -67,4 +67,10 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
  public static String delete_khuyenmai="https://"+IP+"//android/duanmau/delete_khuyenmai.php";
  public static String getdata_khuyenmai="https://"+IP+"//android/duanmau/getdata_khuyenmai.php";
 
+
+    public static String insert_hoadon="https://"+IP+"//android/duanmau/insert_hoadon.php";
+    public static String getdata_hoadon="https://"+IP+"//android/duanmau/getdata_hoadon.php";
+
+    public static String getdata_chitiet_hoadon="https://"+IP+"//android/duanmau/getdata_chitiet_hoadon.php";
+
 }

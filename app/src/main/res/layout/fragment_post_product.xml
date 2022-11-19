@@ -363,6 +363,7 @@ tools:context=".fragment.fragment_utils_product.InsertProductFragment">
                     app:boxStrokeWidth="1dp"
                     app:counterEnabled="true"
                     app:endIconMode="clear_text"
+                    android:minHeight="100dp"
                     app:counterMaxLength="500"
                     android:layout_marginBottom="?attr/actionBarSize"
                     app:boxCornerRadiusTopEnd="8dp"
@@ -378,6 +379,7 @@ tools:context=".fragment.fragment_utils_product.InsertProductFragment">
                         android:id="@+id/edt_detail"
                         android:layout_height="wrap_content"
                         android:hint="Chi tiết.."
+                        android:minHeight="100dp"
                         android:fontFamily="@font/roboto_medium"/>
                 </com.google.android.material.textfield.TextInputLayout>
 

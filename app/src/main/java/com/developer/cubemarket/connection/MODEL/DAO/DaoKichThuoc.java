@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc;
+import com.developer.cubemarket.utils.CallBackSizeProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,7 +91,7 @@ public class DaoKichThuoc {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_kichthuoc(int masanpham){
+    public  void getdata_kichthuoc(CallBackSizeProduct callBackSize, int masanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_kichthuoc, new Response.Listener<String>() {
@@ -102,17 +103,14 @@ public class DaoKichThuoc {
                     for (int i = 0 ; i<jsonArray.length();i++){
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            int mamausac= jsonObject.getInt("makichthuoc");
-                            int masanpham=jsonObject.getInt("masanpham");
-                            String tenmau= jsonObject.getString("tenkichthuoc");
+                            int makichThuoc= jsonObject.getInt("makichthuoc");
+                            int maSanPham=jsonObject.getInt("masanpham");
+                            String tenKichThuoc= jsonObject.getString("tenkichthuoc");
 
-                            Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
+//                            Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
-
+                            callBackSize.onSuccess(new Kichthuoc(makichThuoc,maSanPham,tenKichThuoc));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -121,6 +119,7 @@ public class DaoKichThuoc {
 
                     }
                 } catch (JSONException e) {
+                    callBackSize.onFail(e.getMessage());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
                 }
@@ -128,6 +127,7 @@ public class DaoKichThuoc {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackSize.onError(error.getMessage());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){

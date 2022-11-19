@@ -2,6 +2,7 @@ package com.developer.cubemarket.adapter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,34 @@ class ProductHomeAdapter(
                         "Bạn có muốn xóa sản phẩm ${arr[adapterPosition].tensanpham}", arr[adapterPosition].masanpham, adapterPosition)
                     }
                     R.id.it_edit ->{
-                            fr.findNavController().navigate(R.id.action_productFragment_to_updateProductFragment)
+                        val bundle = Bundle()
+                        bundle.putInt("id_product",
+                            arr[adapterPosition].masanpham)
+                        bundle.putString("name_product",
+                            arr[adapterPosition].tensanpham)
+                        bundle.putString("name_directory",
+                        arr[adapterPosition].danhmuc.tendanhmuc)
+                        bundle.putString("img_product",
+                            arr[adapterPosition].img)
+                        bundle.putInt("price",
+                            arr[adapterPosition].giaban)
+                        bundle.putInt("amount",
+                            arr[adapterPosition].soluong)
+                        bundle.putString("brand",
+                            arr[adapterPosition].nhasanxuat)
+                        bundle.putString("detail",
+                            arr[adapterPosition].chitiet)
+                        bundle.putInt("id_directory",
+                            arr[adapterPosition].danhmuc.madanhmuc)
+                        Log.d("MADANHMUC", arr[adapterPosition].danhmuc.madanhmuc.toString())
+                        bundle.putString("location_directory",
+                            arr[adapterPosition].danhmuc.khuvuc)
+                        bundle.putString("img_directory",
+                            arr[adapterPosition].danhmuc.img)
+                        //start edit product
+                        fr.findNavController().
+                        navigate(R.id.action_productFragment_to_updateProductFragment,
+                        bundle)
                     }
                 }
                 true

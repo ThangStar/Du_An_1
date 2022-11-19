@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac;
+import com.developer.cubemarket.utils.CallBackColorProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +51,6 @@ public class DaoMauSac {
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
-            @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
@@ -92,7 +92,7 @@ public class DaoMauSac {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_mausac(int masanpham){
+    public  void getdata_mausac(CallBackColorProduct callBackColor, int masanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_mausac, new Response.Listener<String>() {
@@ -111,10 +111,7 @@ public class DaoMauSac {
                             Log.d(TAG, "mamau > "+mamausac+" msp >"+masanpham +" ten > "+ tenmau);
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-
-
+                            callBackColor.onSuccess(new Mausac(mamausac, masanpham, tenmau));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -124,16 +121,17 @@ public class DaoMauSac {
                     }
                 } catch (JSONException e) {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    callBackColor.onFail(e.getMessage());
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackColor.onError(error.getMessage());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
-            @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();

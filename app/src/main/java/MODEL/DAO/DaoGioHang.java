@@ -192,7 +192,7 @@ public class DaoGioHang {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_soluong_giohang( int magiohang,int soluong){
+    public  void update_soluong_giohang_tangthem1( int magiohang){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_giohang, new Response.Listener<String>() {
@@ -215,8 +215,40 @@ public class DaoGioHang {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
                 stringStringMap.put("magiohang", String.valueOf(magiohang));
-                stringStringMap.put("soluong", String.valueOf(soluong));
-                stringStringMap.put("update","UDATESOLUONG");
+                stringStringMap.put("cong", String.valueOf(0));
+                stringStringMap.put("update", "UDATESOLUONG");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void update_soluong_giohang_giamthem1( int magiohang){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_giohang, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("magiohang", String.valueOf(magiohang));
+                stringStringMap.put("cong", String.valueOf(1));
+                stringStringMap.put("update", "UDATESOLUONG");
                 return stringStringMap;
             }
         };

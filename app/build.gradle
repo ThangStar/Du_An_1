@@ -71,4 +71,7 @@ dependencies {
     //search bar material
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
 
+    //lotte animation
+    implementation "com.airbnb.android:lottie:5.2.0"
+
 }

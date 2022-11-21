@@ -16,6 +16,7 @@
             android:id="@+id/bottom_nav_product"
             android:layout_alignParentBottom="true"
             app:menu="@menu/menu_bottom_nav"
+            android:animateLayoutChanges="true"
             app:labelVisibilityMode="selected"
             app:itemIconTint="@color/bottom_change_tint_selected"
             app:itemBackground="@color/white"

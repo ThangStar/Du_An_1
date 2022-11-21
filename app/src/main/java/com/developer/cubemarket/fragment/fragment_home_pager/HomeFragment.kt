@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
 
         initCompleteSearch()
 
+        initIsShowRyDirectory()
         postponeEnterTransition()
         initRecyclerDireactory()
         initRecyclerProduct()
@@ -72,6 +73,20 @@ class HomeFragment : Fragment() {
         exitTransition = TransitionInflater.from(ctx).inflateTransition(
             R.transition.shared_image)
         return binding.root
+    }
+
+    private fun initIsShowRyDirectory() {
+        var isShow = false
+        binding.tvIsShow.setOnClickListener {
+            isShow = !isShow
+            if(isShow){
+                binding.ryDirectory.visibility = View.GONE
+                binding.tvIsShow.text = "HIỆN"
+            }else{
+                binding.ryDirectory.visibility = View.VISIBLE
+                binding.tvIsShow.text = "ẨN"
+            }
+        }
     }
 
     private fun initCompleteSearch() {

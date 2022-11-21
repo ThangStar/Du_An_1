@@ -126,8 +126,8 @@ class Utils {
         fun getOptionLoadImgDirectoryFromUrl(): RequestOptions {
             val options: RequestOptions = RequestOptions()
                 .centerCrop()
-                .placeholder(R.drawable.trend)
-                .error(R.drawable.trend)
+                .placeholder(R.drawable.load)
+                .error(R.drawable.load)
             return options
         }
         fun dialogDelDirectory(callBackOnSuccess: CallBackDelDirectory, activity: Activity, title: String, message: String, id: Int, pos: Int){

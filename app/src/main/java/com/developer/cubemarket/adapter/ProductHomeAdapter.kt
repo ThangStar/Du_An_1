@@ -27,10 +27,11 @@ class ProductHomeAdapter(
         var arr: ArrayList<Sanpham>,
         var fr: Fragment,
         v: View): RecyclerView.ViewHolder(v),
-        View.OnLongClickListener {
+        View.OnLongClickListener, View.OnClickListener {
         val binding = ProductHomeItemBinding.bind(v)
         init {
             binding.lnProduct.setOnLongClickListener(this)
+            binding.imvAddCart.setOnClickListener(this)
         }
         override fun onLongClick(p0: View?): Boolean {
             if (p0 != null) {
@@ -88,6 +89,14 @@ class ProductHomeAdapter(
             }
             // Show the popup menu.
             popup.show()
+        }
+
+        override fun onClick(p0: View?) {
+            val x = binding.imvProduct.x
+            val y = binding.imvProduct.y
+            Log.d("CLICKED", "x: $x, y: $y")
+            binding.imvProductTranslate.visibility = View.GONE
+//            binding.imvAddCart.animate().x(400f).y(400f).duration = 1000
         }
     }
 

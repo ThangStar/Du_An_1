@@ -80,6 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/ln_price"
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
@@ -105,6 +107,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ln_price"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
@@ -129,58 +132,114 @@
             <TextView
                 android:background="@color/white"
                 android:id="@+id/tv_detail"
-                android:paddingTop="10dp"
+                android:paddingVertical="24dp"
                 android:paddingHorizontal="15dp"
                 android:layout_width="match_parent"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/info_product"
                 android:layout_height="wrap_content"/>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_marginTop="5dp"
                 android:background="@color/white"
-                android:paddingVertical="30dp"
+                android:paddingVertical="8dp"
                 android:paddingHorizontal="15dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_bold"
+                <LinearLayout
+                    android:layout_toStartOf="@+id/btn_go_sale_person"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/ln_name_sale_person"
                     android:layout_width="wrap_content"
-                    android:text="Văn Thắng"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:src="@drawable/verify"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_name_sale_person"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_width="wrap_content"
+                        android:text="Văn Thắng"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:src="@drawable/verify"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
+                    app:cornerRadius="8dp"
+                    android:id="@+id/btn_go_sale_person"
+                    app:backgroundTint="@color/item_color_secondary"
+                    android:layout_alignParentEnd="true"
+                    android:text="Liên hệ người bán"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
+            </RelativeLayout>
             <RelativeLayout
                 android:paddingVertical="9dp"
                 android:background="@color/white"
                 android:paddingHorizontal="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_color"
+                <LinearLayout
                     android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
-                    android:text="Chọn màu sắc"
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content"/>
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    app:cornerRadius="8dp"
-                    app:backgroundTint="@color/item_color_secondary"
-                    android:layout_alignParentEnd="true"
-                    android:text="Liên hệ người bán"
-                    android:layout_height="wrap_content"/>
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_size"
+                        android:layout_width="wrap_content"
+                        android:text="Chọn kích thước"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_gr"
+                        app:singleSelection="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:text="X"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:checked="true"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:text="L"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:text="XL"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:text="XXL"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:text="XLL"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.chip.ChipGroup>
+                    <TextView
+                        android:layout_marginTop="12dp"
+                        android:id="@+id/tv_color"
+                        android:layout_width="wrap_content"
+                        android:text="Chọn màu sắc"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
             </RelativeLayout>
 
             <RadioGroup
                 android:layout_marginHorizontal="15dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <RelativeLayout
@@ -200,6 +259,8 @@
                         android:layout_height="wrap_content"/>
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:layout_centerVertical="true"
+                        android:checked="true"
+                        android:id="@+id/rad_color"
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_height="wrap_content"/>
@@ -219,7 +280,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -351,21 +412,21 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.button.MaterialButton
-        android:text="Thêm vào giỏ"
-        android:id="@+id/btn_go_check_out"
-        android:layout_marginVertical="5dp"
-        android:paddingVertical="16dp"
-        android:layout_marginHorizontal="15dp"
-        app:cornerRadius="8dp"
-        android:textSize="15sp"
-        android:fontFamily="@font/roboto_bold"
-        app:backgroundTint="@color/button_background_primary"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        app:icon="@drawable/cart"
-        app:iconGravity="textStart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:text="Thêm vào giỏ"-->
+<!--        android:id="@+id/btn_go_check_out"-->
+<!--        android:layout_marginVertical="5dp"-->
+<!--        android:paddingVertical="16dp"-->
+<!--        android:layout_marginHorizontal="15dp"-->
+<!--        app:cornerRadius="8dp"-->
+<!--        android:textSize="15sp"-->
+<!--        android:fontFamily="@font/roboto_bold"-->
+<!--        app:backgroundTint="@color/button_background_primary"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:icon="@drawable/cart"-->
+<!--        app:iconGravity="textStart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

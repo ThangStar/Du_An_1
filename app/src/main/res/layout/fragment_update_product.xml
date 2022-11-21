@@ -81,7 +81,7 @@
                                 android:layout_below="@id/tv1"
                                 app:counterEnabled="true"
                                 app:endIconMode="clear_text"
-                                app:counterMaxLength="18"
+                                app:counterMaxLength="80"
                                 android:layout_height="wrap_content"
                                 app:boxStrokeColor="@color/dividingLine"
                                 app:boxStrokeWidth="1dp"

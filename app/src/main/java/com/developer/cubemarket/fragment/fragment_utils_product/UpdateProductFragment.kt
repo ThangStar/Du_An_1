@@ -104,10 +104,10 @@ class UpdateProductFragment : Fragment() {
             )
             Log.d("SSS", strColor)
             val detail = binding.edtDetail.text.toString().trim()
-            if (Pattern.matches(Utils.getRegexVietNam(), name)) {
+            if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,80}", name)){
                 binding.tilName.error = null
             } else {
-                binding.tilName.error = "Tên 1-18 kí tự, không có kí tự đặc biệt"
+                binding.tilName.error = "Tên 1-80 kí tự, không có kí tự đặc biệt"
                 isCheck = false
             }
 

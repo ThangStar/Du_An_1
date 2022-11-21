@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.developer.cubemarket.MainActivity
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.ProductPagerAdapter
 import com.developer.cubemarket.databinding.FragmentProductBinding
@@ -48,7 +49,6 @@ class ProductFragment : Fragment() {
         badge.isVisible = true
         badge.number = 9
     }
-
 
     private fun initOnBottomNavChange() {
         binding.bottomNavProduct.setOnItemSelectedListener {

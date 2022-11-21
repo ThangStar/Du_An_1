@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.util.Base64
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
@@ -45,6 +46,7 @@ class Utils {
                     //Do something delete here
                     UpdateProductFragment.arrSize.removeAt(pos)
                     UpdateProductFragment.sizeAdapter.notifyItemRemoved(pos)
+                    Log.d("SIZE: ", pos.toString())
                     dialogInterface?.dismiss()
                 }
                 .setNegativeButton("Hủy", R.drawable.cancel_del

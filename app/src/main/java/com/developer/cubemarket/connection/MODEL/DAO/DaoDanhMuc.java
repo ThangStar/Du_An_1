@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
-import com.developer.cubemarket.utils.CallbackUpdateProduct;
+import com.developer.cubemarket.utils.CallbackUpdateDirectory;
 import com.developer.cubemarket.utils.VolleyCallBack;
 
 import org.json.JSONArray;
@@ -120,7 +120,7 @@ public class DaoDanhMuc {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_danhmuc(CallbackUpdateProduct callbackUpdateProduct, Danhmuc danhmuc){
+    public  void update_danhmuc(CallbackUpdateDirectory callbackUpdateDirectory, Danhmuc danhmuc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_danhmuc, new Response.Listener<String>() {
@@ -128,16 +128,16 @@ public class DaoDanhMuc {
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>>" +response);
                 if(response.toString().trim().equals("success")){
-                    callbackUpdateProduct.onSuccess();
+                    callbackUpdateDirectory.onSuccess();
                 }else{
-                    callbackUpdateProduct.onFail();
+                    callbackUpdateDirectory.onFail();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
-                callbackUpdateProduct.onError();
+                callbackUpdateDirectory.onError();
             }
         }){
             @Nullable

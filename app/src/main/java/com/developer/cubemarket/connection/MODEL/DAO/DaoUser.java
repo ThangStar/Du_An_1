@@ -21,7 +21,7 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
 import com.developer.cubemarket.utils.CallBackChangePass;
-import com.developer.cubemarket.utils.CallBackUpdate;
+import com.developer.cubemarket.utils.CallBackUpdateUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,23 +74,23 @@ public class DaoUser {
         };
         requestQueue.add(stringRequest);
     }
-    public void update_user(CallBackUpdate callBackUpdate, int id , String ten, int chucvu, String phone){
+    public void update_user(CallBackUpdateUser callBackUpdateUser, int id , String ten, int chucvu, String phone){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    callBackUpdate.onSuccess("thành công");
+                    callBackUpdateUser.onSuccess("thành công");
                 }else{
-                    callBackUpdate.onFail("Lỗi"+response.toString());
+                    callBackUpdateUser.onFail("Lỗi"+response.toString());
 
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                callBackUpdate.onError("Lỗi: "+error.toString());
+                callBackUpdateUser.onError("Lỗi: "+error.toString());
             }
         }){
             @Nullable

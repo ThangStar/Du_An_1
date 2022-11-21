@@ -16,6 +16,7 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac;
 import com.developer.cubemarket.utils.CallBackColorProduct;
+import com.developer.cubemarket.utils.CallBackDeleteColor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +64,7 @@ public class DaoMauSac {
         requestQueue.add(stringRequest);
 
     }
-    public  void delete_mausac(int mamausac){
+    public  void delete_mausac(CallBackDeleteColor callBackDeleteColor, int mamausac){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_mausac, new Response.Listener<String>() {
@@ -71,13 +72,16 @@ public class DaoMauSac {
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
                     Log.d(TAG, "thành công");
+                    callBackDeleteColor.onSuccess("Thành công");
                 }else{
                     Log.d(TAG, "lỗi>>"+response.toString());
+                    callBackDeleteColor.onFail("Lỗi: "+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackDeleteColor.onError("Xảy ra lỗi: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
@@ -92,7 +96,7 @@ public class DaoMauSac {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_mausac(CallBackColorProduct callBackColor, int masanpham){
+    public void getdata_mausac(CallBackColorProduct callBackColor, int masanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_mausac, new Response.Listener<String>() {

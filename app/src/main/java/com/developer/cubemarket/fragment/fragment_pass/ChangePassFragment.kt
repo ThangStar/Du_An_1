@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.developer.cubemarket.R
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.databinding.FragmentChangePassBinding
-import com.developer.cubemarket.databinding.FragmentUpdateDirectoryBinding
 import com.developer.cubemarket.utils.CallBackChangePass
-import com.developer.cubemarket.utils.CallbackUpdateProduct
 import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 

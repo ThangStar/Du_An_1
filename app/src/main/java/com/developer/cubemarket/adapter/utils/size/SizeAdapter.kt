@@ -9,23 +9,24 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc
 import com.developer.cubemarket.databinding.SizeItemBinding
 
 class SizeAdapter(
     private var activity: Activity,
-    var arr: ArrayList<String>
+    var arr: ArrayList<Kichthuoc>
 ): RecyclerView.Adapter<SizeAdapter.SizeViewHolder>() {
     class SizeViewHolder(
         activity: Activity,
         v: View,
-        arr: ArrayList<String>
+        arr: ArrayList<Kichthuoc>
         ): RecyclerView.ViewHolder(v){
         val binding = SizeItemBinding.bind(v)
         init {
             v.findViewById<LinearLayout>(R.id.ln_root).setOnClickListener {
                 Log.d("SSS", "POS: $adapterPosition")
-                Utils.dialogDelSize(activity, "Xóa size ${arr[adapterPosition]}?",
-                    "Bạn có chắc chắn xóa size này ?", 123, adapterPosition)
+                Utils.dialogDelSize(activity, "Xóa size ${arr[adapterPosition].tenkichthuoc}?",
+                    "Bạn có chắc chắn xóa size này ?", arr[adapterPosition].makichthuoc, adapterPosition)
             }
         }
     }
@@ -38,7 +39,7 @@ class SizeAdapter(
 
     override fun onBindViewHolder(holder: SizeViewHolder, position: Int) {
         val size = arr[position]
-        holder.binding.tvName.text = size
+        holder.binding.tvName.text = size.tenkichthuoc
 
     }
     override fun getItemCount(): Int {

@@ -15,7 +15,10 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc;
+import com.developer.cubemarket.utils.CallBackDeleteSize;
+import com.developer.cubemarket.utils.CallBackInsertSize;
 import com.developer.cubemarket.utils.CallBackSizeProduct;
+import com.developer.cubemarket.utils.CallBackUpdateSize;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,25 +34,27 @@ public class DaoKichThuoc {
     public DaoKichThuoc(Context context) {
         this.context = context;
     }
-    public  void insert_kichthuoc(Kichthuoc kichthuoc){
+    public  void insert_kichthuoc(CallBackInsertSize callBackInsertSize, Kichthuoc kichthuoc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_kichthuoc, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
+                    callBackInsertSize.onSuccess("Thành công");
                     Log.d(TAG, "thành công");
                 }else{
+                    callBackInsertSize.onFail("Lỗi: "+response);
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackInsertSize.onFail("Đã xảy ra lỗi: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
-            @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
@@ -62,21 +67,24 @@ public class DaoKichThuoc {
         requestQueue.add(stringRequest);
 
     }
-    public  void delete_kichthuoc(int makichthuoc){
+    public  void delete_kichthuoc(CallBackDeleteSize callBackDeleteSize, int makichthuoc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_kichthuoc, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
+                    callBackDeleteSize.onSuccess("Thành công");
                     Log.d(TAG, "thành công");
                 }else{
+                    callBackDeleteSize.onFail("Lỗi: "+response);
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackDeleteSize.onFail("Đã xảy ra lỗi: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){

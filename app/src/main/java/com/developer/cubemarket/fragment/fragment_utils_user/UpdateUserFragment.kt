@@ -1,21 +1,16 @@
 package com.developer.cubemarket.fragment.fragment_utils_user
 
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import com.developer.cubemarket.R
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
-import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link
 import com.developer.cubemarket.databinding.FragmentUpdateUserBinding
-import com.developer.cubemarket.utils.CallBackUpdate
+import com.developer.cubemarket.utils.CallBackUpdateUser
 import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.*
 import java.util.regex.Pattern
 
 class UpdateUserFragment : Fragment() {
@@ -68,7 +63,7 @@ class UpdateUserFragment : Fragment() {
             val request = DaoUser(requireContext())
             request.update_gmail_user(DataUser.id, email)
 
-            val callback = object: CallBackUpdate{
+            val callback = object: CallBackUpdateUser{
                 override fun onSuccess(rs: String) {
                     Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
                     DataUser.email = email

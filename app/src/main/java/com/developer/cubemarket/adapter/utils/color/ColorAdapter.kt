@@ -9,16 +9,17 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.OOP.Mausac
 import com.developer.cubemarket.databinding.SizeItemBinding
 
 class ColorAdapter(
     private var activity: Activity,
-    var arr: ArrayList<String>
+    var arr: ArrayList<Mausac>
 ): RecyclerView.Adapter<ColorAdapter.SizeViewHolder>() {
     class SizeViewHolder(
         activity: Activity,
         v: View,
-        arr: ArrayList<String>
+        arr: ArrayList<Mausac>
         ): RecyclerView.ViewHolder(v){
         val binding = SizeItemBinding.bind(v)
         init {
@@ -38,7 +39,7 @@ class ColorAdapter(
 
     override fun onBindViewHolder(holder: SizeViewHolder, position: Int) {
         val size = arr[position]
-        holder.binding.tvName.text = size
+        holder.binding.tvName.text = size.tenmausac
 
     }
     override fun getItemCount(): Int {

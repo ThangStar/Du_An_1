@@ -1,6 +1,6 @@
 package com.developer.cubemarket.utils
 
-interface CallbackUpdateProduct {
+interface CallbackUpdateDirectory {
     fun onSuccess()
     fun onFail()
     fun onError()

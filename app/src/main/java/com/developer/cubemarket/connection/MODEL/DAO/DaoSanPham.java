@@ -25,6 +25,7 @@ import com.developer.cubemarket.utils.CallBackProduct;
 import com.developer.cubemarket.utils.CallBackProductSale;
 import com.developer.cubemarket.utils.CallBackProductSimilar;
 import com.developer.cubemarket.utils.CallBackSearchProduct;
+import com.developer.cubemarket.utils.CallBackUpdateProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -143,7 +144,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_sanpham( Sanpham sanpham){
+    public  void update_sanpham(CallBackUpdateProduct callBackUpdate, int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,int soluong,int giaban,String chitiet){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -152,16 +153,17 @@ public class DaoSanPham {
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
                     Log.d(TAG, "câp nhập thành công");
+                    callBackUpdate.onSuccess("Cập nhật thành công");
                 }else{
+                    callBackUpdate.onFail("Cập nhật thất bại: ");
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackUpdate.onError("Đã xảy ra lỗi: "+error.getMessage());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
-
-
             }
         }){
             @Nullable
@@ -169,21 +171,19 @@ public class DaoSanPham {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
 
-                stringStringMap.put("masanpham", String.valueOf(sanpham.getMasanpham()));
-                Danhmuc danhmuc = new Danhmuc();
-                stringStringMap.put("madanhmuc", String.valueOf(danhmuc.getMadanhmuc()));
-                stringStringMap.put("tensanpham",sanpham.getTensanpham());
-                stringStringMap.put("hinhanh",sanpham.getImg() );// chuyển hình thành base 64
+                stringStringMap.put("masanpham", String.valueOf(masanpham));
+                stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
+                stringStringMap.put("tensanpham",tensanpham);
+                stringStringMap.put("hinhanh",img);// chuyển hình thành base 64
 
-                stringStringMap.put("nhasanxuat", sanpham.getNhasanxuat());
-                stringStringMap.put("soluong", String.valueOf(sanpham.getSoluong()));
+                stringStringMap.put("nhasanxuat", nhasanxuat);
+                stringStringMap.put("soluong", String.valueOf(soluong));
 
-                stringStringMap.put("giaban", String.valueOf(sanpham.getGiaban()));
-                stringStringMap.put("chitiet",sanpham.getChitiet());
+                stringStringMap.put("giaban", String.valueOf(giaban));
+                stringStringMap.put("chitiet",chitiet);
                 return stringStringMap;
             }
         };
-
         requestQueue.add(stringRequest);
 
     }

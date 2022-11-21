@@ -3,7 +3,10 @@ package com.developer.cubemarket.fragment.fragment_utils_product
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +15,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.utils.color.ColorAdapter
 import com.developer.cubemarket.adapter.utils.size.SizeAdapter
@@ -27,14 +33,13 @@ import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
-import com.developer.cubemarket.utils.CallBackColorProduct
-import com.developer.cubemarket.utils.CallBackSizeProduct
-import com.developer.cubemarket.utils.VolleyCallBack
+import com.developer.cubemarket.utils.*
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern
 
 class UpdateProductFragment : Fragment() {
+    private var strBase64Avatar: String? = ""
     private var detail: String? = ""
     private var brand: String? = ""
     private var amount: Int? = 0
@@ -53,8 +58,8 @@ class UpdateProductFragment : Fragment() {
         @SuppressLint("StaticFieldLeak")
         lateinit var colorAdapter: ColorAdapter
 
-        val arrSize = arrayListOf<String>()
-        val arrColor = arrayListOf<String>()
+        val arrSize = arrayListOf<Kichthuoc>()
+        val arrColor = arrayListOf<Mausac>()
     }
 
 
@@ -86,7 +91,7 @@ class UpdateProductFragment : Fragment() {
         binding.btnUpdate.setOnClickListener {
             var isCheck = true
             val name = binding.edtName.text.toString().trim()
-            val idDirectory = typeDirectory[binding.spnDirectory.selectedItemPosition].madanhmuc.toString()
+            val idDirectory = typeDirectory[binding.spnDirectory.selectedItemPosition].madanhmuc.toInt()
             val price = binding.edtPrice.text.toString().trim()
             val amount = binding.edtAmount.text.toString().trim()
             val brand = binding.edtBrand.text.toString().trim()
@@ -127,22 +132,6 @@ class UpdateProductFragment : Fragment() {
                 isCheck = false
             }
 
-            if (Pattern.matches("^[a-zA-Z0-9\\\\, ]{1,18}$", strSize)) {
-                binding.tilSize.error = null
-            } else {
-                binding.tilSize.error = "Kích cỡ 1-18 kí tự, không có kí tự đặc biệt" +
-                        " - ngăn cách nhau bằng dấu phẩy"
-                isCheck = false
-            }
-
-            if (Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,18}", strColor)) {
-                binding.tilColor.error = null
-            } else {
-                binding.tilColor.error =
-                    "Màu sắc 1-18 kí tự, không có kí tự đặc biệt - ngăn cách nhau bằng dấu phẩy"
-                isCheck = false
-            }
-
             if (Pattern.matches("^[\\S ]{5,500}\$", detail)) {
                 binding.tilDetail.error = null
             } else {
@@ -150,20 +139,101 @@ class UpdateProductFragment : Fragment() {
                 binding.tilDetail.error = "Chi tiết sản phẩm 5-500 kí tự, không có kí tự đặc biệt"
             }
             if(isCheck){
-                Log.d("ID DIRECTORY", idDirectory)
-                Toasty.success(requireContext(), "OK", Toasty.LENGTH_SHORT).show()
-                DaoSanPham(requireContext()).update_sanpham(Sanpham(
+                Log.d("ID DIRECTORY", idDirectory.toString())
+                // Update basic
+                val callBackUpdate = object: CallBackUpdateProduct{
+                    override fun onSuccess(rs: String) {
+                        Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                    override fun onFail(rs: String) {
+                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(rs: String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+                DaoSanPham(requireContext()).update_sanpham(callBackUpdate,
                     idProduct!!,
-                Danhmuc(idDirectory.toInt(), nameDirectory,
-                    locationDirectory, imgDirectory),
+                    idDirectory,
                     name,
-                    imgProduct,
+                    strBase64Avatar,
                     brand,
                     amount.toInt(),
                     price.toInt(),
-                    detail,
-                    DataUser.id
-                ))
+                    detail
+                )
+                Log.d("strBase64Avatar", strBase64Avatar!!)
+
+                //update size
+                //1. delete every size
+                val callBackInsertSize = object: CallBackInsertSize{
+                    override fun onSuccess(rs: String) {
+                        Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onFail(rs: String) {
+                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(rs: String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+
+                var countDel = 0
+                val callBackDeleteSize = object: CallBackDeleteSize {
+                    override fun onSuccess(rs: String) {
+                        //2. insert again when delete success (when deleted every size)
+                        ++countDel
+                        Log.d("COUNT DEL: ", "$countDel")
+                        if(arrSize.size == countDel){
+                            //this time deleted every size
+                            for(i in arrSize){
+                                DaoKichThuoc(requireContext()).insert_kichthuoc(callBackInsertSize,i)
+                            }
+                        }
+                    }
+
+                    override fun onFail(rs: String) {
+                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(rs: String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+                for (i in arrSize){
+                    val idSize = i.makichthuoc
+                    DaoKichThuoc(requireContext()).delete_kichthuoc(callBackDeleteSize,
+                        idSize)
+                }
+
+                // 1. delete every color
+                var countColor = 0
+                val callBackDeleteColor = object: CallBackDeleteColor{
+                    override fun onSuccess(rs: String) {
+                        // 1. insert again every color when del every color
+                        ++countColor
+                        if(arrColor.size == countColor){
+                            for (i in arrColor){
+                                DaoMauSac(requireContext()).insert_mausac(Mausac(i.mamausac, idProduct!!, i.tenmausac))
+                            }
+                            findNavController().popBackStack()
+                        }
+                    }
+
+                    override fun onFail(rs: String) {
+                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(rs: String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+                for(i in arrColor){
+                    DaoMauSac(requireContext()).delete_mausac(callBackDeleteColor, i.mamausac)
+                }
             }
         }
     }
@@ -184,13 +254,26 @@ class UpdateProductFragment : Fragment() {
 
 
         binding.edtName.setText(nameProduct)
-        binding.edtPrice.setText(Utils.formaterVND(price))
+        binding.edtPrice.setText("$price")
         binding.edtAmount.setText("$amount")
         binding.edtBrand.setText(brand)
         binding.edtDetail.setText(detail)
         //set image default
         val option = Utils.getOptionLoadImgDirectoryFromUrl()
-        Glide.with(requireContext()).load(imgProduct).apply(option).into(binding.imvAvatar);
+        Glide.with(this)
+            .asBitmap()
+            .load(imgProduct)
+            .apply(option)
+            .into(object: CustomTarget<Bitmap>(){
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    binding.imvAvatar.setImageBitmap(resource)
+                    strBase64Avatar = Utils.getEncoded64ImageStringFromBitmap(resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+            })
 
         //clear array size load data again
         arrSize.clear()
@@ -198,7 +281,7 @@ class UpdateProductFragment : Fragment() {
         val callBackSize = object: CallBackSizeProduct{
             override fun onSuccess(kt: Kichthuoc) {
                 //add data into array size
-                arrSize.add(kt.tenkichthuoc)
+                arrSize.add(kt)
                 sizeAdapter.notifyItemInserted(arrSize.size)
             }
 
@@ -218,7 +301,7 @@ class UpdateProductFragment : Fragment() {
 
         val callBackColor = object: CallBackColorProduct{
             override fun onSuccess(ms: Mausac) {
-                arrColor.add(ms.tenmausac)
+                arrColor.add(ms)
                 colorAdapter.notifyItemInserted(arrColor.size)
             }
 
@@ -255,17 +338,6 @@ class UpdateProductFragment : Fragment() {
 
     }
 
-    private fun formatStr(arr: ArrayList<String>): String {
-        var strFormat = ""
-        if (arr.size != 0){
-            for (i in arr){
-                strFormat += i+", "
-            }
-            strFormat = strFormat.substring(0, strFormat.length - 2)
-        }
-        return strFormat
-    }
-
     private fun initAddColor() {
             binding.btnAddColor.setOnClickListener{
                 val color = binding.edtColor.text.toString().trim()
@@ -275,7 +347,7 @@ class UpdateProductFragment : Fragment() {
                         binding.tilColor.error = null
                     }
                     binding.edtColor.setText("")
-                    arrColor.add(color)
+                    arrColor.add(Mausac(0, idProduct!!, color))
                     colorAdapter.notifyItemInserted(arrColor.size)
                 }else{
                     binding.tilColor.error = "vd: Xanh, Đỏ.."
@@ -292,7 +364,7 @@ class UpdateProductFragment : Fragment() {
                         binding.tilSize.error = null
                     }
                     binding.edtSize.setText("")
-                    arrSize.add(size)
+                    arrSize.add(Kichthuoc(0,idProduct!!,size))
                     sizeAdapter.notifyItemInserted(arrSize.size)
                 }else{
                     binding.tilSize.error = "vd: X, XL, 39.."
@@ -305,7 +377,7 @@ class UpdateProductFragment : Fragment() {
             binding.ryColor.adapter = colorAdapter
         }
 
-        private fun initColor(): ArrayList<String> {
+        private fun initColor(): ArrayList<Mausac> {
             return arrColor
         }
 
@@ -314,7 +386,7 @@ class UpdateProductFragment : Fragment() {
             binding.rySize.adapter = sizeAdapter
         }
 
-        private fun initSize(): ArrayList<String> {
+        private fun initSize(): ArrayList<Kichthuoc> {
             return arrSize
         }
     private fun initEventPickerAvatar() {
@@ -332,8 +404,8 @@ class UpdateProductFragment : Fragment() {
                     .show {
                         // here is selected image uri
                         binding.imvAvatar.setImageURI(it)
-                        Toasty.success(requireContext(), "Đã chọn", 500).show()
-
+                        val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, it)
+                        strBase64Avatar = Utils.getEncoded64ImageStringFromBitmap(bitmap)
                     }
             } else {
                 ActivityCompat.requestPermissions(

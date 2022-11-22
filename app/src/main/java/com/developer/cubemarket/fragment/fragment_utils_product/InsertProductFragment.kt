@@ -17,11 +17,10 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
-import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.databinding.FragmentPostProductBinding
-import com.developer.cubemarket.utils.CallBackInsertProduct
-import com.developer.cubemarket.utils.VolleyCallBack
+import com.developer.cubemarket.callback.CallBackInsertProduct
+import com.developer.cubemarket.callback.VolleyCallBack
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern

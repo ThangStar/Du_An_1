@@ -15,10 +15,9 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc;
-import com.developer.cubemarket.utils.CallBackDeleteSize;
-import com.developer.cubemarket.utils.CallBackInsertSize;
-import com.developer.cubemarket.utils.CallBackSizeProduct;
-import com.developer.cubemarket.utils.CallBackUpdateSize;
+import com.developer.cubemarket.callback.CallBackDeleteSize;
+import com.developer.cubemarket.callback.CallBackInsertSize;
+import com.developer.cubemarket.callback.CallBackSizeProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;

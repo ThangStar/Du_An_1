@@ -19,13 +19,13 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham;
-import com.developer.cubemarket.utils.CallBackDelProduct;
-import com.developer.cubemarket.utils.CallBackInsertProduct;
-import com.developer.cubemarket.utils.CallBackProduct;
-import com.developer.cubemarket.utils.CallBackProductSale;
-import com.developer.cubemarket.utils.CallBackProductSimilar;
-import com.developer.cubemarket.utils.CallBackSearchProduct;
-import com.developer.cubemarket.utils.CallBackUpdateProduct;
+import com.developer.cubemarket.callback.CallBackDelProduct;
+import com.developer.cubemarket.callback.CallBackInsertProduct;
+import com.developer.cubemarket.callback.CallBackProduct;
+import com.developer.cubemarket.callback.CallBackProductSale;
+import com.developer.cubemarket.callback.CallBackProductSimilar;
+import com.developer.cubemarket.callback.CallBackSearchProduct;
+import com.developer.cubemarket.callback.CallBackUpdateProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;

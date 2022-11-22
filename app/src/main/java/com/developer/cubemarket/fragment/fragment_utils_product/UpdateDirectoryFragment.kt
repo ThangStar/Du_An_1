@@ -20,7 +20,7 @@ import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.databinding.FragmentUpdateDirectoryBinding
-import com.developer.cubemarket.utils.CallbackUpdateDirectory
+import com.developer.cubemarket.callback.CallbackUpdateDirectory
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern

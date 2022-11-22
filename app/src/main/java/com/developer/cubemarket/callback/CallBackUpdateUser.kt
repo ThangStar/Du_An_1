@@ -1,4 +1,4 @@
-package com.developer.cubemarket.utils
+package com.developer.cubemarket.callback
 
 interface CallBackUpdateUser {
     fun onSuccess(rs: String)

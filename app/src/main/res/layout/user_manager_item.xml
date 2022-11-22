@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:paddingHorizontal="28dp"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dividingLine"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/imv_avatar"
+            android:layout_marginVertical="4dp"
+            android:src="@drawable/bg_anime"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+        <LinearLayout
+            android:layout_marginHorizontal="8dp"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:text="username"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:text="thang123@gmail.com"
+                android:textSize="10sp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_permission"
+                android:layout_width="wrap_content"
+                android:text="Quyền: người dùng"
+                android:padding="4dp"
+                android:textSize="10sp"
+                android:background="@color/dividingLine"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:id="@+id/btn_lock"
+            android:layout_weight="1"
+            android:text="KHÓA"
+            app:cornerRadius="0dp"
+            app:backgroundTint="@color/item_color_secondary"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:id="@+id/btn_change_permission"
+            android:text="PHÂN QUYỀN"
+            android:layout_weight="1"
+            app:cornerRadius="0dp"
+            app:backgroundTint="@color/primary_tem"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

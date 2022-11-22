@@ -27,7 +27,14 @@ class ProfileFragment : Fragment() {
         initGoChangePass()
         initEventLogout()
         initEventGoSaled()
+        initEventGoUserManager()
         return binding.root
+    }
+
+    private fun initEventGoUserManager() {
+        binding.lnGoUserManager.setOnClickListener {
+            findNavController().navigate(R.id.action_productFragment_to_userManagerFragment)
+        }
     }
 
     private fun initEventGoSaled() {

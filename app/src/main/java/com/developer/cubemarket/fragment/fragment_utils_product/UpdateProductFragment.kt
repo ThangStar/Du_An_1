@@ -22,7 +22,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.utils.color.ColorAdapter
 import com.developer.cubemarket.adapter.utils.size.SizeAdapter
-import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoKichThuoc
@@ -31,9 +30,8 @@ import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac
-import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
-import com.developer.cubemarket.utils.*
+import com.developer.cubemarket.callback.*
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern

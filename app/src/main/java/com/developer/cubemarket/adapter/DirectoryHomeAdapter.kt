@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +16,7 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.databinding.DirectoryItemBinding
-import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
-import com.developer.cubemarket.utils.CallBackDelDirectory
+import com.developer.cubemarket.callback.CallBackDelDirectory
 
 class DirectoryHomeAdapter(
     var ctx: Context,

@@ -16,10 +16,9 @@ import com.developer.cubemarket.call_back_view.CallBackProductDetailScrollTop
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
-import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
-import com.developer.cubemarket.utils.CallBackProductSimilar
+import com.developer.cubemarket.callback.CallBackProductSimilar
 import es.dmoral.toasty.Toasty
 import java.lang.String
 

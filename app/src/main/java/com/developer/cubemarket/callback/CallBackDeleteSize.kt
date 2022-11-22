@@ -1,6 +1,6 @@
-package com.developer.cubemarket.utils
+package com.developer.cubemarket.callback
 
-interface CallBackUpdateProduct {
+interface CallBackDeleteSize {
     fun onSuccess(rs: String)
     fun onFail(rs: String)
     fun onError(rs: String)

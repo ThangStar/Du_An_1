@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.databinding.FragmentChangePassBinding
-import com.developer.cubemarket.utils.CallBackChangePass
+import com.developer.cubemarket.callback.CallBackChangePass
 import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 

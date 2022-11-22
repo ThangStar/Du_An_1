@@ -1,15 +1,12 @@
 package com.developer.cubemarket.fragment.fragment_home_pager
 
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.developer.cubemarket.R
@@ -22,7 +19,7 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentSearchBinding
-import com.developer.cubemarket.utils.CallBackSearchProduct
+import com.developer.cubemarket.callback.CallBackSearchProduct
 import com.mancj.materialsearchbar.MaterialSearchBar.OnSearchActionListener
 
 

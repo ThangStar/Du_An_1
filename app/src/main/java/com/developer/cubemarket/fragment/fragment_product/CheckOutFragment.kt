@@ -10,6 +10,7 @@ import com.developer.cubemarket.`object`.checkout.ProductCheckOut
 import com.developer.cubemarket.adapter.checkout.CheckOutCartAdapter
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.databinding.FragmentCheckOutBinding
+import com.developer.cubemarket.fragment.bottom_sheet.BtsChooseAddressFragment
 
 class CheckOutFragment : Fragment() {
 
@@ -22,8 +23,18 @@ class CheckOutFragment : Fragment() {
         binding = FragmentCheckOutBinding.inflate(layoutInflater)
 
         initRecyclerProduct()
+        initEditAddress()
         return binding.root
     }
+
+    private fun initEditAddress() {
+        binding.imvShowBottomSheet.setOnClickListener {
+            val model = BtsChooseAddressFragment()
+            model.show(requireActivity().supportFragmentManager, BtsChooseAddressFragment.TAG)
+
+        }
+    }
+
 
     private fun initRecyclerProduct() {
         val adapter = CheckOutCartAdapter(initDataProduct())

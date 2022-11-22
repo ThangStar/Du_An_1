@@ -15,8 +15,8 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac;
-import com.developer.cubemarket.utils.CallBackColorProduct;
-import com.developer.cubemarket.utils.CallBackDeleteColor;
+import com.developer.cubemarket.callback.CallBackColorProduct;
+import com.developer.cubemarket.callback.CallBackDeleteColor;
 
 import org.json.JSONArray;
 import org.json.JSONException;

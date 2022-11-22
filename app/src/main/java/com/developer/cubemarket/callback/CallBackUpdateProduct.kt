@@ -1,6 +1,6 @@
-package com.developer.cubemarket.utils
+package com.developer.cubemarket.callback
 
-interface CallBackInsertProduct {
+interface CallBackUpdateProduct {
     fun onSuccess(rs: String)
     fun onFail(rs: String)
     fun onError(rs: String)

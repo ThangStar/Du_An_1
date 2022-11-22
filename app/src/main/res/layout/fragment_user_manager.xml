@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary"
+    android:orientation="vertical"
+    tools:context=".fragment.admin.UserManagerFragment">
+    <RelativeLayout
+        android:translationZ="5dp"
+        android:elevation="3dp"
+        android:id="@+id/rl_top_title"
+        android:layout_width="match_parent"
+        android:padding="25dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/imv_menu"
+            android:background="@drawable/ripple_text"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:focusable="true" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/imv_menu"
+            android:id="@+id/tv_title_tab"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:text="Quản lí người dùng"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_centerVertical="true"
+
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_above="@id/btn_return"
+        android:layout_below="@id/rl_top_title"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/ry_user"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_return"
+        android:paddingVertical="14dp"
+        app:cornerRadius="0dp"
+        android:text="QUAY LẠI"
+        android:layout_gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginHorizontal="20dp"
+        android:drawableEnd="@drawable/ic_back"
+        android:drawableTint="@color/white"
+        android:backgroundTint="@color/button_background_primary"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

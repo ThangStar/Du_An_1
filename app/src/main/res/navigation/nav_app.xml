@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_productFragment_to_productSaleFragment"
             app:destination="@id/productSaleFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_userManagerFragment"
+            app:destination="@id/userManagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
@@ -125,4 +128,9 @@
         android:id="@+id/productSaleFragment"
         android:name="com.developer.cubemarket.fragment.fragment_product_sale.ProductSaleFragment"
         android:label="ProductSaleFragment" />
+    <fragment
+        android:id="@+id/userManagerFragment"
+        android:name="com.developer.cubemarket.fragment.admin.UserManagerFragment"
+        android:label="fragment_user_manager"
+        tools:layout="@layout/fragment_user_manager" />
 </navigation>

@@ -11,8 +11,7 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentProductSaleBinding
-import com.developer.cubemarket.utils.CallBackProduct
-import com.developer.cubemarket.utils.CallBackProductSale
+import com.developer.cubemarket.callback.CallBackProductSale
 import es.dmoral.toasty.Toasty
 
 class ProductSaleFragment : Fragment() {

@@ -9,7 +9,7 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.databinding.FragmentUpdateUserBinding
-import com.developer.cubemarket.utils.CallBackUpdateUser
+import com.developer.cubemarket.callback.CallBackUpdateUser
 import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 

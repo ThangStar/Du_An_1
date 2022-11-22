@@ -17,7 +17,10 @@
 
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">0dp</item>
+        <item name="bottomSheetDialogTheme">@style/ModalBottomSheetDialog</item>
+
     </style>
-
-
+    <style name="ModalBottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
+    </style>
 </resources>

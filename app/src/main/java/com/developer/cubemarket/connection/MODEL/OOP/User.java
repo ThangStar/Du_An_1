@@ -5,7 +5,6 @@ public class User {
     private String ten;
     private String password;
     private int chucvu;
-
     private String phone;
     private String gmail;
 

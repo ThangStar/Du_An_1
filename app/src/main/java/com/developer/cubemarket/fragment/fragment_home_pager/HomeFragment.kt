@@ -9,7 +9,6 @@ import android.transition.TransitionInflater
 import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
-import android.widget.SimpleCursorAdapter
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,10 +25,9 @@ import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 import com.developer.cubemarket.fragment.ProductFragment
-import com.developer.cubemarket.utils.CallBackProduct
-import com.developer.cubemarket.utils.VolleyCallBack
+import com.developer.cubemarket.callback.CallBackProduct
+import com.developer.cubemarket.callback.VolleyCallBack
 import com.mancj.materialsearchbar.MaterialSearchBar.OnSearchActionListener
-import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
 import es.dmoral.toasty.Toasty
 
 

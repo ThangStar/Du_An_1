@@ -4,14 +4,17 @@ public class Mausac {
     int mamausac;
     int masanpham;
     String tenmausac;
-
+    int soluong;
+    int gia;
     public Mausac() {
     }
 
-    public Mausac(int mamausac, int masanpham, String tenmausac) {
+    public Mausac(int mamausac, int masanpham, String tenmausac, int soluong, int gia) {
         this.mamausac = mamausac;
         this.masanpham = masanpham;
         this.tenmausac = tenmausac;
+        this.soluong = soluong;
+        this.gia = gia;
     }
 
     public int getMamausac() {
@@ -36,6 +39,22 @@ public class Mausac {
 
     public void setTenmausac(String tenmausac) {
         this.tenmausac = tenmausac;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public int getGia() {
+        return gia;
+    }
+
+    public void setGia(int gia) {
+        this.gia = gia;
     }
 
     @Override

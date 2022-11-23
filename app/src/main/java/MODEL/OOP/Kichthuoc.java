@@ -4,14 +4,18 @@ public class Kichthuoc {
     int makichthuoc;
     int masanpham;
     String tenkichthuoc;
+    int soluong;
+    int gia;
 
     public Kichthuoc() {
     }
 
-    public Kichthuoc(int makichthuoc, int masanpham, String tenkichthuoc) {
+    public Kichthuoc(int makichthuoc, int masanpham, String tenkichthuoc, int soluong, int gia) {
         this.makichthuoc = makichthuoc;
         this.masanpham = masanpham;
         this.tenkichthuoc = tenkichthuoc;
+        this.soluong = soluong;
+        this.gia = gia;
     }
 
     public int getMakichthuoc() {
@@ -38,8 +42,25 @@ public class Kichthuoc {
         this.tenkichthuoc = tenkichthuoc;
     }
 
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public int getGia() {
+        return gia;
+    }
+
+    public void setGia(int gia) {
+        this.gia = gia;
+    }
+
     @Override
     public String toString() {
-        return tenkichthuoc;
+        return  tenkichthuoc;
     }
+
 }

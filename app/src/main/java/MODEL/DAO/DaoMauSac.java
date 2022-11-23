@@ -32,11 +32,11 @@ public class DaoMauSac {
     String TAG="TAG";
     IResult_mausac mResultCallback = null;
 
-    public DaoMauSac(IResult_mausac resultCallback, Context context) {
-        mResultCallback = resultCallback;
+    public DaoMauSac( Context context) {
+
         this.context = context;
     }
-    public  void insert_mausac(Mausac mausac){
+    public  void insert_mausac(int masanpham,String tenmausac){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_mausac, new Response.Listener<String>() {
@@ -58,8 +58,8 @@ public class DaoMauSac {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(mausac.getMasanpham()));
-                stringStringMap.put("tenmausac",mausac.getTenmausac());
+                stringStringMap.put("masanpham", String.valueOf(masanpham));
+                stringStringMap.put("tenmausac",tenmausac);
 
                 return stringStringMap;
             }
@@ -96,7 +96,7 @@ public class DaoMauSac {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_mausac(int masanpham){
+    public  void getdata_mausac(IResult_mausac mResultCallback,int masanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_mausac, new Response.Listener<String>() {
@@ -105,15 +105,18 @@ public class DaoMauSac {
                 Log.d(TAG, "onResponse: >>> "+response);
                 List<Mausac> ee = new ArrayList<>();
                 try {
+                    
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
+
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
                             int mamausac= jsonObject.getInt("mamausac");
                             int masanpham=jsonObject.getInt("masanpham");
                             String tenmau= jsonObject.getString("tenmausac");
-
-                           ee.add(new Mausac(mamausac,masanpham,tenmau));
+                            int soluong=jsonObject.getInt("soluong");
+                            int gia=jsonObject.getInt("gia");
+                           ee.add(new Mausac(mamausac,masanpham,tenmau,soluong,gia));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 

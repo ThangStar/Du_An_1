@@ -36,12 +36,12 @@ public class DaoSanPham {
     String TAG="TAG";
     IResult_sanpham mResultCallback = null;
 
-    public DaoSanPham(IResult_sanpham resultCallback, Context context) {
-        mResultCallback = resultCallback;
+    public DaoSanPham( Context context) {
+
         this.context = context;
     }
 
-    public  void insert_sanpham( int madanhmuc,String tensanpham,String img,String nhasanxuat,int soluong,int giaban,String chitiet,String tenmau,String tenkichthuoc,int id){
+    public  void insert_sanpham( int madanhmuc,String tensanpham,String img,String nhasanxuat,int giaban,String chitiet,String tenmau,String tenkichthuoc,int id){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -72,7 +72,6 @@ public class DaoSanPham {
                 stringStringMap.put("hinhanh",img );// chuyển hình thành base 64
 
                 stringStringMap.put("nhasanxuat", nhasanxuat);
-                stringStringMap.put("soluong", String.valueOf(soluong));
 
                 stringStringMap.put("giaban", String.valueOf(giaban));
                 stringStringMap.put("chitiet",chitiet);
@@ -131,7 +130,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_sanpham( int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,int soluong,int giaban,String chitiet){
+    public  void update_sanpham( int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,int giaban,String chitiet){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -164,7 +163,7 @@ public class DaoSanPham {
                 stringStringMap.put("hinhanh",img);// chuyển hình thành base 64
 
                 stringStringMap.put("nhasanxuat", nhasanxuat);
-                stringStringMap.put("soluong", String.valueOf(soluong));
+
 
                 stringStringMap.put("giaban", String.valueOf(giaban));
                 stringStringMap.put("chitiet",chitiet);
@@ -175,7 +174,8 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_sanpham(int id,int chucvu){
+
+   public  void getdata_sanpham(IResult_sanpham mResultCallback, int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -239,7 +239,7 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void getdata_sanphamsaphet(int id,int chucvu){
+   public  void getdata_sanphamsaphet( IResult_sanpham mResultCallback ,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -305,7 +305,7 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void getdata_sanpham_all(int id,int chucvu){
+    public  void getdata_sanpham_all( IResult_sanpham mResultCallback ,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -371,7 +371,7 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void search_sanpham_chung(String noidungsearch,int id,int chucvu){
+   public  void search_sanpham_chung(String noidungsearch,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
@@ -541,7 +541,7 @@ public class DaoSanPham {
 
     }
 
-    public  void sanpham_tuongtu(int id,int chucvu,String tendanhmuc,String tensanpham){
+    public  void sanpham_tuongtu( IResult_sanpham mResultCallback ,int id,int chucvu,String tendanhmuc,String tensanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {

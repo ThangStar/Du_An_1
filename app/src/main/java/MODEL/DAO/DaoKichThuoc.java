@@ -32,11 +32,11 @@ public class DaoKichThuoc {
     String TAG="TAG";
     IResult_kichthuoc mResultCallback = null;
 
-    public DaoKichThuoc(IResult_kichthuoc resultCallback, Context context) {
-        mResultCallback = resultCallback;
+    public DaoKichThuoc( Context context) {
+
         this.context = context;
     }
-    public  void insert_kichthuoc(Kichthuoc kichthuoc){
+    public  void insert_kichthuoc(int masanpham,String tenkichthuoc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_kichthuoc, new Response.Listener<String>() {
@@ -58,8 +58,9 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(kichthuoc.getMasanpham()));
-                stringStringMap.put("tenkichthuoc",kichthuoc.getTenkichthuoc());
+                stringStringMap.put("masanpham", String.valueOf(masanpham));
+                stringStringMap.put("tenkichthuoc",tenkichthuoc);
+
 
                 return stringStringMap;
             }
@@ -96,14 +97,14 @@ public class DaoKichThuoc {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_kichthuoc(int masanpham){
+    public  void getdata_kichthuoc(IResult_kichthuoc mResultCallback,int masanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_kichthuoc, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
-                List<Kichthuoc> ee= new ArrayList<>();
+               List<Kichthuoc> ee = new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -112,8 +113,10 @@ public class DaoKichThuoc {
                             int makichthuoc= jsonObject.getInt("makichthuoc");
                             int masanpham=jsonObject.getInt("masanpham");
                             String tenkichthuoc= jsonObject.getString("tenkichthuoc");
+                            int soluong=jsonObject.getInt("soluong");
+                            int gia=jsonObject.getInt("gia");
 
-                            ee.add(new Kichthuoc(makichthuoc,masanpham,tenkichthuoc));
+                            ee.add(new Kichthuoc(makichthuoc,masanpham,tenkichthuoc,soluong,gia));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -134,6 +137,9 @@ public class DaoKichThuoc {
                 if(mResultCallback != null){
 
                     mResultCallback.notifySuccess("kichthuoc", ee);
+                }else{
+                    Log.d(TAG, "onResponse: qqqqq");
+
                 }
             }
         }, new Response.ErrorListener() {

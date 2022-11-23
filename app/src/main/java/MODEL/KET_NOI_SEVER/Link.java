@@ -74,4 +74,8 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
 
     public static String getdata_chitiet_hoadon="https://"+IP+"//android/duanmau/getdata_chitiet_hoadon.php";
 
+    public static String getdata_option="https://"+IP+"//android/duanmau/getdata_option.php";
+    public static String insert_option="https://"+IP+"//android/duanmau/insert_option.php";
+    public static String delete_option="https://"+IP+"//android/duanmau/delete_option.php";
+
 }

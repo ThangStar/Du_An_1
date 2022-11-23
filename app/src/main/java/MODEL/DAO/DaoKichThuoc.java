@@ -97,7 +97,7 @@ public class DaoKichThuoc {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_kichthuoc(IResult_kichthuoc mResultCallback,int masanpham){
+    public  void getdata_kichthuoc(IResult_kichthuoc mResultCallback){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_kichthuoc, new Response.Listener<String>() {
@@ -111,12 +111,10 @@ public class DaoKichThuoc {
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
                             int makichthuoc= jsonObject.getInt("makichthuoc");
-                            int masanpham=jsonObject.getInt("masanpham");
                             String tenkichthuoc= jsonObject.getString("tenkichthuoc");
-                            int soluong=jsonObject.getInt("soluong");
-                            int gia=jsonObject.getInt("gia");
 
-                            ee.add(new Kichthuoc(makichthuoc,masanpham,tenkichthuoc,soluong,gia));
+
+                            ee.add(new Kichthuoc(makichthuoc,tenkichthuoc));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
@@ -152,7 +150,7 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
+
                 return stringStringMap;
             }
         };

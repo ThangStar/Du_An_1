@@ -41,14 +41,15 @@ public class DaoSanPham {
         this.context = context;
     }
 
-    public  void insert_sanpham( int madanhmuc,String tensanpham,String img,String nhasanxuat,int giaban,String chitiet,String tenmau,String tenkichthuoc,int id){
+    public  void insert_sanpham( int madanhmuc,String tensanpham,String img,String nhasanxuat,String chitiet,String name_option,int id){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.toString().trim().equals("success")){
+                String a[]=response.toString().split(":");
+                if(a[0].trim().equals("s")){
                     Log.d(TAG, "thêm thành công");
                 }else{
                     Log.d(TAG, "lỗi>>"+response.toString());
@@ -70,13 +71,9 @@ public class DaoSanPham {
                 stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
                 stringStringMap.put("tensanpham",tensanpham);
                 stringStringMap.put("hinhanh",img );// chuyển hình thành base 64
-
                 stringStringMap.put("nhasanxuat", nhasanxuat);
-
-                stringStringMap.put("giaban", String.valueOf(giaban));
                 stringStringMap.put("chitiet",chitiet);
-                stringStringMap.put("tenmau",tenmau);
-                stringStringMap.put("tenkichthuoc",tenkichthuoc);
+                stringStringMap.put("option",name_option);
                 stringStringMap.put("id", String.valueOf(id));
                 return stringStringMap;
             }
@@ -130,7 +127,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_sanpham( int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,int giaban,String chitiet){
+    public  void update_sanpham( int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,String chitiet){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -165,7 +162,7 @@ public class DaoSanPham {
                 stringStringMap.put("nhasanxuat", nhasanxuat);
 
 
-                stringStringMap.put("giaban", String.valueOf(giaban));
+
                 stringStringMap.put("chitiet",chitiet);
                 return stringStringMap;
             }
@@ -371,7 +368,7 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-   public  void search_sanpham_chung(String noidungsearch,int id,int chucvu){
+   public  void search_sanpham_chung(IResult_sanpham mResultCallback ,String noidungsearch,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
@@ -438,7 +435,7 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void search_sanpham_rieng(String noidungsearch,int id,int chucvu){
+    public  void search_sanpham_rieng(IResult_sanpham mResultCallback ,String noidungsearch,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
@@ -544,7 +541,7 @@ public class DaoSanPham {
     public  void sanpham_tuongtu( IResult_sanpham mResultCallback ,int id,int chucvu,String tendanhmuc,String tensanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham_tuongtu, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);

@@ -1,23 +1,41 @@
 package MODEL.OOP;
 
 public class GioHang {
-    int magiohang;
-    int id;
-    Mausac mausac;
-    Kichthuoc kichthuoc;
-    Sanpham sanpham;
-    int soluong;
+    private int id_optotion;
+    private int magiohang;
+    private int id;
+    private int masanpham;
+    private int gia;
+    private int soluong;
+    private String tenmau;
+    private String tenkichthuoc;
+    private String tensanpham;
+    private  String img;
+
+
 
     public GioHang() {
     }
 
-    public GioHang(int magiohang, int id, Mausac mausac, Kichthuoc kichthuoc, Sanpham sanpham, int soluong) {
+    public GioHang(int id_optotion, int magiohang, int id, int masanpham, int gia, int soluong, String tenmau, String tenkichthuoc, String tensanpham, String img) {
+        this.id_optotion = id_optotion;
         this.magiohang = magiohang;
         this.id = id;
-        this.mausac = mausac;
-        this.kichthuoc = kichthuoc;
-        this.sanpham = sanpham;
+        this.masanpham = masanpham;
+        this.gia = gia;
         this.soluong = soluong;
+        this.tenmau = tenmau;
+        this.tenkichthuoc = tenkichthuoc;
+        this.tensanpham = tensanpham;
+        this.img = img;
+    }
+
+    public int getId_optotion() {
+        return id_optotion;
+    }
+
+    public void setId_optotion(int id_optotion) {
+        this.id_optotion = id_optotion;
     }
 
     public int getMagiohang() {
@@ -36,28 +54,20 @@ public class GioHang {
         this.id = id;
     }
 
-    public Mausac getMausac() {
-        return mausac;
+    public int getMasanpham() {
+        return masanpham;
     }
 
-    public void setMausac(Mausac mausac) {
-        this.mausac = mausac;
+    public void setMasanpham(int masanpham) {
+        this.masanpham = masanpham;
     }
 
-    public Kichthuoc getKichthuoc() {
-        return kichthuoc;
+    public int getGia() {
+        return gia;
     }
 
-    public void setKichthuoc(Kichthuoc kichthuoc) {
-        this.kichthuoc = kichthuoc;
-    }
-
-    public Sanpham getSanpham() {
-        return sanpham;
-    }
-
-    public void setSanpham(Sanpham sanpham) {
-        this.sanpham = sanpham;
+    public void setGia(int gia) {
+        this.gia = gia;
     }
 
     public int getSoluong() {
@@ -66,5 +76,37 @@ public class GioHang {
 
     public void setSoluong(int soluong) {
         this.soluong = soluong;
+    }
+
+    public String getTenmau() {
+        return tenmau;
+    }
+
+    public void setTenmau(String tenmau) {
+        this.tenmau = tenmau;
+    }
+
+    public String getTenkichthuoc() {
+        return tenkichthuoc;
+    }
+
+    public void setTenkichthuoc(String tenkichthuoc) {
+        this.tenkichthuoc = tenkichthuoc;
+    }
+
+    public String getTensanpham() {
+        return tensanpham;
+    }
+
+    public void setTensanpham(String tensanpham) {
+        this.tensanpham = tensanpham;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

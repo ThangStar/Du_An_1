@@ -1,3 +1,4 @@
+
 package MODEL.DAO;
 
 import android.content.Context;
@@ -25,22 +26,17 @@ import java.util.Map;
 import MODEL.IResult.IResult_giohang;
 import MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import MODEL.KET_NOI_SEVER.Link;
-import MODEL.OOP.Danhmuc;
 import MODEL.OOP.GioHang;
-import MODEL.OOP.Kichthuoc;
-import MODEL.OOP.Mausac;
-import MODEL.OOP.Sanpham;
 
 public class DaoGioHang {
     Context context;
     String TAG="TAG";
     IResult_giohang mResultCallback = null;
 
-    public DaoGioHang(IResult_giohang resultCallback, Context context) {
-        mResultCallback = resultCallback;
+    public DaoGioHang(Context context) {
         this.context = context;
     }
-    public  void insert_giohang(int id ,int mamausac,int makichthuoc,int masanpham){
+    public  void insert_giohang(int id ,int option_id){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_giohang, new Response.Listener<String>() {
@@ -63,9 +59,8 @@ public class DaoGioHang {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
                 stringStringMap.put("id", String.valueOf(id));
-                stringStringMap.put("masanpham",String.valueOf(masanpham));
-                stringStringMap.put("mamausac",String.valueOf(mamausac));
-                stringStringMap.put("makichthuoc",String.valueOf(makichthuoc));
+                stringStringMap.put("option_id",String.valueOf(option_id));
+
 
                 return stringStringMap;
             }
@@ -73,7 +68,8 @@ public class DaoGioHang {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_giohang(int id){
+
+  public  void getdata_giohang(IResult_giohang mResultCallback,int id){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_giohang, new Response.Listener<String>() {
@@ -86,19 +82,19 @@ public class DaoGioHang {
                     for (int i = 0 ; i<jsonArray.length();i++){
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int id_option=jsonObject.getInt("id_option");
                             int magiohang=jsonObject.getInt("magiohang");
-                            int mamausac= jsonObject.getInt("mamausac");
-                            int makichthuoc= jsonObject.getInt("makichthuoc");
-                            int giasanpham= jsonObject.getInt("giaban");
-                            String tensanpham=jsonObject.getString("tensanpham");
-                            String tenmausac=jsonObject.getString("tenmau");
-                            String tenkichthuoc=jsonObject.getString("tenkichthuoc");
+                            int masanpham= jsonObject.getInt("id_products");
+                            int id= jsonObject.getInt("id");
+                            int gia= jsonObject.getInt("price");
+                            int soluong= jsonObject.getInt("number_cart");
+                            String tensanpham=jsonObject.getString("name_product");
+                            String tenmausac=jsonObject.getString("name_color");
+                            String tenkichthuoc=jsonObject.getString("name_size");
                             String img=jsonObject.getString("img");
-                            int soluong= jsonObject.getInt("soluong");
 
-                          ee.add(new GioHang(magiohang,-99, new Mausac(mamausac,-99,tenmausac),
-                                  new Kichthuoc(makichthuoc,-99,tenkichthuoc), new Sanpham(-99,new Danhmuc(-99,"dhghgdf","jjfkjdf","kjkj"),tensanpham,img,"kkk",-99,giasanpham,"jhjhjh",-99),
-                                  soluong));
+                            ee.add(new GioHang(id_option,magiohang,id,masanpham,gia,soluong,tensanpham,tenmausac,tenkichthuoc,img));
+
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
                         } catch (JSONException e) {
@@ -132,7 +128,10 @@ public class DaoGioHang {
         };
         requestQueue.add(stringRequest);
     }
-    public  void delete_giohang(int magiohang){
+
+
+
+   public  void delete_giohang(int magiohang){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_giohang, new Response.Listener<String>() {
@@ -162,7 +161,8 @@ public class DaoGioHang {
         requestQueue.add(stringRequest);
 
     }
-    public  void delete_giohang_all(int id){
+
+   /*  public  void delete_giohang_all(int id){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_giohang, new Response.Listener<String>() {
@@ -191,7 +191,7 @@ public class DaoGioHang {
         };
         requestQueue.add(stringRequest);
 
-    }
+    }*/
     public  void update_soluong_giohang_tangthem1( int magiohang){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -256,7 +256,7 @@ public class DaoGioHang {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_mausac_giohang( int magiohang,int id,int masanpham,int makichthuoc,int mamausac){
+    public  void update_option( int magiohang,int id,int id_option){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_giohang, new Response.Listener<String>() {
@@ -280,11 +280,8 @@ public class DaoGioHang {
                 Map<String, String> stringStringMap= new HashMap<>();
                 stringStringMap.put("magiohang", String.valueOf(magiohang));
                 stringStringMap.put("id", String.valueOf(id));
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
-                stringStringMap.put("makichthuoc", String.valueOf(makichthuoc));
-                stringStringMap.put("mamausac", String.valueOf(mamausac));
-
-                stringStringMap.put("update","UDATEMAUSAC");
+                stringStringMap.put("id_option", String.valueOf(id_option));
+                stringStringMap.put("update","UDATEOPTION");
                 return stringStringMap;
             }
         };
@@ -292,40 +289,6 @@ public class DaoGioHang {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_kichthuoc_giohang( int magiohang,int id,int masanpham,int makichthuoc,int mamausac){
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_giohang, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "thành công");
-                }else{
-                    Log.d(TAG, "lỗi>>"+response.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
-            }
-        }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("magiohang", String.valueOf(magiohang));
-                stringStringMap.put("id", String.valueOf(id));
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
-                stringStringMap.put("makichthuoc", String.valueOf(makichthuoc));
-                stringStringMap.put("mamausac", String.valueOf(mamausac));
 
-                stringStringMap.put("update","UDATEKICHTHUOC");
-                return stringStringMap;
-            }
-        };
-
-        requestQueue.add(stringRequest);
-
-    }
 }
+

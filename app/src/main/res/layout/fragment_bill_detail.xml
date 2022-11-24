@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.bill_detail.BillDetailFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/tv_maHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Mã hóa đơn : abcxyz123"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_maHD"
+            android:textSize="22dp"
+            android:layout_marginTop="10dp"
+            android:text="ngày tạo : abcxyz123"/>
+
+        <TextView
+            android:id="@+id/tv_diaChi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_date"
+            android:layout_marginTop="10dp"
+            android:textSize="10dp"
+            android:text="Địa chỉ nhận hàng : 123 abc xyz"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ry_sanPham"
+            android:layout_width="409dp"
+            android:layout_height="657dp"
+            android:layout_below="@id/tv_diaChi"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Back"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:paddingVertical="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="5dp"
+            android:textSize="16sp"
+            app:backgroundTint="@color/button_background_primary"
+            app:cornerRadius="8dp"
+            android:text="QUAY LẠI"/>
+    </RelativeLayout>
+</FrameLayout>

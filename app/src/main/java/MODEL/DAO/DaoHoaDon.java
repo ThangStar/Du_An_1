@@ -32,8 +32,8 @@ public class DaoHoaDon {
     String TAG="TAG";
     IResult_hoadon mResultCallback = null;
 
-    public DaoHoaDon(IResult_hoadon resultCallback, Context context) {
-        mResultCallback = resultCallback;
+    public DaoHoaDon( Context context) {
+
         this.context = context;
     }
     public  void insert_hoadon( int id,String tendiachi,String nhapmagiamgia ){
@@ -75,7 +75,7 @@ public class DaoHoaDon {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_hoadon_admin( int id ){
+    public  void getdata_hoadon_admin(IResult_hoadon mResultCallback, int id ){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -140,18 +140,20 @@ public class DaoHoaDon {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_hoadon_user( int id ){
+    public  void getdata_hoadon_user( IResult_hoadon mResultCallback,int id ){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_hoadon, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d(TAG, "onResponse: "+response);
                 List<Hoadon> ee = new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
                         try {
+                            Log.d(TAG, "onResponse: ");
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
                             int mahoadon=jsonObject.getInt("mahoadon");
                             int id= jsonObject.getInt("id");

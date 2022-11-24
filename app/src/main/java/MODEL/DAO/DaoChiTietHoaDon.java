@@ -43,6 +43,7 @@ public class DaoChiTietHoaDon {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_chitiet_hoadon, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 List<ChiTietHoaDon> ee = new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);

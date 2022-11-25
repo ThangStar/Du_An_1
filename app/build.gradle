@@ -55,4 +55,6 @@ dependencies {
 
     // đọc dữ liệu internet
     implementation 'com.android.volley:volley:1.2.1'
+    // thử viện lấy ảnh từ iinter nét về
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
 }

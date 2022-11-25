@@ -211,7 +211,10 @@ public class DaoUser {
             public void onResponse(String response) {
                if(response.toString().trim().equals("ErrorLogin")){
                    Log.d(TAG, "Tài khoản hoặc mật khẩu không chính sác");
-               }else{
+               }else if(response.toString().trim().equals("LOCKUSER")){
+                   Log.d(TAG, "Tài khoản đã bị khóa");
+               }
+               else{
                    try {
                        JSONArray jsonArray= new JSONArray(response);
                        for (int i = 0 ; i<jsonArray.length();i++){
@@ -259,6 +262,74 @@ public class DaoUser {
         };
         requestQueue.add(stringRequest);
     }
+    public  void khoa_taikhoan( int id_khoa , int chucvu){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.kichhoat_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id_user", String.valueOf(id_khoa));
+
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+
+                stringStringMap.put("check","1");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void mo_taikhoan( int id_mo_khoa , int chucvu){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.kichhoat_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id_user", String.valueOf(id_mo_khoa));
+
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+
+                stringStringMap.put("check","0");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
     public void get_all_user(IResult_user mResultCallback,int chucvu) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -277,8 +348,9 @@ public class DaoUser {
                                 int chuvu=jsonObject.getInt("chucvu");
                                 String phone=jsonObject.getString("phone");
                                 String gmail=jsonObject.getString("gmail");
+                                int tinhtrang=jsonObject.getInt("condition");
 
-                                ee.add(new User(id,ten,"******",chuvu,phone,gmail));
+                                ee.add(new User(id,ten,"******",chuvu,phone,gmail,tinhtrang));
                                      //--------------------------------------------------------code them doạn này------------------------------------
 
                             } catch (JSONException e) {

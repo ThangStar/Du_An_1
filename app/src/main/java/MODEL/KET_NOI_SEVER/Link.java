@@ -30,6 +30,7 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String update_user="http://"+IP+"//android/duanmau/update_user.php";
     public static String getdata_dangnhap="http://"+IP+"//android/duanmau/gedata_user.php";
     public static String getdata_all="http://"+IP+"//android/duanmau/gedata_all_user.php";
+    public static String kichhoat_user="http://"+IP+"//android/duanmau/kiemsoat_user.php";
 
     public static String insert_danhmuc="https://"+IP+"//android/duanmau/insert_danhmuc.php";
     public static String delete_danhmuc="https://"+IP+"//android/duanmau/delete_danhmuc.php";

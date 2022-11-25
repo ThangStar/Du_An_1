@@ -1,6 +1,6 @@
-package com.developer.cubemarket.callback
+package com.developer.cubemarket.connection.callback
 
-interface CallBackInsertSize {
+interface CallBackDeleteSize {
     fun onSuccess(rs: String)
     fun onFail(rs: String)
     fun onError(rs: String)

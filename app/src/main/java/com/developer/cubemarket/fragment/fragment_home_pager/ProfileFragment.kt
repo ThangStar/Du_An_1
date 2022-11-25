@@ -26,9 +26,17 @@ class ProfileFragment : Fragment() {
         initEventInsertDirectory()
         initGoChangePass()
         initEventLogout()
+        initEventVoidcherManager()
         initEventGoSaled()
         initEventGoUserManager()
         return binding.root
+    }
+
+    private fun initEventVoidcherManager() {
+        binding.lnGoVoicherManager.setOnClickListener{
+
+            findNavController().navigate(R.id.action_productFragment_to_voicherManagerFragment)
+        }
     }
 
     private fun initEventGoUserManager() {

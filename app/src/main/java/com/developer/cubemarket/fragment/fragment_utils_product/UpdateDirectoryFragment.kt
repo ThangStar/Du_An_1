@@ -19,8 +19,8 @@ import com.developer.cubemarket.R
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
+import com.developer.cubemarket.connection.callback.CallbackUpdateDirectory
 import com.developer.cubemarket.databinding.FragmentUpdateDirectoryBinding
-import com.developer.cubemarket.callback.CallbackUpdateDirectory
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern
@@ -89,7 +89,7 @@ class UpdateDirectoryFragment : Fragment() {
 
             if(isCheck){
 
-                val stateUpdate = object : CallbackUpdateDirectory{
+                val stateUpdate = object : CallbackUpdateDirectory {
                     override fun onSuccess() {
                         Toasty.success(requireContext(), "Cập nhật thành công", Toasty.LENGTH_SHORT).show()
                     }

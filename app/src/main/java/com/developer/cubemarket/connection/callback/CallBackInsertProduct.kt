@@ -1,4 +1,4 @@
-package com.developer.cubemarket.callback
+package com.developer.cubemarket.connection.callback
 
 interface CallBackInsertProduct {
     fun onSuccess(rs: String)

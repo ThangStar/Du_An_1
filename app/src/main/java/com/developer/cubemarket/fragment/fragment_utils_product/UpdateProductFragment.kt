@@ -31,7 +31,10 @@ import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac
 import com.developer.cubemarket.databinding.FragmentUpdateProductBinding
-import com.developer.cubemarket.callback.*
+import com.developer.cubemarket.connection.callback.CallBackColorProduct
+import com.developer.cubemarket.connection.callback.CallBackSizeProduct
+import com.developer.cubemarket.connection.callback.CallBackUpdateProduct
+import com.developer.cubemarket.connection.callback.VolleyCallBack
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern
@@ -139,7 +142,7 @@ class UpdateProductFragment : Fragment() {
             if(isCheck){
                 Log.d("ID DIRECTORY", idDirectory.toString())
                 // Update basic
-                val callBackUpdate = object: CallBackUpdateProduct{
+                val callBackUpdate = object: CallBackUpdateProduct {
                     override fun onSuccess(rs: String) {
                         Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
                     }
@@ -157,81 +160,13 @@ class UpdateProductFragment : Fragment() {
                     name,
                     strBase64Avatar,
                     brand,
-                    amount.toInt(),
-                    price.toInt(),
                     detail
                 )
                 Log.d("strBase64Avatar", strBase64Avatar!!)
 
                 //update size
                 //1. delete every size
-                val callBackInsertSize = object: CallBackInsertSize{
-                    override fun onSuccess(rs: String) {
-                        Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
 
-                    override fun onFail(rs: String) {
-                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
-
-                    override fun onError(rs: String) {
-                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
-                }
-
-                var countDel = 0
-                val callBackDeleteSize = object: CallBackDeleteSize {
-                    override fun onSuccess(rs: String) {
-                        //2. insert again when delete success (when deleted every size)
-                        ++countDel
-                        Log.d("COUNT DEL: ", "$countDel")
-                        if(arrSize.size == countDel){
-                            //this time deleted every size
-                            for(i in arrSize){
-                                DaoKichThuoc(requireContext()).insert_kichthuoc(callBackInsertSize,i)
-                            }
-                        }
-                    }
-
-                    override fun onFail(rs: String) {
-                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
-
-                    override fun onError(rs: String) {
-                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
-                }
-                for (i in arrSize){
-                    val idSize = i.makichthuoc
-                    DaoKichThuoc(requireContext()).delete_kichthuoc(callBackDeleteSize,
-                        idSize)
-                }
-
-                // 1. delete every color
-                var countColor = 0
-                val callBackDeleteColor = object: CallBackDeleteColor{
-                    override fun onSuccess(rs: String) {
-                        // 1. insert again every color when del every color
-                        ++countColor
-                        if(arrColor.size == countColor){
-                            for (i in arrColor){
-                                DaoMauSac(requireContext()).insert_mausac(Mausac(i.mamausac, i.tenmausac))
-                            }
-                            findNavController().popBackStack()
-                        }
-                    }
-
-                    override fun onFail(rs: String) {
-                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
-
-                    override fun onError(rs: String) {
-                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
-                    }
-                }
-                for(i in arrColor){
-                    DaoMauSac(requireContext()).delete_mausac(callBackDeleteColor, i.mamausac)
-                }
             }
         }
     }
@@ -276,7 +211,7 @@ class UpdateProductFragment : Fragment() {
         //clear array size load data again
         arrSize.clear()
         //init data for size
-        val callBackSize = object: CallBackSizeProduct{
+        val callBackSize = object: CallBackSizeProduct {
             override fun onSuccess(kt: Kichthuoc) {
                 //add data into array size
                 arrSize.add(kt)
@@ -297,7 +232,7 @@ class UpdateProductFragment : Fragment() {
         arrColor.clear()
         //init data for color
 
-        val callBackColor = object: CallBackColorProduct{
+        val callBackColor = object: CallBackColorProduct {
             override fun onSuccess(ms: Mausac) {
                 arrColor.add(ms)
                 colorAdapter.notifyItemInserted(arrColor.size)
@@ -324,12 +259,12 @@ class UpdateProductFragment : Fragment() {
             typeDirectory
         )
         val callBackDirectory = VolleyCallBack { danhmuc ->
-            typeDirectory.add(danhmuc!!);
-            adapter.notifyDataSetChanged();
-            if(danhmuc.tendanhmuc.equals(nameDirectory)){
-                binding.spnDirectory.setSelection(typeDirectory.size-1)
+                typeDirectory.add(danhmuc!!);
+                adapter.notifyDataSetChanged();
+                if (danhmuc.tendanhmuc.equals(nameDirectory)) {
+                    binding.spnDirectory.setSelection(typeDirectory.size - 1)
+                }
             }
-        }
         DaoDanhMuc(requireContext()).getdata_danhmuc(callBackDirectory)
         binding.spnDirectory.adapter = adapter
 

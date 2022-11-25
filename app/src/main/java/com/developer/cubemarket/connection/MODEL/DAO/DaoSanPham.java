@@ -19,13 +19,13 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham;
-import com.developer.cubemarket.callback.CallBackDelProduct;
-import com.developer.cubemarket.callback.CallBackInsertProduct;
-import com.developer.cubemarket.callback.CallBackProduct;
-import com.developer.cubemarket.callback.CallBackProductSale;
-import com.developer.cubemarket.callback.CallBackProductSimilar;
-import com.developer.cubemarket.callback.CallBackSearchProduct;
-import com.developer.cubemarket.callback.CallBackUpdateProduct;
+import com.developer.cubemarket.connection.callback.CallBackDelProduct;
+import com.developer.cubemarket.connection.callback.CallBackInsertProduct;
+import com.developer.cubemarket.connection.callback.CallBackProduct;
+import com.developer.cubemarket.connection.callback.CallBackProductSale;
+import com.developer.cubemarket.connection.callback.CallBackProductSimilar;
+import com.developer.cubemarket.connection.callback.CallBackSearchProduct;
+import com.developer.cubemarket.connection.callback.CallBackUpdateProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +46,7 @@ public class DaoSanPham {
     public DaoSanPham(Context context) {
         this.context = context;
     }
-    public  void insert_sanpham(CallBackInsertProduct callBackInsertProduct, int madanhmuc,String tensanpham,String img,String nhasanxuat,String chitiet,String name_option,int id){
+    public  void insert_sanpham(CallBackInsertProduct callBackInsertProduct, int madanhmuc, String tensanpham, String img, String nhasanxuat, String chitiet, String name_option, int id){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -137,7 +137,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_sanpham(CallBackUpdateProduct callBackUpdate, int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,int soluong,int giaban,String chitiet){
+    public  void update_sanpham(CallBackUpdateProduct callBackUpdate, int masanpham, int madanhmuc, String tensanpham, String img, String nhasanxuat, String chitiet){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -145,8 +145,8 @@ public class DaoSanPham {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "câp nhập thành công");
                     callBackUpdate.onSuccess("Cập nhật thành công");
+                    Log.d(TAG, "câp nhập thành công");
                 }else{
                     callBackUpdate.onFail("Cập nhật thất bại: ");
                     Log.d(TAG, "lỗi>>"+response.toString());
@@ -157,6 +157,8 @@ public class DaoSanPham {
             public void onErrorResponse(VolleyError error) {
                 callBackUpdate.onError("Đã xảy ra lỗi: "+error.getMessage());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
+
+
             }
         }){
             @Nullable
@@ -165,22 +167,24 @@ public class DaoSanPham {
                 Map<String, String> stringStringMap= new HashMap<>();
 
                 stringStringMap.put("masanpham", String.valueOf(masanpham));
+                Danhmuc danhmuc = new Danhmuc();
                 stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
                 stringStringMap.put("tensanpham",tensanpham);
                 stringStringMap.put("hinhanh",img);// chuyển hình thành base 64
 
                 stringStringMap.put("nhasanxuat", nhasanxuat);
-                stringStringMap.put("soluong", String.valueOf(soluong));
 
-                stringStringMap.put("giaban", String.valueOf(giaban));
+
+
                 stringStringMap.put("chitiet",chitiet);
                 return stringStringMap;
             }
         };
+
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_sanpham(CallBackProduct callback, int id,int chucvu){
+    public  void getdata_sanpham(CallBackProduct callback, int id, int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -302,7 +306,7 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void getdata_sanpham_all(CallBackProductSale callBackProductSale, int id,int chucvu){
+    public  void getdata_sanpham_all(CallBackProductSale callBackProductSale, int id, int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
@@ -529,7 +533,7 @@ public class DaoSanPham {
 
     }
 
-    public  void sanpham_tuongtu( CallBackProductSimilar callBack ,int id,int chucvu,String tendanhmuc,String tensanpham){
+    public  void sanpham_tuongtu(CallBackProductSimilar callBack , int id, int chucvu, String tendanhmuc, String tensanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham_tuongtu, new Response.Listener<String>() {

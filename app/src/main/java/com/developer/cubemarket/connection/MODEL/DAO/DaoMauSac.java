@@ -16,8 +16,8 @@ import com.developer.cubemarket.connection.MODEL.IResult.IResult_mausac;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac;
-import com.developer.cubemarket.callback.CallBackColorProduct;
-import com.developer.cubemarket.callback.CallBackDeleteColor;
+import com.developer.cubemarket.connection.callback.CallBackColorProduct;
+import com.developer.cubemarket.connection.callback.CallBackDeleteColor;
 
 import org.json.JSONArray;
 import org.json.JSONException;

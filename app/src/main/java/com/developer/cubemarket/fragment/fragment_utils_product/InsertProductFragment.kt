@@ -15,20 +15,20 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.utils.ProductFormatSizeAndColorAdapter
-import com.developer.cubemarket.callback.CallBackColorProduct
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.databinding.FragmentPostProductBinding
-import com.developer.cubemarket.callback.CallBackInsertProduct
-import com.developer.cubemarket.callback.CallBackSizeProduct
-import com.developer.cubemarket.callback.VolleyCallBack
+import com.developer.cubemarket.connection.callback.VolleyCallBack
 import com.developer.cubemarket.connection.MODEL.DAO.DaoKichThuoc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoMauSac
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac
+import com.developer.cubemarket.connection.callback.CallBackColorProduct
+import com.developer.cubemarket.connection.callback.CallBackInsertProduct
+import com.developer.cubemarket.connection.callback.CallBackSizeProduct
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern
@@ -89,7 +89,7 @@ class InsertProductFragment : Fragment() {
     private fun initSpinnerSizeAndColor() {
         adapterSize = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrSize)
         binding.spnSize.adapter = adapterSize
-        val callBackSize = object : CallBackSizeProduct{
+        val callBackSize = object : CallBackSizeProduct {
             override fun onSuccess(kt: Kichthuoc) {
                 arrSize.add(kt)
                 adapterSize.notifyDataSetChanged()
@@ -105,7 +105,7 @@ class InsertProductFragment : Fragment() {
 
         adapterColor = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrColor)
         binding.spnColor.adapter = adapterColor
-        val callBackColor = object : CallBackColorProduct{
+        val callBackColor = object : CallBackColorProduct {
             override fun onSuccess(ms: Mausac) {
                 arrColor.add(ms)
                 adapterColor.notifyDataSetChanged()
@@ -174,7 +174,7 @@ class InsertProductFragment : Fragment() {
             }
             if (isCheck){
                 Toasty.success(requireContext(), "Xin chờ", Toasty.LENGTH_SHORT).show()
-                val call = object: CallBackInsertProduct{
+                val call = object: CallBackInsertProduct {
                     override fun onSuccess(rs: String) {
                         Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
                     }
@@ -241,9 +241,9 @@ class InsertProductFragment : Fragment() {
         )
         binding.spnDirectory.setAdapter(adapter)
         val callback = VolleyCallBack { danhmuc ->
-            type.add(danhmuc!!)
-            adapter.notifyDataSetChanged()
-        }
+                type.add(danhmuc!!)
+                adapter.notifyDataSetChanged()
+            }
         DaoDanhMuc(requireContext()).getdata_danhmuc(callback)
 
     }

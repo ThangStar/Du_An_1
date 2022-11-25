@@ -19,8 +19,8 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
-import com.developer.cubemarket.callback.CallbackUpdateDirectory;
-import com.developer.cubemarket.callback.VolleyCallBack;
+import com.developer.cubemarket.connection.callback.CallbackUpdateDirectory;
+import com.developer.cubemarket.connection.callback.VolleyCallBack;
 
 import org.json.JSONArray;
 import org.json.JSONException;

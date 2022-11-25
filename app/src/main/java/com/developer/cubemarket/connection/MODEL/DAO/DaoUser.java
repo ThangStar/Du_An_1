@@ -15,14 +15,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.R;
-import com.developer.cubemarket.callback.CallBackGetDataUser;
 import com.developer.cubemarket.config.share_references.DataShareReferences;
 import com.developer.cubemarket.config.user.DataUser;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
-import com.developer.cubemarket.callback.CallBackChangePass;
-import com.developer.cubemarket.callback.CallBackUpdateUser;
+import com.developer.cubemarket.connection.callback.CallBackChangePass;
+import com.developer.cubemarket.connection.callback.CallBackGetDataUser;
+import com.developer.cubemarket.connection.callback.CallBackUpdateUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;

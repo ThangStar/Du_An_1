@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.developer.cubemarket.adapter.manager.UserManagerAdapter
-import com.developer.cubemarket.callback.CallBackGetDataUser
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.MODEL.OOP.User
+import com.developer.cubemarket.connection.callback.CallBackGetDataUser
 import com.developer.cubemarket.databinding.FragmentUserManagerBinding
 import es.dmoral.toasty.Toasty
 
@@ -34,7 +34,7 @@ class UserManagerFragment : Fragment() {
 
     private fun initDataUser(): ArrayList<User> {
         val arr = arrayListOf<User>()
-        val callBackGetDataUser = object : CallBackGetDataUser{
+        val callBackGetDataUser = object : CallBackGetDataUser {
             override fun onSuccess(sp: User) {
                 arr.add(sp)
                 adapterUserManager.notifyItemInserted(arr.size)

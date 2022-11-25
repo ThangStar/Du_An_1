@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
+import com.developer.cubemarket.connection.callback.CallBackUpdateUser
 import com.developer.cubemarket.databinding.FragmentUpdateUserBinding
-import com.developer.cubemarket.callback.CallBackUpdateUser
 import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 
@@ -63,7 +63,7 @@ class UpdateUserFragment : Fragment() {
             val request = DaoUser(requireContext())
             request.update_gmail_user(DataUser.id, email)
 
-            val callback = object: CallBackUpdateUser{
+            val callback = object: CallBackUpdateUser {
                 override fun onSuccess(rs: String) {
                     Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
                     DataUser.email = email

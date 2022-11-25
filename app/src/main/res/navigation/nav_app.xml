@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_productFragment_to_userManagerFragment"
             app:destination="@id/userManagerFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_voicherManagerFragment"
+            app:destination="@id/voicherManagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
@@ -129,4 +132,25 @@
         android:name="com.developer.cubemarket.fragment.admin.UserManagerFragment"
         android:label="fragment_user_manager"
         tools:layout="@layout/fragment_user_manager" />
+    <fragment
+        android:id="@+id/voicherManagerFragment"
+        android:name="com.developer.cubemarket.fragment.voicher.VoicherManagerFragment"
+        android:label="fragment_voicher_manager"
+        tools:layout="@layout/fragment_voicher_manager" >
+        <action
+            android:id="@+id/action_voicherManagerFragment_to_insertVoicherFragment"
+            app:destination="@id/insertVoicherFragment" />
+        <action
+            android:id="@+id/action_voicherManagerFragment_to_updateVoicherFragment"
+            app:destination="@id/updateVoicherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertVoicherFragment"
+        android:name="com.developer.cubemarket.fragment.voicher.InsertVoicherFragment"
+        android:label="fragment_insert_voicher"
+        tools:layout="@layout/fragment_insert_voicher" />
+    <fragment
+        android:id="@+id/updateVoicherFragment"
+        android:name="com.developer.cubemarket.fragment.voicher.UpdateVoicherFragment"
+        android:label="UpdateVoicherFragment" />
 </navigation>

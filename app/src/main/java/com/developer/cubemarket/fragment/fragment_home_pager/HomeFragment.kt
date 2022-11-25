@@ -7,7 +7,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.transition.TransitionInflater
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
@@ -23,10 +26,10 @@ import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
+import com.developer.cubemarket.connection.callback.CallBackProduct
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 import com.developer.cubemarket.fragment.ProductFragment
-import com.developer.cubemarket.callback.CallBackProduct
-import com.developer.cubemarket.callback.VolleyCallBack
+import com.developer.cubemarket.connection.callback.VolleyCallBack
 import com.mancj.materialsearchbar.MaterialSearchBar.OnSearchActionListener
 import es.dmoral.toasty.Toasty
 
@@ -148,7 +151,7 @@ class HomeFragment : Fragment() {
         arrHomeProduct.clear()
         arrAutoComplete.clear()
 
-        val callBack = object : CallBackProduct{
+        val callBack = object : CallBackProduct {
             override fun onSuccess(sp: Sanpham) {
                 arrHomeProduct.add(sp)
                 productHomeAdapter.notifyItemInserted(arrHomeProduct.size)
@@ -195,11 +198,11 @@ class HomeFragment : Fragment() {
     private fun initDataDirectory(): ArrayList<Danhmuc> {
         arrDirectory = arrayListOf()
         arrDirectory.clear()
-        val data = VolleyCallBack(){
-            arrDirectory.add(it)
-            Log.d("SSS", it.tendanhmuc)
-            adapterDirectory.notifyItemInserted(arrDirectory.size)
-        }
+        val data = VolleyCallBack() {
+                arrDirectory.add(it)
+                Log.d("SSS", it.tendanhmuc)
+                adapterDirectory.notifyItemInserted(arrDirectory.size)
+            }
         DaoDanhMuc(requireContext()).getdata_danhmuc(data)
 
         return arrDirectory

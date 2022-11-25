@@ -16,9 +16,9 @@ import com.developer.cubemarket.connection.MODEL.IResult.IResult_kichthuoc;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc;
-import com.developer.cubemarket.callback.CallBackDeleteSize;
-import com.developer.cubemarket.callback.CallBackInsertSize;
-import com.developer.cubemarket.callback.CallBackSizeProduct;
+import com.developer.cubemarket.connection.callback.CallBackDeleteSize;
+import com.developer.cubemarket.connection.callback.CallBackInsertSize;
+import com.developer.cubemarket.connection.callback.CallBackSizeProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;

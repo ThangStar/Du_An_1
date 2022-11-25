@@ -18,8 +18,8 @@ import com.developer.cubemarket.adapter.search.recentlyAdapter
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
+import com.developer.cubemarket.connection.callback.CallBackSearchProduct
 import com.developer.cubemarket.databinding.FragmentSearchBinding
-import com.developer.cubemarket.callback.CallBackSearchProduct
 import com.mancj.materialsearchbar.MaterialSearchBar.OnSearchActionListener
 
 
@@ -67,7 +67,7 @@ class SearchFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val arrNameProduct = arrayListOf<String>()
 
-                val callBack = object: CallBackSearchProduct{
+                val callBack = object: CallBackSearchProduct {
                     override fun onSuccess(sp: Sanpham) {
                         arrNameProduct.add(sp.tensanpham)
                     }

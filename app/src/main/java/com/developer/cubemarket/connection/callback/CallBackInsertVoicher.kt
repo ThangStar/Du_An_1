@@ -1,6 +1,6 @@
-package com.developer.cubemarket.callback
+package com.developer.cubemarket.connection.callback
 
-interface CallBackDeleteColor {
+interface CallBackInsertVoicher {
     fun onSuccess(rs: String)
     fun onFail(rs: String)
     fun onError(rs: String)

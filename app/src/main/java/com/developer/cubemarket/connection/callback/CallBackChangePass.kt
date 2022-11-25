@@ -1,4 +1,4 @@
-package com.developer.cubemarket.callback
+package com.developer.cubemarket.connection.callback
 
 interface CallBackChangePass {
     fun onSuccess(rs: String)

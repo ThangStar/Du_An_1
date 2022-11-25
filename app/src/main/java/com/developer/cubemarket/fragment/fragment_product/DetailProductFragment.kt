@@ -19,8 +19,8 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
+import com.developer.cubemarket.connection.callback.CallBackProductSimilar
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
-import com.developer.cubemarket.callback.CallBackProductSimilar
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialElevationScale
 import es.dmoral.toasty.Toasty
@@ -101,7 +101,7 @@ class DetailProductFragment : Fragment() {
     private fun initDataProductSimilar(): ArrayList<Sanpham>{
         val arr = arrayListOf<Sanpham>()
 
-        val callBackLoadProduct = object: CallBackProductSimilar{
+        val callBackLoadProduct = object: CallBackProductSimilar {
             override fun onSuccess(sp: Sanpham) {
                 arr.add(sp)
 

@@ -9,12 +9,15 @@ import android.util.Base64
 import android.util.Log
 import com.bumptech.glide.request.RequestOptions
 import com.developer.cubemarket.R
+import com.developer.cubemarket.call_back_view.CallBackNotifiDataUi
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
+import com.developer.cubemarket.connection.MODEL.DAO.DaoKhuyenMai
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
+import com.developer.cubemarket.connection.callback.CallBackDelDirectory
+import com.developer.cubemarket.connection.callback.CallBackDelProduct
+import com.developer.cubemarket.connection.callback.CallBackDelVoicher
 import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment
-import com.developer.cubemarket.callback.CallBackDelDirectory
-import com.developer.cubemarket.callback.CallBackDelProduct
 import dev.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog
 import es.dmoral.toasty.Toasty
 import java.io.ByteArrayOutputStream
@@ -85,7 +88,7 @@ class Utils {
                     HomeFragment.arrHomeProduct.removeAt(pos)
                     HomeFragment.productHomeAdapter.notifyItemRemoved(pos)
 
-                    val callBack = object: CallBackDelProduct{
+                    val callBack = object: CallBackDelProduct {
                         override fun onSuccess(rs: String) {
                             Toasty.success(activity, rs, Toasty.LENGTH_SHORT).show()
                         }
@@ -153,6 +156,43 @@ class Utils {
         }
         fun getRegexVietNam2(): String {
             return " a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s"
+        }
+
+        fun dialogDelVoicher(callbackUi: CallBackNotifiDataUi, activity: Activity, title: String, message: String, id: String?, pos: Int){
+            val mBottomSheetDialog: BottomSheetMaterialDialog = BottomSheetMaterialDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setAnimation(R.raw.delete)
+                .setPositiveButton("Xóa",R.drawable.delete
+                ) { dialogInterface, _ ->
+                    //Do something delete here
+
+
+                    val callBack = object: CallBackDelVoicher {
+                        override fun onSuccess(rs: String) {
+                            Toasty.success(activity, rs, Toasty.LENGTH_SHORT).show()
+                            callbackUi.onSuccess()
+                        }
+
+                        override fun onFail(rs: String) {
+                            Toasty.warning(activity, rs, Toasty.LENGTH_SHORT).show()
+                        }
+
+                        override fun onError(rs: String) {
+                            Toasty.error(activity, rs, Toasty.LENGTH_SHORT).show()
+                        }
+
+                    }
+                    DaoKhuyenMai(activity).delete_khuyenmai(id)
+                    dialogInterface?.dismiss()
+                }
+                .setNegativeButton("Hủy", R.drawable.cancel_del
+                ) { dialogInterface, which ->
+                    dialogInterface?.dismiss()
+                }
+                .build()
+            mBottomSheetDialog.show()
         }
     }
 }

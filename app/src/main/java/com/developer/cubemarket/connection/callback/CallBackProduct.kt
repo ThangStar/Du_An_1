@@ -1,9 +1,10 @@
-package com.developer.cubemarket.callback
+package com.developer.cubemarket.connection.callback
 
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 
-interface CallBackProductSale {
+interface CallBackProduct {
     fun onSuccess(sp: Sanpham)
     fun onFail(err: String)
     fun onError(err: String)
+
 }

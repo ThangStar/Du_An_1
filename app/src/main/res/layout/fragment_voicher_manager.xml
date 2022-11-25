@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/background_primary"
+    android:layout_height="match_parent"
+    tools:context=".fragment.voicher.VoicherManagerFragment">
+
+    <RelativeLayout
+        android:layout_alignParentTop="false"
+        android:translationZ="5dp"
+        android:elevation="3dp"
+        android:background="@color/white"
+        android:id="@+id/rl_top_title"
+        android:layout_width="match_parent"
+        android:padding="25dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/imv_menu"
+            android:background="@drawable/ripple_text"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:focusable="true" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/imv_menu"
+            android:id="@+id/tv_title_tab"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:text="Mã giảm giá"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_centerVertical="true"
+
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_below="@id/rl_top_title"
+        android:layout_marginTop="14dp"
+        android:text="Quản lí mã giảm giá"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/text_color_secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_below="@id/tv_title"
+        android:layout_marginTop="18dp"
+        android:text="Ngày bắt đầu"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/button_background_primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ry_voicher"
+        android:layout_below="@id/tv_sub_title"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="28dp"
+        android:layout_width="match_parent"
+        android:weightSum="2"
+        android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Quay lại"
+            android:id="@+id/btn_back"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            app:cornerRadius="14dp"
+            android:layout_marginHorizontal="4dp"
+            android:paddingVertical="14dp"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.button.MaterialButton
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="@color/white"
+            android:text="Thêm"
+            android:id="@+id/btn_add"
+            app:backgroundTint="@color/button_background_primary"
+            android:layout_marginHorizontal="4dp"
+            app:cornerRadius="12dp"
+            android:paddingVertical="14dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

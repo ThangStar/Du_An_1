@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
+import com.developer.cubemarket.connection.callback.CallBackChangePass
 import com.developer.cubemarket.databinding.FragmentChangePassBinding
-import com.developer.cubemarket.callback.CallBackChangePass
 import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 
@@ -66,7 +66,7 @@ class ChangePassFragment : Fragment() {
                 isCheck = false
             }
             if(isCheck){
-                val callback = object: CallBackChangePass{
+                val callback = object: CallBackChangePass {
                     override fun onSuccess(rs: String) {
                         Toasty.success(requireContext(),
                             rs, Toasty.LENGTH_SHORT).show()

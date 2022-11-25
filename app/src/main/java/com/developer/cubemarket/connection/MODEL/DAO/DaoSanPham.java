@@ -46,30 +46,28 @@ public class DaoSanPham {
     public DaoSanPham(Context context) {
         this.context = context;
     }
-
-    public  void insert_sanpham(CallBackInsertProduct callBackInsertProduct, int madanhmuc, String tensanpham, String img, String nhasanxuat,
-                                int soluong, int giaban, String chitiet, String tenmau, String tenkichthuoc, int id){
+    public  void insert_sanpham(CallBackInsertProduct callBackInsertProduct, int madanhmuc,String tensanpham,String img,String nhasanxuat,String chitiet,String name_option,int id){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.toString().trim().equals("success")){
+                String a[]=response.toString().split(":");
+                if(a[0].trim().equals("s")){
                     Log.d(TAG, "thêm thành công");
                     callBackInsertProduct.onSuccess("thêm sản phẩm thành công");
+
                 }else{
                     Log.d(TAG, "lỗi>>"+response.toString());
-                    callBackInsertProduct.onFail("lỗi>>"+response.toString());
+                    callBackInsertProduct.onError("lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                callBackInsertProduct.onError("lỗi>>"+error.toString());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
-
-
+                callBackInsertProduct.onError("lỗi>>"+error.toString());
             }
         }){
             @Nullable
@@ -80,14 +78,9 @@ public class DaoSanPham {
                 stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
                 stringStringMap.put("tensanpham",tensanpham);
                 stringStringMap.put("hinhanh",img );// chuyển hình thành base 64
-
                 stringStringMap.put("nhasanxuat", nhasanxuat);
-                stringStringMap.put("soluong", String.valueOf(soluong));
-
-                stringStringMap.put("giaban", String.valueOf(giaban));
                 stringStringMap.put("chitiet",chitiet);
-                stringStringMap.put("tenmau",tenmau);
-                stringStringMap.put("tenkichthuoc",tenkichthuoc);
+                stringStringMap.put("option",name_option);
                 stringStringMap.put("id", String.valueOf(id));
                 return stringStringMap;
             }
@@ -187,13 +180,12 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_sanpham(CallBackProduct callback, int id, int chucvu){
+    public  void getdata_sanpham(CallBackProduct callback, int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                List<Sanpham> ee= new ArrayList();
                 Log.d(TAG, "onResponse: " +response);
                 try {
                     JSONArray jsonArray = new JSONArray(response);
@@ -213,29 +205,22 @@ public class DaoSanPham {
                             String khuvuc= jsonObject.getString("khuvuc");
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-                            callback.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),
-                                    tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
-                            Log.d("HOMEPRODUCT", masanpham+"");
+                            callback.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            callback.onFail(e.toString());
                             Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
                         }
-
                     }
                 } catch (JSONException e) {
-                    callback.onError(e.toString());
+                    callback.onFail(e.toString());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
-                }
-                if(mResultCallback != null){
-
-                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callback.onError(error.getMessage()+error.networkResponse+error.getStackTrace());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
@@ -317,14 +302,13 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
-    public  void getdata_sanpham_all(CallBackProductSale callBackProductSale, int id, int chucvu){
-        Log.d("III", "id: "+id+" chucVu: "+chucvu);
+    public  void getdata_sanpham_all(CallBackProductSale callBackProductSale, int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("789", "onResponse: >>> 789"+response);
+                Log.d(TAG, "onResponse: >>> "+response);
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -341,32 +325,29 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
-                            callBackProductSale.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),
-                                    tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+
+                            callBackProductSale.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+
                             //---------------------------------------viets code ở dưới này---------------------------------------
-                            Log.d("AAA", tensanpham);
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            callBackProductSale.onFail(e.toString());
-                            Log.d("AAA", e.toString());
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
                         }
 
                     }
                 } catch (JSONException e) {
-                    callBackProductSale.onError(e.toString());
-                    Log.d("AAA", e.toString());
+                    callBackProductSale.onFail(e.toString());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error.networkResponse);
-                Log.d(TAG, "xảy ra lỗi >>>>" +error.getLocalizedMessage());
-                Log.d(TAG, "xảy ra lỗi >>>>" + Arrays.toString(error.getStackTrace()));
-
+                callBackProductSale.onError(error.toString());
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
             @Nullable
@@ -548,15 +529,13 @@ public class DaoSanPham {
 
     }
 
-    public  void sanpham_tuongtu(CallBackProductSimilar callBack, int id, int chucvu, String tendanhmuc, String tensanpham){
-
+    public  void sanpham_tuongtu( CallBackProductSimilar callBack ,int id,int chucvu,String tendanhmuc,String tensanpham){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_sanpham, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham_tuongtu, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
-                List<Sanpham> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -574,15 +553,14 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,
-                                    tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,
-                                    soluong,giaban,chitiet,id));
-
-                            Log.d("PRODUCTSIMILAR: ", tensanpham);
                             //---------------------------------------viets code ở dưới này---------------------------------------
                             callBack.onSuccess(new Sanpham(masanpham, new Danhmuc(madanhmuc,
                                     tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,
                                     soluong,giaban,chitiet,id));
+
+
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
@@ -593,10 +571,6 @@ public class DaoSanPham {
                     callBack.onFail("đã xảy ra lỗi :"+e.getMessage());
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
-                }
-                if(mResultCallback != null){
-
-                    mResultCallback.notifySuccess("sanpham", ee);
                 }
             }
         }, new Response.ErrorListener() {

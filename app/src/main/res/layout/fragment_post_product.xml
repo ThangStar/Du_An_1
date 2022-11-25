@@ -139,94 +139,6 @@ tools:context=".fragment.fragment_utils_product.InsertProductFragment">
             </LinearLayout>
 
             <LinearLayout
-                android:weightSum="2"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:paddingHorizontal="20dp"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_marginBottom="6dp"
-                        android:textColor="@color/text_color_secondary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Giá"
-                        android:layout_marginTop="10dp"/>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:boxStrokeColor="@color/dividingLine"
-                        app:boxStrokeWidth="1dp"
-                        app:counterEnabled="true"
-                        app:endIconMode="clear_text"
-                        app:counterMaxLength="10"
-                        android:id="@+id/til_price"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:hintEnabled="false"
-                        android:textColorHint="@color/text_hint_secondary">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="VND"
-
-                            android:inputType="number"
-                            android:id="@+id/edt_price"
-                            android:layout_marginEnd="8dp"
-                            android:fontFamily="@font/roboto_medium"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/text_color_secondary"
-
-                        android:layout_marginBottom="6dp"
-                        android:id="@+id/tv2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kho"
-                        android:layout_marginTop="10dp"/>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:id="@+id/til_amount"
-                        android:layout_height="wrap_content"
-                        app:counterEnabled="true"
-                        app:endIconMode="clear_text"
-                        app:counterMaxLength="10"
-                        app:boxStrokeColor="@color/dividingLine"
-                        app:boxStrokeWidth="1dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:hintEnabled="false"
-                        android:textColorHint="@color/text_hint_secondary">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="0"
-                            android:id="@+id/edt_amount"
-                            android:inputType="number"
-
-                            android:fontFamily="@font/roboto_medium"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
                 android:paddingHorizontal="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -265,83 +177,158 @@ tools:context=".fragment.fragment_utils_product.InsertProductFragment">
             </LinearLayout>
 
             <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="2"
                 android:paddingHorizontal="20dp"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/text_color_secondary"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kích cỡ"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginTop="10dp"/>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/til_size"
-                    app:counterEnabled="true"
-                    app:endIconMode="clear_text"
-                    app:counterMaxLength="18"
-                    app:boxStrokeColor="@color/dividingLine"
-                    app:boxStrokeWidth="1dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:hintEnabled="false"
-                    android:textColorHint="@color/text_hint_secondary">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edt_size"
-                        android:hint="M, X, XL, XXL"
-                        android:fontFamily="@font/roboto_medium"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text="Kích cỡ"/>
+                    <Spinner
+                        android:id="@+id/spn_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:paddingHorizontal="5dp"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Màu sắc"/>
+                    <Spinner
+                        android:id="@+id/spn_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
+                </LinearLayout>
             </LinearLayout>
 
+
+            <TextView
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_color_secondary"
+                android:layout_marginHorizontal="20dp"
+                android:text="Giá theo từng loại"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/ry_format"
+                tools:itemCount="2"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="wrap_content"/>
             <LinearLayout
-                android:paddingHorizontal="20dp"
-                android:orientation="vertical"
+                android:weightSum="2"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/text_color_secondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Màu sắc"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginTop="10dp"/>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:id="@id/til_color"
-                    android:layout_height="wrap_content"
-                    app:boxStrokeColor="@color/dividingLine"
-                    app:boxStrokeWidth="1dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:counterEnabled="true"
-                    app:endIconMode="clear_text"
-                    app:counterMaxLength="18"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:hintEnabled="false"
-                    android:textColorHint="@color/text_hint_secondary">
-
-                    <com.google.android.material.textfield.TextInputEditText
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giá"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="10dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Xanh, Đỏ, Vàng"
-                        android:id="@+id/edt_color"
-                        android:fontFamily="@font/roboto_medium"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:id="@+id/til_price"
+                        app:counterEnabled="true"
+                        app:endIconMode="clear_text"
+                        app:counterMaxLength="10"
+                        app:boxStrokeColor="@color/dividingLine"
+                        app:boxStrokeWidth="1dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:hintEnabled="false"
+                        android:textColorHint="@color/text_hint_secondary">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/edt_price"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/roboto_medium"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="10dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/til_amount"
+                        app:counterEnabled="true"
+                        app:endIconMode="clear_text"
+                        app:counterMaxLength="10"
+                        app:boxStrokeColor="@color/dividingLine"
+                        app:boxStrokeWidth="1dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:hintEnabled="false"
+                        android:textColorHint="@color/text_hint_secondary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/edt_amount"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/roboto_medium"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                app:cornerRadius="12dp"
+                android:id="@+id/btn_add_format"
+                app:backgroundTint="@color/item_color_secondary"
+                android:layout_marginHorizontal="20dp"
+                android:text="Thêm màu sắc, kích cỡ, giá"
+                android:layout_height="wrap_content"/>
+
 
             <LinearLayout
                 android:layout_marginBottom="10dp"

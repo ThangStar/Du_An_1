@@ -2,15 +2,14 @@ package com.developer.cubemarket.connection.MODEL.OOP;
 
 public class Kichthuoc {
     int makichthuoc;
-    int masanpham;
     String tenkichthuoc;
+
 
     public Kichthuoc() {
     }
 
-    public Kichthuoc(int makichthuoc, int masanpham, String tenkichthuoc) {
+    public Kichthuoc(int makichthuoc, String tenkichthuoc) {
         this.makichthuoc = makichthuoc;
-        this.masanpham = masanpham;
         this.tenkichthuoc = tenkichthuoc;
     }
 
@@ -20,14 +19,6 @@ public class Kichthuoc {
 
     public void setMakichthuoc(int makichthuoc) {
         this.makichthuoc = makichthuoc;
-    }
-
-    public int getMasanpham() {
-        return masanpham;
-    }
-
-    public void setMasanpham(int masanpham) {
-        this.masanpham = masanpham;
     }
 
     public String getTenkichthuoc() {
@@ -40,6 +31,7 @@ public class Kichthuoc {
 
     @Override
     public String toString() {
-        return tenkichthuoc;
+        return  tenkichthuoc;
     }
+
 }

@@ -17,7 +17,7 @@ class UserManagerAdapter(
 ): RecyclerView.Adapter<UserManagerAdapter.UserManagerViewHolder>() {
     class UserManagerViewHolder(
         v: View,
-        var fr: FragmentActivity
+        private var fr: FragmentActivity
     ): RecyclerView.ViewHolder(v), View.OnClickListener {
         val binding = UserManagerItemBinding.bind(v)
         init {

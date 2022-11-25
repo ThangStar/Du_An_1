@@ -191,55 +191,6 @@ public class DaoDanhMuc {
         );
 
         requestQueue.add(stringRequest);
-
-
-    }
-    public  void search_danhmuc(String noidungsearch){
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.search_danhmuc, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "onResponse: >>> "+response);
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0 ; i<jsonArray.length();i++){
-                        try {
-                            JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            int   madanhmuc= jsonObject.getInt("madanhmuc");
-                            String  tendanhmuc= jsonObject.getString("tendanhmuc");
-                            String  khuvuc= jsonObject.getString("khuvuc");
-                            String img=jsonObject.getString("img") ;
-                            Log.d(TAG, "ma >> "+madanhmuc +" tên >>" +tendanhmuc +" khuvuwc  >> "+ khuvuc+" img >>>> "+img);
-                            //---------------------------------------viets code ở dưới này---------------------------------------
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
-                        }
-
-                    }
-                } catch (JSONException e) {
-                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
-            }
-        }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("noidungsearch", noidungsearch);
-                return stringStringMap;
-            }
-        };
-        requestQueue.add(stringRequest);
     }
 
 }

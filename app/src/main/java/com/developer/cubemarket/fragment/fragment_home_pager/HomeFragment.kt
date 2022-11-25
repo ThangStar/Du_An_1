@@ -167,7 +167,6 @@ class HomeFragment : Fragment() {
 
         }
         DaoSanPham(requireContext()).getdata_sanpham(callBack, DataUser.id, DataUser.occupation)
-
         return arrHomeProduct
     }
 

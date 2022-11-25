@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.developer.cubemarket.R
+import com.developer.cubemarket.adapter.utils.ProductFormatSizeAndColorAdapter
+import com.developer.cubemarket.callback.CallBackColorProduct
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
@@ -20,7 +23,12 @@ import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.databinding.FragmentPostProductBinding
 import com.developer.cubemarket.callback.CallBackInsertProduct
+import com.developer.cubemarket.callback.CallBackSizeProduct
 import com.developer.cubemarket.callback.VolleyCallBack
+import com.developer.cubemarket.connection.MODEL.DAO.DaoKichThuoc
+import com.developer.cubemarket.connection.MODEL.DAO.DaoMauSac
+import com.developer.cubemarket.connection.MODEL.OOP.Kichthuoc
+import com.developer.cubemarket.connection.MODEL.OOP.Mausac
 import es.dmoral.toasty.Toasty
 import gun0912.tedbottompicker.TedBottomPicker
 import java.util.regex.Pattern
@@ -29,7 +37,15 @@ import java.util.regex.Pattern
 class InsertProductFragment : Fragment() {
     lateinit var binding: FragmentPostProductBinding
     lateinit var bitmap: Bitmap
+    lateinit var adapterFormat:ProductFormatSizeAndColorAdapter
+    lateinit var adapterColor: ArrayAdapter<Mausac>
+    lateinit var adapterSize: ArrayAdapter<Kichthuoc>
+
     val type = arrayListOf<Danhmuc>()
+    var arrSize = arrayListOf<Kichthuoc>()
+    var arrColor = arrayListOf<Mausac>()
+    val arrFormat = arrayListOf<String>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +53,9 @@ class InsertProductFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPostProductBinding.inflate(layoutInflater)
 
+        initEventAddFormat()
+        initDataRecyclerFormat()
+        initSpinnerSizeAndColor()
         initImageDefault()
         initDataSpinnerDirectory()
         initEventPickerAvatar()
@@ -44,6 +63,61 @@ class InsertProductFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun initEventAddFormat() {
+        binding.btnAddFormat.setOnClickListener {
+            val size = arrSize[binding.spnSize.selectedItemPosition].tenkichthuoc
+            val color = arrColor[binding.spnColor.selectedItemPosition].tenmausac
+            val price = binding.edtPrice.text.toString().trim()
+            val amount = binding.edtAmount.text.toString().trim()
+            val rs = "$size - $color - ${Utils.formaterVND(price.toInt())} - $amount"
+            arrFormat.add(rs)
+            adapterFormat.notifyItemInserted(arrFormat.size)
+        }
+    }
+
+    private fun initDataRecyclerFormat() {
+        adapterFormat = ProductFormatSizeAndColorAdapter(initDataFormat())
+        binding.ryFormat.adapter = adapterFormat
+    }
+
+    private fun initDataFormat(): ArrayList<String> {
+        return arrFormat
+    }
+
+    private fun initSpinnerSizeAndColor() {
+        adapterSize = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrSize)
+        binding.spnSize.adapter = adapterSize
+        val callBackSize = object : CallBackSizeProduct{
+            override fun onSuccess(kt: Kichthuoc) {
+                arrSize.add(kt)
+                adapterSize.notifyDataSetChanged()
+            }
+
+            override fun onFail(rs: String) {
+            }
+
+            override fun onError(rs: String) {
+            }
+        }
+        DaoKichThuoc(requireContext()).getdata_kichthuoc(callBackSize)
+
+        adapterColor = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrColor)
+        binding.spnColor.adapter = adapterColor
+        val callBackColor = object : CallBackColorProduct{
+            override fun onSuccess(ms: Mausac) {
+                arrColor.add(ms)
+                adapterColor.notifyDataSetChanged()
+            }
+
+            override fun onFail(rs: String) {
+            }
+
+            override fun onError(rs: String) {
+            }
+        }
+        DaoMauSac(requireContext()).getdata_mausac(callBackColor)
     }
 
 
@@ -56,11 +130,13 @@ class InsertProductFragment : Fragment() {
             var isCheck = true
             val name = binding.edtName.text.toString().trim()
             val directory = type[binding.spnDirectory.selectedItemPosition].madanhmuc
+            val brand = binding.edtBrand.text.toString().trim()
+
             val price = binding.edtPrice.text.toString().trim()
             val amount = binding.edtAmount.text.toString().trim()
-            val brand = binding.edtBrand.text.toString().trim()
-            val size = binding.edtSize.text.toString().trim()
-            val color = binding.edtColor.text.toString().trim()
+
+            val size = arrSize[binding.spnSize.selectedItemPosition].makichthuoc
+            val color = arrColor[binding.spnColor.selectedItemPosition].mamausac
             val detail = binding.edtDetail.text.toString().trim()
             if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,80}", name)){
                 binding.tilName.error = null
@@ -90,21 +166,6 @@ class InsertProductFragment : Fragment() {
                 isCheck = false
             }
 
-            if(Pattern.matches("^[a-zA-Z0-9\\\\, ]{1,18}$", size)){
-                binding.tilSize.error = null
-            }else{
-                binding.tilSize.error = "Kích cỡ 1-18 kí tự, không có kí tự đặc biệt" +
-                        " - ngăn cách nhau bằng dấu phẩy"
-                isCheck = false
-            }
-
-            if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,18}", color)){
-                binding.tilColor.error = null
-            }else{
-                binding.tilColor.error = "Màu sắc 1-18 kí tự, không có kí tự đặc biệt - ngăn cách nhau bằng dấu phẩy"
-                isCheck = false
-            }
-
             if(Pattern.matches("^[\\S ]{5,500}\$", detail)){
                 binding.tilDetail.error = null
             }else{
@@ -112,8 +173,7 @@ class InsertProductFragment : Fragment() {
                 binding.tilDetail.error = "Chi tiết sản phẩm 5-500 kí tự, không có kí tự đặc biệt"
             }
             if (isCheck){
-                Toasty.success(requireContext(), "OK", Toasty.LENGTH_SHORT).show()
-
+                Toasty.success(requireContext(), "Xin chờ", Toasty.LENGTH_SHORT).show()
                 val call = object: CallBackInsertProduct{
                     override fun onSuccess(rs: String) {
                         Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
@@ -128,20 +188,17 @@ class InsertProductFragment : Fragment() {
                     }
 
                 }
+                //format color & size
+                val rs = "$color:$size:$price:$amount/"
                 DaoSanPham(requireContext()).insert_sanpham(call, directory,
                     name,
                     Utils.getEncoded64ImageStringFromBitmap(bitmap),
-                brand,
-                amount.toInt(),
-                price.toInt(),
-                detail,
-                color,
-                size,
-                DataUser.id)
+                    brand,
+                    detail,
+                    rs,
+                    DataUser.id)
             }
-
         }
-
     }
 
 

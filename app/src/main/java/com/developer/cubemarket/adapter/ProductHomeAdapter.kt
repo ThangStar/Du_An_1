@@ -1,6 +1,7 @@
 package com.developer.cubemarket.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
+import com.google.android.material.transition.MaterialContainerTransform
 
 class ProductHomeAdapter(
     var fr: Fragment,
@@ -113,8 +116,14 @@ class ProductHomeAdapter(
         }catch (_: java.lang.Exception){
 
         }
+
+        holder.binding.imvProduct.transitionName = "IMAGE_PRODUCT_${pr.masanpham}"
+
+
+        Log.d("ADAPTER", "${pr.id}")
         holder.binding.tvPrice.text = Utils.formaterVND(pr.giaban)
         holder.binding.tvTitle.text = pr.tensanpham
+
         holder.binding.lnProduct.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("img", pr.img)
@@ -124,9 +133,11 @@ class ProductHomeAdapter(
             bundle.putString("brand", pr.nhasanxuat)
             bundle.putInt("amount", pr.soluong)
             bundle.putString("directory", pr.danhmuc.tendanhmuc)
-
+            val extra = FragmentNavigatorExtras(
+                holder.binding.imvProduct to "IMAGE_PRODUCT",
+            )
             findNavController(fr).navigate(
-                R.id.action_productFragment_to_detailProductFragment, bundle)
+                R.id.action_productFragment_to_detailProductFragment, bundle, null, extra)
         }
 
     }

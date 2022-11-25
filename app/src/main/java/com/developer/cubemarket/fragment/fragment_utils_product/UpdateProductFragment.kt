@@ -215,7 +215,7 @@ class UpdateProductFragment : Fragment() {
                         ++countColor
                         if(arrColor.size == countColor){
                             for (i in arrColor){
-                                DaoMauSac(requireContext()).insert_mausac(Mausac(i.mamausac, idProduct!!, i.tenmausac))
+                                DaoMauSac(requireContext()).insert_mausac(Mausac(i.mamausac, i.tenmausac))
                             }
                             findNavController().popBackStack()
                         }
@@ -291,7 +291,7 @@ class UpdateProductFragment : Fragment() {
                 Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
             }
         }
-        DaoKichThuoc(requireContext()).getdata_kichthuoc(callBackSize, idProduct!!)
+        DaoKichThuoc(requireContext()).getdata_kichthuoc(callBackSize)
 
         //clear array color load data again
         arrColor.clear()
@@ -313,7 +313,7 @@ class UpdateProductFragment : Fragment() {
             }
 
         }
-        DaoMauSac(requireContext()).getdata_mausac(callBackColor, idProduct!!)
+        DaoMauSac(requireContext()).getdata_mausac(callBackColor)
     }
 
     private fun initDataSpinnerDirectory() {
@@ -345,7 +345,7 @@ class UpdateProductFragment : Fragment() {
                         binding.tilColor.error = null
                     }
                     binding.edtColor.setText("")
-                    arrColor.add(Mausac(0, idProduct!!, color))
+                    arrColor.add(Mausac(0, color))
                     colorAdapter.notifyItemInserted(arrColor.size)
                 }else{
                     binding.tilColor.error = "vd: Xanh, Đỏ.."
@@ -362,7 +362,7 @@ class UpdateProductFragment : Fragment() {
                         binding.tilSize.error = null
                     }
                     binding.edtSize.setText("")
-                    arrSize.add(Kichthuoc(0,idProduct!!,size))
+                    arrSize.add(Kichthuoc(0,size))
                     sizeAdapter.notifyItemInserted(arrSize.size)
                 }else{
                     binding.tilSize.error = "vd: X, XL, 39.."

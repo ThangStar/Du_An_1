@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
+import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.detail_product_similar.ProductDetailSimilarAdapter
 import com.developer.cubemarket.call_back_view.CallBackProductDetailScrollTop
 import com.developer.cubemarket.config.user.DataUser
@@ -19,6 +21,8 @@ import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
 import com.developer.cubemarket.callback.CallBackProductSimilar
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import es.dmoral.toasty.Toasty
 import java.lang.String
 
@@ -41,11 +45,25 @@ class DetailProductFragment : Fragment() {
         //set tint icon floating favorite
         binding.fabAddFavorite.setColorFilter(Color.WHITE)
 
+        initTransition()
         initDataDefault()
         initEventToolbar()
 
         initRecyclerProductSimilar()
         return binding.root
+    }
+
+    private fun initTransition() {
+        binding.appBarImage.transitionName = "IMAGE_PRODUCT"
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            scrimColor = Color.TRANSPARENT
+            duration = 800
+        }
+        sharedElementReturnTransition = MaterialContainerTransform().apply {
+            scrimColor = Color.TRANSPARENT
+            duration = 800
+        }
     }
 
     private fun initRecyclerProductSimilar() {
@@ -135,7 +153,7 @@ class DetailProductFragment : Fragment() {
     private fun initEventToolbar() {
         val v = getToolbarLogoIcon(binding.toolbar)
         v!!.setOnClickListener {
-            findNavController().popBackStack()
+            requireActivity().onBackPressed()
         }
     }
     private fun getToolbarLogoIcon(toolbar: androidx.appcompat.widget.Toolbar): View? {

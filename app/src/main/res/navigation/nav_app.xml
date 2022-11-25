@@ -35,11 +35,7 @@
         tools:layout="@layout/fragment_product" >
         <action
             android:id="@+id/action_productFragment_to_detailProductFragment"
-            app:destination="@id/detailProductFragment"
-            app:enterAnim="@anim/in_page"
-            app:exitAnim="@anim/out_page"
-            app:popEnterAnim="@anim/pop_in_page"
-            app:popExitAnim="@anim/pop_out_page" />
+            app:destination="@id/detailProductFragment" />
         <action
             android:id="@+id/action_productFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment"

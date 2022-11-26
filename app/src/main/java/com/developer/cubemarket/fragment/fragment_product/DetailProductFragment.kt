@@ -4,33 +4,43 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
-import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.util.Util
 import com.developer.cubemarket.R
+import com.developer.cubemarket.adapter.detail_product.DetailSizeProductAdapter
 import com.developer.cubemarket.adapter.detail_product_similar.ProductDetailSimilarAdapter
 import com.developer.cubemarket.call_back_view.CallBackProductDetailScrollTop
+import com.developer.cubemarket.call_back_view.CallBackUpdateDetailProduct
+import com.developer.cubemarket.call_back_view.OnChipSelected
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.DAO.DaoGioHang
+import com.developer.cubemarket.connection.MODEL.DAO.DaoOption
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
+import com.developer.cubemarket.connection.MODEL.OOP.Option
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
+import com.developer.cubemarket.connection.callback.CallBackAddCart
+import com.developer.cubemarket.connection.callback.CallBackDataOption
 import com.developer.cubemarket.connection.callback.CallBackProductSimilar
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialElevationScale
 import es.dmoral.toasty.Toasty
 import java.lang.String
 
 
 class DetailProductFragment : Fragment() {
+    val arrOption = arrayListOf<Option>()
+    var opSelected: Option? = null
     lateinit var binding: FragmentDetailProductBinding
+    lateinit var adapterDetailSize: DetailSizeProductAdapter
     lateinit var ctx: Context
     lateinit var adapterProductDetailSimilar: ProductDetailSimilarAdapter
+    var idProduct: Int = 0
 
     var nameProduct = ""
     var nameDirectory = ""
@@ -45,12 +55,70 @@ class DetailProductFragment : Fragment() {
         //set tint icon floating favorite
         binding.fabAddFavorite.setColorFilter(Color.WHITE)
 
+
         initTransition()
         initDataDefault()
+
+        initRecyclerSize()
+        initAddCart()
         initEventToolbar()
 
         initRecyclerProductSimilar()
         return binding.root
+    }
+
+    private fun initAddCart() {
+        binding.btnAddCart.setOnClickListener {
+            if (opSelected == null){
+                Toasty.warning(requireContext(), "Chưa chọn loại hàng", Toasty.LENGTH_SHORT).show()
+            }else{
+                val callBackAddCart = object : CallBackAddCart{
+                    override fun onSuccess(rs: kotlin.String) {
+                        Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onFail(err: kotlin.String) {
+                        Toasty.warning(requireContext(), err, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(error: kotlin.String) {
+                        Toasty.error(requireContext(), error, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+                DaoGioHang(requireContext()).insert_giohang(callBackAddCart, DataUser.id, opSelected!!.option_id)
+            }
+        }
+    }
+
+    private fun initRecyclerSize() {
+        val onChipSelected = object : OnChipSelected{
+            override fun onSelected(op: Option) {
+                opSelected = op
+                binding.tvPrice.text = Utils.formaterVND(op.price)
+            }
+        }
+        adapterDetailSize = DetailSizeProductAdapter(this, onChipSelected, initOption())
+        binding.rySize.adapter = adapterDetailSize
+    }
+
+    private fun initOption(): ArrayList<Option> {
+        val callBackOption = object : CallBackDataOption{
+            override fun onSuccess(op: Option) {
+                arrOption.add(op)
+                adapterDetailSize.notifyItemInserted(arrOption.size)
+            }
+
+            override fun onFail(rs: kotlin.String) {
+                Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+            }
+
+            override fun onError(rs: kotlin.String) {
+                Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+            }
+        }
+//        Toasty.success(requireContext(), "mã sp là: $idProduct", Toasty.LENGTH_SHORT).show()
+        DaoOption(requireContext()).getdata_option(callBackOption, idProduct)
+        return arrOption
     }
 
     private fun initTransition() {
@@ -77,7 +145,24 @@ class DetailProductFragment : Fragment() {
                 binding.tvPrice.text = Utils.formaterVND(sp.giaban)
                 binding.tvAmount.text = "${sp.soluong}"
                 binding.tvBrand.text = sp.nhasanxuat
+                idProduct = sp.masanpham
+                arrOption.clear()
+                val callBackOption = object : CallBackDataOption{
+                    override fun onSuccess(op: Option) {
+                        arrOption.add(op)
+                        Toasty.warning(requireContext(), "ID PRODUCT: "+idProduct, Toasty.LENGTH_SHORT).show()
+                        adapterDetailSize.notifyDataSetChanged()
+                    }
 
+                    override fun onFail(rs: kotlin.String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(rs: kotlin.String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+                DaoOption(requireContext()).getdata_option(callBackOption, idProduct)
 
                 try{
                     val option = Utils.getOptionLoadImgDirectoryFromUrl()
@@ -134,6 +219,7 @@ class DetailProductFragment : Fragment() {
         val price = arguments?.getInt("price")
         val brand = arguments?.getString("brand")
         val amount = arguments?.getInt("amount")
+        idProduct = arguments?.getInt("id_product")!!
         nameDirectory = arguments?.getString("directory")!!
 
         binding.tvName.text = nameProduct

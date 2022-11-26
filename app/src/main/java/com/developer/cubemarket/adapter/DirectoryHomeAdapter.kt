@@ -90,7 +90,6 @@ class DirectoryHomeAdapter(
         val dr = arr[position]
         val option = Utils.getOptionLoadImgDirectoryFromUrl()
         Glide.with(ctx).load(dr.img).apply(option).into(holder.binding.imvDirectory);
-//        holder.binding.imvDirectory.setImageBitmap(báes)
         holder.binding.tvNameDirectory.text = dr.tendanhmuc
     }
 

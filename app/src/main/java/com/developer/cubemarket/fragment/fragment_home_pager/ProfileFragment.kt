@@ -1,6 +1,7 @@
 package com.developer.cubemarket.fragment.fragment_home_pager
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
+import com.developer.cubemarket.activity.VIEW.LayoutHoadonActivity
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.databinding.FragmentProfileBinding
 
@@ -29,7 +31,14 @@ class ProfileFragment : Fragment() {
         initEventVoidcherManager()
         initEventGoSaled()
         initEventGoUserManager()
+        initEventGoBill()
         return binding.root
+    }
+
+    private fun initEventGoBill() {
+        binding.lnGoBill.setOnClickListener {
+            startActivity(Intent(requireContext(), LayoutHoadonActivity::class.java))
+        }
     }
 
     private fun initEventVoidcherManager() {

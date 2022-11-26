@@ -18,9 +18,12 @@ import com.bumptech.glide.Glide
 import com.developer.cubemarket.R
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.DAO.DaoGioHang
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
+import com.developer.cubemarket.connection.callback.CallBackAddCart
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
 import com.google.android.material.transition.MaterialContainerTransform
+import es.dmoral.toasty.Toasty
 
 class ProductHomeAdapter(
     var fr: Fragment,
@@ -35,6 +38,7 @@ class ProductHomeAdapter(
         init {
             binding.lnProduct.setOnLongClickListener(this)
             binding.imvAddCart.setOnClickListener(this)
+
         }
         override fun onLongClick(p0: View?): Boolean {
             if (p0 != null) {
@@ -95,11 +99,27 @@ class ProductHomeAdapter(
         }
 
         override fun onClick(p0: View?) {
-            val x = binding.imvProduct.x
-            val y = binding.imvProduct.y
-            Log.d("CLICKED", "x: $x, y: $y")
-            binding.imvProductTranslate.visibility = View.GONE
-//            binding.imvAddCart.animate().x(400f).y(400f).duration = 1000
+            when(p0){
+                binding.imvAddCart ->{
+                    val callBackAddCart = object : CallBackAddCart{
+                        override fun onSuccess(rs: String) {
+                            Toasty.success(fr.requireContext(), "Đã thêm vào giỏ", Toasty.LENGTH_SHORT).show()
+                        }
+
+                        override fun onFail(err: String) {
+                            Toasty.warning(fr.requireContext(), err, Toasty.LENGTH_SHORT).show()
+                        }
+
+                        override fun onError(error: String) {
+                            Toasty.error(fr.requireContext(), error, Toasty.LENGTH_SHORT).show()
+                        }
+                    }
+                    DaoGioHang(fr.requireContext()).insert_giohang(callBackAddCart,
+                        DataUser.id,
+                        5
+                    )
+                }
+            }
         }
     }
 
@@ -126,6 +146,8 @@ class ProductHomeAdapter(
 
         holder.binding.lnProduct.setOnClickListener {
             val bundle = Bundle()
+            bundle.putInt("id_product",
+                pr.masanpham)
             bundle.putString("img", pr.img)
             bundle.putString("name", pr.tensanpham)
             bundle.putString("detail", pr.chitiet)

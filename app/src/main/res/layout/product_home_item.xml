@@ -23,13 +23,6 @@
             android:animateLayoutChanges="true"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/imv_product_translate"
-                android:src="@drawable/product1"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:transitionName="imageProduct"
-                android:contentDescription="@string/image_product" />
-            <ImageView
                 android:id="@+id/imv_product"
                 android:src="@drawable/product1"
                 android:layout_width="match_parent"

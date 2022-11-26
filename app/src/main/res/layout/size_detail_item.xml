@@ -1,0 +1,7 @@
+<com.google.android.material.chip.Chip
+    android:layout_width="wrap_content"
+    android:text="X"
+    android:id="@+id/chip_size"
+    style="@style/Widget.Material3.Chip.Filter"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

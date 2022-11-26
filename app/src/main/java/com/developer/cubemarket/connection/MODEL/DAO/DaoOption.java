@@ -16,6 +16,7 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
 import com.developer.cubemarket.connection.MODEL.OOP.Option;
+import com.developer.cubemarket.connection.callback.CallBackDataOption;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -109,7 +110,7 @@ public class DaoOption {
         requestQueue.add(stringRequest);
 
     }
-    public  void getdata_option(int id_product){
+    public  void getdata_option(CallBackDataOption callBackDataOption, int id_product){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_option, new Response.Listener<String>() {
@@ -129,10 +130,8 @@ public class DaoOption {
                             String size_name = jsonObject.getString("size_name");
                             int price=jsonObject.getInt("price");
                             int number= jsonObject.getInt("number");
-
-
-                            ee.add(new Option(id_option,masanpham,product_name,color_name,size_name,price,number));
-
+                            callBackDataOption.onSuccess(new Option(id_option,masanpham,product_name,color_name,size_name,
+                                    price,number));
                             //---------------------------------------viets code ở dưới này---------------------------------------
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -141,6 +140,7 @@ public class DaoOption {
 
                     }
                 } catch (JSONException e) {
+                    callBackDataOption.onFail("Lỗi: "+e);
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
                 }
@@ -148,6 +148,7 @@ public class DaoOption {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackDataOption.onFail("Lỗi: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){

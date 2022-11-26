@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.developer.cubemarket.R
-import com.developer.cubemarket.`object`.cart.CartProduct
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.OOP.GioHang
 import com.developer.cubemarket.databinding.ProductCartItemBinding
+import com.developer.cubemarket.fragment.fragment_home_pager.CartFragment
 
 class CartProductAdapter(
-    var arr: ArrayList<CartProduct>
+    var fr: CartFragment,
+    var arr: ArrayList<GioHang>
 ): RecyclerView.Adapter<CartProductAdapter.CartProductViewHolder>() {
     class CartProductViewHolder(v: View): RecyclerView.ViewHolder(v){
         val binding = ProductCartItemBinding.bind(v)
@@ -22,11 +25,12 @@ class CartProductAdapter(
     }
 
     override fun onBindViewHolder(holder: CartProductViewHolder, position: Int) {
-        val pr = arr[position]
-        holder.binding.imvProduct.setImageBitmap(pr.img)
-        holder.binding.tvInfo.text = pr.info
-        holder.binding.tvName.text = pr.name
-        holder.binding.tvPrice.text = Utils.formaterVND(pr.price)
+        val gh = arr[position]
+        val option = Utils.getOptionLoadImgDirectoryFromUrl()
+        Glide.with(fr.requireContext()).load(gh.img).apply(option).into(holder.binding.imvProduct);
+        holder.binding.tvInfo.text = "Kích thước: ${gh.tenkichthuoc} màu: ${gh.tenmau}"
+        holder.binding.tvName.text = gh.tensanpham
+        holder.binding.tvPrice.text = Utils.formaterVND(gh.gia)
     }
     override fun getItemCount(): Int {
         return arr.size

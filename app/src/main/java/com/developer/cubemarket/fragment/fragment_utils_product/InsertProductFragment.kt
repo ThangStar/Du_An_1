@@ -45,6 +45,8 @@ class InsertProductFragment : Fragment() {
     var arrSize = arrayListOf<Kichthuoc>()
     var arrColor = arrayListOf<Mausac>()
     val arrFormat = arrayListOf<String>()
+    var strUpload = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +73,12 @@ class InsertProductFragment : Fragment() {
             val color = arrColor[binding.spnColor.selectedItemPosition].tenmausac
             val price = binding.edtPrice.text.toString().trim()
             val amount = binding.edtAmount.text.toString().trim()
+
+            val idSize = arrSize[binding.spnSize.selectedItemPosition].makichthuoc
+            val idColor = arrColor[binding.spnColor.selectedItemPosition].mamausac
+            var formatUpload = "$idColor:$idSize:$price:$amount/"
+            strUpload += formatUpload
+
             val rs = "$size - $color - ${Utils.formaterVND(price.toInt())} - $amount"
             arrFormat.add(rs)
             adapterFormat.notifyItemInserted(arrFormat.size)
@@ -135,8 +143,7 @@ class InsertProductFragment : Fragment() {
             val price = binding.edtPrice.text.toString().trim()
             val amount = binding.edtAmount.text.toString().trim()
 
-            val size = arrSize[binding.spnSize.selectedItemPosition].makichthuoc
-            val color = arrColor[binding.spnColor.selectedItemPosition].mamausac
+
             val detail = binding.edtDetail.text.toString().trim()
             if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,80}", name)){
                 binding.tilName.error = null
@@ -189,13 +196,12 @@ class InsertProductFragment : Fragment() {
 
                 }
                 //format color & size
-                val rs = "$color:$size:$price:$amount/"
                 DaoSanPham(requireContext()).insert_sanpham(call, directory,
                     name,
                     Utils.getEncoded64ImageStringFromBitmap(bitmap),
                     brand,
                     detail,
-                    rs,
+                    strUpload,
                     DataUser.id)
             }
         }

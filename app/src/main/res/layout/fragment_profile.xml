@@ -353,6 +353,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <LinearLayout
+                        android:id="@+id/ln_go_bill"
                         android:layout_width="match_parent"
                         android:gravity="center_vertical"
                         android:clickable="true"

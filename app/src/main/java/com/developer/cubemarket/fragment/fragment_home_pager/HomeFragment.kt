@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
     lateinit var ctx: Context
     private var arrAutoComplete = arrayListOf<String>()
 
-    var adapterCompleteSearch: ArrayAdapter<String>? = null
+    private var adapterCompleteSearch: ArrayAdapter<String>? = null
     companion object{
         lateinit var arrDirectory: ArrayList<Danhmuc>
         @SuppressLint("StaticFieldLeak")

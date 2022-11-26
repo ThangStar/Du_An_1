@@ -11,16 +11,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
-import com.developer.cubemarket.`object`.DirectoryHome
-import com.developer.cubemarket.`object`.cart.CartProduct
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.cart.CartProductAdapter
-import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.config.user.DataUser
+import com.developer.cubemarket.connection.MODEL.DAO.DaoGioHang
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
+import com.developer.cubemarket.connection.MODEL.OOP.GioHang
+import com.developer.cubemarket.connection.callback.CallBackSelectCart
 import com.developer.cubemarket.databinding.FragmentCartBinding
+import es.dmoral.toasty.Toasty
 
 class CartFragment : Fragment() {
     lateinit var binding: FragmentCartBinding
+    lateinit var adapterProduct: CartProductAdapter
     lateinit var ctx: Context
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,19 +48,25 @@ class CartFragment : Fragment() {
     }
 
     private fun initRecyclerProduct() {
-        val adapter = CartProductAdapter(initDataCartProduct())
-        binding.ryProduct.adapter = adapter
+        adapterProduct = CartProductAdapter(this, initDataCartProduct())
+        binding.ryProduct.adapter = adapterProduct
     }
 
-    private fun initDataCartProduct():  ArrayList<CartProduct> {
-        var arr = arrayListOf<CartProduct>()
-        val bm = Utils.resourceToBitmap(resources, R.drawable.product1)
-        val bm2 = Utils.resourceToBitmap(resources, R.drawable.product2)
-        arr.add(CartProduct(bm, "Giày nike", "size: 41", 690000))
-        arr.add(CartProduct(bm2, "Mặt nạ hacker", "size: 41", 690300))
-        arr.add(CartProduct(bm, "Giày nike", "size: 41", 534000))
-        arr.add(CartProduct(bm2, "Mặt nạ hacker", "size: 41", 6234000))
-        arr.add(CartProduct(bm, "Giày nike", "size: 41", 6490000))
+    private fun initDataCartProduct():  ArrayList<GioHang> {
+        val arr = arrayListOf<GioHang>()
+        val callBackSelect = object : CallBackSelectCart{
+            override fun onSuccess(gh: GioHang) {
+                arr.add(gh)
+                adapterProduct.notifyItemInserted(arr.size)
+            }
+            override fun onFail(rs: String) {
+                Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+            }
+            override fun onError(rs: String) {
+                Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+            }
+        }
+        DaoGioHang(requireContext()).getdata_giohang(callBackSelect, DataUser.id)
         return arr
     }
 

@@ -79,4 +79,8 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String insert_option="https://"+IP+"//android/duanmau/insert_option.php";
     public static String delete_option="https://"+IP+"//android/duanmau/delete_option.php";
 
+    public static String insert_comment="https://"+IP+"//android/duanmau/insert_comment.php";
+    public static String update_comment="https://"+IP+"//android/duanmau/update_comment.php";
+    public static String getdata_comment="https://"+IP+"//android/duanmau/getdata_comment_product.php";
+
 }

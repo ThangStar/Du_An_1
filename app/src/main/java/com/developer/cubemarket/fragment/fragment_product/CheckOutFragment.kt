@@ -5,18 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.developer.cubemarket.R
-import com.developer.cubemarket.`object`.checkout.ProductCheckOut
-import com.developer.cubemarket.adapter.cart.CartProductAdapter
 import com.developer.cubemarket.adapter.checkout.CheckOutCartAdapter
+import com.developer.cubemarket.call_back_view.OnAddressSelected
 import com.developer.cubemarket.config.user.DataUser
-import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoGioHang
 import com.developer.cubemarket.connection.MODEL.DAO.DaoHoaDon
+import com.developer.cubemarket.connection.MODEL.OOP.Diachi
 import com.developer.cubemarket.connection.MODEL.OOP.GioHang
 import com.developer.cubemarket.connection.callback.CallBackSelectCart
 import com.developer.cubemarket.databinding.FragmentCheckOutBinding
 import com.developer.cubemarket.fragment.bottom_sheet.BtsChooseAddressFragment
+import com.developer.cubemarket.fragment.bottom_sheet.BtsVoicherFragment
 import es.dmoral.toasty.Toasty
 
 class CheckOutFragment : Fragment() {
@@ -32,22 +31,35 @@ class CheckOutFragment : Fragment() {
         initRecyclerProduct()
         initEditAddress()
         initEventOrder()
+        initGoSelectVoucher()
 
 
         return binding.root
     }
 
+    private fun initGoSelectVoucher() {
+        binding.rlGoSelectVoucher.setOnClickListener {
+            val model = BtsVoicherFragment()
+            model.show(requireActivity().supportFragmentManager, BtsVoicherFragment.TAG)
+        }
+    }
+
     private fun initEventOrder() {
         binding.btnOrder.setOnClickListener {
-            DaoHoaDon(requireContext()).insert_hoadon(DataUser.id, "123 abc 456 def", "ms1")
+            DaoHoaDon(requireContext()).insert_hoadon(DataUser.id, binding.tvAddress.text.toString(), "ms1")
         }
     }
 
     private fun initEditAddress() {
         binding.imvShowBottomSheet.setOnClickListener {
-            val model = BtsChooseAddressFragment()
-            model.show(requireActivity().supportFragmentManager, BtsChooseAddressFragment.TAG)
 
+            val onAddressSelected = object : OnAddressSelected {
+                override fun onSelected(dc: Diachi) {
+                    binding.tvAddress.text = dc.tendiachi
+                }
+            }
+            val model = BtsChooseAddressFragment(onAddressSelected)
+            model.show(requireActivity().supportFragmentManager, BtsChooseAddressFragment.TAG)
         }
     }
 

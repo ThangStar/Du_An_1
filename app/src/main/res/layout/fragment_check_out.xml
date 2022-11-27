@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bg_anime"
+                android:src="@drawable/ripple_item_favorite"
                 app:layout_collapseMode="parallax" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -67,6 +67,97 @@
                     android:textColor="@color/text_color_secondary"
                     android:textSize="25sp" />
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/address"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Phường 123 quận 456 thành phố 789"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <ImageView
+                    android:id="@+id/imv_show_bottom_sheet"
+                    android:clickable="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="8dp"
+                    android:background="@drawable/ripple_item"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_edit_address"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    app:tint="@color/text_color_secondary" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_go_select_voucher"
+                android:clickable="true"
+                android:background="@drawable/ripple_text"
+                android:paddingVertical="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true">
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/imv_voicher"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_voicher_cart"
+                    android:layout_height="wrap_content"
+                    app:tint="@color/item_color_secondary" />
+                <TextView
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginStart="6dp"
+                    android:layout_toEndOf="@id/imv_voicher"
+                    android:text="Voicher"
+                    android:fontFamily="@font/roboto_light"
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="6dp"
+                    android:text="Chọn hoặc nhập mã"
+                    android:layout_toStartOf="@+id/ic_goto"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_centerVertical="true"
+
+                    android:id="@+id/ic_goto"
+                    android:src="@drawable/ic_goto"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:tint="@color/text_hint_secondary" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@id/card1"
+                android:background="@color/dividingLine"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ry_product"
                 android:nestedScrollingEnabled="false"
@@ -83,66 +174,87 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
-            android:background="@color/white"
-            android:paddingHorizontal="20dp"
             android:paddingVertical="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/text_color_secondary"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="@string/address"
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textColor="@color/text_color_secondary"
-                    android:layout_marginVertical="10dp"
-                    android:textSize="8sp"
-                    android:text="Phường 123 quận 456 thành phố 789"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-            <ImageView
-                android:id="@+id/imv_show_bottom_sheet"
-                android:clickable="true"
-                android:layout_alignParentEnd="true"
-                android:padding="8dp"
-                android:background="@drawable/ripple_item"
-                android:layout_width="wrap_content"
-                android:src="@drawable/ic_edit"
-                android:layout_height="wrap_content"
-                android:focusable="true" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:paddingHorizontal="20dp"
             android:layout_height="wrap_content">
             <TextView
-                android:textColor="@color/text_color_secondary"
+                android:id="@+id/tv_sum"
                 android:text="Tổng tiền"
-                android:textSize="18sp"
-                android:fontFamily="@font/roboto_light"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/tv_sum_price"
+                android:text="đ 1.900.000"
+                android:textSize="14sp"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_ship"
+                android:layout_marginVertical="2dp"
+                android:layout_below="@id/tv_sum"
+                android:text="Phí giao hàng"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_price_ship"
+                android:layout_below="@id/tv_sum_price"
+                android:text="đ 20.000"
+                android:textSize="12sp"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_voicher"
+                android:layout_marginVertical="2dp"
+                android:layout_below="@id/tv_ship"
+                android:text="Voicher từ CubeShop"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_sum_voicher"
+                android:layout_below="@id/tv_price_ship"
+                android:text="- đ 10.000"
+                android:textSize="12sp"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_voicher"
+                android:textColor="@color/text_color_secondary"
+                android:text="Thành tiền"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="8dp"
                 android:textColor="@color/text_color_secondary"
                 android:text="đ 1.900.000"
                 android:textSize="18sp"
-                android:layout_alignParentRight="true"
+                android:layout_below="@id/tv_sum_voicher"
+                android:layout_alignParentEnd="true"
                 android:fontFamily="@font/roboto_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:paddingVertical="5dp"
             android:layout_height="wrap_content">
             <com.google.android.material.button.MaterialButton
                 android:text="@string/order"

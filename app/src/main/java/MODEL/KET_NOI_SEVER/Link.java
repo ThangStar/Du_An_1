@@ -49,10 +49,12 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String insert_mausac="https://"+IP+"//android/duanmau/insert_mausac.php";
     public static String delete_mausac="https://"+IP+"//android/duanmau/delete_mausac.php";
     public static String getdata_mausac="https://"+IP+"//android/duanmau/getdata_mausac.php";
+    public static String update_mausac="https://"+IP+"//android/duanmau/update_mausac.php";
 
     public static String insert_kichthuoc="https://"+IP+"//android/duanmau/insert_kichthuoc.php";
     public static String delete_kichthuoc="https://"+IP+"//android/duanmau/delete_kichthuoc.php";
     public static String getdata_kichthuoc="https://"+IP+"//android/duanmau/getdata_kichthuoc.php";
+    public static String update_kichthuoc="https://"+IP+"//android/duanmau/update_kichthuoc.php";
 
     public static String insert_giohang="https://"+IP+"//android/duanmau/insert_giohang.php";
     public static String getdata_giohang="https://"+IP+"//android/duanmau/getdata_giohang.php";

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import MODEL.IResult.IResult_kichthuoc;
@@ -36,7 +37,7 @@ public class DaoKichThuoc {
 
         this.context = context;
     }
-    public  void insert_kichthuoc(int masanpham,String tenkichthuoc){
+    public  void insert_kichthuoc(String tenkichthuoc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_kichthuoc, new Response.Listener<String>() {
@@ -58,8 +59,41 @@ public class DaoKichThuoc {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
-                stringStringMap.put("tenkichthuoc",tenkichthuoc);
+
+                stringStringMap.put("tenkichthuoc",tenkichthuoc.toUpperCase(Locale.ROOT));
+
+
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    public  void update_kichthuoc(int makichthuoc,String tenkichthuoc){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_kichthuoc, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("makichthuoc", String.valueOf(makichthuoc));
+                stringStringMap.put("tenkichthuoc",tenkichthuoc.toUpperCase(Locale.ROOT));
 
 
                 return stringStringMap;
@@ -76,6 +110,8 @@ public class DaoKichThuoc {
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
                     Log.d(TAG, "thành công");
+                }else  if(response.toString().trim().equals("NODELETE")){
+                    Log.d(TAG, "khoong theer xoa kich thuoc  nay");
                 }else{
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }

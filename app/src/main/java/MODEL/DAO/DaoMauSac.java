@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import MODEL.IResult.IResult_mausac;
@@ -36,7 +37,7 @@ public class DaoMauSac {
 
         this.context = context;
     }
-/*    public  void insert_mausac(int masanpham,String tenmausac){
+   public  void insert_mausac(String tenmausac){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_mausac, new Response.Listener<String>() {
@@ -58,8 +59,41 @@ public class DaoMauSac {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("masanpham", String.valueOf(masanpham));
-                stringStringMap.put("tenmausac",tenmausac);
+
+                stringStringMap.put("tenmausac",tenmausac.toUpperCase(Locale.ROOT));
+
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    public  void update_mausac(int mamau,String tenmau){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_mausac, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                }else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("mamausac", String.valueOf(mamau));
+                stringStringMap.put("tenmaumausac",tenmau.toUpperCase(Locale.ROOT));
+
 
                 return stringStringMap;
             }
@@ -75,6 +109,8 @@ public class DaoMauSac {
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
                     Log.d(TAG, "thành công");
+                }else  if(response.toString().trim().equals("NODELETE")){
+                    Log.d(TAG, "khoong theer xoa mau nay");
                 }else{
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
@@ -95,7 +131,7 @@ public class DaoMauSac {
         };
         requestQueue.add(stringRequest);
 
-    }*/
+    }
     public  void getdata_mausac(IResult_mausac mResultCallback){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();

@@ -37,7 +37,6 @@ public class DaoOption {
         this.context = context;
     }
     public  void insert_option( int id_product,String option){
-
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_option, new Response.Listener<String>() {

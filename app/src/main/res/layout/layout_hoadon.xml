@@ -1,18 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0DDDD"
+    android:background="@color/background_primary"
     tools:context=".activity.VIEW.LayoutHoadonActivity">
 
-    <ListView
-        android:id="@+id/list_hoadon"
+    <RelativeLayout
+        android:translationZ="5dp"
+        android:elevation="3dp"
+        android:background="@color/white"
+        android:id="@+id/rl_top_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="25dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/imv_menu"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:focusable="true" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/imv_menu"
+            android:id="@+id/tv_title_tab"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:text="Hóa đơn"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_above="@id/btn_return"
+        android:layout_below="@id/rl_top_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginTop="14dp"
+            android:id="@+id/tv_title"
+            android:text="Đơn hàng đã đặt"
+            android:textSize="24sp"
+            android:textColor="@color/text_color_secondary"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ListView
+            android:scrollbars="none"
+            android:layout_marginVertical="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/tv_title"
+            android:id="@+id/list_hoadon"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:text="Quay lại"
+        app:cornerRadius="12dp"
+        android:id="@+id/btn_return"
+        android:paddingVertical="14dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/button_background_primary"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

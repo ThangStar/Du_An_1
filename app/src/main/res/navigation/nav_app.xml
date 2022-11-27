@@ -35,7 +35,8 @@
         tools:layout="@layout/fragment_product" >
         <action
             android:id="@+id/action_productFragment_to_detailProductFragment"
-            app:destination="@id/detailProductFragment" />
+            app:destination="@id/detailProductFragment"
+            app:enterAnim="@anim/in_page" />
         <action
             android:id="@+id/action_productFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment"
@@ -59,10 +60,18 @@
             app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_updateUserFragment"
-            app:destination="@id/updateUserFragment" />
+            app:destination="@id/updateUserFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_insertDirectoryFragment"
-            app:destination="@id/insertDirectoryFragment" />
+            app:destination="@id/insertDirectoryFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_updateDirectoryFragment"
             app:destination="@id/updateDirectoryFragment" />
@@ -92,7 +101,11 @@
     <fragment
         android:id="@+id/checkOutFragment"
         android:name="com.developer.cubemarket.fragment.fragment_product.CheckOutFragment"
-        android:label="CheckOutFragment" />
+        android:label="CheckOutFragment" >
+        <action
+            android:id="@+id/action_checkOutFragment_to_detailProductFragment"
+            app:destination="@id/detailProductFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postProductFragment"
         android:name="com.developer.cubemarket.fragment.fragment_utils_product.InsertProductFragment"

@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
+    android:id="@+id/rl_product_check_out"
     android:paddingVertical="10dp"
-    android:clickable="true"
     android:background="@drawable/ripple_text"
     android:paddingHorizontal="10dp"
+    android:clickable="true"
     android:layout_marginHorizontal="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@id/car_image"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
@@ -57,10 +59,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:padding="4dp"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
         android:orientation="vertical"
         android:background="@drawable/shape_linear_radius"
         android:layout_alignParentRight="true"
@@ -70,22 +71,23 @@
             android:clickable="true"
             android:background="@drawable/ripple_item"
             android:src="@drawable/ic_plus"
-            android:padding="8dp"
-            android:layout_width="wrap_content"
+            android:padding="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true" />
         <TextView
             android:id="@+id/tv_amount"
-            android:text="2"
+            android:text="01"
+            android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:textSize="18sp"
             android:fontFamily="@font/roboto_bold"
             android:textColor="@color/text_color_secondary"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/imv_minus"
-            android:padding="8dp"
+            android:padding="16dp"
             android:clickable="true"
             android:background="@drawable/ripple_item"
             android:src="@drawable/ic_minus"

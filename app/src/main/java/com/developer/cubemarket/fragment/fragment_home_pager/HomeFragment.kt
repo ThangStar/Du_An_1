@@ -2,6 +2,7 @@ package com.developer.cubemarket.fragment.fragment_home_pager
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,6 +31,7 @@ import com.developer.cubemarket.connection.callback.CallBackProduct
 import com.developer.cubemarket.databinding.FragmentHomeBinding
 import com.developer.cubemarket.fragment.ProductFragment
 import com.developer.cubemarket.connection.callback.VolleyCallBack
+import com.google.android.material.transition.MaterialContainerTransform
 import com.mancj.materialsearchbar.MaterialSearchBar.OnSearchActionListener
 import es.dmoral.toasty.Toasty
 
@@ -42,7 +44,6 @@ class HomeFragment : Fragment() {
     private var adapterCompleteSearch: ArrayAdapter<String>? = null
     companion object{
         lateinit var arrDirectory: ArrayList<Danhmuc>
-        @SuppressLint("StaticFieldLeak")
         lateinit var adapterDirectory: DirectoryHomeAdapter
         lateinit var productHomeAdapter: ProductHomeAdapter
         var arrHomeProduct = arrayListOf<Sanpham>()
@@ -64,15 +65,8 @@ class HomeFragment : Fragment() {
         initRecyclerProduct()
         initSearch()
 
-        binding.ryProduct.doOnPreDraw {
-            startPostponedEnterTransition()
-        }
 
 
-        sharedElementReturnTransition = TransitionInflater.from(requireContext()).inflateTransition(
-            R.transition.shared_image)
-        exitTransition = TransitionInflater.from(ctx).inflateTransition(
-            R.transition.shared_image)
         return binding.root
     }
 

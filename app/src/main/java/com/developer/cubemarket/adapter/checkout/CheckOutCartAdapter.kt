@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.developer.cubemarket.R
@@ -18,6 +19,7 @@ class CheckOutCartAdapter(
     var fr: Fragment,
     var arr: ArrayList<GioHang>
 ): RecyclerView.Adapter<CheckOutCartAdapter.CheckOutCartViewHolder>() {
+    @SuppressLint("SetTextI18n")
     class CheckOutCartViewHolder(
         v: View,
         var arr: ArrayList<GioHang>,
@@ -27,18 +29,29 @@ class CheckOutCartAdapter(
         val binding = CheckoutProductItemBinding.bind(v)
 
         init {
+            binding.rlProductCheckOut.setOnClickListener{
+                fr.findNavController().navigate(R.id.action_checkOutFragment_to_detailProductFragment)
+            }
             binding.imvPlus.setOnClickListener {
                 //plus tvAmount
                 val tvAmount = binding.tvAmount.text.toString()
                 var count = tvAmount.toInt()
-                binding.tvAmount.text = "${++count}"
+                if(count < 9){
+                    binding.tvAmount.text = "0${++count}"
+                }else{
+                    binding.tvAmount.text = "${++count}"
+                }
             }
             binding.imvMinus.setOnClickListener {
                 //minus tvAmount
                 val tvAmount = binding.tvAmount.text.toString()
                 var count = tvAmount.toInt()
                 if(count > 1){
-                    binding.tvAmount.text = "${--count}"
+                    if (count < 9){
+                        binding.tvAmount.text = "0${--count}"
+                    }else{
+                        binding.tvAmount.text = "${--count}"
+                    }
                 }else{
                     val callBackDeleteCart = object : CallBackDeleteCart{
                         override fun onSuccess() {

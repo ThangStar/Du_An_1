@@ -22,7 +22,7 @@ import java.util.List;
 
 public class LayoutHoadonActivity extends AppCompatActivity {
     ListView list_hoadon;
-    public  static adapter_list_hoadon adapter_list_hoadons;
+    public static adapter_list_hoadon adapter_list_hoadons;
 
     IResult_hoadon mResultCallback_hoadon = null;
     @Override
@@ -38,8 +38,6 @@ public class LayoutHoadonActivity extends AppCompatActivity {
         mResultCallback_hoadon= new IResult_hoadon() {
             @Override
             public void notifySuccess(String requestType, List<Hoadon> response) {
-
-
                 adapter_list_hoadons= new adapter_list_hoadon(LayoutHoadonActivity.this,R.layout.list_hoadon,response);
                 list_hoadon.setAdapter(adapter_list_hoadons);
             }
@@ -50,8 +48,8 @@ public class LayoutHoadonActivity extends AppCompatActivity {
             }
         };
         DaoHoaDon daoHoaDo = new DaoHoaDon(LayoutHoadonActivity.this);
-        Log.d("OCUPATION", DataUser.Companion.getOccupation()+"");
-        if(DataUser.Companion.getOccupation() ==2){
+        if(DataUser.Companion.getOccupation() == 2){
+            Log.d("OCUPATION", DataUser.Companion.getId()+"");
             daoHoaDo.getdata_hoadon_admin(mResultCallback_hoadon, DataUser.Companion.getId());
         }
 

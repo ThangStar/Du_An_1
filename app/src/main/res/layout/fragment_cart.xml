@@ -116,7 +116,6 @@ tools:context=".fragment.fragment_home_pager.CartFragment">
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title_directory"
             android:layout_marginHorizontal="10dp"
-            android:background="@color/background_primary"
             android:layout_marginTop="15dp"
             android:nestedScrollingEnabled="false"
             android:layout_marginBottom="?attr/actionBarSize"
@@ -144,7 +143,8 @@ tools:context=".fragment.fragment_home_pager.CartFragment">
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:minWidth="30dp"
-                android:text="2"
+                android:text="1"
+                android:id="@+id/tv_count"
                 android:padding="0dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
@@ -170,12 +170,13 @@ tools:context=".fragment.fragment_home_pager.CartFragment">
                 android:textSize="26sp" />
 
             <TextView
+                android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="25dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="đ 1.290.000"
+                android:text="đ 0"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
         </LinearLayout>

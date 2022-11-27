@@ -130,7 +130,7 @@ class InsertProductFragment : Fragment() {
 
 
     private fun initImageDefault() {
-        bitmap = Utils.resourceToBitmap(resources, R.drawable.other)
+        bitmap = Utils.resourceToBitmap(resources, R.drawable.image_default)
     }
 
     private fun initInsertProduct() {
@@ -140,29 +140,12 @@ class InsertProductFragment : Fragment() {
             val directory = type[binding.spnDirectory.selectedItemPosition].madanhmuc
             val brand = binding.edtBrand.text.toString().trim()
 
-            val price = binding.edtPrice.text.toString().trim()
-            val amount = binding.edtAmount.text.toString().trim()
-
 
             val detail = binding.edtDetail.text.toString().trim()
             if(Pattern.matches("[${Utils.getRegexVietNam2()} \\\\,]{1,80}", name)){
                 binding.tilName.error = null
             }else{
                 binding.tilName.error = "Tên 1-80 kí tự, không có kí tự đặc biệt"
-                isCheck = false
-            }
-
-            if(Pattern.matches("^[0-9]{5,10}$", price)){
-                binding.tilPrice.error = null
-            }else{
-                binding.tilPrice.error = "Giá 5-10 kí tự, phải là số"
-                isCheck = false
-            }
-
-            if(Pattern.matches("^[0-9]{1,10}$", amount)){
-                binding.tilAmount.error = null
-            }else{
-                binding.tilAmount.error = "Số lượng 1-10 kí tự, phải là số"
                 isCheck = false
             }
 

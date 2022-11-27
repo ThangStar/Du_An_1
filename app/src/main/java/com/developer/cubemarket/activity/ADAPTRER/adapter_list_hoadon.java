@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.developer.cubemarket.R;
 import com.developer.cubemarket.activity.VIEW.LayoutChitiethoadonActivity;
+import com.developer.cubemarket.config.utils.Utils;
 import com.developer.cubemarket.connection.MODEL.OOP.Hoadon;
 
 import java.util.List;
@@ -58,12 +59,12 @@ public class adapter_list_hoadon extends BaseAdapter {
         Button bnt=(Button)view.findViewById(R.id.bnt_hoadon_chitiet);
 
         Hoadon o = list.get(i);
-        txt_ngaymua.setText("Ngày mua :"+o.getNgaymua());
-        txt_ma.setText("Mã :"+o.getMahoadon());
-        txt_diachi.setText("Địa chỉ :"+o.getTendiachi());
-        txt_soluong.setText("Số lượng :"+o.getSoluonghoadon());
-        txt_khuyenmai.setText("Khuễn mãi :"+o.getPhantramkhuyenmai()+"");
-        txt_gia.setText("đ "+o.getTongtien());
+        txt_ngaymua.setText("Ngày mua: "+o.getNgaymua());
+        txt_ma.setText(o.getMahoadon()+"");
+        txt_diachi.setText("Địa chỉ: "+o.getTendiachi());
+        txt_soluong.setText("Số lượng: "+o.getSoluonghoadon());
+        txt_khuyenmai.setText("Khuyến mãi: "+o.getPhantramkhuyenmai()+"");
+        txt_gia.setText(Utils.Companion.formaterVND(o.getTongtien()));
         bnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

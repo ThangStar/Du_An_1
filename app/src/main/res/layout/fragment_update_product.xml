@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.fragment_utils_product.UpdateProductFragment">
+    tools:context=".fragment.fragment_utils_product.InsertProductFragment">
 
     <RelativeLayout
         android:id="@+id/rl_toolbar"
@@ -22,8 +22,7 @@
             android:background="@drawable/ripple_text"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/ic_back"
-            android:contentDescription="TODO" />
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:textColor="@color/text_color_secondary"
@@ -42,7 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:paddingBottom="80dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -79,13 +77,13 @@
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_below="@id/tv1"
-                                app:counterEnabled="true"
-                                app:endIconMode="clear_text"
-                                app:counterMaxLength="80"
                                 android:layout_height="wrap_content"
                                 app:boxStrokeColor="@color/dividingLine"
                                 app:boxStrokeWidth="1dp"
                                 android:layout_marginBottom="6dp"
+                                app:counterEnabled="true"
+                                app:endIconMode="clear_text"
+                                app:counterMaxLength="80"
                                 app:boxCornerRadiusTopEnd="8dp"
                                 app:boxCornerRadiusBottomStart="8dp"
                                 app:boxCornerRadiusBottomEnd="8dp"
@@ -98,7 +96,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="Tên.."
-
                                     android:fontFamily="@font/roboto_medium"
                                     android:id="@+id/edt_name"/>
                             </com.google.android.material.textfield.TextInputLayout>
@@ -134,7 +131,7 @@
                         android:padding="10dp"
                         android:clickable="true"
                         android:background="@drawable/ripple_text"
-                        android:src="@drawable/avatar_2"
+                        android:src="@drawable/image_default"
                         android:layout_width="0dp"
                         android:scaleType="fitCenter"
                         android:layout_height="match_parent"
@@ -142,101 +139,12 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:paddingHorizontal="20dp"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_marginBottom="6dp"
-                            android:textColor="@color/text_color_secondary"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Giá"
-                            android:layout_marginTop="10dp"/>
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:id="@+id/til_price"
-                            android:layout_height="wrap_content"
-                            app:boxStrokeColor="@color/dividingLine"
-                            app:boxStrokeWidth="1dp"
-                            android:layout_marginEnd="8dp"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:hintEnabled="false"
-                            app:counterEnabled="true"
-                            app:endIconMode="clear_text"
-                            app:counterMaxLength="10"
-                            android:textColorHint="@color/text_hint_secondary">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/edt_price"
-                                android:hint="VND"
-                                android:inputType="number"
-                                android:fontFamily="@font/roboto_medium"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:textColor="@color/text_color_secondary"
-
-                            android:layout_marginBottom="6dp"
-                            android:id="@+id/tv2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Kho"
-                            android:layout_marginTop="10dp"/>
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxStrokeColor="@color/dividingLine"
-                            app:boxStrokeWidth="1dp"
-                            android:id="@+id/til_amount"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:hintEnabled="false"
-                            app:counterEnabled="true"
-                            app:endIconMode="clear_text"
-                            app:counterMaxLength="10"
-                            android:textColorHint="@color/text_hint_secondary">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:id="@+id/edt_amount"
-                                android:layout_height="wrap_content"
-                                android:hint="0"
-                                android:inputType="number"
-
-                                android:fontFamily="@font/roboto_medium"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
                     android:paddingHorizontal="20dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         android:textColor="@color/text_color_secondary"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nhà sản xuất"
@@ -245,23 +153,23 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/til_brand"
                         app:boxStrokeColor="@color/dividingLine"
                         app:boxStrokeWidth="1dp"
+                        app:counterEnabled="true"
+                        app:endIconMode="clear_text"
+                        app:counterMaxLength="18"
+                        android:id="@+id/til_brand"
                         app:boxCornerRadiusTopEnd="8dp"
                         app:boxCornerRadiusBottomStart="8dp"
                         app:boxCornerRadiusBottomEnd="8dp"
                         app:boxCornerRadiusTopStart="8dp"
                         app:hintEnabled="false"
-                        app:counterEnabled="true"
-                        app:endIconMode="clear_text"
-                        app:counterMaxLength="18"
                         android:textColorHint="@color/text_hint_secondary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:id="@+id/edt_brand"
+                            android:layout_height="wrap_content"
                             android:hint="Nike, Supreme, Adidas,.."
                             android:fontFamily="@font/roboto_medium"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -269,94 +177,86 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="2"
                     android:paddingHorizontal="20dp"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/text_color_secondary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kích cỡ"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginTop="10dp"/>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/ry_size"
-                        app:spanCount="3"
-                        android:nestedScrollingEnabled="false"
-                        tools:itemCount="8"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
                         android:layout_height="wrap_content">
-                        <com.google.android.material.textfield.TextInputLayout
+                        <TextView
+                            android:textColor="@color/text_color_secondary"
                             android:layout_width="wrap_content"
-                            android:id="@+id/til_size"
                             android:layout_height="wrap_content"
-                            app:boxStrokeColor="@color/dividingLine"
-                            app:boxStrokeWidth="1dp"
-                            app:counterEnabled="true"
-                            app:endIconMode="clear_text"
-                            app:counterMaxLength="10"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:hintEnabled="false"
-                            android:textColorHint="@color/text_hint_secondary">
-                        <com.google.android.material.textfield.TextInputEditText
+                            android:text="Kích cỡ"/>
+                        <Spinner
+                            android:id="@+id/spn_size"
                             android:layout_width="match_parent"
-                            android:id="@+id/edt_size"
-                            android:layout_height="wrap_content"
-                            android:hint="M, L, XL, XXL"
-                            android:fontFamily="@font/roboto_medium"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="wrap_content"
-                            android:id="@+id/btn_add_size"
-                            android:text="Thêm cỡ"
-                            android:layout_gravity="top"
-                            android:layout_marginHorizontal="18dp"
-                            app:backgroundTint="@color/text_color_primary"
-                            app:cornerRadius="8dp"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:paddingHorizontal="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/text_color_secondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Màu sắc"/>
+                        <Spinner
+                            android:id="@+id/spn_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
                 </LinearLayout>
 
 
+                <TextView
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="Giá theo từng loại"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/ry_format"
+                    tools:itemCount="2"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
                 <LinearLayout
-                    android:paddingHorizontal="20dp"
-                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="@color/text_color_secondary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Màu sắc"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginTop="10dp"/>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/ry_color"
-                        app:spanCount="3"
-                        tools:itemCount="8"
-                        android:nestedScrollingEnabled="false"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="20dp"
                         android:layout_height="wrap_content">
-                        <com.google.android.material.textfield.TextInputLayout
+                        <TextView
+                            android:textColor="@color/text_color_secondary"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Giá"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="10dp"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/til_price"
                             app:counterEnabled="true"
                             app:endIconMode="clear_text"
                             app:counterMaxLength="10"
-                            android:id="@+id/til_color"
-                            android:layout_height="wrap_content"
                             app:boxStrokeColor="@color/dividingLine"
                             app:boxStrokeWidth="1dp"
                             app:boxCornerRadiusTopEnd="8dp"
@@ -365,25 +265,69 @@
                             app:boxCornerRadiusTopStart="8dp"
                             app:hintEnabled="false"
                             android:textColorHint="@color/text_hint_secondary">
+
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
-                                android:id="@+id/edt_color"
                                 android:layout_height="wrap_content"
-                                android:hint="Xanh, đỏ, vàng"
+                                android:id="@+id/edt_price"
+                                android:hint="0"
+                                android:inputType="number"
+                                android:layout_marginTop="4dp"
                                 android:fontFamily="@font/roboto_medium"/>
                         </com.google.android.material.textfield.TextInputLayout>
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="wrap_content"
-                            android:id="@+id/btn_add_color"
-                            android:text="Thêm màu"
-                            android:layout_marginHorizontal="18dp"
-                            android:layout_gravity="top"
-                            app:backgroundTint="@color/item_color_secondary"
-                            app:cornerRadius="8dp"
-                            android:layout_height="wrap_content"/>
+
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="20dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@color/text_color_secondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Số lượng"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="10dp"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/til_amount"
+                            app:counterEnabled="true"
+                            app:endIconMode="clear_text"
+                            app:counterMaxLength="10"
+                            app:boxStrokeColor="@color/dividingLine"
+                            app:boxStrokeWidth="1dp"
+                            app:boxCornerRadiusTopEnd="8dp"
+                            app:boxCornerRadiusBottomStart="8dp"
+                            app:boxCornerRadiusBottomEnd="8dp"
+                            app:boxCornerRadiusTopStart="8dp"
+                            app:hintEnabled="false"
+                            android:textColorHint="@color/text_hint_secondary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/edt_amount"
+                                android:hint="0"
+                                android:inputType="number"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/roboto_medium"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    app:cornerRadius="12dp"
+                    android:id="@+id/btn_add_format"
+                    app:backgroundTint="@color/item_color_secondary"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="Thêm màu sắc, kích cỡ, giá"
+                    android:layout_height="wrap_content"/>
 
 
                 <LinearLayout
@@ -397,31 +341,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Chi tiết"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_marginTop="10dp"/>
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/til_detail"
                         app:boxStrokeColor="@color/dividingLine"
                         app:boxStrokeWidth="1dp"
+                        app:counterEnabled="true"
+                        app:endIconMode="clear_text"
                         android:minHeight="100dp"
+                        app:counterMaxLength="500"
+                        android:layout_marginBottom="?attr/actionBarSize"
                         app:boxCornerRadiusTopEnd="8dp"
+                        android:id="@+id/til_detail"
                         app:boxCornerRadiusBottomStart="8dp"
                         app:boxCornerRadiusBottomEnd="8dp"
                         app:boxCornerRadiusTopStart="8dp"
                         app:hintEnabled="false"
-                        app:counterEnabled="true"
-                        app:endIconMode="clear_text"
-                        app:counterMaxLength="500"
                         android:textColorHint="@color/text_hint_secondary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:id="@+id/edt_detail"
-                            android:minHeight="100dp"
                             android:layout_height="wrap_content"
                             android:hint="Chi tiết.."
+                            android:minHeight="100dp"
                             android:fontFamily="@font/roboto_medium"/>
                     </com.google.android.material.textfield.TextInputLayout>
 

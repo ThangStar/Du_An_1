@@ -137,7 +137,8 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
-    public  void update_sanpham(CallBackUpdateProduct callBackUpdate, int masanpham, int madanhmuc, String tensanpham, String img, String nhasanxuat, String chitiet){
+
+    public  void update_sanpham(CallBackUpdateProduct callBackUpdate, int masanpham,int madanhmuc,String tensanpham,String img,String nhasanxuat,String chitiet){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -145,8 +146,8 @@ public class DaoSanPham {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    callBackUpdate.onSuccess("Cập nhật thành công");
                     Log.d(TAG, "câp nhập thành công");
+                    callBackUpdate.onSuccess("Cập nhật thành công");
                 }else{
                     callBackUpdate.onFail("Cập nhật thất bại: ");
                     Log.d(TAG, "lỗi>>"+response.toString());
@@ -157,8 +158,6 @@ public class DaoSanPham {
             public void onErrorResponse(VolleyError error) {
                 callBackUpdate.onError("Đã xảy ra lỗi: "+error.getMessage());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
-
-
             }
         }){
             @Nullable
@@ -184,6 +183,7 @@ public class DaoSanPham {
         requestQueue.add(stringRequest);
 
     }
+
     public  void getdata_sanpham(CallBackProduct callback, int id, int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();

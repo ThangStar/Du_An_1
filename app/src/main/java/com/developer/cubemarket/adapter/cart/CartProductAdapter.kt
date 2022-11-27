@@ -1,5 +1,6 @@
 package com.developer.cubemarket.adapter.cart
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class CartProductAdapter(
         return CartProductViewHolder(v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartProductViewHolder, position: Int) {
         val gh = arr[position]
         val option = Utils.getOptionLoadImgDirectoryFromUrl()

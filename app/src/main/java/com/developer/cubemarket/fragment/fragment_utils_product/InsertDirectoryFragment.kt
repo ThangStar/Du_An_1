@@ -38,7 +38,7 @@ class InsertDirectoryFragment : Fragment() {
     }
 
     private fun initImageDefault() {
-        bitmap = Utils.resourceToBitmap(resources, R.drawable.other)
+        bitmap = Utils.resourceToBitmap(resources, R.drawable.image_default)
     }
 
     private fun initEventInsertDirectory() {

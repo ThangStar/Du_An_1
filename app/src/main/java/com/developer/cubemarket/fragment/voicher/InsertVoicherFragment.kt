@@ -107,7 +107,8 @@ class InsertVoicherFragment : Fragment() {
 
             val dateRangePicker =
                 MaterialDatePicker.Builder.dateRangePicker()
-                    .setTitleText("Select dates")
+                    .setTitleText("Chọn khoảng ngày")
+                    .setPositiveButtonText("Lưu")
                     .build()
 
             dateRangePicker.show(requireActivity().supportFragmentManager, "DATE_PICKER")
@@ -129,6 +130,8 @@ class InsertVoicherFragment : Fragment() {
                     .setTimeFormat(TimeFormat.CLOCK_24H)
                     .setHour(12)
                     .setMinute(10)
+                    .setPositiveButtonText("Lưu")
+                    .setNegativeButtonText("Hủy")
                     .setInputMode(INPUT_MODE_CLOCK)
                     .setTitleText("Chọn giờ bắt đầu")
                     .build()
@@ -138,6 +141,8 @@ class InsertVoicherFragment : Fragment() {
                     MaterialTimePicker.Builder()
                         .setTimeFormat(TimeFormat.CLOCK_24H)
                         .setHour(12)
+                        .setPositiveButtonText("Lưu")
+                        .setNegativeButtonText("Hủy")
                         .setMinute(10)
                         .setInputMode(INPUT_MODE_CLOCK)
                         .setTitleText("Chọn giờ kết thúc")

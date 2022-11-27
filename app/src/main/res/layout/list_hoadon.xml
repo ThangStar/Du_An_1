@@ -4,129 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="5dp"
-    android:paddingTop="10dp"
-    android:paddingRight="5dp"
-    android:paddingBottom="5dp">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@color/white"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        app:cardElevation="2dp"
+        android:translationZ="2dp"
         android:layout_height="match_parent"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="8dp">
 
         <LinearLayout
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="25dp"
-                    android:scrollbarAlwaysDrawHorizontalTrack="true"
-                    app:cardCornerRadius="50dp">
-
                     <ImageView
-                        android:id="@+id/list_hoadon_img"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/product1" />
-                </androidx.cardview.widget.CardView>
-
+                        app:srcCompat="@drawable/bill" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_hoadon_ngaymua"
+                        android:textColor="@color/text_color_secondary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Ngày mua:22/02/2022"
-                        android:textStyle="bold" />
+                        android:textSize="12sp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Ngày mua:22/02/2022"/>
 
                     <TextView
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/roboto_bold"
                         android:id="@+id/txt_hoadon_mahoadon"
+                        android:textColor="@color/text_color_secondary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="Mã :01000"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:textColor="@color/button_background_primary"
                         android:id="@+id/txt_hoadon_soluong"
                         android:layout_width="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Sô lượng : 222"
-                        android:textStyle="bold" />
+                        android:textSize="12sp"
+                        android:text="Sô lượng : 222"/>
 
                     <TextView
                         android:id="@+id/txt_hoadon_diachi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_thin"
                         android:text="Địa chỉ nhận hàng: 123 abc phuong xyz, Thanh phố yyy"
                         android:textSize="12sp" />
 
                     <TextView
+                        android:textSize="12sp"
+                        android:fontFamily="@font/roboto_regular"
                         android:id="@+id/txt_hoadon_khuyenmai"
                         android:layout_width="match_parent"
+                        android:textColor="@color/item_color_secondary"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="Mã giảm giá: XMLTKJH" />
 
                     <LinearLayout
+                        android:layout_marginTop="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="10">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="horizontal">
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:layout_marginEnd="8dp"
                                 android:id="@+id/txt_hoadon_gia"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="đ 666666"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                android:layout_alignParentStart="true"
+                                android:layout_toStartOf="@+id/bnt_hoadon_chitiet"
+                                android:gravity="bottom"
+                                android:text="đ 100.000"
+                                android:layout_centerVertical="true"
+                                android:textColor="@color/purple_200"
+                                android:textSize="14sp"
+                                android:textStyle="bold"/>
 
-                            <Button
+                            <com.google.android.material.button.MaterialButton
                                 android:id="@+id/bnt_hoadon_chitiet"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="8"
+                                app:backgroundTint="@color/button_background_primary"
                                 android:text="Chi tiết"
-                                app:icon="@android:drawable/btn_dialog"
-                                app:iconGravity="end"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                                android:textSize="12sp"
+                                app:icon="@drawable/ic_info"
+                                app:cornerRadius="6dp"
+                                app:iconGravity="end" />
+                        </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

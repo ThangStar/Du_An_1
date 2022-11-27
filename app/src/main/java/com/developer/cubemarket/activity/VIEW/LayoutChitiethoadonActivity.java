@@ -21,7 +21,7 @@ public class LayoutChitiethoadonActivity extends AppCompatActivity {
     String id_hoadon,day_buy,price,adress=null;
     ListView list_cthd;
     TextView txt_mhd,txt_ngaymua,txt_diachi,txt_gia;
-    public  static adapter_list_cthd adapter_list_cthds;
+    public static adapter_list_cthd adapter_list_cthds;
     IResult_chitiethoadon mResultCallback_chitiethoadon = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,10 @@ public class LayoutChitiethoadonActivity extends AppCompatActivity {
             adress=intent.getStringExtra("adress").toString().trim();
         }
         if(id_hoadon!=null){
-            txt_mhd.setText("Mã hóa đơn : "+id_hoadon);
-            txt_ngaymua.setText("Ngày mua : "+day_buy);
-            txt_gia.setText("Thành tiền : "+price);
-            txt_diachi.setText("Địa chỉ : "+adress);
+            txt_mhd.setText("Mã hóa đơn: "+id_hoadon);
+            txt_ngaymua.setText("Ngày tạo: "+day_buy);
+            txt_gia.setText("Tổng tiền: "+price);
+            txt_diachi.setText("Địa chỉ nhận hàng: "+adress);
             mResultCallback_chitiethoadon= new IResult_chitiethoadon() {
                 @Override
                 public void notifySuccess(String requestType, List<ChiTietHoaDon> response) {

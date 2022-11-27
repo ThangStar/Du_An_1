@@ -113,7 +113,7 @@
                         android:padding="10dp"
                         android:clickable="true"
                         android:background="@drawable/ripple_text"
-                        android:src="@drawable/avatar_2"
+                        android:src="@drawable/image_default"
                         android:layout_width="0dp"
                         android:scaleType="fitCenter"
                         android:layout_height="match_parent"

@@ -1,71 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/background_primary"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingTop="5dp"
-    android:paddingEnd="10dp"
-    android:paddingBottom="5dp"
     tools:context=".activity.VIEW.LayoutChitiethoadonActivity">
 
+    <RelativeLayout
+        android:translationZ="5dp"
+        android:elevation="3dp"
+        android:background="@color/white"
+        android:id="@+id/rl_top_title"
+        android:layout_width="match_parent"
+        android:padding="25dp"
+        android:layout_height="wrap_content">
+        <ImageView
+
+            android:layout_centerVertical="true"
+            android:id="@+id/imv_menu"
+            android:clickable="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:focusable="true" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/imv_menu"
+            android:id="@+id/tv_title_tab"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:text="Chi tiết hóa đơn"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"/>
+    </RelativeLayout>
     <LinearLayout
+        android:layout_below="@id/rl_top_title"
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_above="@id/btn_return"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
+            android:layout_marginTop="14dp"
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/txt_cthd_mahoadon"
+            android:fontFamily="@font/roboto_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="madonhang"
+            android:text="Mã hóa đơn: 0"
+            android:textColor="@color/text_color_secondary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/txt_cthd_ngaytao"
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/text_color_secondary"
             android:layout_height="wrap_content"
-            android:text="ngày tạo"
-            android:textSize="16sp" />
+            android:text="Ngày tạo"
+            android:textSize="13sp" />
 
         <TextView
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/txt_cthd_diachi"
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_regular"
             android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/item_color_primary"
             android:text="địa chỉ" />
 
         <TextView
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/txt_cthd_thanhtien"
             android:layout_width="match_parent"
+            android:textSize="20sp"
             android:layout_height="wrap_content"
-            android:text="thành tiền" />
+            android:textColor="@color/item_color_secondary"
+            android:text="Tổng tiền:  đ 390.000" />
+
+        <ListView
+            android:scrollbars="none"
+            android:divider="@null"
+            android:id="@+id/list_cthd"
+            android:listSelector="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        </ListView>
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/list_cthd"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-    </ListView>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:text="Quay lại"
+        app:cornerRadius="12dp"
+        android:id="@+id/btn_return"
+        android:paddingVertical="14dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="@color/button_background_primary"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

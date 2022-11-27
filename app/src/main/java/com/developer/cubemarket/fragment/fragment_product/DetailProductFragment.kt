@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.util.Util
 import com.developer.cubemarket.R
@@ -123,14 +124,11 @@ class DetailProductFragment : Fragment() {
 
     private fun initTransition() {
         binding.appBarImage.transitionName = "IMAGE_PRODUCT"
-
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             scrimColor = Color.TRANSPARENT
-            duration = 800
         }
         sharedElementReturnTransition = MaterialContainerTransform().apply {
             scrimColor = Color.TRANSPARENT
-            duration = 800
         }
     }
 

@@ -24,7 +24,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.VIEW.HoaDonActivity"
+            android:name=".activity.VIEW.LayoutChitiethoadonActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 import com.developer.cubemarket.R;
+import com.developer.cubemarket.config.utils.Utils;
 import com.developer.cubemarket.connection.MODEL.OOP.ChiTietHoaDon;
 
 import java.util.List;
@@ -54,17 +56,15 @@ public class adapter_list_cthd extends BaseAdapter {
         tv_name = view.findViewById(R.id.tv_name);
         tv_sl = view.findViewById(R.id.tv_sl);
         tv_size = view.findViewById(R.id.tv_size);
-        tv_price = view.findViewById(R.id.tv_gia);
         tv_sum_price = view.findViewById(R.id.tv_tonggia);
         tv_color = view.findViewById(R.id.tv_color);
 
         ChiTietHoaDon o = list.get(i);
         tv_name.setText("Tên : "+o.getTensanpham());
         tv_sl.setText("Số lương : "+o.getSoluong() );
-        tv_size.setText("Size : "+o.getTenkichthuoc());
-        tv_color.setText("Color : "+o.getTenmau());
-        tv_price.setText("Giá mua : "+o.getGiamua());
-        tv_sum_price.setText("đ : "+o.getTongtien());
+        tv_size.setText("Kích thước : "+o.getTenkichthuoc());
+        tv_color.setText("Màu : "+o.getTenmau());
+        tv_sum_price.setText(Utils.Companion.formaterVND(o.getTongtien()));
         Log.d("TAG", "getView: "+o.getImg());
         Glide.with(context).load(o.getImg()).into(imv_product);
 

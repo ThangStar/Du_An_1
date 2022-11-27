@@ -39,6 +39,24 @@ class ProductHomeAdapter(
             binding.lnProduct.setOnLongClickListener(this)
             binding.imvAddCart.setOnClickListener(this)
 
+            binding.lnProduct.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("id_product",
+                    arr[adapterPosition].masanpham)
+                bundle.putString("img", arr[adapterPosition].img)
+                bundle.putString("name", arr[adapterPosition].tensanpham)
+                bundle.putString("detail", arr[adapterPosition].chitiet)
+                bundle.putInt("price", arr[adapterPosition].giaban)
+                bundle.putString("brand", arr[adapterPosition].nhasanxuat)
+                bundle.putInt("amount", arr[adapterPosition].soluong)
+                bundle.putString("directory", arr[adapterPosition].danhmuc.tendanhmuc)
+                val extra = FragmentNavigatorExtras(
+                    binding.imvProduct to "IMAGE_PRODUCT",
+                )
+                findNavController(fr).navigate(
+                    R.id.action_productFragment_to_detailProductFragment, bundle, null, extra)
+            }
+
         }
         override fun onLongClick(p0: View?): Boolean {
             if (p0 != null) {
@@ -137,30 +155,12 @@ class ProductHomeAdapter(
 
         }
 
-        holder.binding.imvProduct.transitionName = "IMAGE_PRODUCT_${pr.masanpham}"
 
 
-        Log.d("ADAPTER", "${pr.id}")
         holder.binding.tvPrice.text = Utils.formaterVND(pr.giaban)
         holder.binding.tvTitle.text = pr.tensanpham
+        holder.binding.imvProduct.transitionName = "IMAGE_PRODUCT_${pr.masanpham}"
 
-        holder.binding.lnProduct.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putInt("id_product",
-                pr.masanpham)
-            bundle.putString("img", pr.img)
-            bundle.putString("name", pr.tensanpham)
-            bundle.putString("detail", pr.chitiet)
-            bundle.putInt("price", pr.giaban)
-            bundle.putString("brand", pr.nhasanxuat)
-            bundle.putInt("amount", pr.soluong)
-            bundle.putString("directory", pr.danhmuc.tendanhmuc)
-            val extra = FragmentNavigatorExtras(
-                holder.binding.imvProduct to "IMAGE_PRODUCT",
-            )
-            findNavController(fr).navigate(
-                R.id.action_productFragment_to_detailProductFragment, bundle, null, extra)
-        }
 
     }
 

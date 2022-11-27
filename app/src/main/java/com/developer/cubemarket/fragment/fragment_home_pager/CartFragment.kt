@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.utils.Utils
+import com.bumptech.glide.util.Util
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.DirectoryHomeAdapter
 import com.developer.cubemarket.adapter.cart.CartProductAdapter
@@ -22,6 +24,7 @@ import com.developer.cubemarket.databinding.FragmentCartBinding
 import es.dmoral.toasty.Toasty
 
 class CartFragment : Fragment() {
+    val arr = arrayListOf<GioHang>()
     lateinit var binding: FragmentCartBinding
     lateinit var adapterProduct: CartProductAdapter
     lateinit var ctx: Context
@@ -33,9 +36,11 @@ class CartFragment : Fragment() {
         binding = FragmentCartBinding.inflate(layoutInflater)
         ctx = binding.root.context
 
-        //Do something here
-        initRecyclerDireactory()
         initRecyclerProduct()
+
+        //Default
+
+        initRecyclerDireactory()
         initGoCheckOut()
 
         return binding.root
@@ -53,10 +58,19 @@ class CartFragment : Fragment() {
     }
 
     private fun initDataCartProduct():  ArrayList<GioHang> {
-        val arr = arrayListOf<GioHang>()
+        arr.clear()
+        var uiPrice = 0
+        var uiCount = 0
         val callBackSelect = object : CallBackSelectCart{
             override fun onSuccess(gh: GioHang) {
                 arr.add(gh)
+                //Update ui for price
+                uiPrice += gh.gia
+                ++uiCount
+                binding.tvPrice.text = com.developer.cubemarket.config.utils.Utils.formaterVND(uiPrice)
+                binding.tvCount.text = "$uiCount"
+
+                //update ui array cart
                 adapterProduct.notifyItemInserted(arr.size)
             }
             override fun onFail(rs: String) {

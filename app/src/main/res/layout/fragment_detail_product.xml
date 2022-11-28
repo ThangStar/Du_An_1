@@ -344,7 +344,6 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ry_product_similar"
                 android:layout_width="match_parent"
-                android:background="@color/white"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 android:layout_marginBottom="?attr/actionBarSize"

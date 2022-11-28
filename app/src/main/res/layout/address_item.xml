@@ -33,7 +33,7 @@
                 android:id="@+id/tv_address"
                 android:textSize="12sp"
                 android:gravity="center_vertical"
-                android:textColor="@color/text_color_secondary"
+                android:textColor="@color/black"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Đường 123, phường 456, Thành phố 789"
                 android:layout_width="wrap_content"

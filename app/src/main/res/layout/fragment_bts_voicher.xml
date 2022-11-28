@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_primary"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/dividingLine"
             app:boxStrokeWidth="1dp"
             app:endIconMode="clear_text"

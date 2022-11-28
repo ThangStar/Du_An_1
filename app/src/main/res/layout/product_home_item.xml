@@ -26,7 +26,7 @@
                 android:id="@+id/imv_product"
                 android:src="@drawable/product1"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="110dp"
                 android:contentDescription="@string/image_product" />
         </RelativeLayout>
 

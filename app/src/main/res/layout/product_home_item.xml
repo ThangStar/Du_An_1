@@ -33,6 +33,7 @@
         <TextView
             android:id="@+id/tv_title"
             android:textSize="15sp"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/giay_nike"
             android:fontFamily="@font/roboto_bold"
@@ -41,18 +42,37 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/tv_price"
-            android:textSize="15sp"
-            android:layout_marginTop="6dp"
+            android:textSize="18sp"
+            android:layout_marginTop="2dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/gia690_000"
             android:fontFamily="@font/roboto_bold"
             android:textColor="@color/button_background_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RatingBar
+                android:theme="@style/RatingBar"
+                android:rating="4"
+                android:isIndicator="true"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:fontFamily="@font/notosans_light"
+                android:textSize="11sp"
+                android:text="5/5 (0 lượt đánh giá)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_gravity="bottom"
-            android:layout_marginTop="16dp"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="20dp"

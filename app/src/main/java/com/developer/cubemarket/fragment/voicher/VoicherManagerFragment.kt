@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
-import com.developer.cubemarket.adapter.voicher.VoicherManagerAdapter
+import com.developer.cubemarket.adapter.voucher.VoucherManagerAdapter
 import com.developer.cubemarket.connection.MODEL.DAO.DaoKhuyenMai
 import com.developer.cubemarket.connection.MODEL.OOP.KhuyenMai
 import com.developer.cubemarket.connection.callback.CallBackVoicher
@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class VoicherManagerFragment : Fragment() {
-    lateinit var adapterVoicher: VoicherManagerAdapter
+    lateinit var adapterVoicher: VoucherManagerAdapter
     lateinit var binding: FragmentVoicherManagerBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +54,7 @@ class VoicherManagerFragment : Fragment() {
     }
 
     private fun initRecyclerVoicher() {
-        adapterVoicher = VoicherManagerAdapter(this, initDataVoidcher())
+        adapterVoicher = VoucherManagerAdapter(this, initDataVoidcher())
         binding.ryVoicher.adapter = adapterVoicher
     }
 

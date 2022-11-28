@@ -35,4 +35,10 @@
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerSize">16dp</item>
     </style>
+
+    // Rating Bar
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/color_icon_primary</item>
+        <item name="colorControlActivated">@color/color_item_secondary</item>
+    </style>
 </resources>

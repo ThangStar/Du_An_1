@@ -212,7 +212,7 @@ public class DaoKhuyenMai {
         };
         requestQueue.add(stringRequest);
     }
-    public  void nhapma_giamgia(String magiamgia){
+    public  void nhapma_giamgia(CallBackVoicher callBackVoicher, String magiamgia){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_khuyenmai, new Response.Listener<String>() {
@@ -221,6 +221,7 @@ public class DaoKhuyenMai {
                 List<KhuyenMai> ee= new ArrayList<>();
                 if(response.toString().trim().equals("khongtontai")){
                     Log.d(TAG, "ma giảm giá đã hét hạn hoặc không tồn tại");
+                    callBackVoicher.onFail("mã giảm giá đã hết hạn hoặc không tồn tại");
                 }else{
 
                     try {
@@ -233,10 +234,11 @@ public class DaoKhuyenMai {
                                 String ngaybatdau=jsonObject.getString("ngaybatdau");
                                 String ngayketthuc=jsonObject.getString("ngayketthuc");
                                 int sotienapdung=jsonObject.getInt("sotienapdung");
-                                ee.add(new KhuyenMai(magiamgia,phantramgiamgia,ngaybatdau,ngayketthuc,sotienapdung));
+                                ee.add(new KhuyenMai(magiamgia,phantramgiamgia,ngaybatdau,ngayketthuc,
+                                        sotienapdung));
                                 //---------------------------------------viets code ở dưới này---------------------------------------
-
-
+                                callBackVoicher.onSuccess(new KhuyenMai(magiamgia,phantramgiamgia,ngaybatdau,ngayketthuc,
+                                        sotienapdung));
 
 
                             } catch (JSONException e) {
@@ -246,6 +248,7 @@ public class DaoKhuyenMai {
 
                         }
                     } catch (JSONException e) {
+                        callBackVoicher.onError(e.getMessage());
                         Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                         e.printStackTrace();
                     }

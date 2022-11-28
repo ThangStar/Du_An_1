@@ -7,4 +7,5 @@ interface CallBackSelectCart {
     fun onSuccess(gh: GioHang)
     fun onFail(rs: String)
     fun onError(rs: String)
+    fun onFinish()
 }

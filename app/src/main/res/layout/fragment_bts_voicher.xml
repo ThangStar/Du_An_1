@@ -56,11 +56,12 @@
         <com.google.android.material.button.MaterialButton
             android:layout_alignParentEnd="true"
             android:id="@+id/btn_accept"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             app:cornerRadius="4dp"
             android:layout_marginStart="8dp"
             android:text="Áp dụng"
             android:paddingVertical="16dp"
+            android:textColor="@color/white"
             app:backgroundTint="@color/button_background_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

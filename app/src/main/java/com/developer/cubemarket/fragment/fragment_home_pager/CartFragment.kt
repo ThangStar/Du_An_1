@@ -79,6 +79,9 @@ class CartFragment : Fragment() {
             override fun onError(rs: String) {
                 Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
             }
+            override fun onFinish() {
+
+            }
         }
         DaoGioHang(requireContext()).getdata_giohang(callBackSelect, DataUser.id)
         return arr

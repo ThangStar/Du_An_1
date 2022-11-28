@@ -108,6 +108,7 @@ public class DaoGioHang {
                         }
 
                     }
+                    callBackSelectCart.onFinish();
                 } catch (JSONException e) {
                     callBackSelectCart.onFail("Lỗi "+e);
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);

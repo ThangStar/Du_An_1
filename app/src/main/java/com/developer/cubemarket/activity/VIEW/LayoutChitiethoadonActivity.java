@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.VolleyError;
 import com.developer.cubemarket.R;
 import com.developer.cubemarket.activity.ADAPTRER.adapter_list_cthd;
+import com.developer.cubemarket.config.utils.Utils;
 import com.developer.cubemarket.connection.IResult.IResult_chitiethoadon;
 import com.developer.cubemarket.connection.MODEL.DAO.DaoChiTietHoaDon;
 import com.developer.cubemarket.connection.MODEL.OOP.ChiTietHoaDon;
@@ -43,7 +44,7 @@ public class LayoutChitiethoadonActivity extends AppCompatActivity {
         if(id_hoadon!=null){
             txt_mhd.setText("Mã hóa đơn: "+id_hoadon);
             txt_ngaymua.setText("Ngày tạo: "+day_buy);
-            txt_gia.setText("Tổng tiền: "+price);
+            txt_gia.setText("Tổng tiền: "+ Utils.Companion.formaterVND(Integer.valueOf(price)));
             txt_diachi.setText("Địa chỉ nhận hàng: "+adress);
             mResultCallback_chitiethoadon= new IResult_chitiethoadon() {
                 @Override

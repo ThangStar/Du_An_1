@@ -16,6 +16,7 @@ import com.developer.cubemarket.connection.IResult.IResult_hoadon;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Hoadon;
+import com.developer.cubemarket.connection.callback.CallBackInsertBill;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,7 @@ public class DaoHoaDon {
 
         this.context = context;
     }
-    public  void insert_hoadon( int id,String tendiachi,String nhapmagiamgia ){
+    public  void insert_hoadon(CallBackInsertBill callBackInsertBill, int id, String tendiachi, String nhapmagiamgia ){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_hoadon, new Response.Listener<String>() {
@@ -47,13 +48,16 @@ public class DaoHoaDon {
                 String b[]=a.split(":");
                 if(b[0].toString().trim().equals("sssss")){
                     Log.d(TAG, "thêm thành công");
+                    callBackInsertBill.onSuccess("thêm thành công");
                 }else{
+                    callBackInsertBill.onFail("Lỗi: "+response);
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackInsertBill.onError("Lỗi: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
 
 

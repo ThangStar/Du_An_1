@@ -1,8 +1,7 @@
-package com.developer.cubemarket.adapter.voicher
+package com.developer.cubemarket.adapter.voucher
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,22 +14,22 @@ import com.developer.cubemarket.R
 import com.developer.cubemarket.call_back_view.CallBackNotifiDataUi
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.OOP.KhuyenMai
-import com.developer.cubemarket.databinding.VoicherItemBinding
+import com.developer.cubemarket.databinding.VoucherItemBinding
 import es.dmoral.toasty.Toasty
 
-class VoicherManagerAdapter(
+class VoucherManagerAdapter(
     var fr: Fragment,
     var arr: ArrayList<KhuyenMai>
 
 ):
-    RecyclerView.Adapter<VoicherManagerAdapter.VoicherManagerViewHolder>() {
+    RecyclerView.Adapter<VoucherManagerAdapter.VoicherManagerViewHolder>() {
     class VoicherManagerViewHolder(
         v: View,
         var arr: ArrayList<KhuyenMai>,
         var fr: Fragment,
-        var voicherManagerAdapter: VoicherManagerAdapter
+        var voucherManagerAdapter: VoucherManagerAdapter
     ): RecyclerView.ViewHolder(v){
-        val binding = VoicherItemBinding.bind(v)
+        val binding = VoucherItemBinding.bind(v)
         init {
             binding.rlShowUtils.setOnLongClickListener{
                 showMenu(fr.requireContext(), binding.rlShowUtils, R.menu.menu_utils)
@@ -46,7 +45,7 @@ class VoicherManagerAdapter(
                         val callBackUi = object : CallBackNotifiDataUi{
                             override fun onSuccess() {
                                 arr.removeAt(adapterPosition)
-                                voicherManagerAdapter.notifyItemRemoved(adapterPosition)
+                                voucherManagerAdapter.notifyItemRemoved(adapterPosition)
                                 Toasty.success(fr.requireContext(), "Xóa thành công!", Toasty.LENGTH_SHORT).show()
                             }
                         }
@@ -73,7 +72,7 @@ class VoicherManagerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoicherManagerViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.voicher_item, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.voucher_item, parent, false)
         return VoicherManagerViewHolder(v, arr, fr, this)
     }
 

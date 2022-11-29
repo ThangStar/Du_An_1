@@ -23,7 +23,7 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
 
     // địa chỉ mạng
    // static final String IP="192.168.191.162";
-    // static final String IP="192.168.1.18";
+  //   static final String IP="192.168.1.19";
     static final String IP="idgz-sv.click";
     // link lên server
    public static String insert_user="https://"+IP+"//android/duanmau/insert_user.php";
@@ -85,4 +85,9 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String update_comment="https://"+IP+"//android/duanmau/update_comment.php";
     public static String getdata_comment="https://"+IP+"//android/duanmau/getdata_comment_product.php";
 
+
+
+    public static String getdata_thongketheongay="https://"+IP+"//android/duanmau/tong_doanh_thu_ngay.php";
+    public static String getdata_thongketheothang="https://"+IP+"//android/duanmau/tong_doanh_thu_thang.php";
+    public static String getdata_thongketheonam="https://"+IP+"//android/duanmau/tong_doanh_thu_nam.php";
 }

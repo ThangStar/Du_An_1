@@ -9,16 +9,18 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
+import com.developer.cubemarket.R;
 
 import java.util.List;
 
+import JAVA.ADAPTRER.adapter_list_hoadon;
 import MODEL.DAO.DaoHoaDon;
 import MODEL.IResult.IResult_hoadon;
 import MODEL.OOP.Hoadon;
 
 public class LayoutHoadonActivity extends AppCompatActivity {
     ListView list_hoadon;
-    public  static  adapter_list_hoadon adapter_list_hoadons;
+    public  static adapter_list_hoadon adapter_list_hoadons;
 
     IResult_hoadon mResultCallback_hoadon = null;
     int ID=2;

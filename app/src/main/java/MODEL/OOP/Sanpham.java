@@ -10,11 +10,13 @@ public class Sanpham {
     private  int giaban;
     private  String chitiet;
     private  int id;
+    private String sao;
+    private  int soluongban;
 
     public Sanpham() {
     }
 
-    public Sanpham(int masanpham, Danhmuc danhmuc, String tensanpham, String img, String nhasanxuat, int soluong, int giaban, String chitiet, int id) {
+    public Sanpham(int masanpham, Danhmuc danhmuc, String tensanpham, String img, String nhasanxuat, int soluong, int giaban, String chitiet, int id, String sao, int soluongban) {
         this.masanpham = masanpham;
         this.danhmuc = danhmuc;
         this.tensanpham = tensanpham;
@@ -24,6 +26,8 @@ public class Sanpham {
         this.giaban = giaban;
         this.chitiet = chitiet;
         this.id = id;
+        this.sao = sao;
+        this.soluongban = soluongban;
     }
 
     public int getMasanpham() {
@@ -96,5 +100,21 @@ public class Sanpham {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSao() {
+        return sao;
+    }
+
+    public void setSao(String sao) {
+        this.sao = sao;
+    }
+
+    public int getSoluongban() {
+        return soluongban;
+    }
+
+    public void setSoluongban(int soluongban) {
+        this.soluongban = soluongban;
     }
 }

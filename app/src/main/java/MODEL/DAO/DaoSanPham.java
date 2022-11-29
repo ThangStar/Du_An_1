@@ -36,7 +36,7 @@ public class DaoSanPham {
     String TAG="TAG";
     IResult_sanpham mResultCallback = null;
 
-    public DaoSanPham( Context context) {
+    public DaoSanPham(Context context) {
 
         this.context = context;
     }
@@ -196,9 +196,11 @@ public class DaoSanPham {
                             int id=jsonObject.getInt("id");
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
 
 
 
@@ -261,9 +263,11 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
 
 
 
@@ -327,9 +331,11 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
 
 
 
@@ -393,9 +399,11 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
 
 
 
@@ -460,8 +468,11 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
 
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
 
@@ -563,8 +574,11 @@ public class DaoSanPham {
                             String tendanhmuc= jsonObject.getString("tendanhmuc");
                             String khuvuc= jsonObject.getString("khuvuc");
 
-                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id));
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
 
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
                             //---------------------------------------viets code ở dưới này---------------------------------------
 
 

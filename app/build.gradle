@@ -57,4 +57,9 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     // thử viện lấy ảnh từ iinter nét về
     implementation 'com.github.bumptech.glide:glide:4.10.0'
+    // ban do
+    implementation 'com.github.hadiidbouk:ChartProgressBar-Android:2.0.6'
+    implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

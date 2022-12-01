@@ -88,16 +88,16 @@
                 android:background="@drawable/ripple_cart_product_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    app:boxCornerRadiusBottomStart="25dp"
-                    app:boxCornerRadiusTopStart="25dp"
-                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidth="1dp"
                     android:id="@+id/ipl_a"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintEnabled="false"
+                    app:boxStrokeColor="@color/black"
                     android:textColorHint="@color/text_hint_secondary"
                     app:boxBackgroundColor="@color/background_edittext_primary"
                     android:layout_height="wrap_content">
@@ -116,17 +116,25 @@
             </LinearLayout>
 
         </LinearLayout>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="right|bottom"
-            android:layout_marginHorizontal="18dp"
-            android:paddingVertical="15dp"
-            android:text="ĐĂNG"
-            android:textSize="16sp"
-            app:backgroundTint="@color/button_background_primary"
-            app:cornerRadius="8dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="right|bottom|center"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="15dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:text="ĐĂNG"
+                android:textSize="16sp"
+                app:backgroundTint="@color/button_background_primary"
+                app:cornerRadius="5dp" />
+
+        </androidx.cardview.widget.CardView>
+
+
     </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

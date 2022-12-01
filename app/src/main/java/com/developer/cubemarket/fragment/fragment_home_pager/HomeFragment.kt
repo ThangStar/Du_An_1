@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
 
         initIsShowRyDirectory()
         postponeEnterTransition()
-        initRecyclerDireactory()
+        initRecyclerDirectory()
         initRecyclerProduct()
         initSearch()
 
@@ -168,7 +168,7 @@ class HomeFragment : Fragment() {
         return arrHomeProduct
     }
 
-    private fun initRecyclerDireactory() {
+    private fun initRecyclerDirectory() {
         binding.ryDirectory.layoutManager = LinearLayoutManager(ctx, RecyclerView.HORIZONTAL, false)
         adapterDirectory = DirectoryHomeAdapter(requireContext(), this, initDataDirectory())
         binding.ryDirectory.adapter = adapterDirectory

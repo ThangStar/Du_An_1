@@ -404,40 +404,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_marginHorizontal="15dp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="8dp"
-                    android:elevation="3dp"
-                    android:layout_width="match_parent"
-                    android:paddingVertical="8dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom">
                     <LinearLayout
+                        android:layout_marginHorizontal="15dp"
+                        android:background="@color/background_primary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/background_primary"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bình Luận"
+                            android:text="Đánh giá &amp; bình Luận"
                             android:fontFamily="@font/notosans_medium"
                             android:textSize="14sp"/>
+
                         <RelativeLayout
                             android:gravity="center_vertical"
-                            android:layout_marginTop="3dp"
+                            android:layout_marginTop="6dp"
                             android:layout_width="match_parent"
                             android:background="@color/white"
-                            android:paddingHorizontal="6dp"
-                            android:paddingVertical="3dp"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="8dp"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+                            <RatingBar
+                                android:id="@+id/rt_cmt"
+                                android:theme="@style/RatingBar"
+                                android:rating="4"
+                                android:isIndicator="false"
+                                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 app:boxStrokeWidth="0dp"
-                                android:id="@+id/ipl_a"
+                                android:background="@color/background_primary"
+                                app:counterEnabled="true"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginEnd="8dp"
+                                app:counterMaxLength="100"
+                                android:layout_below="@id/rt_cmt"
+                                android:id="@+id/ipl_cmt"
+                                android:layout_toStartOf="@+id/btn_post_cmt"
                                 app:boxStrokeWidthFocused="0dp"
                                 android:gravity="center_vertical"
                                 android:layout_gravity="center_vertical"
@@ -450,29 +458,35 @@
                                     android:gravity="center_vertical"
                                     android:layout_gravity="center_vertical"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/white"
                                     android:fontFamily="@font/roboto_medium"
                                     android:hint="Để lại bình luận"
-                                    android:id="@+id/edt_a"
+                                    android:id="@+id/edt_cmt"
                                     android:textColor="@color/text_color_secondary"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_Back"
-                                android:fontFamily="@font/poppins_bold"
+                                android:id="@+id/btn_post_cmt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
-                                android:paddingVertical="15dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
                                 android:text="ĐĂNG"
-                                android:textSize="16sp"
-                                app:backgroundTint="@color/color_item_twice"
-                                app:cornerRadius="8dp" />
+                                android:textSize="14sp"
+                                app:backgroundTint="@color/primary_item"
+                                app:cornerRadius="4dp" />
                         </RelativeLayout>
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -500,9 +514,11 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.button.MaterialButton
         android:text="Thêm vào giỏ"
         android:id="@+id/btn_add_cart"
+        android:windowSoftInputMode="adjustPan"
         android:layout_marginVertical="5dp"
         android:paddingVertical="16dp"
         android:layout_marginHorizontal="15dp"

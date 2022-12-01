@@ -64,13 +64,27 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/rating_text"
-                android:fontFamily="@font/notosans_light"
-                android:textSize="11sp"
-                android:text="5/5 (0 lượt đánh giá)"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/tv_amount_sold"
+                    android:id="@+id/rating_text"
+                    android:fontFamily="@font/notosans_light"
+                    android:textSize="11sp"
+                    android:text="5/5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_amount_sold"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/notosans_light"
+                    android:textSize="11sp"
+                    android:text="Đã bán 0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"

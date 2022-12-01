@@ -16,6 +16,7 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.CommentProduct;
 import com.developer.cubemarket.connection.callback.CallBackGetComment;
+import com.developer.cubemarket.connection.callback.CallBackInsertCmt;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,45 +32,6 @@ public class DaoCommentProduct {
 
     public DaoCommentProduct(Context context) {
         this.context = context;
-    }
-    public  void insert_comment(int masanpham,int id_user_nguoi_dang,String noidung,int sosao){
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_comment, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.toString().trim().equals("success")){
-                    Log.d(TAG, "thành công");
-                }else if(response.toString().trim().equals("Error")){
-                    Log.d(TAG, "Bạn chưa mua sản phẩm nay ");
-                }else if(response.toString().trim().equals("Error1")){
-                    Log.d(TAG, "mỗi người chỉ được bình luận 1 lần ");
-                }
-                else{
-                    Log.d(TAG, "lỗi>>"+response.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "xảy ra lỗi >>>>" +error);
-            }
-
-
-        }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("id_product", String.valueOf(masanpham));
-                stringStringMap.put("id_user", String.valueOf(id_user_nguoi_dang));
-                stringStringMap.put("conten_comment", noidung);
-                stringStringMap.put("star", String.valueOf(sosao));
-                return stringStringMap;
-            }
-        };
-        requestQueue.add(stringRequest);
-
     }
     public  void update_comment(int masanpham,int id_user_nguoi_dang,String noidung,int sosao){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -139,6 +101,7 @@ public class DaoCommentProduct {
                             }
 
                         }
+                        callBackGetComment.onFinish();
                     } catch (JSONException e) {
                         callBackGetComment.onFail("Lấy dữ liệu cmt thất bại: "+e);
                         Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
@@ -169,6 +132,49 @@ public class DaoCommentProduct {
             }
         };
 
+        requestQueue.add(stringRequest);
+
+    }
+
+    public  void insert_comment(CallBackInsertCmt callBackInsertCmt, int masanpham, int id_user_nguoi_dang, String noidung, float sosao){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_comment, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    callBackInsertCmt.onSuccess();
+                    Log.d(TAG, "thành công");
+                }else if(response.toString().trim().equals("Error")){
+                    Log.d(TAG, "Bạn chưa mua sản phẩm nay ");
+                }else if(response.toString().trim().equals("Error1")){
+                    callBackInsertCmt.onFail("mỗi người chỉ được bình luận 1 lần ");
+                    Log.d(TAG, "mỗi người chỉ được bình luận 1 lần ");
+                }
+                else{
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBackInsertCmt.onError("Lỗi: "+error);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+
+
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id_product", String.valueOf(masanpham));
+                stringStringMap.put("id_user", String.valueOf(id_user_nguoi_dang));
+                stringStringMap.put("conten_comment", noidung);
+                stringStringMap.put("star", String.valueOf(sosao));
+                return stringStringMap;
+            }
+        };
         requestQueue.add(stringRequest);
 
     }

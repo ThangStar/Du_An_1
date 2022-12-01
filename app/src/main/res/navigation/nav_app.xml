@@ -77,10 +77,16 @@
             app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_updateDirectoryFragment"
-            app:destination="@id/updateDirectoryFragment" />
+            app:destination="@id/updateDirectoryFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_changePassFragment"
-            app:destination="@id/changePassFragment" />
+            app:destination="@id/changePassFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page" />
         <action
             app:popUpTo="@id/nav_app"
             app:popUpToInclusive="true"
@@ -97,7 +103,9 @@
             android:id="@+id/action_productFragment_to_userManagerFragment"
             app:destination="@id/userManagerFragment"
             app:enterAnim="@anim/in_page"
-            app:exitAnim="@anim/out_page" />
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_voicherManagerFragment"
             app:destination="@id/voicherManagerFragment" />
@@ -164,7 +172,11 @@
             app:destination="@id/insertVoicherFragment" />
         <action
             android:id="@+id/action_voicherManagerFragment_to_updateVoicherFragment"
-            app:destination="@id/updateVoicherFragment" />
+            app:destination="@id/updateVoicherFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
     </fragment>
     <fragment
         android:id="@+id/insertVoicherFragment"

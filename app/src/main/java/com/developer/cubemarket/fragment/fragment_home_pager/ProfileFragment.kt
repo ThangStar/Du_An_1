@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
             binding.lnGoProductSale.visibility = View.GONE
             binding.lnPost.visibility = View.GONE
         }else if(DataUser.occupation == 1){
+            binding.lnInsertDirectory.visibility = View.GONE
             binding.lnGoUserManager.visibility = View.GONE
             binding.lnGoVoicherManager.visibility = View.GONE
         }

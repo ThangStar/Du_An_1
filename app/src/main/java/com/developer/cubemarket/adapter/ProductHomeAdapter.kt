@@ -1,5 +1,6 @@
 package com.developer.cubemarket.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -147,6 +148,7 @@ class ProductHomeAdapter(
         return ProducHomeViewHolder(arr, fr, v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ProducHomeViewHolder, position: Int) {
         val pr = arr[position]
         try{
@@ -160,8 +162,8 @@ class ProductHomeAdapter(
         holder.binding.tvTitle.text = pr.tensanpham
         holder.binding.imvProduct.transitionName = "IMAGE_PRODUCT_${pr.masanpham}"
         holder.binding.rbProduct.rating = pr.sao.toFloat()
-        holder.binding.ratingText.text = "${pr.sao.toFloat()}/5 Sao"
-
+        holder.binding.ratingText.text = "${pr.sao.toFloat()}/5"
+        holder.binding.tvAmountSold.text = "Đã bán ${pr.soluongban}"
     }
 
     override fun getItemCount(): Int {

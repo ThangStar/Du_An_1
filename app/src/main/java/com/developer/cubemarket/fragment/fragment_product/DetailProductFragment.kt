@@ -1,14 +1,19 @@
 package com.developer.cubemarket.fragment.fragment_product
 
 import android.content.Context
+import android.content.res.Resources.Theme
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,15 +35,12 @@ import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
 import com.developer.cubemarket.connection.MODEL.OOP.CommentProduct
 import com.developer.cubemarket.connection.MODEL.OOP.Option
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
-import com.developer.cubemarket.connection.callback.CallBackAddCart
-import com.developer.cubemarket.connection.callback.CallBackDataOption
-import com.developer.cubemarket.connection.callback.CallBackGetComment
-import com.developer.cubemarket.connection.callback.CallBackProductSimilar
+import com.developer.cubemarket.connection.callback.*
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.transition.MaterialContainerTransform
 import es.dmoral.toasty.Toasty
-import java.lang.String
+import java.util.regex.Pattern
 
 
 class DetailProductFragment : Fragment() {
@@ -69,14 +71,86 @@ class DetailProductFragment : Fragment() {
         initTransition()
         initDataDefault()
 
+        initStateBtnPostCmt()
+
         initRecyclerSize()
         initAddCart()
         initEventToolbar()
 
         initRecyclerComment()
+        initEventInsertCmt()
+
+
 
         initRecyclerProductSimilar()
         return binding.root
+    }
+
+    private fun initStateBtnPostCmt() {
+        binding.edtCmt.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(p0!!.trim().isBlank()) {
+                    binding.btnPostCmt.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_item))
+                }else{
+                    binding.btnPostCmt.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.color_item_twice))
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+    }
+
+    private fun initEventInsertCmt() {
+        binding.btnPostCmt.setOnClickListener {
+            val bodyCmt = binding.edtCmt.text.toString().trim()
+            Log.d("CMT", bodyCmt)
+            if(Pattern.matches("^[\\S ]{1,100}$", bodyCmt)){
+                insertCmt(bodyCmt)
+                binding.iplCmt.error = null
+            }else{
+                binding.iplCmt.error = "Bạn chưa nhập nội dung"
+            }
+        }
+    }
+
+    private fun insertCmt(cmt: String) {
+        val callBackInsert = object : CallBackInsertCmt{
+            override fun onSuccess() {
+                var currentComment = CommentProduct()
+                DaoCommentProduct(requireContext()).getdata_comment(object : CallBackGetComment{
+                    override fun onFinish() {
+                        Log.d("CURRENT CMT: ", currentComment.noidungbinhluan)
+                        arrCmt.add(currentComment)
+                        adapterComment.notifyItemInserted(arrCmt.size)
+                    }
+
+                    override fun onSuccess(cmt: CommentProduct) {
+                        currentComment = cmt
+                    }
+
+                    override fun onFail(rs: String) {
+                    }
+
+                    override fun onError(rs: String) {
+                    }
+                }, idProduct)
+                Toasty.success(requireContext(), "Cảm ơn đánh giá của bạn").show()
+            }
+
+            override fun onFail(rs: String) {
+                Toasty.warning(requireContext(), rs).show()
+            }
+
+            override fun onError(rs: String) {
+                Toasty.error(requireContext(), rs).show()
+            }
+        }
+        DaoCommentProduct(requireContext()).insert_comment(callBackInsert, idProduct, DataUser.id, cmt, binding.rtCmt.rating)
     }
 
     private fun initRecyclerComment() {
@@ -88,6 +162,10 @@ class DetailProductFragment : Fragment() {
     private fun initDataComment(): ArrayList<CommentProduct> {
         Log.d("ID: ", "$idProduct")
         val callBackGet = object : CallBackGetComment{
+            override fun onFinish() {
+
+            }
+
             override fun onSuccess(cmt: CommentProduct) {
                 arrCmt.add(cmt)
                 adapterComment.notifyItemInserted(arrCmt.size)
@@ -283,11 +361,11 @@ class DetailProductFragment : Fragment() {
             requireActivity().onBackPressed()
         }
     }
-    private fun getToolbarLogoIcon(toolbar: androidx.appcompat.widget.Toolbar): View? {
+    private fun getToolbarLogoIcon(toolbar: Toolbar): View? {
         //check if contentDescription previously was set
         val hadContentDescription = TextUtils.isEmpty(toolbar.logoDescription)
         val contentDescription =
-            String.valueOf(if (!hadContentDescription) toolbar.logoDescription else "logoContentDescription")
+            (if (!hadContentDescription) toolbar.logoDescription else "logoContentDescription").toString()
         toolbar.logoDescription = contentDescription
         val potentialViews = ArrayList<View>()
         //find the view based on it's content description, set programatically or with android:contentDescription

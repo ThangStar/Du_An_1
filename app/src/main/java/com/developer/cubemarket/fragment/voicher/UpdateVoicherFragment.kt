@@ -48,6 +48,7 @@ class UpdateVoicherFragment : Fragment() {
         val minPrice = arguments?.getInt("MIN_PRICE")
         val timeFirst = arguments?.getString("TIME_FIRST")
         val timeEnd = arguments?.getString("TIME_END")
+
         var arr1 = timeFirst?.split("\\s".toRegex())?.toTypedArray()
         var arr2 = timeFirst?.split("\\s".toRegex())?.toTypedArray()
         Log.d("DATA ARR", "1: $timeFirst")
@@ -73,8 +74,8 @@ class UpdateVoicherFragment : Fragment() {
         binding.edtCode.setText(code)
         binding.edtPercent.setText(percent.toString())
         binding.edtMin.setText(minPrice.toString())
-        binding.tvTimeFirst.setText("Từ: $timeFirst")
-        binding.tvTimeSecond.setText("Đến: $timeEnd")
+        binding.tvTimeFirst.text = "Từ: $timeFirst"
+        binding.tvTimeSecond.text = "Đến: $timeEnd"
     }
     private fun initEventUpdate() {
         binding.btnUpdate.setOnClickListener {

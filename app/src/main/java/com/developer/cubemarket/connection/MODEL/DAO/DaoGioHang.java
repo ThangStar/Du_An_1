@@ -233,6 +233,7 @@ public class DaoGioHang {
 
     }
     public  void update_soluong_giohang_giamthem1( int magiohang){
+        Log.d("MASP", magiohang+"");
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_giohang, new Response.Listener<String>() {

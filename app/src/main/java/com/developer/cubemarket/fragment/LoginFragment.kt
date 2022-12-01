@@ -2,6 +2,7 @@ package com.developer.cubemarket.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +24,8 @@ class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
     lateinit var ctx: Context
     var isExit = false
-    var countLayout = 0;
-    lateinit var animEdtOut: Animation
+    private var countLayout = 0;
+    private lateinit var animEdtOut: Animation
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,6 +84,8 @@ class LoginFragment : Fragment() {
                 binding.tvTitle.text = "Đăng Kí"
                 binding.btnOk.text = "Đăng kí"
 
+                binding.edtB.inputType = InputType.TYPE_CLASS_TEXT
+                binding.iplB.startIconDrawable
                 binding.edtB.hint = "Số điện thoại"
                 binding.iplC.visibility = View.VISIBLE
                 binding.iplD.visibility = View.VISIBLE

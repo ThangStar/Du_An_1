@@ -50,6 +50,7 @@ class ProductHomeAdapter(
                 bundle.putString("brand", arr[adapterPosition].nhasanxuat)
                 bundle.putInt("amount", arr[adapterPosition].soluong)
                 bundle.putString("directory", arr[adapterPosition].danhmuc.tendanhmuc)
+                bundle.putString("rating", arr[adapterPosition].sao)
                 val extra = FragmentNavigatorExtras(
                     binding.imvProduct to "IMAGE_PRODUCT",
                 )
@@ -155,12 +156,11 @@ class ProductHomeAdapter(
 
         }
 
-
-
         holder.binding.tvPrice.text = Utils.formaterVND(pr.giaban)
         holder.binding.tvTitle.text = pr.tensanpham
         holder.binding.imvProduct.transitionName = "IMAGE_PRODUCT_${pr.masanpham}"
-
+        holder.binding.rbProduct.rating = pr.sao.toFloat()
+        holder.binding.ratingText.text = "${pr.sao.toFloat()}/5 Sao"
 
     }
 

@@ -1,6 +1,7 @@
 package com.developer.cubemarket.adapter.checkout
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,10 +34,10 @@ class CheckOutCartAdapter(
 
         init {
             binding.rlProductCheckOut.setOnClickListener{
-                fr.findNavController().navigate(R.id.action_checkOutFragment_to_detailProductFragment)
+//                fr.findNavController().navigate(R.id.action_checkOutFragment_to_detailProductFragment)
             }
             binding.imvPlus.setOnClickListener {
-
+                DaoGioHang(fr.requireContext()).update_soluong_giohang_tangthem1(arr[adapterPosition].magiohang)
                 //plus tvAmount
                 val tvAmount = binding.tvAmount.text.toString()
                 var count = tvAmount.toInt()
@@ -55,6 +56,8 @@ class CheckOutCartAdapter(
             }
             binding.imvMinus.setOnClickListener {
                 //minus tvAmount
+                DaoGioHang(fr.requireContext()).update_soluong_giohang_giamthem1(arr[adapterPosition].masanpham)
+
                 val tvAmount = binding.tvAmount.text.toString()
                 var count = tvAmount.toInt()
                 if(count > 1){

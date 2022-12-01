@@ -64,7 +64,7 @@ public class adapter_list_hoadon extends BaseAdapter {
         txt_diachi.setText("Địa chỉ: "+o.getTendiachi());
         txt_soluong.setText("Số lượng: "+o.getSoluonghoadon());
         txt_khuyenmai.setText("Khuyến mãi: "+o.getPhantramkhuyenmai()+"");
-        txt_gia.setText(Utils.Companion.formaterVND(o.getTongtien()));
+        txt_gia.setText(Utils.Companion.formaterVND(o.getSotienphaitra()));
         bnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

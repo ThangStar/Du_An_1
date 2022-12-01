@@ -51,7 +51,12 @@ public class LayoutHoadonActivity extends AppCompatActivity {
         if(DataUser.Companion.getOccupation() == 2){
             Log.d("OCUPATION", DataUser.Companion.getId()+"");
             daoHoaDo.getdata_hoadon_admin(mResultCallback_hoadon, DataUser.Companion.getId());
+        }else if(DataUser.Companion.getId() == 1){
+            daoHoaDo.getdata_hoadon_nguoiban(mResultCallback_hoadon, DataUser.Companion.getId());
+        }else{
+            daoHoaDo.getdata_hoadon_user(mResultCallback_hoadon, DataUser.Companion.getId());
         }
+
 
 
 

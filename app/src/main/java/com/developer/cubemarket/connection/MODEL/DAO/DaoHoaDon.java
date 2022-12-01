@@ -210,4 +210,71 @@ public class DaoHoaDon {
         requestQueue.add(stringRequest);
 
     }
+    public  void getdata_hoadon_nguoiban( IResult_hoadon mResultCallback,int id ){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_hoadon, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse: "+response);
+                List<Hoadon> ee = new ArrayList<>();
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            Log.d(TAG, "onResponse: ");
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int mahoadon=jsonObject.getInt("mahoadon");
+                            int id= jsonObject.getInt("id");
+                            String phantramkhuyenmai= jsonObject.getString("phantramkhuyenmai");
+                            String tendiachi= jsonObject.getString("tendiachi");
+                            String ngaymua=jsonObject.getString("ngaymua");
+                            int tongtien=jsonObject.getInt("tongtien");
+                            int sotiengiam=jsonObject.getInt("sotiengiam");
+                            int sotienphaitra=jsonObject.getInt("phaitra");
+                            int soluonghoadon= jsonObject.getInt("soluong");
+
+                            ee.add(new Hoadon(mahoadon,id,phantramkhuyenmai,tendiachi,ngaymua,tongtien,sotiengiam,sotienphaitra,soluonghoadon));
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("hoadon", ee);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+
+
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("check","1");
+
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
 }

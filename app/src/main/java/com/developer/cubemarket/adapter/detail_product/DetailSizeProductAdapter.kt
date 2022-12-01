@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
@@ -15,21 +16,25 @@ import com.developer.cubemarket.databinding.SizeDetailItemBinding
 
 class DetailSizeProductAdapter(
     var fr: Fragment,
-    var onChipSelected: OnChipSelected,
+    private var onChipSelected: OnChipSelected,
     var arr: ArrayList<Option>
 ): RecyclerView.Adapter<DetailSizeProductAdapter.DetailSizeProductViewHolder>() {
     class DetailSizeProductViewHolder(
         v: View,
         var arr: ArrayList<Option>,
-        var onChipSelected: OnChipSelected,
+        private var onChipSelected: OnChipSelected,
         var fr: Fragment,
     ): RecyclerView.ViewHolder(v){
         val binding = SizeDetailItemBinding.bind(v)
         init {
+            binding.chipSize.id = ViewCompat.generateViewId()
             binding.chipSize.setOnClickListener {
                 if (binding.chipSize.isChecked){
                     onChipSelected.onSelected(arr[adapterPosition])
+//                    arr.clear()
+
                     //get data and show price
+//                    binding.chipSize.isChecked = false
                 }
             }
         }

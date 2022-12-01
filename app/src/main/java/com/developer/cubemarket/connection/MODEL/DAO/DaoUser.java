@@ -22,7 +22,9 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
 import com.developer.cubemarket.connection.callback.CallBackChangePass;
 import com.developer.cubemarket.connection.callback.CallBackGetDataUser;
+import com.developer.cubemarket.connection.callback.CallBackUpdatePermissionUser;
 import com.developer.cubemarket.connection.callback.CallBackUpdateUser;
+import com.developer.cubemarket.fragment.bottom_sheet.BtsChangePermissionUserFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,21 +45,24 @@ public class DaoUser {
     public DaoUser(Context context) {
         this.context = context;
     }
-    public  void update_chucvu_user( int id , int chucvu){
+    public  void update_chucvu_user(BtsChangePermissionUserFragment btsChangePermissionUserFragment, CallBackUpdatePermissionUser callBackUpdatePermissionUser, int id, int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.update_user, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
+                    callBackUpdatePermissionUser.onSuccess(btsChangePermissionUserFragment, "Thành công");
                     Log.d(TAG, "thành công");
                 }else{
+                    callBackUpdatePermissionUser.onFail("Cập nhật thất bại");
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackUpdatePermissionUser.onFail("Đã xảy ra lỗi"+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
@@ -319,7 +324,6 @@ public class DaoUser {
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
-            @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();

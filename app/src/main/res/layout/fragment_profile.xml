@@ -143,6 +143,55 @@
                         android:layout_height="1dp"
                         android:layout_below="@id/card1"
                         android:background="@color/dividingLine"/>
+
+                    <LinearLayout
+                        android:id="@+id/ln_go_rank"
+                        android:paddingHorizontal="22dp"
+                        android:paddingVertical="8dp"
+                        android:clickable="true"
+                        android:background="@drawable/ripple_text"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:focusable="true">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/edit_profile" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_margin="16dp"
+                                android:text="Thống kê"
+                                android:textAlignment="center"
+                                android:textColor="@color/text_color_secondary"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+                        <ImageView
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitEnd"
+                            android:src="@drawable/ic_next"
+                            />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/card1"
+                        android:background="@color/dividingLine"/>
+
                     <LinearLayout
                         android:id="@+id/ln_go_change_pass"
                         android:paddingHorizontal="22dp"
@@ -382,7 +431,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_margin="16dp"
-                                android:text="Trạng thái đơn hàng"
+                                android:text="Đơn hàng của bạn"
                                 android:textAlignment="center"
                                 android:textColor="@color/text_color_secondary"
                                 android:textSize="16dp" />

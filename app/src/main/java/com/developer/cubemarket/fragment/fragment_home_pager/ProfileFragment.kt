@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
 import com.developer.cubemarket.activity.VIEW.LayoutHoadonActivity
+import com.developer.cubemarket.activity.VIEW.ThongkeActivity
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.databinding.FragmentProfileBinding
 
@@ -22,6 +23,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
+        initUiPermission()
         initBtnPost()
         initDataDefault()
         initEventGoEditUser()
@@ -32,7 +34,28 @@ class ProfileFragment : Fragment() {
         initEventGoSaled()
         initEventGoUserManager()
         initEventGoBill()
+        initEventGoRank()
         return binding.root
+    }
+
+    private fun initUiPermission() {
+        if(DataUser.occupation == 0){
+            binding.lnGoRank.visibility = View.GONE
+            binding.lnGoUserManager.visibility = View.GONE
+            binding.lnGoVoicherManager.visibility = View.GONE
+            binding.lnInsertDirectory.visibility = View.GONE
+            binding.lnGoProductSale.visibility = View.GONE
+            binding.lnPost.visibility = View.GONE
+        }else if(DataUser.occupation == 1){
+            binding.lnGoUserManager.visibility = View.GONE
+            binding.lnGoVoicherManager.visibility = View.GONE
+        }
+    }
+
+    private fun initEventGoRank() {
+        binding.lnGoRank.setOnClickListener {
+            startActivity(Intent(requireContext(), ThongkeActivity::class.java))
+        }
     }
 
     private fun initEventGoBill() {

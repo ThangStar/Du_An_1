@@ -88,10 +88,16 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_productFragment_to_productSaleFragment"
-            app:destination="@id/productSaleFragment" />
+            app:destination="@id/productSaleFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
         <action
             android:id="@+id/action_productFragment_to_userManagerFragment"
-            app:destination="@id/userManagerFragment" />
+            app:destination="@id/userManagerFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page" />
         <action
             android:id="@+id/action_productFragment_to_voicherManagerFragment"
             app:destination="@id/voicherManagerFragment" />

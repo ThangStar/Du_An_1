@@ -4,15 +4,18 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.util.Util
 import com.developer.cubemarket.R
+import com.developer.cubemarket.adapter.comment.CommentAdapter
 import com.developer.cubemarket.adapter.detail_product.DetailSizeProductAdapter
 import com.developer.cubemarket.adapter.detail_product_similar.ProductDetailSimilarAdapter
 import com.developer.cubemarket.call_back_view.CallBackProductDetailScrollTop
@@ -20,21 +23,27 @@ import com.developer.cubemarket.call_back_view.CallBackUpdateDetailProduct
 import com.developer.cubemarket.call_back_view.OnChipSelected
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
+import com.developer.cubemarket.connection.MODEL.DAO.DaoCommentProduct
 import com.developer.cubemarket.connection.MODEL.DAO.DaoGioHang
 import com.developer.cubemarket.connection.MODEL.DAO.DaoOption
 import com.developer.cubemarket.connection.MODEL.DAO.DaoSanPham
+import com.developer.cubemarket.connection.MODEL.OOP.CommentProduct
 import com.developer.cubemarket.connection.MODEL.OOP.Option
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.connection.callback.CallBackAddCart
 import com.developer.cubemarket.connection.callback.CallBackDataOption
+import com.developer.cubemarket.connection.callback.CallBackGetComment
 import com.developer.cubemarket.connection.callback.CallBackProductSimilar
 import com.developer.cubemarket.databinding.FragmentDetailProductBinding
+import com.google.android.material.chip.Chip
 import com.google.android.material.transition.MaterialContainerTransform
 import es.dmoral.toasty.Toasty
 import java.lang.String
 
 
 class DetailProductFragment : Fragment() {
+    val arrCmt = arrayListOf<CommentProduct>()
+    lateinit var adapterComment: CommentAdapter
     val arrOption = arrayListOf<Option>()
     var opSelected: Option? = null
     lateinit var binding: FragmentDetailProductBinding
@@ -64,8 +73,37 @@ class DetailProductFragment : Fragment() {
         initAddCart()
         initEventToolbar()
 
+        initRecyclerComment()
+
         initRecyclerProductSimilar()
         return binding.root
+    }
+
+    private fun initRecyclerComment() {
+        adapterComment = CommentAdapter(initDataComment())
+        binding.ryComment.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
+        binding.ryComment.adapter = adapterComment
+    }
+
+    private fun initDataComment(): ArrayList<CommentProduct> {
+        Log.d("ID: ", "$idProduct")
+        val callBackGet = object : CallBackGetComment{
+            override fun onSuccess(cmt: CommentProduct) {
+                arrCmt.add(cmt)
+                adapterComment.notifyItemInserted(arrCmt.size)
+                Log.d("CMT: ", cmt.noidungbinhluan)
+            }
+
+            override fun onFail(rs: kotlin.String) {
+                Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+            }
+
+            override fun onError(rs: kotlin.String) {
+                Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+            }
+        }
+        DaoCommentProduct(requireContext()).getdata_comment(callBackGet, idProduct)
+        return arrCmt
     }
 
     private fun initAddCart() {
@@ -145,10 +183,12 @@ class DetailProductFragment : Fragment() {
                 binding.tvBrand.text = sp.nhasanxuat
                 idProduct = sp.masanpham
                 arrOption.clear()
+                arrCmt.clear()
+                adapterComment.notifyDataSetChanged()
+                initDataComment()
                 val callBackOption = object : CallBackDataOption{
                     override fun onSuccess(op: Option) {
                         arrOption.add(op)
-                        Toasty.warning(requireContext(), "ID PRODUCT: "+idProduct, Toasty.LENGTH_SHORT).show()
                         adapterDetailSize.notifyDataSetChanged()
                     }
 
@@ -219,6 +259,9 @@ class DetailProductFragment : Fragment() {
         val amount = arguments?.getInt("amount")
         idProduct = arguments?.getInt("id_product")!!
         nameDirectory = arguments?.getString("directory")!!
+        val rating = arguments?.getString("rating")!!.toFloat()
+        binding.rbRating.rating = rating
+
 
         binding.tvName.text = nameProduct
         binding.tvDetail.text = detail

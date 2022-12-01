@@ -12,10 +12,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.developer.cubemarket.connection.IResult.IResult_chitiethoadon;
+import com.developer.cubemarket.connection.IResult.IResult_thongkedoanhthutheothang;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
-import com.developer.cubemarket.connection.MODEL.OOP.ChiTietHoaDon;
+import com.developer.cubemarket.connection.MODEL.OOP.ThongKeDoanhThuTheoThang;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,41 +25,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-public class DaoChiTietHoaDon {
+
+
+public class DaoThongKeDoanhThuTheothang {
     Context context;
     String TAG="TAG";
-    IResult_chitiethoadon mResultCallback = null;
+    IResult_thongkedoanhthutheothang mResultCallback = null;
 
-    public DaoChiTietHoaDon(IResult_chitiethoadon resultCallback, Context context) {
-        mResultCallback = resultCallback;
+    public DaoThongKeDoanhThuTheothang(Context context) {
         this.context = context;
     }
-    public  void getdata_chitiet_hoadon( int mahoadon ,int chucvu,int id){
-
+    public  void getdata_doanhthu_thang(IResult_thongkedoanhthutheothang mResultCallback,int id,int chucvu){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_chitiet_hoadon, new Response.Listener<String>() {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_thongketheothang, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-                List<ChiTietHoaDon> ee = new ArrayList<>();
+                Log.d(TAG, "onResponse: >>> "+response);
+                List<ThongKeDoanhThuTheoThang> ee = new ArrayList<>();
                 try {
+
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
+
                         try {
                             JSONObject jsonObject= jsonArray.getJSONObject(i);
-                            int masanpham=jsonObject.getInt("masanpham");
-                            String tensanpham= jsonObject.getString("tensanpham");
-                            String img= jsonObject.getString("img");
-                            String tenkichthuoc= jsonObject.getString("tenkichthuoc");
-                            String tenmau= jsonObject.getString("tenmau");
-                            int soluong=jsonObject.getInt("soluong");
-                            int giamua=jsonObject.getInt("giamua");
-                            int tongtien=jsonObject.getInt("tongtien");
-
-                            ee.add(new ChiTietHoaDon(masanpham,tensanpham,img,tenkichthuoc,tenmau,soluong,giamua,tongtien));
+                            String thang= jsonObject.getString("thang");
+                            int tongtien= jsonObject.getInt("tongtien");
+                            ee.add(new ThongKeDoanhThuTheoThang(thang,tongtien));
 
                             //---------------------------------------viets code ở dưới này---------------------------------------
+
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -71,34 +70,26 @@ public class DaoChiTietHoaDon {
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
                     e.printStackTrace();
                 }
-
                 if(mResultCallback != null){
 
-                    mResultCallback.notifySuccess("chitiet_hoadon", ee);
+                    mResultCallback.notifySuccess("thongkethang",ee);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
-
-
             }
         }){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-
-                stringStringMap.put("id_mahoadon", String.valueOf(mahoadon));
                 stringStringMap.put("id", String.valueOf(id));
                 stringStringMap.put("chucvu", String.valueOf(chucvu));
-
-
                 return stringStringMap;
             }
         };
-
         requestQueue.add(stringRequest);
 
     }

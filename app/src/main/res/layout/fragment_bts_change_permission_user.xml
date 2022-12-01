@@ -67,6 +67,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:id="@+id/btn_dismiss"
                 android:text="Hủy"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 app:cornerRadius="14dp"
@@ -76,6 +77,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_weight="1"
                 android:layout_width="0dp"
+                android:id="@+id/btn_update"
                 android:textColor="@color/white"
                 android:text="Cập nhật"
                 app:backgroundTint="@color/button_background_primary"

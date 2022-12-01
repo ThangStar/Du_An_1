@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.VolleyError;
 import com.developer.cubemarket.R;
 import com.developer.cubemarket.activity.ADAPTRER.adapter_list_cthd;
+import com.developer.cubemarket.config.user.DataUser;
 import com.developer.cubemarket.config.utils.Utils;
 import com.developer.cubemarket.connection.IResult.IResult_chitiethoadon;
 import com.developer.cubemarket.connection.MODEL.DAO.DaoChiTietHoaDon;
@@ -60,7 +61,7 @@ public class LayoutChitiethoadonActivity extends AppCompatActivity {
             };
 
             DaoChiTietHoaDon daoChiTietHoaDon= new DaoChiTietHoaDon(mResultCallback_chitiethoadon,LayoutChitiethoadonActivity.this);
-            daoChiTietHoaDon.getdata_chitiet_hoadon(Integer.parseInt(id_hoadon));
+            daoChiTietHoaDon.getdata_chitiet_hoadon(Integer.parseInt(id_hoadon), DataUser.Companion.getOccupation(), DataUser.Companion.getId());
         }
     }
       

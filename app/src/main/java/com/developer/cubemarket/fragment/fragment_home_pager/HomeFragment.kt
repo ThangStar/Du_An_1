@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
     private var adapterCompleteSearch: ArrayAdapter<String>? = null
     companion object{
         lateinit var arrDirectory: ArrayList<Danhmuc>
+        @SuppressLint("StaticFieldLeak")
         lateinit var adapterDirectory: DirectoryHomeAdapter
         lateinit var productHomeAdapter: ProductHomeAdapter
         var arrHomeProduct = arrayListOf<Sanpham>()
@@ -173,8 +174,7 @@ class HomeFragment : Fragment() {
         binding.ryDirectory.adapter = adapterDirectory
         binding.ryDirectory.addOnItemTouchListener(object: OnItemTouchListener{
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                val action: Int = e.getAction()
-                when (action) {
+                when (e.action) {
                     MotionEvent.ACTION_DOWN -> rv.parent.requestDisallowInterceptTouchEvent(true)
                 }
                 return false

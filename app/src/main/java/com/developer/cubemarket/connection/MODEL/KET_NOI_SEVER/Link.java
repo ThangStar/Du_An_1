@@ -26,6 +26,8 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     // static final String IP="192.168.1.18";
     static final String IP="idgz-sv.click";
     // link lên server
+    public static String insert_comment="https://"+IP+"//android/duanmau/insert_comment.php";
+    public static String getdata_comment="https://"+IP+"//android/duanmau/getdata_comment_product.php";
    public static String insert_user="https://"+IP+"//android/duanmau/insert_user.php";
     public static String update_user="http://"+IP+"//android/duanmau/update_user.php";
     public static String getdata_dangnhap="http://"+IP+"//android/duanmau/gedata_user.php";
@@ -67,6 +69,7 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String update_khuyenmai="https://"+IP+"//android/duanmau/update_khuyenmai.php";
  public static String delete_khuyenmai="https://"+IP+"//android/duanmau/delete_khuyenmai.php";
  public static String getdata_khuyenmai="https://"+IP+"//android/duanmau/getdata_khuyenmai.php";
+    public static String update_comment="https://"+IP+"//android/duanmau/update_comment.php";
 
 
     public static String insert_hoadon="https://"+IP+"//android/duanmau/insert_hoadon.php";
@@ -77,5 +80,10 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String getdata_option="https://"+IP+"//android/duanmau/getdata_option.php";
     public static String insert_option="https://"+IP+"//android/duanmau/insert_option.php";
     public static String delete_option="https://"+IP+"//android/duanmau/delete_option.php";
+
+
+    public static String getdata_thongketheongay="https://"+IP+"//android/duanmau/tong_doanh_thu_ngay.php";
+    public static String getdata_thongketheothang="https://"+IP+"//android/duanmau/tong_doanh_thu_thang.php";
+    public static String getdata_thongketheonam="https://"+IP+"//android/duanmau/tong_doanh_thu_nam.php";
 
 }

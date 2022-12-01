@@ -3,7 +3,6 @@ package com.developer.cubemarket.adapter.manager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
@@ -17,7 +16,8 @@ class UserManagerAdapter(
 ): RecyclerView.Adapter<UserManagerAdapter.UserManagerViewHolder>() {
     class UserManagerViewHolder(
         v: View,
-        private var fr: FragmentActivity
+        private var fr: FragmentActivity,
+        var arr: ArrayList<User>
     ): RecyclerView.ViewHolder(v), View.OnClickListener {
         val binding = UserManagerItemBinding.bind(v)
         init {
@@ -27,7 +27,7 @@ class UserManagerAdapter(
         override fun onClick(p0: View?) {
             when(p0!!){
                 binding.btnChangePermission -> {
-                    val bottomSheet = BtsChangePermissionUserFragment()
+                    val bottomSheet = BtsChangePermissionUserFragment(arr[adapterPosition].id, arr[adapterPosition].chucvu)
                     bottomSheet.show(fr.supportFragmentManager, BtsChangePermissionUserFragment.TAG)
                 }
             }
@@ -36,14 +36,21 @@ class UserManagerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserManagerViewHolder {
         val bind = LayoutInflater.from(parent.context).inflate(R.layout.user_manager_item, parent, false)
-        return UserManagerViewHolder(bind, fr)
+        return UserManagerViewHolder(bind, fr, arr)
     }
 
     override fun onBindViewHolder(holder: UserManagerViewHolder, position: Int) {
         val us = arr[position]
         holder.binding.tvUsername.text = us.ten
         holder.binding.tvEmail.text = us.gmail
-        holder.binding.tvPermission.text = "Chức vụ: ${us.chucvu}"
+
+        var cv = "Không xác định!"
+        when(us.chucvu){
+            0 -> cv = "Người dùng"
+            1 -> cv = "Người bán"
+            2 -> cv = "Quản trị viên"
+        }
+        holder.binding.tvPermission.text = "Chức vụ: $cv"
     }
 
     override fun getItemCount(): Int {

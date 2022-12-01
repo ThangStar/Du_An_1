@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_thin"
-                        android:text="Địa chỉ nhận hàng: 123 abc phuong xyz, Thanh phố yyy"
+                        android:text="Địa chỉ nhận hàng: 123 abc phưo xyz, Thanh phố yyy"
                         android:textSize="12sp" />
 
                     <TextView

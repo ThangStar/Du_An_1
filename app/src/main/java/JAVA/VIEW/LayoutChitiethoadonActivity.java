@@ -60,7 +60,7 @@ public class LayoutChitiethoadonActivity extends AppCompatActivity {
             };
 
             DaoChiTietHoaDon daoChiTietHoaDon= new DaoChiTietHoaDon(mResultCallback_chitiethoadon,LayoutChitiethoadonActivity.this);
-            daoChiTietHoaDon.getdata_chitiet_hoadon(Integer.parseInt(id_hoadon));
+         //   daoChiTietHoaDon.getdata_chitiet_hoadon(Integer.parseInt(id_hoadon));
         }
     }
       

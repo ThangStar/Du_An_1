@@ -36,7 +36,7 @@ public class DaoSanPham {
     String TAG="TAG";
     IResult_sanpham mResultCallback = null;
 
-    public DaoSanPham(Context context) {
+    public DaoSanPham( Context context) {
 
         this.context = context;
     }
@@ -616,6 +616,129 @@ public class DaoSanPham {
                 stringStringMap.put("tendanhmuctuongtu", tendanhmuc);
                 stringStringMap.put("tensanphamtuongtu", tensanpham);
                 stringStringMap.put("YEUCAUGEDATAALL", "XEMCHUNG");
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public  void get_phone_gmail_usre( int id_product){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_phone_gmail, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse: >>> "+response);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+
+                            String phone_nguoi_ban= jsonObject.getString("phone");
+                            String gmail_nguoiban = jsonObject.getString("gmail");
+                            Log.d(TAG, "sodt >>> "+phone_nguoi_ban + "gmail nguwoiban  >> "+ gmail_nguoiban);
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("id_product", String.valueOf(id_product));
+
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public  void getdata_sanpham_theodanhmuc( IResult_sanpham mResultCallback ,int madanhmuc){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_sanpham_theodanhmuc, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse: >>> "+response);
+                List<Sanpham> ee= new ArrayList();
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int masanpham=jsonObject.getInt("masanpham");
+                            int madanhmuc= jsonObject.getInt("madanhmuc");
+                            String tensanpham= jsonObject.getString("tensanpham");
+                            String img = jsonObject.getString("img");
+                            String nhasanxuat=jsonObject.getString("nhasanxuat");
+                            int soluong=jsonObject.getInt("soluong");
+                            int giaban= jsonObject.getInt("giaban");
+                            String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
+
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
+
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("madanhmuc", String.valueOf(madanhmuc));
+
                 return stringStringMap;
             }
         };

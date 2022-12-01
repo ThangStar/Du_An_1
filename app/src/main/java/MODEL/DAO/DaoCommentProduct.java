@@ -32,7 +32,7 @@ public class DaoCommentProduct {
     String TAG="TAG";
     IResult_comment_product mResultCallback = null;
 
-    public DaoCommentProduct(Context context) {
+    public DaoCommentProduct( Context context) {
         this.context = context;
     }
     public  void insert_comment(int masanpham,int id_user_nguoi_dang,String noidung,int sosao){
@@ -171,6 +171,47 @@ public class DaoCommentProduct {
 
                 stringStringMap.put("id_product", String.valueOf(masanpham));
 
+
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void check_user(int masanpham,int id ){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.check_comment, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+               int a= Integer.parseInt(response);
+               if(a==2){
+                   Log.d(TAG, "bạn chỉ có thế sửa bình luận");
+
+               }else if(a==1){
+                   Log.d(TAG, "bạn chỉ có thế  bình luận");
+               }else{
+                   Log.d(TAG, "bạn không thể làm gì vì bạn chưa mua hàng");
+               }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+
+
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("id_product", String.valueOf(masanpham));
+                stringStringMap.put("id_user", String.valueOf(id));
 
                 return stringStringMap;
             }

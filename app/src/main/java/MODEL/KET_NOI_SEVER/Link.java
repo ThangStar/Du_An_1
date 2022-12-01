@@ -90,4 +90,10 @@ public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
     public static String getdata_thongketheongay="https://"+IP+"//android/duanmau/tong_doanh_thu_ngay.php";
     public static String getdata_thongketheothang="https://"+IP+"//android/duanmau/tong_doanh_thu_thang.php";
     public static String getdata_thongketheonam="https://"+IP+"//android/duanmau/tong_doanh_thu_nam.php";
+
+
+
+    public static String getdata_phone_gmail="https://"+IP+"//android/duanmau/getdata_phone_gmail.php";
+    public static String check_comment="https://"+IP+"//android/duanmau/check_commen.php";
+    public static String getdata_sanpham_theodanhmuc="https://"+IP+"//android/duanmau/getdata_sanpham_theodanhmuc.php";
 }

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/root"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".fragment.ForgotPassFragment">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <RelativeLayout
+            android:background="@color/background_primary"
+            android:id="@+id/rl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color_secondary"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_title_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Quên mật khẩu"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+        <ScrollView
+            android:layout_below="@+id/rl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/send_mail"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bg_anime" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Nhập mã OTP"
+                    android:textAlignment="center"
+                    android:textColor="@color/button_background_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/otp"
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Hãy nhập mã xác minh trong hộp thư của bạn"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="16.66"
+                        android:background="@color/button_background_primary">
+
+                        <EditText
+                            android:id="@+id/otp_box_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/roboto_bold"
+                            android:hint="*"
+                            android:inputType="phone"
+                            android:maxLength="1"
+                            android:padding="12dp"
+                            android:textColor="@color/white"
+                            android:textAlignment="center"
+                            android:textColorHint="#c7c7c8"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="16.66"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/button_background_primary">
+
+                        <EditText
+                            android:id="@+id/otp_box_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_bold"
+                            android:hint="*"
+                            android:background="@null"
+                            android:inputType="phone"
+                            android:maxLength="1"
+                            android:padding="12dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+
+                            android:textColorHint="#c7c7c8"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="16.66"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/button_background_primary">
+
+                        <EditText
+                            android:id="@+id/otp_box_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/roboto_bold"
+                            android:hint="*"
+                            android:inputType="phone"
+                            android:maxLength="1"
+                            android:padding="12dp"
+                            android:textColor="@color/white"
+
+                            android:textAlignment="center"
+                            android:textColorHint="#c7c7c8"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="16.66"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/button_background_primary">
+
+                        <EditText
+                            android:id="@+id/otp_box_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/roboto_bold"
+                            android:hint="*"
+                            android:inputType="phone"
+                            android:maxLength="1"
+                            android:padding="12dp"
+                            android:textColor="@color/white"
+
+                            android:textAlignment="center"
+                            android:textColorHint="#c7c7c8"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="16.66"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/button_background_primary">
+
+                        <EditText
+                            android:id="@+id/otp_box_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/roboto_bold"
+                            android:hint="*"
+                            android:inputType="phone"
+                            android:maxLength="1"
+                            android:padding="12dp"
+                            android:textColor="@color/white"
+
+                            android:textAlignment="center"
+                            android:textColorHint="#c7c7c8"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="16.66"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/button_background_primary">
+
+                        <EditText
+                            android:id="@+id/otp_box_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/roboto_bold"
+                            android:hint="*"
+                            android:inputType="phone"
+                            android:maxLength="1"
+                            android:padding="12dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+
+                            android:textColorHint="#c7c7c8"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Bạn chưa nhập được mã?"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="GỬI LẠI OTP"
+                    android:textAlignment="center"
+                    android:textColor="@color/item_color_secondary"
+                    android:textSize="16sp" />
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCheckCode"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:paddingVertical="15dp"
+            android:text="XÁC NHẬN"
+            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="5dp"
+            android:textSize="16sp"
+            app:backgroundTint="@color/button_background_primary"
+            app:cornerRadius="8dp" />
+    </RelativeLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

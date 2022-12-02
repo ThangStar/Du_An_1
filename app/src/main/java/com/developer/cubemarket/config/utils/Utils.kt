@@ -2,11 +2,15 @@ package com.developer.cubemarket.config.utils
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.util.Base64
 import android.util.Log
+import androidx.annotation.RawRes
+import com.amrdeveloper.lottiedialog.LottieDialog
 import com.bumptech.glide.request.RequestOptions
 import com.developer.cubemarket.R
 import com.developer.cubemarket.call_back_view.CallBackNotifiDataUi
@@ -18,7 +22,9 @@ import com.developer.cubemarket.connection.callback.CallBackDelProduct
 import com.developer.cubemarket.connection.callback.CallBackDelVoicher
 import com.developer.cubemarket.fragment.fragment_home_pager.HomeFragment
 import com.developer.cubemarket.fragment.fragment_utils_product.UpdateProductFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog
+import dev.shreyaspatil.MaterialDialog.MaterialDialog
 import es.dmoral.toasty.Toasty
 import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
@@ -193,6 +199,11 @@ class Utils {
                 }
                 .build()
             mBottomSheetDialog.show()
+        }
+        fun diaLogProgress(ctx: Context, message: String, rawRes: Int){
+            val mt = MaterialAlertDialogBuilder(ctx)
+                .setView(R.layout.alert_layout)
+                .show()
         }
     }
 }

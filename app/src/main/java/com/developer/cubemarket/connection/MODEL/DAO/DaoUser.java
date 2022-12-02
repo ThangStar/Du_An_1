@@ -22,6 +22,8 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
 import com.developer.cubemarket.connection.callback.CallBackChangePass;
 import com.developer.cubemarket.connection.callback.CallBackGetDataUser;
+import com.developer.cubemarket.connection.callback.CallBackInsertUser;
+import com.developer.cubemarket.connection.callback.CallBackLogin;
 import com.developer.cubemarket.connection.callback.CallBackUpdatePermissionUser;
 import com.developer.cubemarket.connection.callback.CallBackUpdateUser;
 import com.developer.cubemarket.fragment.bottom_sheet.BtsChangePermissionUserFragment;
@@ -82,7 +84,7 @@ public class DaoUser {
         requestQueue.add(stringRequest);
 
     }
-    public  void insert_user( User user){
+    public  void insert_user(CallBackInsertUser callBackInsertUser, User user){
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
@@ -90,14 +92,15 @@ public class DaoUser {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
-                    Toasty.success(context, "Tạo tài khoản thành công!", Toasty.LENGTH_SHORT).show();
+                    callBackInsertUser.onSuccess("Tạo tài khoản thành công!");
                 }else{
-                    Toasty.error(context, "Lỗi: "+response.toString(), Toasty.LENGTH_SHORT).show();
+                    callBackInsertUser.onFail("Thất bại: "+response);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackInsertUser.onError("Thất bại: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
@@ -215,14 +218,14 @@ public class DaoUser {
         requestQueue.add(stringRequest);
 
     }
-    public void dangnhap(LinearLayout root, String user, String pass){
+    public void dangnhap(CallBackLogin callBackLogin, String user, String pass){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_dangnhap, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                if(response.toString().trim().equals("ErrorLogin")){
-                   Toasty.warning(context, "Tài khoản hoặc mật khẩu không chính xác", Toasty.LENGTH_SHORT).show();
+                   callBackLogin.onFail("Tài khoản hoặc mật khẩu không chính xác");
                }else{
                    try {
                        JSONArray jsonArray= new JSONArray(response);
@@ -251,8 +254,8 @@ public class DaoUser {
                                DataShareReferences.Companion.putEmailAndPass(context, user, pass);
 
                                //go to home
-                               Navigation.findNavController(root)
-                                       .navigate(R.id.action_loginFragment_to_productFragment);
+                               callBackLogin.onSuccess("Đăng nhập thành công");
+
                            } catch (JSONException e) {
                                e.printStackTrace();
                                Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
@@ -268,6 +271,7 @@ public class DaoUser {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackLogin.onError("Đã xảy ra lỗi"+error);
                 Log.d("SSS", "-----llll--->>"+error.toString());
                 Toasty.error(context, "đã xảy ra lỗi ", Toasty.LENGTH_SHORT).show();
             }

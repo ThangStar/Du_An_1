@@ -130,16 +130,18 @@ class DetailProductFragment : Fragment() {
                     }
 
                     override fun onSuccess(cmt: CommentProduct) {
+                        Toasty.success(requireContext(), "Cảm ơn đánh giá của bạn").show()
                         currentComment = cmt
                     }
 
                     override fun onFail(rs: String) {
+                        Toasty.warning(requireContext(), rs).show()
                     }
 
                     override fun onError(rs: String) {
+                        Toasty.error(requireContext(), rs).show()
                     }
                 }, idProduct)
-                Toasty.success(requireContext(), "Cảm ơn đánh giá của bạn").show()
             }
 
             override fun onFail(rs: String) {

@@ -27,6 +27,13 @@
             android:id="@+id/action_loginFragment_to_productFragment"
             app:destination="@id/productFragment"
             app:enterAnim="@anim/in_page" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPassFragment"
+            app:destination="@id/forgotPassFragment"
+            app:enterAnim="@anim/in_page"
+            app:exitAnim="@anim/out_page"
+            app:popEnterAnim="@anim/pop_in_page"
+            app:popExitAnim="@anim/pop_out_page" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
@@ -187,4 +194,18 @@
         android:id="@+id/updateVoicherFragment"
         android:name="com.developer.cubemarket.fragment.voicher.UpdateVoicherFragment"
         android:label="UpdateVoicherFragment" />
+    <fragment
+        android:id="@+id/forgotPassFragment"
+        android:name="com.developer.cubemarket.fragment.ForgotPassFragment"
+        android:label="fragment_forgot_pass"
+        tools:layout="@layout/fragment_forgot_pass" >
+        <action
+            android:id="@+id/action_forgotPassFragment_to_newPassFragment"
+            app:destination="@id/newPassFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPassFragment"
+        android:name="com.developer.cubemarket.fragment.NewPassFragment"
+        android:label="fragment_new_pass"
+        tools:layout="@layout/fragment_new_pass" />
 </navigation>

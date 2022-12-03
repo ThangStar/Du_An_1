@@ -384,4 +384,65 @@ public class DaoUser {
         };
         requestQueue.add(stringRequest);
     }
+
+    public void  layma(int id) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.get_code_change_pass, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if(Integer.parseInt(response)==-1){
+                    Log.d(TAG, "vui lòng đợi 3 phút để gủi mã tiếp theo");
+                }else{
+                    Log.d(TAG, "mã code dooir mật khẩu: .....>"+response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id", String.valueOf(id));
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public void  nhapma(int id, int nhapma,String passnew) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.input_code_change_pass, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if(Integer.parseInt(response)==-1){
+                    Log.d(TAG, "Mã đã hết hạn hoặc nhập không đúng");
+                }else{
+                    Log.d(TAG, "đoi mat khau thnah cong");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("nhapma", String.valueOf(nhapma));
+                stringStringMap.put("passnew", passnew);
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 }

@@ -385,7 +385,7 @@ public class DaoUser {
         requestQueue.add(stringRequest);
     }
 
-    public void  layma(int id) {
+    public void  layma(String gmail_nhan) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.get_code_change_pass, new Response.Listener<String>() {
@@ -408,13 +408,13 @@ public class DaoUser {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("gmail", gmail_nhan);
                 return stringStringMap;
             }
         };
         requestQueue.add(stringRequest);
     }
-    public void  nhapma(int id, int nhapma,String passnew) {
+    public void  nhapma(String gmail, int nhapma,String passnew) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.input_code_change_pass, new Response.Listener<String>() {
@@ -437,7 +437,7 @@ public class DaoUser {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> stringStringMap= new HashMap<>();
-                stringStringMap.put("id", String.valueOf(id));
+                stringStringMap.put("gmail", gmail);
                 stringStringMap.put("nhapma", String.valueOf(nhapma));
                 stringStringMap.put("passnew", passnew);
                 return stringStringMap;

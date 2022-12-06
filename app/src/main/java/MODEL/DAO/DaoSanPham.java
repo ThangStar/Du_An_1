@@ -744,4 +744,70 @@ public class DaoSanPham {
         };
         requestQueue.add(stringRequest);
     }
+    public  void getdata_theotung_sanpham(IResult_sanpham mResultCallback, int masanpham){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_theotung_sanpham, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                List<Sanpham> ee= new ArrayList();
+                Log.d(TAG, "onResponse: " +response);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0 ; i<jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject= jsonArray.getJSONObject(i);
+                            int masanpham=jsonObject.getInt("masanpham");
+                            int madanhmuc= jsonObject.getInt("madanhmuc");
+                            String tensanpham= jsonObject.getString("tensanpham");
+                            String img = jsonObject.getString("img");
+                            String nhasanxuat=jsonObject.getString("nhasanxuat");
+                            int soluong=jsonObject.getInt("soluong");
+                            int giaban= jsonObject.getInt("giaban");
+                            String chitiet= jsonObject.getString("chitiet");
+                            int id=jsonObject.getInt("id");
+                            String tendanhmuc= jsonObject.getString("tendanhmuc");
+                            String khuvuc= jsonObject.getString("khuvuc");
+                            String sao= jsonObject.getString("star");
+                            int daban= jsonObject.getInt("ban");
+
+                            //---------------------------------------viets code ở dưới này---------------------------------------
+                            ee.add(new Sanpham(masanpham, new Danhmuc(madanhmuc,tendanhmuc,khuvuc,"hinh"),tensanpham,img,nhasanxuat,soluong,giaban,chitiet,id,sao,daban));
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, "đã xảy ra lỗi : llllll"+e);
+                    e.printStackTrace();
+                }
+                if(mResultCallback != null){
+
+                    mResultCallback.notifySuccess("sanpham", ee);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+
+                stringStringMap.put("masanpham", String.valueOf(masanpham));
+
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 }

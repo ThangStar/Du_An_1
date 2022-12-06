@@ -23,6 +23,7 @@ import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.utils.ProductFormatSizeAndColorAdapter
 import com.developer.cubemarket.adapter.utils.color.ColorAdapter
 import com.developer.cubemarket.adapter.utils.size.SizeAdapter
+import com.developer.cubemarket.call_back_view.CallBackDelOption
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoKichThuoc
@@ -128,6 +129,7 @@ class UpdateProductFragment : Fragment() {
     }
 
     private fun initSpinnerSizeAndColor() {
+        arrSize.clear()
         adapterSize = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrSize)
         binding.spnSize.adapter = adapterSize
         val callBackSize = object : CallBackSizeProduct {
@@ -143,7 +145,7 @@ class UpdateProductFragment : Fragment() {
             }
         }
         DaoKichThuoc(requireContext()).getdata_kichthuoc(callBackSize)
-
+        arrColor.clear()
         adapterColor = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrColor)
         binding.spnColor.adapter = adapterColor
         val callBackColor = object : CallBackColorProduct {
@@ -162,7 +164,13 @@ class UpdateProductFragment : Fragment() {
     }
 
     private fun initRecyclerOption() {
-        adapterOption = ProductFormatSizeAndColorAdapter(arrOption)
+        val callBackDel = object : CallBackDelOption{
+            override fun onDel(pos: Int) {
+                arrOption.removeAt(pos)
+                adapterOption.notifyItemRemoved(pos)
+            }
+        }
+        adapterOption = ProductFormatSizeAndColorAdapter(callBackDel, this, arrOption)
         binding.ryFormat.adapter = adapterOption
 
         val callBackOption = object : CallBackDataOption {
@@ -174,11 +182,9 @@ class UpdateProductFragment : Fragment() {
             }
 
             override fun onFail(rs: String) {
-                TODO("Not yet implemented")
             }
 
             override fun onError(rs: String) {
-                TODO("Not yet implemented")
             }
 
         }
@@ -252,11 +258,9 @@ class UpdateProductFragment : Fragment() {
                     }
 
                     override fun onFail(rs: String) {
-                        TODO("Not yet implemented")
                     }
 
                     override fun onError(rs: String) {
-                        TODO("Not yet implemented")
                     }
                 }
                 daoOption.getdata_option(callBackGetOption, idProduct!!)

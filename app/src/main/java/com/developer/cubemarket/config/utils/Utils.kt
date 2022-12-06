@@ -13,6 +13,7 @@ import androidx.annotation.RawRes
 import com.amrdeveloper.lottiedialog.LottieDialog
 import com.bumptech.glide.request.RequestOptions
 import com.developer.cubemarket.R
+import com.developer.cubemarket.call_back_view.CallBackDelOption
 import com.developer.cubemarket.call_back_view.CallBackNotifiDataUi
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
 import com.developer.cubemarket.connection.MODEL.DAO.DaoKhuyenMai
@@ -204,6 +205,25 @@ class Utils {
             val mt = MaterialAlertDialogBuilder(ctx)
                 .setView(R.layout.alert_layout)
                 .show()
+        }
+        fun dialogDelOption(callBackDelOption: CallBackDelOption, activity: Activity, title: String, message: String, pos: Int){
+            val mBottomSheetDialog: BottomSheetMaterialDialog = BottomSheetMaterialDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setAnimation(R.raw.delete)
+                .setPositiveButton("Xóa",R.drawable.delete
+                ) { dialogInterface, _ ->
+                    //Do something delete here
+                    callBackDelOption.onDel(pos)
+                    dialogInterface?.dismiss()
+                }
+                .setNegativeButton("Hủy", R.drawable.cancel_del
+                ) { dialogInterface, which ->
+                    dialogInterface?.dismiss()
+                }
+                .build()
+            mBottomSheetDialog.show()
         }
     }
 }

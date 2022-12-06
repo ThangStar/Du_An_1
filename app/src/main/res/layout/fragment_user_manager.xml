@@ -54,14 +54,13 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:id="@+id/btn_return"
-        android:paddingVertical="14dp"
-        app:cornerRadius="0dp"
+        android:paddingVertical="18dp"
+        app:cornerRadius="4dp"
         android:text="QUAY LẠI"
         android:layout_gravity="center_vertical"
         android:textSize="12sp"
         android:layout_marginHorizontal="20dp"
-        android:drawableEnd="@drawable/ic_back"
-        android:drawableTint="@color/white"
+        app:icon="@drawable/ic_back"
         android:backgroundTint="@color/button_background_primary"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

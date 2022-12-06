@@ -62,7 +62,8 @@ class BtsChooseAddressFragment(var onAddressSelected: OnAddressSelected) : Botto
 
                         //2. When insert success -> get data address
                         //3. Set array old address = new address behind got return
-                        arrAddress = initDataAddress()
+                        arrAddress.add(Diachi(0, DataUser.id, address))
+                        adapterAddress.notifyItemInserted(arrAddress.size)
                     }
 
                     override fun onFail(err: String) {
@@ -78,7 +79,6 @@ class BtsChooseAddressFragment(var onAddressSelected: OnAddressSelected) : Botto
                     DataUser.id,
                     address
                 )
-                arrAddress.add(Diachi(0, DataUser.id, address))
             }
         }
     }
@@ -89,6 +89,7 @@ class BtsChooseAddressFragment(var onAddressSelected: OnAddressSelected) : Botto
     }
 
     private fun initDataAddress(): ArrayList<Diachi> {
+        arrAddress.clear()
         val callBackGet = object : CallBackGetAddress{
             override fun onSuccess(dc: Diachi) {
                 arrAddress.add(dc)

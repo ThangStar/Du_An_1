@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.developer.cubemarket.R
 import com.developer.cubemarket.adapter.utils.ProductFormatSizeAndColorAdapter
+import com.developer.cubemarket.call_back_view.CallBackDelOption
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoDanhMuc
@@ -76,17 +77,38 @@ class InsertProductFragment : Fragment() {
 
             val idSize = arrSize[binding.spnSize.selectedItemPosition].makichthuoc
             val idColor = arrColor[binding.spnColor.selectedItemPosition].mamausac
-            var formatUpload = "$idColor:$idSize:$price:$amount/"
-            strUpload += formatUpload
 
-            val rs = "$size - $color - ${Utils.formaterVND(price.toInt())} - $amount"
-            arrFormat.add(rs)
-            adapterFormat.notifyItemInserted(arrFormat.size)
+            var isCheck = true
+            if(Pattern.matches("^[0-9]{5,10}$", price)){
+                binding.tilPrice.error = null
+            }else{
+                isCheck = false
+                binding.tilPrice.error = "Giá 5-10 số"
+            }
+            if (Pattern.matches("^[0-9]{1,10}\$", amount)){
+                binding.tilAmount.error = null
+            }else{
+                isCheck = false
+                binding.tilAmount.error = "Số lượng 1-10 số"
+            }
+            if (isCheck){
+                val formatUpload = "$idColor:$idSize:$price:$amount/"
+                strUpload += formatUpload
+                val rs = "$size - $color - ${Utils.formaterVND(price.toInt())} - $amount"
+                arrFormat.add(rs)
+                adapterFormat.notifyItemInserted(arrFormat.size)
+            }
         }
     }
 
     private fun initDataRecyclerFormat() {
-        adapterFormat = ProductFormatSizeAndColorAdapter(initDataFormat())
+        val callBackDel = object : CallBackDelOption {
+            override fun onDel(pos: Int) {
+                arrFormat.removeAt(pos)
+                adapterFormat.notifyItemRemoved(pos)
+            }
+        }
+        adapterFormat = ProductFormatSizeAndColorAdapter(callBackDel, this, initDataFormat())
         binding.ryFormat.adapter = adapterFormat
     }
 
@@ -156,6 +178,10 @@ class InsertProductFragment : Fragment() {
                 isCheck = false
             }
 
+            if (arrFormat.size < 1){
+                isCheck = false
+                Toasty.error(requireContext(), "Bạn chưa thêm option", Toasty.LENGTH_SHORT).show()
+            }
             if(Pattern.matches("^[\\S ]{5,500}\$", detail)){
                 binding.tilDetail.error = null
             }else{

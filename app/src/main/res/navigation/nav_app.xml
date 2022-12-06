@@ -207,5 +207,9 @@
         android:id="@+id/newPassFragment"
         android:name="com.developer.cubemarket.fragment.NewPassFragment"
         android:label="fragment_new_pass"
-        tools:layout="@layout/fragment_new_pass" />
+        tools:layout="@layout/fragment_new_pass" >
+        <action
+            android:id="@+id/action_newPassFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

@@ -144,7 +144,7 @@ public class ThongkeActivity extends AppCompatActivity {
                 int i=0;
                 for (ThongKeDoanhThuTheoNam o: response
                 ) {
-                    barEntries.add(new BarEntry(i, o.getTongtien()));
+                    barEntries.add(new BarEntry(i, o.getTongtien()/1000));
                     i++;
                 }
 
@@ -157,7 +157,6 @@ public class ThongkeActivity extends AppCompatActivity {
                     theDates.add("Năm "+o.getNammua());
 
                 }
-
                 barChart2.notifyDataSetChanged();
                 barChart2.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
                 BarData theData = new BarData(barDataSet);//----Line of error
@@ -167,7 +166,6 @@ public class ThongkeActivity extends AppCompatActivity {
                 barChart2.setDragEnabled(true);
                 barChart2.setScaleEnabled(true);
                 barChart2.setBorderColor(R.color.teal_200);
-
 
             }
 

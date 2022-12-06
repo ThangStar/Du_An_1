@@ -50,10 +50,17 @@ public class ForgotPassFragment extends Fragment {
                             otp_box_5.getText().toString()+otp_box_6.getText().toString();
                     assert getArguments() != null;
                     String valueTrue = getArguments().getString("CODE");
+                    String email = getArguments().getString("EMAIL");
+
                     Log.d("SSS", "code: "+valueTrue);
                     if(otpUser.equals(valueTrue)){
                         Toasty.success(v.getContext(), "Xác minh thành công!", Toast.LENGTH_SHORT, true).show();
-                        Navigation.findNavController(v).navigate(R.id.action_forgotPassFragment_to_newPassFragment);
+
+                        Bundle bd = new Bundle();
+                        bd.putString("CODE", valueTrue);
+                        bd.putString("EMAIL", email);
+
+                        Navigation.findNavController(v).navigate(R.id.action_forgotPassFragment_to_newPassFragment, bd);
 //                        MotionToast.Companion.createColorToast(EnterCode.this,"",
 //                                MotionToast.Companion.getTOAST_SUCCESS(),
 //                                MotionToast.Companion.getGRAVITY_BOTTOM(),

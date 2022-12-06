@@ -18,6 +18,7 @@ import com.developer.cubemarket.R
 import com.developer.cubemarket.config.share_references.DataShareReferences
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.MODEL.OOP.User
+import com.developer.cubemarket.connection.callback.CallBackGetCode
 import com.developer.cubemarket.connection.callback.CallBackInsertUser
 import com.developer.cubemarket.connection.callback.CallBackLogin
 import com.developer.cubemarket.databinding.FragmentLoginBinding
@@ -66,13 +67,15 @@ class LoginFragment : Fragment() {
             binding.iplB.visibility = View.INVISIBLE
             binding.iplC.visibility = View.INVISIBLE
             binding.iplD.visibility = View.INVISIBLE
-            binding.lnGoLogin.visibility = View.GONE
+
             binding.rlInLogin.visibility = View.GONE
+
         }
     }
 
     private fun initGoLogin() {
         binding.tvGoLogin.setOnClickListener {
+            isForgotPass = false
             binding.btnOk.text = "Đăng nhập"
             binding.tvTitle.text = "Đăng Nhập"
             binding.edtB.hint = "Mật khẩu"
@@ -102,6 +105,7 @@ class LoginFragment : Fragment() {
     private fun initAnimation(v: View) {
         animEdtOut = AnimationUtils.loadAnimation(ctx, R.anim.anim_edt_out)
         v.setOnClickListener {
+            isForgotPass = false
             binding.edtA.error = null
             binding.edtB.error = null
             binding.edtC.error = null
@@ -119,7 +123,7 @@ class LoginFragment : Fragment() {
             binding.edtD.setText("")
 
             if (isLogin){
-
+                initDataDefault()
 
                 //this is login
                 binding.edtB.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
@@ -267,27 +271,35 @@ class LoginFragment : Fragment() {
     private fun initGoForgotPass() {
         val email = binding.edtA.text.toString()
         if (isValidEmail(email)){
-            var ranCode = ""
-            repeat(6){
-                val code: Int = (0..9).random()
-                ranCode += "$code"
+            val callback = object : CallBackGetCode{
+                override fun onSuccess(code: String) {
+
+                    //SEND EMAIL
+                    val javaMailAPI = SendMailService(
+                        requireContext(), email,
+                        "KHÔI PHỤC MẬT KHẨU", "$code Là mã xác minh CubeApp của bạn."
+                    )
+                    javaMailAPI.execute()
+
+                    //GO CHECK OUT CODE
+                    val bd = Bundle()
+                    bd.putString("CODE", code)
+                    bd.putString("EMAIL", email)
+                    findNavController().navigate(R.id.action_loginFragment_to_forgotPassFragment,
+                        bd)
+                }
+
+                override fun onFail(err: String) {
+                    Toasty.warning(requireContext(), err, Toasty.LENGTH_SHORT).show()
+                }
+
+                override fun onError(error: String) {
+                    Toasty.error(requireContext(), error, Toasty.LENGTH_SHORT).show()
+                }
             }
+            DaoUser(requireContext()).layma(callback, email)
 
-            Toasty.success(requireContext(), ranCode, Toasty.LENGTH_SHORT).show()
-//            val javaMailAPI = SendMailService(
-//                requireContext(), email,
-//                "KHÔI PHỤC MẬT KHẨU", "$ranCode Là mã xác minh CubeApp của bạn."
-//            )
-//            javaMailAPI.execute()
-            val bd = Bundle()
-            bd.putString("CODE", ranCode)
-            bd.putString("EMAIL", email)
-            findNavController().navigate(R.id.action_loginFragment_to_forgotPassFragment,
-            bd)
 
-            Log.d("FORGOTPASS", "code: $ranCode, email: $email")
-            Toasty.success(requireContext(), "Mã xác nhận đã được gửi đi", Toast.LENGTH_SHORT)
-                .show()
         }
     }
 

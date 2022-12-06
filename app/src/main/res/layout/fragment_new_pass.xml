@@ -83,6 +83,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:id="@+id/edt_pass"
+                            android:inputType="textPassword"
                             android:layout_height="wrap_content"
                             android:hint="abc123@"
                             android:fontFamily="@font/roboto_medium"/>
@@ -122,7 +123,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:id="@+id/edt_pass_again"
-                            android:inputType="number"
+                            android:inputType="textPassword"
                             android:layout_height="wrap_content"
                             android:hint="abc123@"
                             android:fontFamily="@font/roboto_medium"/>

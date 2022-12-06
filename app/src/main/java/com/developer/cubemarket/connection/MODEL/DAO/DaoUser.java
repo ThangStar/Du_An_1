@@ -21,9 +21,12 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.User;
 import com.developer.cubemarket.connection.callback.CallBackChangePass;
+import com.developer.cubemarket.connection.callback.CallBackGetCode;
 import com.developer.cubemarket.connection.callback.CallBackGetDataUser;
 import com.developer.cubemarket.connection.callback.CallBackInsertUser;
+import com.developer.cubemarket.connection.callback.CallBackLockAccount;
 import com.developer.cubemarket.connection.callback.CallBackLogin;
+import com.developer.cubemarket.connection.callback.CallBackUpdatePass;
 import com.developer.cubemarket.connection.callback.CallBackUpdatePermissionUser;
 import com.developer.cubemarket.connection.callback.CallBackUpdateUser;
 import com.developer.cubemarket.fragment.bottom_sheet.BtsChangePermissionUserFragment;
@@ -194,7 +197,7 @@ public class DaoUser {
                 if(response.toString().trim().equals("success")){
                     callBackChangePass.onSuccess("Đổi mật khẩu thành công");
                 }else{
-                    callBackChangePass.onError(response.toString());
+                    callBackChangePass.onFail(response.toString());
                 }
             }
         }, new Response.ErrorListener() {
@@ -224,56 +227,59 @@ public class DaoUser {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_dangnhap, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               if(response.toString().trim().equals("ErrorLogin")){
-                   callBackLogin.onFail("Tài khoản hoặc mật khẩu không chính xác");
-               }else{
-                   try {
-                       JSONArray jsonArray= new JSONArray(response);
-                       for (int i = 0 ; i<jsonArray.length();i++){
-                           try {
-                               JSONObject jsonObject= jsonArray.getJSONObject(i);
-                               int id= jsonObject.getInt("id");
-                               String ten = jsonObject.getString("ten");
-                               int chuvu=jsonObject.getInt("chucvu");
-                               String phone=jsonObject.getString("phone");
-                               String gmail=jsonObject.getString("gmail");
-                               if(chuvu==1){
-                                   tenchucvu="Admin";
-                               }
-                               Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"" +
-                                       "   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
-                               //--------------------------------------------------------code them doạn này------------------------------------
-                               Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
-                               DataUser.Companion.setId(id);
-                               DataUser.Companion.setName(ten);
-                               DataUser.Companion.setEmail(gmail);
-                               DataUser.Companion.setOccupation(chuvu);
-                               DataUser.Companion.setNumberPhone(phone);
-                               DataUser.Companion.setPass(pass);
-                               //put data in share references
-                               DataShareReferences.Companion.putEmailAndPass(context, user, pass);
-
-                               //go to home
-                               callBackLogin.onSuccess("Đăng nhập thành công");
-
-                           } catch (JSONException e) {
-                               e.printStackTrace();
-                               Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
-                           }
-                       }
-                   } catch (JSONException e) {
-                       Log.d("SSS", "-----llll--->>"+e);
-                       Toasty.error(context, "đã xảy ra lỗi "+e, Toasty.LENGTH_SHORT).show();
-                       e.printStackTrace();
-                   }
-               }
+                if(response.toString().trim().equals("ErrorLogin")){
+                    callBackLogin.onFail("Tài khoản hoặc mật khẩu không chính xác");
+                }else if(response.toString().trim().equals("LOCKUSER")){
+                    Log.d(TAG, "Tài khoản đã bị khóa");
+                    callBackLogin.onError("Tài khoản này đã bị khóa!");
+                }
+                else{
+                    try {
+                        JSONArray jsonArray= new JSONArray(response);
+                        for (int i = 0 ; i<jsonArray.length();i++){
+                            try {
+                                JSONObject jsonObject= jsonArray.getJSONObject(i);
+                                int id= jsonObject.getInt("id");
+                                String ten = jsonObject.getString("ten");
+                                int chuvu=jsonObject.getInt("chucvu");
+                                String phone=jsonObject.getString("phone");
+                                String gmail=jsonObject.getString("gmail");
+                                String tenchucvu="Người dùng";
+                                if(chuvu==1){
+                                    tenchucvu="Người bán";
+                                }else if (chuvu==2) {
+                                    tenchucvu="Admin";
+                                }
+                                Log.d(TAG, "  d=>  "+id+"  ten=> "+ten+"   chvu=> "+tenchucvu+"   phone=> "+phone+"  gmal=> "+gmail);
+                                //--------------------------------------------------------code them doạn này------------------------------------
+                                Toasty.success(context, "đăng nhập thành công!", Toasty.LENGTH_SHORT).show();
+                                DataUser.Companion.setId(id);
+                                DataUser.Companion.setName(ten);
+                                DataUser.Companion.setEmail(gmail);
+                                DataUser.Companion.setOccupation(chuvu);
+                                DataUser.Companion.setNumberPhone(phone);
+                                DataUser.Companion.setPass(pass);
+                                //put data in share references
+                                DataShareReferences.Companion.putEmailAndPass(context, user, pass);
+                                //go to home
+                                callBackLogin.onSuccess("Đăng nhập thành công");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.d(TAG, "đã xảy ra lỗi : gggg"+e);
+                            }
+                        }
+                    } catch (JSONException e) {
+                        callBackLogin.onError("LỖI"+e);
+                        Log.d(TAG, "-----llll--->>"+e);
+                        e.printStackTrace();
+                    }
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                callBackLogin.onError("Đã xảy ra lỗi"+error);
-                Log.d("SSS", "-----llll--->>"+error.toString());
-                Toasty.error(context, "đã xảy ra lỗi ", Toasty.LENGTH_SHORT).show();
+                callBackLogin.onError("LỖI"+error);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){
             @Nullable
@@ -336,5 +342,108 @@ public class DaoUser {
             }
         };
         requestQueue.add(stringRequest);
+    }
+    public void layma(CallBackGetCode callBackGetCode, String gmail_nhan) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.get_code_change_pass, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if(Integer.parseInt(response)==-1){
+                    callBackGetCode.onFail("vui lòng đợi 3 phút để gủi mã tiếp theo");
+                    Log.d(TAG, "vui lòng đợi 3 phút để gủi mã tiếp theo");
+                }else{
+                    callBackGetCode.onSuccess(response.toString());
+                    Log.d(TAG, "mã code dooir mật khẩu: .....>"+response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBackGetCode.onError("Lỗi: "+error);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("gmail", gmail_nhan);
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public void nhapma(CallBackUpdatePass callBackUpdatePass, String gmail, int nhapma, String passnew) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.input_code_change_pass, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if(Integer.parseInt(response)==-1){
+                    callBackUpdatePass.onFail("Mã đã hết hạn hoặc nhập không đúng");
+                    Log.d(TAG, "Mã đã hết hạn hoặc nhập không đúng");
+                }else{
+                    callBackUpdatePass.onSuccess("Đổi mật khẩu thành công");
+                    Log.d(TAG, "Đổi mật khẩu thành công");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBackUpdatePass.onError("Lỗi: "+error);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("gmail", gmail);
+                stringStringMap.put("nhapma", String.valueOf(nhapma));
+                stringStringMap.put("passnew", passnew);
+                return stringStringMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    public  void khoa_taikhoan(CallBackLockAccount callBack, int id_khoa , int chucvu){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.kichhoat_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    Log.d(TAG, "thành công");
+                    callBack.onSuccess("Thành công");
+                }else{
+                    callBack.onFail("Thất bại"+response);
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.onError("Lỗi"+error);
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id_user", String.valueOf(id_khoa));
+
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+
+                stringStringMap.put("check","1");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
     }
 }

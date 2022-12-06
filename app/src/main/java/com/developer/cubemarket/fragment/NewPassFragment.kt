@@ -1,12 +1,17 @@
 package com.developer.cubemarket.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
+import com.developer.cubemarket.config.share_references.DataShareReferences.Companion.putEmailAndPass
+import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
+import com.developer.cubemarket.connection.callback.CallBackUpdatePass
 import com.developer.cubemarket.databinding.FragmentNewPassBinding
+import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,16 +38,41 @@ class NewPassFragment : Fragment() {
     }
 
     private fun initEventNewPass() {
-        val pass = binding.edtPass.text.toString().trim()
-        val passAgain = binding.edtPassAgain.text.toString().trim()
+        binding.btnAccept.setOnClickListener {
+            val pass = binding.edtPass.text.toString().trim()
+            val passAgain = binding.edtPassAgain.text.toString().trim()
 
-        if(pass != passAgain){
-            binding.tilPassAgain.error = "Mật khẩu không giống nhau"
-        }else if(Pattern.matches("^[\\S ]{2,10}$", pass)){
-            binding.tilPassAgain.error = null
-            //up pass new
-        }else{
-            binding.tilPassAgain.error = "Mật khẩu phải 2-10 kí tự"
+            if(pass != passAgain){
+                binding.tilPassAgain.error = "Mật khẩu không giống nhau"
+            }else if(Pattern.matches("^[\\S ]{2,10}$", pass)){
+                binding.tilPassAgain.error = null
+                //up pass new
+
+                val code = arguments?.getString("CODE")
+                val email = arguments?.getString("EMAIL")
+
+                val callback = object : CallBackUpdatePass{
+                    override fun onSuccess(rs: String) {
+                        Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                        putEmailAndPass(requireContext(), email!!, pass)
+                        findNavController().navigate(R.id.action_newPassFragment_to_loginFragment)
+
+                        //put data in share references
+
+                    }
+
+                    override fun onFail(rs: String) {
+                        Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(rs: String) {
+                        Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+                }
+                DaoUser(requireContext()).nhapma(callback, email, code!!.toInt(), pass)
+            }else{
+                binding.tilPassAgain.error = "Mật khẩu phải 2-10 kí tự"
+            }
         }
     }
 }

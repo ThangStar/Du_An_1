@@ -61,9 +61,10 @@ class ChangePassFragment : Fragment() {
                 binding.tilPassNewAgain.error = null
             }
             if (passOld != DataUser.pass){
-                Toasty.warning(requireContext(),
-                    "mật khẩu cũ không chính xác", Toasty.LENGTH_SHORT).show()
+                binding.tilPassOld.error = "mật khẩu cũ không chính xác"
                 isCheck = false
+            }else{
+                binding.tilPassOld.error = null
             }
             if(isCheck){
                 val callback = object: CallBackChangePass {

@@ -1,14 +1,21 @@
 package com.developer.cubemarket.adapter.manager
 
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.cubemarket.R
+import com.developer.cubemarket.config.user.DataUser
+import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.MODEL.OOP.User
+import com.developer.cubemarket.connection.callback.CallBackLockAccount
 import com.developer.cubemarket.databinding.UserManagerItemBinding
 import com.developer.cubemarket.fragment.bottom_sheet.BtsChangePermissionUserFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import es.dmoral.toasty.Toasty
 
 class UserManagerAdapter(
     var fr: FragmentActivity,
@@ -22,6 +29,7 @@ class UserManagerAdapter(
         val binding = UserManagerItemBinding.bind(v)
         init {
             binding.btnChangePermission.setOnClickListener(this)
+            binding.btnLock.setOnClickListener(this)
         }
 
         override fun onClick(p0: View?) {
@@ -29,6 +37,35 @@ class UserManagerAdapter(
                 binding.btnChangePermission -> {
                     val bottomSheet = BtsChangePermissionUserFragment(arr[adapterPosition].id, arr[adapterPosition].chucvu)
                     bottomSheet.show(fr.supportFragmentManager, BtsChangePermissionUserFragment.TAG)
+                }
+                binding.btnLock -> {
+                    val buider = MaterialAlertDialogBuilder(fr)
+                        .setTitle("KHÓA ${arr[adapterPosition].ten}?")
+                        .setMessage("Bạn có muốn khóa tài khoản ${arr[adapterPosition].ten}")
+                        .setNegativeButton("Khóa", object : DialogInterface.OnClickListener{
+                            override fun onClick(p0: DialogInterface?, p1: Int) {
+                                val callBack = object : CallBackLockAccount{
+                                    override fun onSuccess(rs: String) {
+                                        Toasty.success(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onFail(rs: String) {
+                                        Toasty.warning(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onError(rs: String) {
+                                        Toasty.error(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                    }
+                                }
+                                DaoUser(fr.baseContext).khoa_taikhoan(callBack, arr[adapterPosition].id, DataUser.occupation)
+                            }
+                        })
+                        .setPositiveButton("Hủy", object : DialogInterface.OnClickListener{
+                            override fun onClick(p0: DialogInterface?, p1: Int) {
+
+                            }
+                        })
+                        .show()
                 }
             }
         }

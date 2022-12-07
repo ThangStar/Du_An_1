@@ -18,6 +18,7 @@ import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Mausac;
 import com.developer.cubemarket.connection.callback.CallBackColorProduct;
 import com.developer.cubemarket.connection.callback.CallBackDeleteColor;
+import com.developer.cubemarket.connection.callback.CallBackInsertSize;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,21 +38,24 @@ public class DaoMauSac {
     public DaoMauSac(Context context) {
         this.context = context;
     }
-    public  void insert_mausac(Mausac mausac){
+    public  void insert_mausac(CallBackInsertSize callBackInsertSize, Mausac mausac){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.insert_mausac, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
+                    callBackInsertSize.onSuccess("");
                     Log.d(TAG, "thành công");
                 }else{
+                    callBackInsertSize.onFail("Thêm thất bại: "+response);
                     Log.d(TAG, "lỗi>>"+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackInsertSize.onError("Thêm thất bại: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){

@@ -116,6 +116,9 @@
         <action
             android:id="@+id/action_productFragment_to_voicherManagerFragment"
             app:destination="@id/voicherManagerFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_colorAndSizeFragment"
+            app:destination="@id/colorAndSizeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
@@ -212,4 +215,9 @@
             android:id="@+id/action_newPassFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/colorAndSizeFragment"
+        android:name="com.developer.cubemarket.fragment.fragment_color_size_manager.ColorAndSizeFragment"
+        android:label="fragment_color_and_size"
+        tools:layout="@layout/fragment_color_and_size" />
 </navigation>

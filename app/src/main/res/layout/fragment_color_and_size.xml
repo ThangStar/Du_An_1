@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.fragment_color_size_manager.ColorAndSizeFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp">
+
+        <ImageView
+            android:id="@+id/imv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ripple_text"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:textColor="@color/text_color_secondary"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_title_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="màu sắc &amp; kích thước"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_above="@id/btn_insert"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <LinearLayout
+                    android:paddingHorizontal="20dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/text_color_secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Màu sắc"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="10dp"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ry_color"
+                        android:nestedScrollingEnabled="true"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_width="match_parent"
+                        tools:itemCount="5"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="@color/dividingLine"
+                        app:boxStrokeWidth="1dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:counterEnabled="true"
+                        app:endIconMode="clear_text"
+                        android:id="@+id/til_color"
+                        app:counterMaxLength="14"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:hintEnabled="false"
+                        android:textColorHint="@color/text_hint_secondary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:id="@+id/edt_color"
+                            android:layout_height="wrap_content"
+                            android:hint="Đỏ, xanh,.."
+                            android:fontFamily="@font/roboto_medium"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_color"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="15dp"
+                        android:text="THÊM MÀU"
+                        android:layout_alignParentBottom="true"
+                        android:textSize="16sp"
+                        app:backgroundTint="@color/text_color_primary"
+                        app:cornerRadius="8dp" />
+                </LinearLayout>
+            <LinearLayout
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kích thước"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="10dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/ry_size"
+                    android:nestedScrollingEnabled="true"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    tools:itemCount="5"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dividingLine"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:counterEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:counterMaxLength="14"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:hintEnabled="false"
+                    android:id="@+id/til_size"
+                    android:textColorHint="@color/text_hint_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/edt_size"
+                        android:layout_height="wrap_content"
+                        android:hint="X, XL, 2Xl"
+                        android:fontFamily="@font/roboto_medium"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_size"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:text="THÊM KÍCH THƯỚC"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/item_color_secondary"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_insert"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:paddingVertical="15dp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:text="QUAY LẠI"
+        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="5dp"
+        android:textSize="16sp"
+        app:cornerRadius="8dp" />
+
+</RelativeLayout>

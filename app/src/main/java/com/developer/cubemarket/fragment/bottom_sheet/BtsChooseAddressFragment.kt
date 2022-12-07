@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import es.dmoral.toasty.Toasty
 import java.util.regex.Pattern
 
-class BtsChooseAddressFragment(var onAddressSelected: OnAddressSelected) : BottomSheetDialogFragment() {
+class BtsChooseAddressFragment(private var onAddressSelected: OnAddressSelected) : BottomSheetDialogFragment() {
     companion object {
         const val TAG = "BottomSheetChooseAddress"
     }

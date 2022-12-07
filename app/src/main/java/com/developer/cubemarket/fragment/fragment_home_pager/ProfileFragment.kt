@@ -35,7 +35,14 @@ class ProfileFragment : Fragment() {
         initEventGoUserManager()
         initEventGoBill()
         initEventGoRank()
+        initEventGoColorAndSizeManager()
         return binding.root
+    }
+
+    private fun initEventGoColorAndSizeManager() {
+        binding.lnGoColorSizeManager.setOnClickListener {
+            findNavController().navigate(R.id.action_productFragment_to_colorAndSizeFragment)
+        }
     }
 
     private fun initUiPermission() {

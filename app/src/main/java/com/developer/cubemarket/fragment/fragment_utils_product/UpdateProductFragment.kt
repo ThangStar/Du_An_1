@@ -187,6 +187,10 @@ class UpdateProductFragment : Fragment() {
             override fun onError(rs: String) {
             }
 
+            override fun onFinish(rs: String) {
+
+            }
+
         }
         DaoOption(requireContext()).getdata_option(callBackOption, idProduct!!)
     }
@@ -261,6 +265,9 @@ class UpdateProductFragment : Fragment() {
                     }
 
                     override fun onError(rs: String) {
+                    }
+
+                    override fun onFinish(rs: String) {
                     }
                 }
                 daoOption.getdata_option(callBackGetOption, idProduct!!)

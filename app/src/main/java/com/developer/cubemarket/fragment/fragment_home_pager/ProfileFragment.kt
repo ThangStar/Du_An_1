@@ -1,16 +1,16 @@
 package com.developer.cubemarket.fragment.fragment_home_pager
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.developer.cubemarket.R
 import com.developer.cubemarket.activity.VIEW.LayoutHoadonActivity
 import com.developer.cubemarket.activity.VIEW.ThongkeActivity
+import com.developer.cubemarket.config.share_references.DataShareReferences.Companion.putEmailAndPass
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.databinding.FragmentProfileBinding
 
@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
 
     private fun initUiPermission() {
         if(DataUser.occupation == 0){
+            binding.lnGoColorSizeManager.visibility = View.GONE
             binding.lnGoRank.visibility = View.GONE
             binding.lnGoUserManager.visibility = View.GONE
             binding.lnGoVoicherManager.visibility = View.GONE
@@ -54,6 +55,7 @@ class ProfileFragment : Fragment() {
             binding.lnGoProductSale.visibility = View.GONE
             binding.lnPost.visibility = View.GONE
         }else if(DataUser.occupation == 1){
+            binding.lnGoColorSizeManager.visibility = View.GONE
             binding.lnInsertDirectory.visibility = View.GONE
             binding.lnGoUserManager.visibility = View.GONE
             binding.lnGoVoicherManager.visibility = View.GONE
@@ -93,6 +95,8 @@ class ProfileFragment : Fragment() {
 
     private fun initEventLogout() {
         binding.tvLogout.setOnClickListener{
+            //put data in share references
+            putEmailAndPass(requireContext(), "", "")
             findNavController().navigate(R.id.action_productFragment_to_loginFragment)
         }
     }

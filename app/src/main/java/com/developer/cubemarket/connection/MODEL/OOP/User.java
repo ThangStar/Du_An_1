@@ -5,21 +5,22 @@ public class User {
     private String ten;
     private String password;
     private int chucvu;
-
     private String phone;
     private String gmail;
+    private int tinhtrang;
 
 
     public User() {
     }
 
-    public User(int id, String ten, String password, int chucvu, String phone, String gmail) {
+    public User(int id, String ten, String password, int chucvu, String phone, String gmail, int tinhtrang) {
         this.id = id;
         this.ten = ten;
         this.password = password;
         this.chucvu = chucvu;
         this.phone = phone;
         this.gmail = gmail;
+        this.tinhtrang = tinhtrang;
     }
 
     public int getId() {
@@ -68,5 +69,13 @@ public class User {
 
     public void setGmail(String gmail) {
         this.gmail = gmail;
+    }
+
+    public int getTinhtrang() {
+        return tinhtrang;
+    }
+
+    public void setTinhtrang(int tinhtrang) {
+        this.tinhtrang = tinhtrang;
     }
 }

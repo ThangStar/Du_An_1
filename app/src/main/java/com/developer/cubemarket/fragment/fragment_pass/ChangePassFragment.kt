@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.developer.cubemarket.R
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.connection.MODEL.DAO.DaoUser
 import com.developer.cubemarket.connection.callback.CallBackChangePass
@@ -71,6 +73,7 @@ class ChangePassFragment : Fragment() {
                     override fun onSuccess(rs: String) {
                         Toasty.success(requireContext(),
                             rs, Toasty.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_changePassFragment_to_loginFragment)
                     }
 
                     override fun onFail(err: String) {

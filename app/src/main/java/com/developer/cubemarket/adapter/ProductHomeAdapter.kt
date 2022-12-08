@@ -20,8 +20,11 @@ import com.developer.cubemarket.R
 import com.developer.cubemarket.config.user.DataUser
 import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.DAO.DaoGioHang
+import com.developer.cubemarket.connection.MODEL.DAO.DaoOption
+import com.developer.cubemarket.connection.MODEL.OOP.Option
 import com.developer.cubemarket.connection.MODEL.OOP.Sanpham
 import com.developer.cubemarket.connection.callback.CallBackAddCart
+import com.developer.cubemarket.connection.callback.CallBackDataOption
 import com.developer.cubemarket.databinding.ProductHomeItemBinding
 import com.google.android.material.transition.MaterialContainerTransform
 import es.dmoral.toasty.Toasty
@@ -72,7 +75,7 @@ class ProductHomeAdapter(
             }
             return true
         }
-        fun showMenu(ctx: Context, v: View, @MenuRes menuRes: Int) {
+        private fun showMenu(ctx: Context, v: View, @MenuRes menuRes: Int) {
             val popup = PopupMenu(ctx, v)
             popup.menuInflater.inflate(menuRes, popup.menu)
             popup.setOnMenuItemClickListener {
@@ -121,23 +124,41 @@ class ProductHomeAdapter(
         override fun onClick(p0: View?) {
             when(p0){
                 binding.imvAddCart ->{
-                    val callBackAddCart = object : CallBackAddCart{
-                        override fun onSuccess(rs: String) {
-                            Toasty.success(fr.requireContext(), "Đã thêm vào giỏ", Toasty.LENGTH_SHORT).show()
+                    val op1 = arrayListOf<Option>()
+                    Log.d(" ID SP","${arr[adapterPosition].masanpham}")
+                    val callBackGetOption = object : CallBackDataOption{
+                        override fun onSuccess(op: Option) {
+                            op1.add(op)
+                            Log.d("RETURN: ","${op.option_id}")
                         }
 
-                        override fun onFail(err: String) {
-                            Toasty.warning(fr.requireContext(), err, Toasty.LENGTH_SHORT).show()
+                        override fun onFail(rs: String) {
                         }
 
-                        override fun onError(error: String) {
-                            Toasty.error(fr.requireContext(), error, Toasty.LENGTH_SHORT).show()
+                        override fun onError(rs: String) {
+                        }
+
+                        override fun onFinish(rs: String) {
+
+                            val callBackAddCart = object : CallBackAddCart{
+                                override fun onSuccess(rs: String) {
+                                    Toasty.success(fr.requireContext(), "Đã thêm vào giỏ", Toasty.LENGTH_SHORT).show()
+                                }
+
+                                override fun onFail(err: String) {
+                                    Toasty.warning(fr.requireContext(), err, Toasty.LENGTH_SHORT).show()
+                                }
+
+                                override fun onError(error: String) {
+                                    Toasty.error(fr.requireContext(), error, Toasty.LENGTH_SHORT).show()
+                                }
+                            }
+                            DaoGioHang(fr.requireContext()).insert_giohang(callBackAddCart,
+                                DataUser.id,
+                                op1[0].option_id)
                         }
                     }
-                    DaoGioHang(fr.requireContext()).insert_giohang(callBackAddCart,
-                        DataUser.id,
-                        5
-                    )
+                    DaoOption(fr.requireContext()).getdata_option(callBackGetOption, arr[adapterPosition].masanpham)
                 }
             }
         }

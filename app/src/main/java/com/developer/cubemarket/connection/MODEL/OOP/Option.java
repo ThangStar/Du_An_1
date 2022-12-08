@@ -9,6 +9,7 @@ public class Option {
     private  int price;
     private  int number;
 
+    public Option(){}
     public Option(int option_id, int id_product, String name_product, String color_name, String size_name, int price, int number) {
         this.option_id = option_id;
         this.id_product = id_product;

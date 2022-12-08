@@ -162,7 +162,11 @@
         android:id="@+id/changePassFragment"
         android:name="com.developer.cubemarket.fragment.fragment_pass.ChangePassFragment"
         android:label="fragment_change_pass"
-        tools:layout="@layout/fragment_change_pass" />
+        tools:layout="@layout/fragment_change_pass" >
+        <action
+            android:id="@+id/action_changePassFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productSaleFragment"
         android:name="com.developer.cubemarket.fragment.fragment_product_sale.ProductSaleFragment"

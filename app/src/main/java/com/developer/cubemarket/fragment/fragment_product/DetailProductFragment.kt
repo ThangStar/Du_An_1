@@ -234,9 +234,14 @@ class DetailProductFragment : Fragment() {
             override fun onError(rs: kotlin.String) {
                 Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
             }
+
+            override fun onFinish(rs: String) {
+
+            }
         }
 //        Toasty.success(requireContext(), "mã sp là: $idProduct", Toasty.LENGTH_SHORT).show()
         DaoOption(requireContext()).getdata_option(callBackOption, idProduct)
+        Log.d("SSS ID PRRRRRRR", "$idProduct")
         return arrOption
     }
 
@@ -278,6 +283,10 @@ class DetailProductFragment : Fragment() {
 
                     override fun onError(rs: kotlin.String) {
                         Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                    }
+
+                    override fun onFinish(rs: String) {
+
                     }
                 }
                 DaoOption(requireContext()).getdata_option(callBackOption, idProduct)

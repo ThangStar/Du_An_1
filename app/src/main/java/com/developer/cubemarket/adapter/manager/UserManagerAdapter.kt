@@ -39,33 +39,70 @@ class UserManagerAdapter(
                     bottomSheet.show(fr.supportFragmentManager, BtsChangePermissionUserFragment.TAG)
                 }
                 binding.btnLock -> {
-                    val buider = MaterialAlertDialogBuilder(fr)
-                        .setTitle("KHÓA ${arr[adapterPosition].ten}?")
-                        .setMessage("Bạn có muốn khóa tài khoản ${arr[adapterPosition].ten}")
-                        .setNegativeButton("Khóa", object : DialogInterface.OnClickListener{
-                            override fun onClick(p0: DialogInterface?, p1: Int) {
-                                val callBack = object : CallBackLockAccount{
-                                    override fun onSuccess(rs: String) {
-                                        Toasty.success(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
-                                    }
+                    if (arr[adapterPosition].tinhtrang == 0){
+                        val buider = MaterialAlertDialogBuilder(fr)
+                            .setTitle("KHÓA ${arr[adapterPosition].ten}?")
+                            .setMessage("Bạn có muốn khóa tài khoản ${arr[adapterPosition].ten}")
+                            .setNegativeButton("Khóa", object : DialogInterface.OnClickListener{
+                                override fun onClick(p0: DialogInterface?, p1: Int) {
+                                    val callBack = object : CallBackLockAccount{
+                                        override fun onSuccess(rs: String) {
+                                            arr[adapterPosition].tinhtrang = 1
+                                            binding.btnLock.setBackgroundColor(fr.resources.getColor(R.color.green, null))
+                                            binding.btnLock.text = "MỞ KHÓA"
+                                            Toasty.success(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        }
 
-                                    override fun onFail(rs: String) {
-                                        Toasty.warning(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
-                                    }
+                                        override fun onFail(rs: String) {
+                                            Toasty.warning(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        }
 
-                                    override fun onError(rs: String) {
-                                        Toasty.error(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        override fun onError(rs: String) {
+                                            Toasty.error(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        }
                                     }
+                                    DaoUser(fr.baseContext).khoa_taikhoan(callBack, arr[adapterPosition].id, DataUser.occupation)
                                 }
-                                DaoUser(fr.baseContext).khoa_taikhoan(callBack, arr[adapterPosition].id, DataUser.occupation)
-                            }
-                        })
-                        .setPositiveButton("Hủy", object : DialogInterface.OnClickListener{
-                            override fun onClick(p0: DialogInterface?, p1: Int) {
+                            })
+                            .setPositiveButton("Hủy", object : DialogInterface.OnClickListener{
+                                override fun onClick(p0: DialogInterface?, p1: Int) {
 
-                            }
-                        })
-                        .show()
+                                }
+                            })
+                            .show()
+                    }else{
+                        val buider = MaterialAlertDialogBuilder(fr)
+                            .setTitle("MỞ KHÓA ${arr[adapterPosition].ten}?")
+                            .setMessage("Bạn có muốn mở khóa tài khoản ${arr[adapterPosition].ten}")
+                            .setNegativeButton("Mở khóa", object : DialogInterface.OnClickListener{
+                                override fun onClick(p0: DialogInterface?, p1: Int) {
+                                    val callBack = object : CallBackLockAccount{
+                                        override fun onSuccess(rs: String) {
+                                            arr[adapterPosition].tinhtrang = 0
+                                            binding.btnLock.text = "KHÓA"
+                                            binding.btnLock.setBackgroundColor(fr.resources.getColor(R.color.item_color_secondary, null))
+                                            Toasty.success(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        }
+
+                                        override fun onFail(rs: String) {
+                                            Toasty.warning(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        }
+
+                                        override fun onError(rs: String) {
+                                            Toasty.error(fr.baseContext, rs, Toasty.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    DaoUser(fr.baseContext).mo_taikhoan(callBack, arr[adapterPosition].id, DataUser.occupation)
+                                }
+                            })
+                            .setPositiveButton("Hủy", object : DialogInterface.OnClickListener{
+                                override fun onClick(p0: DialogInterface?, p1: Int) {
+
+                                }
+                            })
+                            .show()
+                    }
+
                 }
             }
         }
@@ -80,7 +117,13 @@ class UserManagerAdapter(
         val us = arr[position]
         holder.binding.tvUsername.text = us.ten
         holder.binding.tvEmail.text = us.gmail
-
+        if (us.tinhtrang == 0){
+            holder.binding.btnLock.text = "KHÓA"
+            holder.binding.btnLock.setBackgroundColor(fr.resources.getColor(R.color.item_color_secondary, null))
+        }else{
+            holder.binding.btnLock.setBackgroundColor(fr.resources.getColor(R.color.green, null))
+            holder.binding.btnLock.text = "MỞ KHÓA"
+        }
         var cv = "Không xác định!"
         when(us.chucvu){
             0 -> cv = "Người dùng"

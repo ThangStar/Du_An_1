@@ -7,4 +7,5 @@ interface CallBackDataOption {
     fun onSuccess(op: Option)
     fun onFail(rs: String)
     fun onError(rs: String)
+    fun onFinish(rs: String)
 }

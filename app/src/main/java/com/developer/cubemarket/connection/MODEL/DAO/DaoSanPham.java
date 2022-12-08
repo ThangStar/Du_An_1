@@ -110,14 +110,14 @@ public class DaoSanPham {
                     Log.d(TAG, "xóa thành công");
                     callback.onSuccess("xóa thành công");
                 }else{
-                    callback.onFail("lỗi>>"+response.toString());
-                    Log.d(TAG, "lỗi>>"+response.toString());
+                    callback.onFail("Không được xoá sản phẩm này");
+                    Log.d(TAG, "lỗi "+response.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                callback.onError("lỗi>>"+error.toString());
+                callback.onError("lỗi"+error.toString());
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
 
 

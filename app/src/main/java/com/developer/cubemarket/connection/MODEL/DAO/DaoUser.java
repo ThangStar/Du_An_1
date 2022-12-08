@@ -196,6 +196,7 @@ public class DaoUser {
             public void onResponse(String response) {
                 if(response.toString().trim().equals("success")){
                     callBackChangePass.onSuccess("Đổi mật khẩu thành công");
+                    DataShareReferences.Companion.putEmailAndPass(context, DataUser.Companion.getEmail(), pass_new);
                 }else{
                     callBackChangePass.onFail(response.toString());
                 }
@@ -311,8 +312,8 @@ public class DaoUser {
                             int chuvu=jsonObject.getInt("chucvu");
                             String phone=jsonObject.getString("phone");
                             String gmail=jsonObject.getString("gmail");
-                            callBackGetDataUser.onSuccess(new User(id,ten,"******",chuvu,phone,gmail));
-                            ee.add(new User(id,ten,"******",chuvu,phone,gmail));
+                            int tinhtrang=jsonObject.getInt("condition");
+                            callBackGetDataUser.onSuccess(new User(id,ten,"******",chuvu,phone,gmail, tinhtrang));
                             //--------------------------------------------------------code them doạn này------------------------------------
 
                         } catch (JSONException e) {
@@ -439,6 +440,43 @@ public class DaoUser {
                 stringStringMap.put("chucvu", String.valueOf(chucvu));
 
                 stringStringMap.put("check","1");
+                return stringStringMap;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    public  void mo_taikhoan(CallBackLockAccount callBackLockAccount, int id_mo_khoa , int chucvu){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        HttpsTrustManager.allowAllSSL();
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.kichhoat_user, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.toString().trim().equals("success")){
+                    callBackLockAccount.onSuccess("ĐÃ MỞ");
+                    Log.d(TAG, "thành công");
+                }else{
+                    callBackLockAccount.onFail("Thất bại");
+                    Log.d(TAG, "lỗi>>"+response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBackLockAccount.onError("Lỗi");
+                Log.d(TAG, "xảy ra lỗi >>>>" +error);
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> stringStringMap= new HashMap<>();
+                stringStringMap.put("id_user", String.valueOf(id_mo_khoa));
+
+                stringStringMap.put("chucvu", String.valueOf(chucvu));
+
+                stringStringMap.put("check","0");
                 return stringStringMap;
             }
         };

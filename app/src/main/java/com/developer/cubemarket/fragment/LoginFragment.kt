@@ -100,6 +100,29 @@ class LoginFragment : Fragment() {
         val auth = DataShareReferences.getEmailAndPass(requireContext())
         binding.edtA.setText(auth.email)
         binding.edtB.setText(auth.pass)
+        val email = binding.edtA.text.toString().trim()
+        val pass = binding.edtB.text.toString().trim()
+
+
+        if (email.isNotBlank()){
+            val callBackLogin = object : CallBackLogin {
+                override fun onSuccess(rs: String) {
+//                                Utils.diaLogProgress(requireContext(), "Đang đăng nhập", R.raw.loading)
+                    findNavController().navigate(R.id.action_loginFragment_to_productFragment)
+                    Toasty.success(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                }
+
+                override fun onFail(rs: String) {
+                    Toasty.warning(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                }
+
+                override fun onError(rs: String) {
+                    Toasty.error(requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                }
+            }
+            Toasty.success(requireContext(), "Tự động đăng nhập", Toasty.LENGTH_SHORT).show()
+            DaoUser(ctx).dangnhap(callBackLogin, email, pass)
+        }
     }
 
     private fun initAnimation(v: View) {
@@ -218,7 +241,7 @@ class LoginFragment : Fragment() {
                                     Toasty.error(requireContext(), error, Toasty.LENGTH_SHORT).show()
                                 }
                             }
-                            val user = User(0, fullname, pass, 0, numberPhone, email)
+                            val user = User(0, fullname, pass, 0, numberPhone, email, 0)
                             DaoUser(ctx).insert_user(callBack, user)
                         }
                     }

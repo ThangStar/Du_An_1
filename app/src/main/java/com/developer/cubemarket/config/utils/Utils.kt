@@ -92,11 +92,12 @@ class Utils {
                 .setPositiveButton("Xóa",R.drawable.delete
                 ) { dialogInterface, _ ->
                     //Do something delete here
-                    HomeFragment.arrHomeProduct.removeAt(pos)
-                    HomeFragment.productHomeAdapter.notifyItemRemoved(pos)
+
 
                     val callBack = object: CallBackDelProduct {
                         override fun onSuccess(rs: String) {
+                            HomeFragment.arrHomeProduct.removeAt(pos)
+                            HomeFragment.productHomeAdapter.notifyItemRemoved(pos)
                             Toasty.success(activity, rs, Toasty.LENGTH_SHORT).show()
                         }
 
@@ -146,9 +147,7 @@ class Utils {
                 .setPositiveButton("Xóa",R.drawable.delete
                 ) { dialogInterface, _ ->
                     //Do something delete here
-                    DaoDanhMuc(activity).delete_danhmuc(id)
-                    callBackOnSuccess.onUpdateScreen()
-
+                    DaoDanhMuc(activity).delete_danhmuc(callBackOnSuccess, id)
                     dialogInterface?.dismiss()
                 }
                 .setNegativeButton("Hủy", R.drawable.cancel_del

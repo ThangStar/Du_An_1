@@ -110,13 +110,14 @@ public class DaoOption {
 
     }
     public  void getdata_option(CallBackDataOption callBackDataOption, int id_product){
+        Log.d(" ID SP222222222",id_product+"");
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.getdata_option, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>> "+response);
-                List<Option> ee= new ArrayList();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0 ; i<jsonArray.length();i++){
@@ -138,6 +139,7 @@ public class DaoOption {
                         }
 
                     }
+                    callBackDataOption.onFinish("Hoàn tất");
                 } catch (JSONException e) {
                     callBackDataOption.onFail("Lỗi: "+e);
                     Log.d(TAG, "đã xảy ra lỗi : llllll"+e);

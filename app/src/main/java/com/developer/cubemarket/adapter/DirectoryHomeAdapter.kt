@@ -17,6 +17,7 @@ import com.developer.cubemarket.config.utils.Utils
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc
 import com.developer.cubemarket.connection.callback.CallBackDelDirectory
 import com.developer.cubemarket.databinding.DirectoryItemBinding
+import es.dmoral.toasty.Toasty
 
 class DirectoryHomeAdapter(
     var ctx: Context,
@@ -57,6 +58,14 @@ class DirectoryHomeAdapter(
                             override fun onUpdateScreen() {
                                 arr.removeAt(adapterPosition)
                                 adapter.notifyItemRemoved(adapterPosition)
+                            }
+
+                            override fun onFail(rs: String) {
+                                Toasty.warning(fr.requireContext(), rs, Toasty.LENGTH_SHORT).show()
+                            }
+
+                            override fun onError(rs: String) {
+                                Toasty.error(fr.requireContext(), rs, Toasty.LENGTH_SHORT).show()
                             }
                         }
                         Utils.dialogDelDirectory(callBackOnSuccess, fr.requireActivity(), "Xóa ${arr[adapterPosition].tendanhmuc}?",

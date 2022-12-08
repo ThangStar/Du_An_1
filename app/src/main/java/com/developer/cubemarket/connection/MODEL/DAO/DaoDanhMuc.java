@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.HttpsTrustManager;
 import com.developer.cubemarket.connection.MODEL.KET_NOI_SEVER.Link;
 import com.developer.cubemarket.connection.MODEL.OOP.Danhmuc;
+import com.developer.cubemarket.connection.callback.CallBackDelDirectory;
 import com.developer.cubemarket.connection.callback.CallbackUpdateDirectory;
 import com.developer.cubemarket.connection.callback.VolleyCallBack;
 
@@ -90,7 +91,7 @@ public class DaoDanhMuc {
 
         return imgString;
     }
-    public void delete_danhmuc( int madanhmuc){
+    public void delete_danhmuc(CallBackDelDirectory callBackDelDirectory, int madanhmuc){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, Link.delete_danhmuc, new Response.Listener<String>() {
@@ -98,14 +99,17 @@ public class DaoDanhMuc {
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse: >>>" +response);
                 if(response.toString().trim().equals("success")){
+                    callBackDelDirectory.onUpdateScreen();
                     Log.d(TAG, "xóa thành công");
                 }else{
+                    callBackDelDirectory.onFail("Xóa thất bại");
                     Log.d(TAG, "xóa không thành công");
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                callBackDelDirectory.onError("Xảy ra lỗi: "+error);
                 Log.d(TAG, "xảy ra lỗi >>>>" +error);
             }
         }){

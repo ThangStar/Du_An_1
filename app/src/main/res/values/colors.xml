@@ -19,10 +19,4 @@
     <color name="text_color_three">#E0201A</color>
     <color name="button_background_primary">#572D86</color>
     <color name="item_color_primary">#9D9EA3</color>
-    <color name="barChart1">#66FF00</color>
-    <color name="barChart2">#FFFF33</color>
-    <color name="barChart3">#FFCC33</color>
-    <color name="barChart4">#9966FF</color>
-    <color name="barChart5">#FF3366</color>
-    <color name="barChart6">#FF9966</color>
 </resources>

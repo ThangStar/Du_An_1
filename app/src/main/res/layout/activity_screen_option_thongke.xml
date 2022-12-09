@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="JAVA.VIEW.ScreenOptionThongkeActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <Button
+        android:id="@+id/bnt_inten_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê 7 ngày" />
+
+    <Button
+        android:id="@+id/bnt_inten_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê theo tháng" />
+
+    <Button
+        android:id="@+id/bnt_inten_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê theo năm" />
+</LinearLayout>

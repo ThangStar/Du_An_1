@@ -62,4 +62,7 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    /// thuw vien ve bieu do
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
